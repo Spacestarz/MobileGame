@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SpadeCards : MonoBehaviour
@@ -6,7 +8,10 @@ public class SpadeCards : MonoBehaviour
     [SerializeField] private int _MaxCount = 13;
     public bool noMoreSpade = false;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public List spadeList = new List();
+
+    //make so each spade, heart etc is in a list
+
     void Start()
     {
         
@@ -16,5 +21,6 @@ public class SpadeCards : MonoBehaviour
     void Update()
     {
         
+        Debug.Log(spadeList + "spadelist");
     }
 }

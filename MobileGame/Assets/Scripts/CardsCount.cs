@@ -13,7 +13,10 @@ public class CardsCount : MonoBehaviour
     private DiamondCards DiamondCards;
     private CloverCards CloverCards;
 
+
+    //scritableobjects when have a lot of things with similar thing like different weapons
     //finns 13 kort av varje spader, hearts etc
+    //göra spader, hearts in a list and when k heart is gone it gets removed in the list?
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

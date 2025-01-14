@@ -31,7 +31,8 @@ public class distributeCards : MonoBehaviour
 
     public void Distribute()
     {
+        
         //Get from the overall cardcount
-        //cardscount randomize from all the spade, heart etc?
+        //So it gets from the lists
     }
 }

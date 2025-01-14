@@ -6,7 +6,8 @@ public class DiamondCards : MonoBehaviour
     [SerializeField] private int _MaxCount = 13;
     public bool noMoreDiamond = false;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    //make so each spade, heart etc is in a list
+
     void Start()
     {
         

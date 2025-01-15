@@ -6,16 +6,17 @@ using JetBrains.Annotations;
 using System;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
+using ListsExtensions;
 
-public class CardManager : MonoBehaviour //addid static becayse i cant shuffle if its not static
+public class CardManager : MonoBehaviour
 {
-    private System.Random rng = new System.Random();
+    
     [SerializeField]  int _howManyCards = 52;
     [SerializeField]  int _maxAmountCards = 52;
 
     public TextMeshProUGUI _cardCountText;
 
-     private List<Card> allCardsList;
+    private List<Card> allCardsList;
 
     //make an object pool with the cards? yes i think so i can just reuse cards  and have them in a discard pile maybe?
 
@@ -31,11 +32,11 @@ public class CardManager : MonoBehaviour //addid static becayse i cant shuffle i
         //1-4 for the suit and then the rank 1-13 for each of the suits 
 
         //first for suit
-        for (int s = 0; s <4; s++)
+        for (int s = 1; s <4; s++)
         {
             
             //second for ranks
-            for (global::System.Int32 r = 0; r < 13; r++)
+            for (global::System.Int32 r = 1; r < 13; r++)
             {
                 var wholedeck = new Card((Card.SuitEnum)s, r);
 
@@ -45,24 +46,12 @@ public class CardManager : MonoBehaviour //addid static becayse i cant shuffle i
             
         }
 
-        ShuffleCards(allCardsList);      
+          allCardsList.ShuffleCards();
+        Debug.Log("shuffle done here is cards");
         
     }
 
-    private void ShuffleCards<T>(this IList<T> list)
-    {
-        //this is the fisher yates shuffle from overstackflow
-       int n = list.Count;
-        while (n > 1)
-        {
-            n--;
-            int k = rng.Next(n + 1);
-            T card = list[k];
-            list[k] = list[n];
-            list[n] = card;
-        }
-        Debug.Log("done shuffling");
-    }
+    
 
     // Update is called once per frame
     void Update()
@@ -79,7 +68,7 @@ public class CardManager : MonoBehaviour //addid static becayse i cant shuffle i
     {
         foreach (var card in allCardsList)
         {
-            Debug.Log($"Card: {card}, Suit: {card._suit}, Rank: {card._rank}");
+            Debug.Log($" Suit: {card._suit}, Rank: {card._rank}");
         }
     }
 }

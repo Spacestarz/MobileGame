@@ -163,6 +163,7 @@ GameObject:
   - component: {fileID: 468975529}
   - component: {fileID: 468975530}
   - component: {fileID: 468975531}
+  - component: {fileID: 468975532}
   m_Layer: 0
   m_Name: CardManager
   m_TagString: Untagged
@@ -241,6 +242,18 @@ MonoBehaviour:
   _spadePrefab: {fileID: 8439615217410317158, guid: 285073a682d950141810268eeac00b3c, type: 3}
   _diamondPrefab: {fileID: 6163235588484091234, guid: 604af24d1b419014f87bf624e3b9f625, type: 3}
   maxAmount: 52
+--- !u!114 &468975532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468975521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e40eb766c7c40a4aaa4d0cb29aa1b3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &690887658
 GameObject:
   m_ObjectHideFlags: 0

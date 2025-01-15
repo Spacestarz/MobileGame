@@ -18,7 +18,9 @@ public class distributeCards : MonoBehaviour
     public void Distribute()
     {
         
-        //Get from the overall cardcount
-        //So it gets from the lists
+        //take cards from the object pool and then you get a random cards. 
+        //same with death he should get random cards. 
+
+        //probably use random.list.count (not how you do that but you know what do do)
     }
 }

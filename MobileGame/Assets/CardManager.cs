@@ -14,9 +14,6 @@ public class CardManager : MonoBehaviour
 
     //make an object pool with the cards? yes i think so i can just reuse cards  and have them in a discard pile maybe?
 
-
-    //TODO make list with all with all cards and show which  rank and suit
-
     void Start()
     {
         allCardsList = new List<Card>();

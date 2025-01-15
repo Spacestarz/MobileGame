@@ -8,8 +8,10 @@ public class CardObjectPool : MonoBehaviour
     public GameObject _spadePrefab;
     public GameObject _diamondPrefab;
 
-    //the maxamount
+    //the max amount
     [SerializeField] int maxAmount = 52;
+
+    //have list with cards from where we can pull the cards from
 
     void Start()
     {
@@ -19,5 +21,15 @@ public class CardObjectPool : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnDisable() //clear list when done
+    {
+        
+    }
+
+    public void DestroyCard()
+    {
+
     }
 }

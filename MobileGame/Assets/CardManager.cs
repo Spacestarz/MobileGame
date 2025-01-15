@@ -2,9 +2,14 @@ using UnityEngine;
 using TMPro;
 using NUnit.Framework;
 using System.Collections.Generic;
+using JetBrains.Annotations;
+using System;
+using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 
-public class CardManager : MonoBehaviour
+public class CardManager : MonoBehaviour //addid static becayse i cant shuffle if its not static
 {
+    private System.Random rng = new System.Random();
     [SerializeField]  int _howManyCards = 52;
     [SerializeField]  int _maxAmountCards = 52;
 
@@ -39,7 +44,24 @@ public class CardManager : MonoBehaviour
             }
             
         }
+
+        ShuffleCards(allCardsList);      
         
+    }
+
+    private void ShuffleCards<T>(this IList<T> list)
+    {
+        //this is the fisher yates shuffle from overstackflow
+       int n = list.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = rng.Next(n + 1);
+            T card = list[k];
+            list[k] = list[n];
+            list[n] = card;
+        }
+        Debug.Log("done shuffling");
     }
 
     // Update is called once per frame

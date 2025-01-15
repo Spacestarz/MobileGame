@@ -10,12 +10,13 @@ public class CardManager : MonoBehaviour
 
     public TextMeshProUGUI _cardCountText;
 
-    private List<Card> allCardsList;
+     private List<Card> allCardsList;
 
     //make an object pool with the cards? yes i think so i can just reuse cards  and have them in a discard pile maybe?
 
     void Start()
     {
+        
         allCardsList = new List<Card>();
 
         //makes one card
@@ -38,15 +39,18 @@ public class CardManager : MonoBehaviour
             }
             
         }
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         if (Input.GetKeyDown(KeyCode.F))
         {
             GoThroughDeck();
         }
+        
     }
 
     private void GoThroughDeck()

@@ -9,6 +9,7 @@ namespace ListsExtensions
         public static void ShuffleCards<T>(this IList<T> list)
         {
             System.Random rng = new System.Random();
+
             //this is the fisher yates shuffle from stackoverflow
             int n = list.Count;
             while (n > 1)

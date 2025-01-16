@@ -7,7 +7,6 @@ using System.Linq;
 
 public class CardManager : MonoBehaviour
 {
-    
     [SerializeField]  int _howManyCards = 52;
     [SerializeField]  int _maxAmountCards = 52;
 
@@ -42,24 +41,21 @@ public class CardManager : MonoBehaviour
                 allCardsList.Add(wholedeck);
                 //made the whole "deck" now
             }
-
-            
         }
 
-        int heartCount = allCardsList.Count(card => card._suit == Card.SuitEnum.Hearts);
+        int heartCount = allCardsList.Count(card => card._suit == Card.SuitEnum.Hearts); //check how many heart cards you have
         Debug.Log($"You got {heartCount}" + " " + "heart" + " " + "cards");
 
-        int diamondCount = allCardsList.Count(card => card._suit == Card.SuitEnum.Diamonds);
+        int diamondCount = allCardsList.Count(card => card._suit == Card.SuitEnum.Diamonds); //check how many diamond cards you have
         Debug.Log($"You got {diamondCount}" + " " + "diamond" + " " + "cards");
 
-        int spadeCount = allCardsList.Count(card => card._suit == Card.SuitEnum.Spades);
+        int spadeCount = allCardsList.Count(card => card._suit == Card.SuitEnum.Spades); //check how many spade cards you have
         Debug.Log($"You got {spadeCount}" + " " + "spade" + " " + "cards");
 
-        int cloverCount = allCardsList.Count(card => card._suit == Card.SuitEnum.Clubs);
+        int cloverCount = allCardsList.Count(card => card._suit == Card.SuitEnum.Clubs); //check how many clubs cards you have
         Debug.Log($"You got {cloverCount}" + " " + "clover" + " " + "cards");
     }
 
-    // Update is called once per frame
     void Update()
     {
         _cardCountText.text = allCardsList.Count.ToString() + "  " + "cards left"; //want an observer instead of being in update!!

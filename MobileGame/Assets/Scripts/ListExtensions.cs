@@ -3,10 +3,9 @@ using UnityEngine;
 
 namespace ListsExtensions
 {
-
     public static class ListExtensions
     {
-        //this works yaya
+        //this works yay
         public static void ShuffleCards<T>(this IList<T> list)
         {
             System.Random rng = new System.Random();

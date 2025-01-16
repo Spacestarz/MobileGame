@@ -15,15 +15,18 @@ public class CardManager : MonoBehaviour
     [SerializeField]  int _maxAmountCards = 52;
 
     public TextMeshProUGUI _cardCountText;
+    public TextMeshProUGUI _DiscardPileCountText;
 
-    private List<Card> allCardsList;
+    public List<Card> allCardsList;
 
-    //make an object pool with the cards? yes i think so i can just reuse cards  and have them in a discard pile maybe?
+    public List <Card> DiscardList;
+
+    //make an object pool with the cards? yes i think so i can just reuse cards and have them in a discard pile maybe?
 
     void Start()
     {
-        
         allCardsList = new List<Card>();
+        DiscardList = new List<Card>();
 
         //makes one card
         var card = new Card((Card.SuitEnum)1, 5);
@@ -32,36 +35,49 @@ public class CardManager : MonoBehaviour
         //1-4 for the suit and then the rank 1-13 for each of the suits 
 
         //first for suit
-        for (int s = 1; s <4; s++)
+        for (int s = 1; s <=4; s++)
         {
-            
             //second for ranks
-            for (global::System.Int32 r = 1; r < 13; r++)
+            for (global::System.Int32 r = 1; r <= 13; r++)
             {
                 var wholedeck = new Card((Card.SuitEnum)s, r);
 
                 allCardsList.Add(wholedeck);
                 //made the whole "deck" now
             }
-            
+            Debug.Log($"You got {card._suit}");
         }
-
-          allCardsList.ShuffleCards();
-        Debug.Log("shuffle done here is cards");
-        
     }
-
-    
 
     // Update is called once per frame
     void Update()
     {
-        
+        _cardCountText.text = allCardsList.Count.ToString() + "  " + "cards left"; //want an observer instead of being in update!!
+
+        _DiscardPileCountText.text = DiscardList.Count.ToString() + "  " + " cards  " + "in discard pile";
+
         if (Input.GetKeyDown(KeyCode.F))
         {
             GoThroughDeck();
         }
-        
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            Spin();
+        }
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            checkDiscardList();
+        }
+    }
+
+    private void checkDiscardList()
+    {
+        foreach (var card in DiscardList)
+        {
+            Debug.Log($" Suit: {card._suit}, Rank: {card._rank}");
+        }
     }
 
     private void GoThroughDeck()
@@ -70,5 +86,11 @@ public class CardManager : MonoBehaviour
         {
             Debug.Log($" Suit: {card._suit}, Rank: {card._rank}");
         }
+    }
+
+    private void Spin()
+    {
+        allCardsList.ShuffleCards();
+        Debug.Log("shuffle done");
     }
 }

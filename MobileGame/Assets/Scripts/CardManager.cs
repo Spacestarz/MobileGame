@@ -1,12 +1,9 @@
 using UnityEngine;
 using TMPro;
-using NUnit.Framework;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using System;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
 using ListsExtensions;
+using System.Linq;
 
 public class CardManager : MonoBehaviour
 {
@@ -45,8 +42,21 @@ public class CardManager : MonoBehaviour
                 allCardsList.Add(wholedeck);
                 //made the whole "deck" now
             }
-            Debug.Log($"You got {card._suit}");
+
+            
         }
+
+        int heartCount = allCardsList.Count(card => card._suit == Card.SuitEnum.Hearts);
+        Debug.Log($"You got {heartCount}" + " " + "heart" + " " + "cards");
+
+        int diamondCount = allCardsList.Count(card => card._suit == Card.SuitEnum.Diamonds);
+        Debug.Log($"You got {diamondCount}" + " " + "diamond" + " " + "cards");
+
+        int spadeCount = allCardsList.Count(card => card._suit == Card.SuitEnum.Spades);
+        Debug.Log($"You got {spadeCount}" + " " + "spade" + " " + "cards");
+
+        int cloverCount = allCardsList.Count(card => card._suit == Card.SuitEnum.Clubs);
+        Debug.Log($"You got {cloverCount}" + " " + "clover" + " " + "cards");
     }
 
     // Update is called once per frame

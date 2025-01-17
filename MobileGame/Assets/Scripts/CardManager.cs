@@ -42,18 +42,20 @@ public class CardManager : MonoBehaviour
                 //made the whole "deck" now
             }
         }
-
+        /*
         int heartCount = allCardsList.Count(card => card._suit == Card.SuitEnum.Hearts); //check how many heart cards you have
-        Debug.Log($"You got {heartCount}" + " " + "heart" + " " + "cards");
+        Debug.Log($"the cardpile have {heartCount}" + " " + "heart" + " " + "cards");
 
         int diamondCount = allCardsList.Count(card => card._suit == Card.SuitEnum.Diamonds); //check how many diamond cards you have
-        Debug.Log($"You got {diamondCount}" + " " + "diamond" + " " + "cards");
+        Debug.Log($"the cardpile have {diamondCount}" + " " + "diamond" + " " + "cards");
 
         int spadeCount = allCardsList.Count(card => card._suit == Card.SuitEnum.Spades); //check how many spade cards you have
-        Debug.Log($"You got {spadeCount}" + " " + "spade" + " " + "cards");
+        Debug.Log($"the cardpile have {spadeCount}" + " " + "spade" + " " + "cards");
 
         int cloverCount = allCardsList.Count(card => card._suit == Card.SuitEnum.Clubs); //check how many clubs cards you have
-        Debug.Log($"You got {cloverCount}" + " " + "clover" + " " + "cards");
+        Debug.Log($"the cardpile have {cloverCount}" + " " + "clover" + " " + "cards");
+
+        */
     }
 
     void Update()
@@ -97,6 +99,6 @@ public class CardManager : MonoBehaviour
     private void Spin()
     {
         allCardsList.ShuffleCards();
-        Debug.Log("shuffle done");
+        
     }
 }

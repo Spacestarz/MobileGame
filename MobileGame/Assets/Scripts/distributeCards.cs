@@ -3,10 +3,12 @@ using UnityEngine;
 public class distributeCards : MonoBehaviour
 {
    private CardManager cardManager;
+   private PlayerHand playerHand;
+
     void Start()
     {
        cardManager = GetComponent<CardManager>();
-       
+       playerHand = GetComponent<PlayerHand>();
     }
   
     void Update()
@@ -29,10 +31,13 @@ public class distributeCards : MonoBehaviour
             Debug.Log($"Retrieving card. Suit: {card._suit} Rank: {card._rank}");
 
             cardManager.allCardsList.Remove(card);
-            Debug.Log($"Removing suit {card._suit} rank: {card._rank}");
+            //Debug.Log($"Removing suit {card._suit} rank: {card._rank}");
 
-            cardManager.DiscardList.Add(card);
-            Debug.Log($"Adding suit {card._suit} rank: {card._rank}");
+            playerHand.PlayercardsList.Add(card);
+            Debug.Log($"Player got suit {card._suit} rank: {card._rank}");
+
+            // cardManager.DiscardList.Add(card);
+            //Debug.Log($"Adding suit {card._suit} rank: {card._rank}");
         }
        
         //take cards from the object pool and then you get a random cards. 

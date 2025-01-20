@@ -4,11 +4,13 @@ public class distributeCards : MonoBehaviour
 {
    private CardManager cardManager;
    private PlayerHand playerHand;
+   private CardUIHandler cardUIHandler;
 
     void Start()
     {
        cardManager = GetComponent<CardManager>();
        playerHand = GetComponent<PlayerHand>();
+       cardUIHandler = GetComponent<CardUIHandler>();
     }
   
     void Update()
@@ -30,6 +32,9 @@ public class distributeCards : MonoBehaviour
             Card card = cardManager.allCardsList[index];
             Debug.Log($"Retrieving card. Suit: {card._suit} Rank: {card._rank}");
 
+            //gets the visuals for the card.
+            cardUIHandler.GetCardUI(card._rank, card._suit); //sending the suit and rank
+
             cardManager.allCardsList.Remove(card);
             //Debug.Log($"Removing suit {card._suit} rank: {card._rank}");
 
@@ -40,9 +45,5 @@ public class distributeCards : MonoBehaviour
             //Debug.Log($"Adding suit {card._suit} rank: {card._rank}");
         }
        
-        //take cards from the object pool and then you get a random cards. 
-        //same with death he should get random cards. 
-
-        //probably use random.list.count (not how you do that but you know what do do)
     }
 }

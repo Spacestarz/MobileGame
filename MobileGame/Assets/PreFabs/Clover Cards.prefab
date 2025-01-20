@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9077027923752809407}
   - component: {fileID: 467346969346452537}
+  - component: {fileID: 599299725311931108}
   m_Layer: 0
   m_Name: Clover Cards
   m_TagString: Untagged
@@ -17,21 +18,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &9077027923752809407
-Transform:
+--- !u!224 &9077027923752809407
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5765913129927860480}
-  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.016610943, y: -0.6414916, z: -0.049136937}
+  m_LocalPosition: {x: 0, y: 0, z: -0.049136937}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.016610943, y: 317.35852}
+  m_SizeDelta: {x: 0.41, y: 0.5499878}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &467346969346452537
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -76,14 +81,22 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 7200617408571607331, guid: 8c75c068867fa0b4084d9355016237be, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.41, y: 0.55}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!222 &599299725311931108
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5765913129927860480}
+  m_CullTransparentMesh: 1

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System;
 using ListsExtensions;
 using System.Linq;
+using UnityEngine.Events;
 
 public class CardManager : MonoBehaviour
 {
@@ -43,16 +44,16 @@ public class CardManager : MonoBehaviour
             }
         }
         /*
-        int heartCount = allCardsList.Count(card => card._suit == Card.SuitEnum.Hearts); //check how many heart cards you have
+        int heartCount = allCardsList.Count(card => card._suit == Card.SuitEnum.Hearts); //check how many heart cards in the cardpile
         Debug.Log($"the cardpile have {heartCount}" + " " + "heart" + " " + "cards");
 
-        int diamondCount = allCardsList.Count(card => card._suit == Card.SuitEnum.Diamonds); //check how many diamond cards you have
+        int diamondCount = allCardsList.Count(card => card._suit == Card.SuitEnum.Diamonds); //check how many diamond cards in the cardpile
         Debug.Log($"the cardpile have {diamondCount}" + " " + "diamond" + " " + "cards");
 
-        int spadeCount = allCardsList.Count(card => card._suit == Card.SuitEnum.Spades); //check how many spade cards you have
+        int spadeCount = allCardsList.Count(card => card._suit == Card.SuitEnum.Spades); //check how many spade cards in the cardpile
         Debug.Log($"the cardpile have {spadeCount}" + " " + "spade" + " " + "cards");
 
-        int cloverCount = allCardsList.Count(card => card._suit == Card.SuitEnum.Clubs); //check how many clubs cards you have
+        int cloverCount = allCardsList.Count(card => card._suit == Card.SuitEnum.Clubs); //check how many clubs cards in the cardpile
         Debug.Log($"the cardpile have {cloverCount}" + " " + "clover" + " " + "cards");
 
         */
@@ -63,11 +64,12 @@ public class CardManager : MonoBehaviour
         _cardCountText.text = allCardsList.Count.ToString() + "  " + "cards left"; //want an observer instead of being in update!!
 
         _DiscardPileCountText.text = DiscardList.Count.ToString() + "  " + " cards  " + "in discard pile";
-
+        /*
         if (Input.GetKeyDown(KeyCode.F))
         {
             GoThroughDeck();
         }
+        */
 
         if (Input.GetKeyDown(KeyCode.D))
         {
@@ -99,6 +101,5 @@ public class CardManager : MonoBehaviour
     private void Spin()
     {
         allCardsList.ShuffleCards();
-        
     }
 }

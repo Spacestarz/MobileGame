@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Card 
 {
-    
     public enum SuitEnum
     {
         Hearts = 1,

@@ -10,11 +10,13 @@ public class DropZone : MonoBehaviour
     public TextMeshProUGUI _dropZoneText;
     private GameObject _cardmanagerObject;
     private PlayerHand _playerhand;
+    private SpawnLocationsPlayer _spawnLocation;
 
     void Start()
     {
         _cardmanagerObject = GameObject.Find("CardManager");
         _playerhand = _cardmanagerObject.GetComponent<PlayerHand>();
+        _spawnLocation = GetComponent<SpawnLocationsPlayer>();
 
         _dropzoneCardList = new List<Card> ();
     }
@@ -66,8 +68,6 @@ public class DropZone : MonoBehaviour
         {
             Debug.Log("You cant place this card");
         }
-
-        
 
     }
 

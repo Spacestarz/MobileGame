@@ -7,14 +7,12 @@ public class CardUIHandler : MonoBehaviour
     private distributeCards distributeCards;
     private CardManager cardManager;
 
-    private TextMeshProUGUI _rankText;
+    private TextMeshPro _rankText;
 
     public GameObject _heartPrefab;
     public GameObject _diamondPrefab;
     public GameObject _cloverPrefab;
     public GameObject _spadesPrefab;
-
-    private TextMeshProUGUI rankOnCardText;
     
     void Start()
     {
@@ -28,18 +26,21 @@ public class CardUIHandler : MonoBehaviour
         //will get the rank and suit of the card 
         GameObject cardInstance = InstantiateCardPrefab(suit);
 
-        _rankText = cardInstance.GetComponent<TextMeshProUGUI>();
+        TextMeshPro[] ranktexts = cardInstance.GetComponentsInChildren<TextMeshPro>();
 
-        _rankText.text = GetRank(rank);
-
+       foreach (TextMeshPro text in ranktexts)
+        {
+            text.text = rank.ToString();
+        }
     }
 
     private GameObject InstantiateCardPrefab(Card.SuitEnum suit)
     {
+        
         switch (suit)
         {
             case Card.SuitEnum.Hearts:
-                return Instantiate(_heartPrefab, transform);
+                return Instantiate(_heartPrefab, transform); //transform is where card spawn
 
             case Card.SuitEnum.Diamonds:
                 return Instantiate(_diamondPrefab, transform);

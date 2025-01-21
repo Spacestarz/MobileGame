@@ -10,7 +10,8 @@ public class PlayerHand : MonoBehaviour
     private Card card;
     private DropZone dropZone;
     private GameObject dropzoneObject;
-   
+
+    public Action<PlayerHand> playerHandChanged;
 
     void Start()
     {
@@ -66,7 +67,7 @@ public class PlayerHand : MonoBehaviour
         }
         else
         {
-            Debug.Log($"You got {PlayercardsList.Count}  cards in your hand");
+            Debug.Log($"You got {PlayercardsList.Count} cards in your hand");
 
             foreach (var card in PlayercardsList)
             {
@@ -94,5 +95,11 @@ public class PlayerHand : MonoBehaviour
             }
            // dropZone.dropzoneCardList.Add(card); //only add if you can place the card there
         } 
+    }
+
+    public void DistributeCard(Card card)
+    {
+        PlayercardsList.Add(card);
+        playerHandChanged?.Invoke(this);
     }
 }

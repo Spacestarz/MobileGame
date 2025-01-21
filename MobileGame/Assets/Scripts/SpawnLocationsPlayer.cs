@@ -1,0 +1,59 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+
+public class SpawnLocationsPlayer : MonoBehaviour
+{
+    public GameObject[] spawningPlacePlayer; //change to list later :) generally better and more comftable with list
+    private PlayerHand playerHand;
+    //private List<Card> playerHandList; //testing for cardlocationthing
+
+    private void Start()
+    {
+        playerHand = GetComponent<PlayerHand>();
+        playerHand.playerHandChanged += OnPlayerHandChanged;
+        //playerHandList = playerHand.PlayercardsList; //testing
+
+    }
+
+    private void OnPlayerHandChanged(PlayerHand hand)
+    {
+        //update hand visuals // move cards or something
+        //check math formel to where to spawn cards? 
+    }
+
+    public void PlayerCardLocations()
+   { 
+        var spawnPosition = spawningPlacePlayer.Length;
+        Debug.Log("location thing");
+   }
+
+
+    
+   
+
+    /*
+
+    bit code from teacher to help with the spawnpoints and handupdate (observer)
+
+    private void Start()
+    {
+     //   CardUIHandler.HandUpdated += OnHandUpdated
+    }
+
+    public List<Card> PlayerHand = new(); //take the playerhand list here i think
+
+    private void OnHandUpdated(List<Card> playerHand) //the playerhandlist?
+    {
+        for (int i = 0; i < playerHand.Count; i++)
+        {
+            if (i < spawningPlacePlayer.Length)
+            {
+                //playerHand[i].position = spawningPlacePlayer[i]
+            }
+        }
+    } 
+
+    */
+}

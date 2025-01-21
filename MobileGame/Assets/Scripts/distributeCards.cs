@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class distributeCards : MonoBehaviour
@@ -19,7 +20,7 @@ public class distributeCards : MonoBehaviour
         {
             if (cardManager.allCardsList.Count > 0)
             {
-                int randomIndex = Random.Range(0, cardManager.allCardsList.Count);
+                int randomIndex = UnityEngine.Random.Range(0, cardManager.allCardsList.Count);
                 Distribute(randomIndex);
             }
         }
@@ -38,7 +39,8 @@ public class distributeCards : MonoBehaviour
             cardManager.allCardsList.Remove(card);
             //Debug.Log($"Removing suit {card._suit} rank: {card._rank}");
 
-            playerHand.PlayercardsList.Add(card);
+            playerHand.DistributeCard(card);
+            //playerHand.PlayercardsList.Add(card); //player gets a card
             Debug.Log($"Player got suit {card._suit} rank: {card._rank}");
 
             // cardManager.DiscardList.Add(card);

@@ -39,7 +39,7 @@ public class distributeCards : MonoBehaviour
             cardManager.allCardsList.Remove(card);
             //Debug.Log($"Removing suit {card._suit} rank: {card._rank}");
 
-            playerHand.DistributeCard(card);
+            playerHand.DistributeCard(card); //distrubute card to player hand class
             //playerHand.PlayercardsList.Add(card); //player gets a card
             Debug.Log($"Player got suit {card._suit} rank: {card._rank}");
 

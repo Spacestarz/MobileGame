@@ -52,7 +52,7 @@ public class DropZone : MonoBehaviour
             Debug.Log("You can play this card");
             _dropzoneCardList.Add (playercard);
             Debug.Log($"adding your card {playercard._suit} with rank {playercard._rank} to dropzone");
-            _playerhand.PlayercardsList.Remove (playercard);
+            _playerhand._PlayercardsList.Remove (playercard);
 
             if (playercard._rank == 10)
             {

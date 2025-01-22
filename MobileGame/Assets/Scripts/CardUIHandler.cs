@@ -6,6 +6,7 @@ public class CardUIHandler : MonoBehaviour
 {
     private distributeCards distributeCards;
     private CardManager cardManager;
+  
 
     private TextMeshPro _rankText;
 
@@ -13,20 +14,20 @@ public class CardUIHandler : MonoBehaviour
     public GameObject _diamondPrefab;
     public GameObject _cloverPrefab;
     public GameObject _spadesPrefab;
+
+   public GameObject _cardInstance; //the instantiated card
     
     void Start()
     {
        distributeCards = GetComponent<distributeCards>();
        cardManager = GetComponent<CardManager>();
-      
     }
 
     public void GetCardUI(int rank, Card.SuitEnum suit)
     {
         //will get the rank and suit of the card 
-        GameObject cardInstance = InstantiateCardPrefab(suit);
-
-        TextMeshPro[] ranktexts = cardInstance.GetComponentsInChildren<TextMeshPro>();
+        _cardInstance = InstantiateCardPrefab(suit);
+        TextMeshPro[] ranktexts = _cardInstance.GetComponentsInChildren<TextMeshPro>();
 
        foreach (TextMeshPro text in ranktexts)
         {
@@ -36,20 +37,20 @@ public class CardUIHandler : MonoBehaviour
 
     private GameObject InstantiateCardPrefab(Card.SuitEnum suit)
     {
-        
+        Debug.Log("getting the prefab look fab");
         switch (suit)
         {
             case Card.SuitEnum.Hearts:
-                return Instantiate(_heartPrefab, transform); //transform is where card spawn
+                return Instantiate(_heartPrefab); 
 
             case Card.SuitEnum.Diamonds:
-                return Instantiate(_diamondPrefab, transform);
+                return Instantiate(_diamondPrefab);
 
             case Card.SuitEnum.Spades:
-                return Instantiate(_spadesPrefab, transform);
+                return Instantiate(_spadesPrefab);
 
             case Card.SuitEnum.Clubs:
-                return Instantiate(_cloverPrefab, transform);
+                return Instantiate(_cloverPrefab);
 
 
             default:
@@ -57,6 +58,7 @@ public class CardUIHandler : MonoBehaviour
                 return null;
 
         }
+
     }
 
     private string GetRank(int rank)

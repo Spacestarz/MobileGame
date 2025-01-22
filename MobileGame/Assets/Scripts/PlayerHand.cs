@@ -5,7 +5,7 @@ using System;
 
 public class PlayerHand : MonoBehaviour
 {
-    public List<Card> PlayercardsList;
+    public List<Card> _PlayercardsList;
     public TextMeshProUGUI playerHandCountText;
     private Card card;
     private DropZone dropZone;
@@ -15,7 +15,7 @@ public class PlayerHand : MonoBehaviour
 
     void Start()
     {
-       PlayercardsList = new List<Card>();
+       _PlayercardsList = new List<Card>();
        dropzoneObject = GameObject.Find("Drop Zone");
         if (dropzoneObject == null )
         {
@@ -37,9 +37,9 @@ public class PlayerHand : MonoBehaviour
         }
 
       
-        if (PlayercardsList.Count > 0)
+        if (_PlayercardsList.Count > 0)
         {
-            playerHandCountText.text = PlayercardsList.Count.ToString() + "cards in your hand";
+            playerHandCountText.text = _PlayercardsList.Count.ToString() + "cards in your hand";
         }
         else
         {
@@ -48,7 +48,7 @@ public class PlayerHand : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (PlayercardsList.Count > 0)
+            if (_PlayercardsList.Count > 0)
             {
                 PutCardInDropZone(0);
             }
@@ -61,15 +61,15 @@ public class PlayerHand : MonoBehaviour
 
     private void CheckPlayerHand()
     {
-        if (PlayercardsList.Count <1)
+        if (_PlayercardsList.Count <1)
         {
             Debug.Log("You dont have any cards in hand");
         }
         else
         {
-            Debug.Log($"You got {PlayercardsList.Count} cards in your hand");
+            Debug.Log($"You got {_PlayercardsList.Count} cards in your hand");
 
-            foreach (var card in PlayercardsList)
+            foreach (var card in _PlayercardsList)
             {
                 Debug.Log($"You got {card._suit} with rank {card._rank}");
             }
@@ -78,9 +78,9 @@ public class PlayerHand : MonoBehaviour
 
     private void PutCardInDropZone(int index)
     {
-        Card card = PlayercardsList[index];
+        Card card = _PlayercardsList[index];
 
-        if (index >= 0 && index < PlayercardsList.Count)
+        if (index >= 0 && index < _PlayercardsList.Count)
         {
             if (dropZone._dropzoneCardList.Count > 0)
             {
@@ -90,7 +90,7 @@ public class PlayerHand : MonoBehaviour
             else
             {
                 dropZone._dropzoneCardList.Add(card);
-                PlayercardsList.Remove(card);
+                _PlayercardsList.Remove(card);
                 Debug.Log($"no card in dropzone adding {card._suit} with rank {card._rank}");
             }
            // dropZone.dropzoneCardList.Add(card); //only add if you can place the card there
@@ -99,7 +99,7 @@ public class PlayerHand : MonoBehaviour
 
     public void DistributeCard(Card card)
     {
-        PlayercardsList.Add(card);
+        _PlayercardsList.Add(card);
         playerHandChanged?.Invoke(this);
     }
 }

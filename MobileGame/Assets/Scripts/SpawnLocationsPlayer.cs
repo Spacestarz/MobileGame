@@ -14,13 +14,12 @@ public class SpawnLocationsPlayer : MonoBehaviour
         playerHand = GetComponent<PlayerHand>();
         playerHand.playerHandChanged += OnPlayerHandChanged;
         cardUIHandler = GetComponent<CardUIHandler>();//testing
-
     }
 
     private void OnPlayerHandChanged(PlayerHand hand)
     {
         int cardCount = playerHand._PlayercardsList.Count;
-        Debug.Log($"player got {cardCount} cards in hand "); //it says player got 1 card so why wont it go to the right position?
+        Debug.Log($"player got {cardCount} cards in hand "); 
         //update hand visuals // move cards or something
         //check math formel to where to spawn cards? 
         for (int i = 0; i < cardCount; i++)

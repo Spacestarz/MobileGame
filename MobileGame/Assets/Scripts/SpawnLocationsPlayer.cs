@@ -7,6 +7,7 @@ public class SpawnLocationsPlayer : MonoBehaviour
 {
     public GameObject[] spawningPlacePlayer; //change to list later :) generally better and more comftable with list
     public List<GameObject> threeSpawningCardLocation;
+    public List <GameObject> dropZoneLocation;
     private PlayerHand playerHand;
     private CardUIHandler cardUIHandler;//testing
 

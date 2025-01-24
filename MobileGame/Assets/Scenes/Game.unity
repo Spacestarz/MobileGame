@@ -543,6 +543,8 @@ MonoBehaviour:
   - {fileID: 421679412}
   - {fileID: 1241397475}
   - {fileID: 1670850004}
+  dropZoneLocation:
+  - {fileID: 1658243144}
 --- !u!114 &468975536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1004,8 +1006,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "F - how many cards are in \nthe dropzone\n\nD to shuffle cards\n\nE- send
-    your first card to \nthe drop zone\n\n\n\n\n"
+  m_text: "F - how many cards are in \nthe dropzone\n\nE- send your first card to
+    \nthe drop zone\n\n\n\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 20eb4c2bc1d3bf0449232400ba2b75b4, type: 2}
   m_sharedMaterial: {fileID: -7640997074047728275, guid: 20eb4c2bc1d3bf0449232400ba2b75b4, type: 2}
@@ -1478,6 +1480,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 690887660}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1658243144
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1658243145}
+  m_Layer: 0
+  m_Name: dropzone location
+  m_TagString: Untagged
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1658243145
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1658243144}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.12, y: 0.43, z: 0.02802818}
+  m_LocalScale: {x: 1.25, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1670850004
 GameObject:
@@ -1963,3 +1996,4 @@ SceneRoots:
   - {fileID: 193922882}
   - {fileID: 2013339100}
   - {fileID: 1978090070}
+  - {fileID: 1658243145}

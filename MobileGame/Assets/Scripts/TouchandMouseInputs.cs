@@ -7,6 +7,11 @@ public class TouchandMouseInputs : MonoBehaviour
     //will test mouseinput and touch here
     // watched a yt thing https://www.youtube.com/watch?v=aTtheFyh7Ac
 
+
+    //TODO
+    //make so player can drag the card to drop zone
+
+
     private Vector2 _orgScaleCard;
     private Vector2 _zoomScaleCard;
 
@@ -72,6 +77,11 @@ public class TouchandMouseInputs : MonoBehaviour
                     ZoomIn(clickedCard);
                 }
 
+                if (Input.GetMouseButton(0)) //if left mouse button is held down
+                {
+                    
+                }
+
 
                 #region comments
                 // 1. Spara isZOomedIn på kortet i sig, när du klickar, if(iZoomedin) zoomOut()
@@ -98,6 +108,8 @@ public class TouchandMouseInputs : MonoBehaviour
         }
 #endif
         
+      
+
     }
 
     private void HighlightCard(GameObject CurrentCard)

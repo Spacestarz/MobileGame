@@ -10,6 +10,7 @@ public class CardManager : MonoBehaviour
 {
     [SerializeField]  int _howManyCards = 52;
     [SerializeField]  int _maxAmountCards = 52;
+    private distributeCards _distributeCards;
 
     public TextMeshProUGUI _cardCountText;
     public TextMeshProUGUI _DiscardPileCountText;
@@ -22,6 +23,7 @@ public class CardManager : MonoBehaviour
 
     void Start()
     {
+        _distributeCards = GetComponent<distributeCards>();
         allCardsList = new List<Card>();
         DiscardList = new List<Card>();
 
@@ -43,6 +45,9 @@ public class CardManager : MonoBehaviour
                 //made the whole "deck" now
             }
         }
+        Spin();
+        _distributeCards.GetStartCards();
+        #region debug code
         /*
         int heartCount = allCardsList.Count(card => card._suit == Card.SuitEnum.Hearts); //check how many heart cards in the cardpile
         Debug.Log($"the cardpile have {heartCount}" + " " + "heart" + " " + "cards");
@@ -57,6 +62,7 @@ public class CardManager : MonoBehaviour
         Debug.Log($"the cardpile have {cloverCount}" + " " + "clover" + " " + "cards");
 
         */
+        #endregion
     }
 
     void Update()
@@ -71,10 +77,6 @@ public class CardManager : MonoBehaviour
         }
         */
 
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            Spin();
-        }
 
         if (Input.GetKeyDown(KeyCode.W))
         {

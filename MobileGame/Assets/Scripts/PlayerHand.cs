@@ -13,9 +13,14 @@ public class PlayerHand : MonoBehaviour
 
     public Action<PlayerHand> playerHandChanged;
 
+    private void Awake()
+    {
+        _PlayercardsList = new List<Card>();
+    }
+
     void Start()
     {
-       _PlayercardsList = new List<Card>();
+      
        dropzoneObject = GameObject.Find("Drop Zone");
         if (dropzoneObject == null )
         {

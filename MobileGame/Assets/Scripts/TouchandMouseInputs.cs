@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class TouchandMouseInputs : MonoBehaviour
 {
@@ -9,10 +10,12 @@ public class TouchandMouseInputs : MonoBehaviour
     private Vector2 _orgScaleCard;
     private Vector2 _zoomScaleCard;
 
+    private GameObject _currentZoomInCard;
+
     [SerializeField] private float _zoomScale = 0.5f;
     [SerializeField] private float _zoomDuration = 2f;
 
-    public bool zoomedIn;
+    public bool zoomedInCard;
 
     void Start()
     {
@@ -30,7 +33,7 @@ public class TouchandMouseInputs : MonoBehaviour
 
             if (hit.collider != null)
             {
-                Debug.Log($"touched object {hit.collider.name}");
+                //Debug.Log($"touched object {hit.collider.name}");
             }
         }
         
@@ -41,13 +44,36 @@ public class TouchandMouseInputs : MonoBehaviour
 
             RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
 
-            if (hit.collider != null && zoomedIn == false)
+            if (hit.collider != null)
             {
                 Debug.Log($"you touch/click {hit.collider.name}");
+                GameObject clickedCard = hit.collider.gameObject;
+                Transform currentCardTransform = hit.collider.transform;
 
-                Transform cardtransform = hit.collider.transform;
-                _orgScaleCard = cardtransform.localScale;
+                //make clickedcard another color
+                HighlightCard(clickedCard);
 
+                if (_currentZoomInCard == clickedCard)
+                {
+                    var sprite = clickedCard.GetComponent<SpriteRenderer>();
+                    sprite.color = Color.white;
+                    zoomBack(currentCardTransform);
+                }
+                else
+                {
+                    if (_currentZoomInCard != null)
+                    {
+                        var sprite = _currentZoomInCard.GetComponent<SpriteRenderer>();
+                        sprite.color= Color.white;
+                        zoomBack(_currentZoomInCard.transform);
+                    }
+
+                    Debug.Log($"zooming in on {clickedCard}");
+                    ZoomIn(clickedCard);
+                }
+
+
+                #region comments
                 // 1. Spara isZOomedIn på kortet i sig, när du klickar, if(iZoomedin) zoomOut()
 
                 // 2. Spara här(?) currentlyZoomedInCard när man zoomar in på ett kort
@@ -63,16 +89,38 @@ public class TouchandMouseInputs : MonoBehaviour
                 //make so the card dont go out of bound of the screen so it adapts to screen!(do math)
 
                 //also make so that card that zooms gets put above the other cards
-                cardtransform.DOScale(_orgScaleCard * _zoomScale, _zoomDuration);
-
-                zoomedIn = true;
+                #endregion  
             }
             else
             {
-                Debug.Log("you did not hit anything");
+                //Debug.Log("you did not hit anything");
             }
         }
 #endif
         
+    }
+
+    private void HighlightCard(GameObject CurrentCard)
+    {
+      var sprite =  CurrentCard.GetComponent<SpriteRenderer>();
+
+        sprite.color = Color.blue;
+        //Debug.Log($"changed color on sprite to {sprite.color}");
+    }
+
+    private void ZoomIn(GameObject card)
+    {
+        _orgScaleCard = card.transform.localScale;
+        card.transform.DOScale(_orgScaleCard * _zoomScale, _zoomDuration);
+        _currentZoomInCard = card;
+
+        zoomedInCard = true;
+    }
+
+    private void zoomBack(Transform card)
+    {
+        card.localScale = _orgScaleCard;
+        zoomedInCard = false;
+        _currentZoomInCard = null;
     }
 }

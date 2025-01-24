@@ -6,12 +6,14 @@ using UnityEngine;
 public class SpawnLocationsPlayer : MonoBehaviour
 {
     public GameObject[] spawningPlacePlayer; //change to list later :) generally better and more comftable with list
+    public List<GameObject> threeSpawningCardLocation;
     private PlayerHand playerHand;
     private CardUIHandler cardUIHandler;//testing
 
     private void Start()
     {
         playerHand = GetComponent<PlayerHand>();
+        playerHand.playerHandChanged -= OnPlayerHandChanged;
         playerHand.playerHandChanged += OnPlayerHandChanged;
         cardUIHandler = GetComponent<CardUIHandler>();//testing
     }
@@ -35,16 +37,8 @@ public class SpawnLocationsPlayer : MonoBehaviour
         }
     }
 
-    public void PlayerCardLocations()
-    { 
-        var spawnPosition = spawningPlacePlayer.Length;
-        Debug.Log("location thing");
-    }
 
-
-    
-   
-
+    #region comments
     /*
 
     bit code from teacher to help with the spawnpoints and handupdate (observer)
@@ -68,4 +62,5 @@ public class SpawnLocationsPlayer : MonoBehaviour
     } 
 
     */
+    #endregion
 }

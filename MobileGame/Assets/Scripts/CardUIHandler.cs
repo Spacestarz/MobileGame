@@ -37,7 +37,7 @@ public class CardUIHandler : MonoBehaviour
 
     private GameObject InstantiateCardPrefab(Card.SuitEnum suit)
     {
-        Debug.Log("getting the prefab look fab");
+       // Debug.Log("getting the prefab look fab");
         switch (suit)
         {
             case Card.SuitEnum.Hearts:
@@ -54,7 +54,7 @@ public class CardUIHandler : MonoBehaviour
 
 
             default:
-                Debug.Log("idk which suit");
+               // Debug.Log("idk which suit");
                 return null;
 
         }

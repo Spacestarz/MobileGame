@@ -24,9 +24,6 @@ public class HoverOverCard : MonoBehaviour
     private void OnMouseOver() //have this script on cards and this event will trigger when hover over with mouse/held down touch
     {
         
-        //todo KILL THE TWEEN
-        
-        //
         Debug.Log(gameObject.name);
         if (_CardhasbeenMoved && _lasthovocard == gameObject)
         {
@@ -41,8 +38,8 @@ public class HoverOverCard : MonoBehaviour
     
         help = new Vector3(_orgposCard.x,newpos,_orgposCard.z);
         
-         //todo make card go up a bit
         gameObject.transform.DOMove(help, 0.1f);
+        DOTween.Kill(gameObject);
         _CardhasbeenMoved = true;
     
      }
@@ -52,7 +49,8 @@ public class HoverOverCard : MonoBehaviour
         if (_CardhasbeenMoved && _lasthovocard == gameObject)
         {
             //make a tween here too
-            _lasthovocard.transform.localPosition = _orgposCard;
+            _lasthovocard.transform.DOMove(_orgposCard, 0.1f);
+            DOTween.Kill(gameObject);
             _CardhasbeenMoved = false;
         }
     }

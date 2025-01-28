@@ -56,33 +56,34 @@ public class TouchandMouseInputs : MonoBehaviour
                 GameObject clickedCard = hit.collider.gameObject;
                 Transform currentCardTransform = hit.collider.transform;
 
-                //make clickedcard another color
-                HighlightCard(clickedCard);
+                #region badzoom
 
-                if (_currentZoomInCard == clickedCard)
-                {
-                    var sprite = clickedCard.GetComponent<SpriteRenderer>();
-                    sprite.color = Color.white;
-                    zoomBack(currentCardTransform);
-                }
-                else
-                {
-                    if (_currentZoomInCard != null)
-                    {
-                        var sprite = _currentZoomInCard.GetComponent<SpriteRenderer>();
-                        sprite.color= Color.white;
-                        zoomBack(_currentZoomInCard.transform);
-                    }
+                
 
-                    Debug.Log($"zooming in on {clickedCard}");
-                    ZoomIn(clickedCard);
-                }
-
-                if (Input.GetMouseButton(0)) //if left mouse button is held down
-                {
-                    
-                }
-
+              
+                // //make clickedcard another color
+                // HighlightCard(clickedCard);
+                //
+                // if (_currentZoomInCard == clickedCard)
+                // {
+                //     var sprite = clickedCard.GetComponent<SpriteRenderer>();
+                //     sprite.color = Color.white;
+                //     zoomBack(currentCardTransform);
+                // }
+                // else
+                // {
+                //     if (_currentZoomInCard != null)
+                //     {
+                //         var sprite = _currentZoomInCard.GetComponent<SpriteRenderer>();
+                //         sprite.color= Color.white;
+                //         zoomBack(_currentZoomInCard.transform);
+                //     }
+                //
+                //     Debug.Log($"zooming in on {clickedCard}");
+                //     ZoomIn(clickedCard);
+                // }
+                
+                #endregion
 
                 #region comments
                 // 1. Spara isZOomedIn p� kortet i sig, n�r du klickar, if(iZoomedin) zoomOut()
@@ -109,29 +110,30 @@ public class TouchandMouseInputs : MonoBehaviour
         }
 //#endif
     }
-
-    private void HighlightCard(GameObject CurrentCard)
-    {
-      var sprite =  CurrentCard.GetComponent<SpriteRenderer>();
-
-        sprite.color = Color.blue;
-        //Debug.Log($"changed color on sprite to {sprite.color}");
-    }
-
-    private void ZoomIn(GameObject card)
-    {
-        _orgScaleCard = card.transform.localScale;
-        card.transform.DOScale(_orgScaleCard * _zoomScale, _zoomDuration);
-        _currentZoomInCard = card;
-
-        zoomedInCard = true;
-    }
-
-    private void zoomBack(Transform card)
-    {
-        card.localScale = _orgScaleCard;
-        zoomedInCard = false;
-        _currentZoomInCard = null;
-    }
+#region badzoom
+    // private void HighlightCard(GameObject CurrentCard)
+    // {
+    //   var sprite =  CurrentCard.GetComponent<SpriteRenderer>();
+    //
+    //     sprite.color = Color.blue;
+    //     //Debug.Log($"changed color on sprite to {sprite.color}");
+    // }
+    //
+    // private void ZoomIn(GameObject card)
+    // {
+    //     _orgScaleCard = card.transform.localScale;
+    //     card.transform.DOScale(_orgScaleCard * _zoomScale, _zoomDuration);
+    //     _currentZoomInCard = card;
+    //
+    //     zoomedInCard = true;
+    // }
+    //
+    // private void zoomBack(Transform card)
+    // {
+    //     card.localScale = _orgScaleCard;
+    //     zoomedInCard = false;
+    //     _currentZoomInCard = null;
+    // }
+    #endregion
     
 }

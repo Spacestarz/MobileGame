@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using System;
+using Unity.VisualScripting;
 
 public class TouchandMouseInputs : MonoBehaviour
 {
@@ -29,7 +30,7 @@ public class TouchandMouseInputs : MonoBehaviour
 
     void Update()
     {
-
+        
         if (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
         {
             Vector2 touchPosition = Camera.main.ScreenToWorldPoint(Input.touches[0].position);
@@ -42,7 +43,7 @@ public class TouchandMouseInputs : MonoBehaviour
             }
         }
         
-#if UNITY_EDITOR //if you are in the unity editor. Cool thing i am learning yay
+//#if UNITY_EDITOR //if you are in the unity editor. Cool thing i am learning yay
         if (Input.GetMouseButtonDown(0))
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -84,10 +85,10 @@ public class TouchandMouseInputs : MonoBehaviour
 
 
                 #region comments
-                // 1. Spara isZOomedIn på kortet i sig, när du klickar, if(iZoomedin) zoomOut()
+                // 1. Spara isZOomedIn pï¿½ kortet i sig, nï¿½r du klickar, if(iZoomedin) zoomOut()
 
-                // 2. Spara här(?) currentlyZoomedInCard när man zoomar in på ett kort
-                // sedan när man klickar på ett nytt kort, if (cardClicked == currentlyZooemdinCard) zoomOut, else
+                // 2. Spara hï¿½r(?) currentlyZoomedInCard nï¿½r man zoomar in pï¿½ ett kort
+                // sedan nï¿½r man klickar pï¿½ ett nytt kort, if (cardClicked == currentlyZooemdinCard) zoomOut, else
                 // current.. Zoom out, then  zoomInNewCard & currentlyZoomedInCard = newCard
 
                 // 3. OnMouseEnter // OnMouseExit/Leave
@@ -106,10 +107,7 @@ public class TouchandMouseInputs : MonoBehaviour
                 //Debug.Log("you did not hit anything");
             }
         }
-#endif
-        
-      
-
+//#endif
     }
 
     private void HighlightCard(GameObject CurrentCard)
@@ -135,4 +133,5 @@ public class TouchandMouseInputs : MonoBehaviour
         zoomedInCard = false;
         _currentZoomInCard = null;
     }
+    
 }

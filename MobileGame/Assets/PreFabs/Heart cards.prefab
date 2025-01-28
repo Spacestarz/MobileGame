@@ -188,6 +188,7 @@ GameObject:
   - component: {fileID: 6127988981423265179}
   - component: {fileID: 7112658418775494833}
   - component: {fileID: -7059082306567091326}
+  - component: {fileID: 5565366507830898304}
   m_Layer: 0
   m_Name: Heart cards
   m_TagString: Untagged
@@ -325,6 +326,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.41, y: 0.55}
   m_EdgeRadius: 0
+--- !u!114 &5565366507830898304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3980269592314548513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ffa45f35f79d7849b5b3ef9d8ae6ba4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7953190964341876808
 GameObject:
   m_ObjectHideFlags: 0

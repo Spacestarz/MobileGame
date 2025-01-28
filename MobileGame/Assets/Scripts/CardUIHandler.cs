@@ -6,7 +6,6 @@ public class CardUIHandler : MonoBehaviour
 {
     private distributeCards distributeCards;
     private CardManager cardManager;
-  
 
     private TextMeshPro _rankText;
 

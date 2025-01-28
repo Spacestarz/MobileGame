@@ -12,6 +12,8 @@ public class HoverOverCard : MonoBehaviour
     private GameObject CardClicked;
     private GameObject _lasthovocard;
     
+    private TouchandMouseInputs _touchandMouseInputs;
+    
     //on mouse press, if cardFound, heldCardRef = cardFound
     // update, cardFound . position = mousePointer
     // on mouse press, if heldCardRef != null, drop card (or return card to somewhere)
@@ -20,29 +22,34 @@ public class HoverOverCard : MonoBehaviour
     // if cPU == true, position = mousePointer //cPU = card pick up
     // if pressed while CPU true, cpu false
     // ScreenToWorldPosition
+    void Start()
+    {
+        _touchandMouseInputs = FindObjectOfType<TouchandMouseInputs>();
+    }
     
     private void OnMouseOver() //have this script on cards and this event will trigger when hover over with mouse/held down touch
     {
-        
-        Debug.Log(gameObject.name);
-        if (_CardhasbeenMoved && _lasthovocard == gameObject)
+        if (_touchandMouseInputs.FollowMouse == false)
         {
-            return;
-        }
+            Debug.Log(gameObject.name);
+            if (_CardhasbeenMoved && _lasthovocard == gameObject)
+            {
+                return;
+            }
         
-        _lasthovocard = gameObject;
+            _lasthovocard = gameObject;
       
-         _orgposCard = gameObject.transform.position;
+            _orgposCard = gameObject.transform.position;
     
-        newpos = _orgposCard.y + MovehowMuch;
+            newpos = _orgposCard.y + MovehowMuch;
     
-        help = new Vector3(_orgposCard.x,newpos,_orgposCard.z);
+            help = new Vector3(_orgposCard.x,newpos,_orgposCard.z);
         
-        gameObject.transform.DOMove(help, 0.1f);
-        DOTween.Kill(gameObject);
-        _CardhasbeenMoved = true;
-    
-     }
+            gameObject.transform.DOMove(help, 0.1f);
+            DOTween.Kill(gameObject);
+            _CardhasbeenMoved = true;
+        }
+    }
 
     private void OnMouseExit()
     {

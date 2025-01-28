@@ -23,6 +23,13 @@ public class TouchandMouseInputs : MonoBehaviour
 
     public bool zoomedInCard;
 
+    public bool FollowMouse;
+
+    private GameObject _clickedCard;
+    private Vector3 _clickedCardPosition;
+    private Vector2 _orgCardPosition;
+
+    private HoverOverCard _HoverOverCardScript;
     void Start()
     {
         
@@ -30,7 +37,6 @@ public class TouchandMouseInputs : MonoBehaviour
 
     void Update()
     {
-        
         if (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
         {
             Vector2 touchPosition = Camera.main.ScreenToWorldPoint(Input.touches[0].position);
@@ -42,19 +48,36 @@ public class TouchandMouseInputs : MonoBehaviour
                 //Debug.Log($"touched object {hit.collider.name}");
             }
         }
-        
 //#if UNITY_EDITOR //if you are in the unity editor. Cool thing i am learning yay
         if (Input.GetMouseButtonDown(0))
         {
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-            RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
-
-            if (hit.collider != null)
+            if (_clickedCard != null)
             {
-                Debug.Log($"you touch/click {hit.collider.name}");
-                GameObject clickedCard = hit.collider.gameObject;
-                Transform currentCardTransform = hit.collider.transform;
+                //RELEASE THE CARD KRONK
+                Debug.Log("release the card" + _clickedCard.name);
+                _clickedCard.transform.position = _orgCardPosition;
+                Debug.Log($"go to {_orgCardPosition}");
+                FollowMouse = false;
+                _clickedCard = null;
+            }
+            else 
+            {
+                Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+                RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+
+                if (hit.collider != null)
+                {
+                    Debug.Log($"you touch/click {hit.collider.name}");
+                    _clickedCard = hit.collider.gameObject;
+                    _clickedCardPosition = _clickedCard.transform.position;
+                    _orgCardPosition = _clickedCard.transform.position;
+                }
+                else
+                {
+                   Debug.Log("nothing where you clicked with collides thing");
+                }
+
 
                 #region badzoom
 
@@ -103,14 +126,23 @@ public class TouchandMouseInputs : MonoBehaviour
                 //also make so that card that zooms gets put above the other cards
                 #endregion  
             }
-            else
-            {
-                //Debug.Log("you did not hit anything");
-            }
+          
         }
+        
+        if (_clickedCard != null)
+        {
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            _clickedCard.transform.position = mousePos; 
+            FollowMouse = true;
+        }
+    }
 //#endif
     }
-#region badzoom
+
+
+
+    #region badzoom
     // private void HighlightCard(GameObject CurrentCard)
     // {
     //   var sprite =  CurrentCard.GetComponent<SpriteRenderer>();
@@ -136,4 +168,4 @@ public class TouchandMouseInputs : MonoBehaviour
     // }
     #endregion
     
-}
+

@@ -59,7 +59,8 @@ public class PlayerHand : MonoBehaviour
             }
             else
             {
-                dropZone._dropZoneText.text = ("You cant do that. You have no cards");
+                Debug.Log("You cant do that. You have no cards");
+                //dropZone._dropZoneText.text = ("You cant do that. You have no cards");
             }
         }
     }

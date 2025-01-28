@@ -30,6 +30,10 @@ public class TouchandMouseInputs : MonoBehaviour
     private Vector2 _orgCardPosition;
 
     private HoverOverCard _HoverOverCardScript;
+
+    public DropZone _dropzoneScript;
+
+
     void Start()
     {
         
@@ -51,8 +55,21 @@ public class TouchandMouseInputs : MonoBehaviour
 //#if UNITY_EDITOR //if you are in the unity editor. Cool thing i am learning yay
         if (Input.GetMouseButtonDown(0))
         {
+
+            //TODO
+            //do a raycast and check on just the layer for an example dropzone layer
+            //if there jiho go to droplist list.
+
             if (_clickedCard != null)
             {
+                //checking here if player click while over the dropzone locations
+                Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero, 100f, LayerMask.GetMask("dropZoneLayer"));
+                if (hit.collider != null)
+                {
+                    //_dropzoneScript.CanCardBePlaced();
+                }
+
                 //RELEASE THE CARD KRONK
                 Debug.Log("release the card" + _clickedCard.name);
                 _clickedCard.transform.position = _orgCardPosition;
@@ -69,9 +86,12 @@ public class TouchandMouseInputs : MonoBehaviour
                 if (hit.collider != null)
                 {
                     Debug.Log($"you touch/click {hit.collider.name}");
+                    //get the Card thing
+
                     _clickedCard = hit.collider.gameObject;
                     _clickedCardPosition = _clickedCard.transform.position;
                     _orgCardPosition = _clickedCard.transform.position;
+
                 }
                 else
                 {

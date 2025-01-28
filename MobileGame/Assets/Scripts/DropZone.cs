@@ -7,7 +7,7 @@ public class DropZone : MonoBehaviour
 {
     public List <Card> _dropzoneCardList;
     private Card card;
-    public TextMeshProUGUI _dropZoneText;
+    //public TextMeshProUGUI _dropZoneText;
     private GameObject _cardmanagerObject;
     private PlayerHand _playerhand;
     private SpawnLocationsPlayer _spawnLocation;
@@ -34,11 +34,13 @@ public class DropZone : MonoBehaviour
         if (_dropzoneCardList.Count > 0)
         {
            Card card = _dropzoneCardList[0];
-            _dropZoneText.text = _dropzoneCardList.Count.ToString() +  "" + $"card in the dropZone pile"  + $" \n" + $"The card at the top is {card._suit} with rank {card._rank} " ;
+            Debug.Log("idk what to said commented out stuff lol");
+            //_dropZoneText.text = _dropzoneCardList.Count.ToString() +  "" + $"card in the dropZone pile"  + $" \n" + $"The card at the top is {card._suit} with rank {card._rank} " ;
         }
         else
         {
-            _dropZoneText.text = ("No cards are in the dropzone");
+            Debug.Log("\"No cards are in the dropzone\"");
+            //_dropZoneText.text = ("No cards are in the dropzone");
         }
     }
 

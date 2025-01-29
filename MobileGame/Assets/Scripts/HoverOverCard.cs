@@ -27,9 +27,13 @@ public class HoverOverCard : MonoBehaviour
         _touchandMouseInputs = FindObjectOfType<TouchandMouseInputs>();
     }
     
-    private void OnMouseOver() //have this script on cards and this event will trigger when hover over with mouse/held down touch
+
+    //changed to onmouseenter
+    private void OnMouseEnter() //have this script on cards and this event will trigger when hover over with mouse/held down touch
     {
-        if (_touchandMouseInputs.FollowMouse == false)
+        Debug.Log("checking the bool onmouse over" + _CardhasbeenMoved);
+        Debug.Log("checking bool followmouse)" + _touchandMouseInputs.FollowMouse);
+        if (_touchandMouseInputs.FollowMouse == false && _touchandMouseInputs._clickedCard ==null)
         {
             Debug.Log(gameObject.name);
             if (_CardhasbeenMoved && _lasthovocard == gameObject)

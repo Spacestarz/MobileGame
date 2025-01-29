@@ -25,13 +25,14 @@ public class TouchandMouseInputs : MonoBehaviour
 
     public bool FollowMouse;
 
-    private GameObject _clickedCard;
+    public GameObject _clickedCard;
     private Vector3 _clickedCardPosition;
     private Vector2 _orgCardPosition;
 
     private HoverOverCard _HoverOverCardScript;
 
     public DropZone _dropzoneScript;
+    public Collider2D _dropzoneCollider;
    
 
 
@@ -73,16 +74,22 @@ public class TouchandMouseInputs : MonoBehaviour
                     var CardData = _clickedCard.GetComponent<CardScript>();
                   
                     //Debug.Log("this should be something" + CardData.GetCardData());
-                    _dropzoneScript.PutCardInDropZone(CardData.GetCardData());
+                    _dropzoneScript.PutCardInDropZone(CardData.GetCardData(),_clickedCard.transform);
                     
                 }
 
-                //RELEASE THE CARD KRONK
-                //Debug.Log("release the card" + _clickedCard.name);
-                _clickedCard.transform.position = _orgCardPosition;
-               // Debug.Log($"go to {_orgCardPosition}");
-                FollowMouse = false;
-                _clickedCard = null;
+
+                if (hit.collider != _dropzoneCollider) //have the dropzone collider here
+                {
+                    Debug.Log("this is not dropzone collider returning");
+                    //RELEASE THE CARD KRONK
+                    //Debug.Log("release the card" + _clickedCard.name);
+                    _clickedCard.transform.position = _orgCardPosition;
+                    // Debug.Log($"go to {_orgCardPosition}");
+                    FollowMouse = false;
+                    _clickedCard = null;
+                }
+            
             }
             else 
             {
@@ -90,7 +97,7 @@ public class TouchandMouseInputs : MonoBehaviour
 
                 RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
 
-                if (hit.collider != null)
+                if (hit.collider != null && hit.collider != _dropzoneCollider)
                 {
                     //Debug.Log($"you touch/click {hit.collider.name}");
                     //get the Card thing TODO need to make script on cards with their data for suit and rank so i can get it

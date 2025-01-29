@@ -67,11 +67,7 @@ public class DropZone : MonoBehaviour
 
     public void CanCardBePlaced(Card CardData)
     {
-        
         Card FirstcardDropZone = _dropzoneCardList [0];
-
-        Debug.Log(FirstcardDropZone+"what is this idk wtf");
-        
 
         Debug.Log($"rank and suit of playercard {CardData._suit} and rank {CardData._rank} ");
 

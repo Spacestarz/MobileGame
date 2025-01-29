@@ -66,20 +66,21 @@ public class TouchandMouseInputs : MonoBehaviour
                 //checking here if player click while over the dropzone locations
                 Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero, 100f, LayerMask.GetMask("dropZoneLayer"));
+
                 if (hit.collider != null)
                 {
-                    Debug.Log($"you hit {hit.collider.name}");
+                   // Debug.Log($"you hit {hit.collider.name}");
                     var CardData = _clickedCard.GetComponent<CardScript>();
                   
-                    Debug.Log("this should be something" + CardData.GetCardData());
+                    //Debug.Log("this should be something" + CardData.GetCardData());
                     _dropzoneScript.PutCardInDropZone(CardData.GetCardData());
                     
                 }
 
                 //RELEASE THE CARD KRONK
-                Debug.Log("release the card" + _clickedCard.name);
+                //Debug.Log("release the card" + _clickedCard.name);
                 _clickedCard.transform.position = _orgCardPosition;
-                Debug.Log($"go to {_orgCardPosition}");
+               // Debug.Log($"go to {_orgCardPosition}");
                 FollowMouse = false;
                 _clickedCard = null;
             }
@@ -101,7 +102,7 @@ public class TouchandMouseInputs : MonoBehaviour
                 }
                 else
                 {
-                   Debug.Log("nothing where you clicked with collides thing");
+                   //Debug.Log("nothing where you clicked with collides thing");
                 }
 
 

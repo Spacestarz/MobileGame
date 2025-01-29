@@ -26,11 +26,21 @@ public class CardUIHandler : MonoBehaviour
     {
         //will get the rank and suit of the card 
         _cardInstance = InstantiateCardPrefab(suit);
-        TextMeshPro[] ranktexts = _cardInstance.GetComponentsInChildren<TextMeshPro>();
 
+        if (_cardInstance != null)
+        {
+            //makes so the card script on the prefab gets the data
+            CardScript cardScript = _cardInstance.GetComponent<CardScript>();
+            cardScript.SetCardData(rank, suit);
+        }
+       
+        TextMeshPro[] ranktexts = _cardInstance.GetComponentsInChildren<TextMeshPro>();
+        
+        string rankString = GetRank(rank); //if its above 10 it gets a q for queen etc
+        
        foreach (TextMeshPro text in ranktexts)
         {
-            text.text = rank.ToString();
+            text.text = rankString;
         }
     }
 

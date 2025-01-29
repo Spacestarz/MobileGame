@@ -11,6 +11,8 @@ public class DropZone : MonoBehaviour
     private GameObject _cardmanagerObject;
     private PlayerHand _playerhand;
     private SpawnLocationsPlayer _spawnLocation;
+    
+    
 
     void Start()
     {
@@ -44,19 +46,43 @@ public class DropZone : MonoBehaviour
         }
     }
 
-    public void CanCardBePlaced(Card playercard)
+    public void PutCardInDropZone(Card carddata)
     {
+        Card card = carddata;
+
+      if (_dropzoneCardList.Count > 0)
+      {
+         Debug.Log("will compare to dropzone");
+        CanCardBePlaced(card); //will check here if the card can be placed
+      }
+      else
+      {
+         _dropzoneCardList.Add(card);
+         _playerhand._PlayercardsList.Remove(card);
+         Debug.Log($"no card in dropzone adding {card._suit} with rank {card._rank}");
+      }
+        // dropZone.dropzoneCardList.Add(card); //only add if you can place the card there
+        
+    }
+
+    public void CanCardBePlaced(Card CardData)
+    {
+        
         Card FirstcardDropZone = _dropzoneCardList [0];
 
-        Debug.Log($"rank and suit of playercard {playercard._suit} and rank {playercard._rank} ");
-        if (playercard._rank > FirstcardDropZone._rank)
+        Debug.Log(FirstcardDropZone+"what is this idk wtf");
+        
+
+        Debug.Log($"rank and suit of playercard {CardData._suit} and rank {CardData._rank} ");
+
+        if (CardData._rank > FirstcardDropZone._rank)
         {
             Debug.Log("You can play this card");
-            _dropzoneCardList.Add (playercard);
-            Debug.Log($"adding your card {playercard._suit} with rank {playercard._rank} to dropzone");
-            _playerhand._PlayercardsList.Remove (playercard);
+            _dropzoneCardList.Add (CardData);
+            Debug.Log($"adding your card {CardData._suit} with rank {CardData._rank} to dropzone");
+            _playerhand._PlayercardsList.Remove (CardData);
 
-            if (playercard._rank == 10)
+            if (CardData._rank == 10)
             {
                 Debug.Log("Player played a 10. Everything to discard pile");
             }

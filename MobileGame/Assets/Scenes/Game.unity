@@ -517,6 +517,76 @@ MonoBehaviour:
   zoomedInCard: 0
   FollowMouse: 0
   _dropzoneScript: {fileID: 1658243147}
+--- !u!1001 &641081062
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1871443266}
+    m_Modifications:
+    - target: {fileID: 886875788293509846, guid: 3d75d3ff51e05774faff7d4b9eb4d69d, type: 3}
+      propertyPath: m_Name
+      value: BackgroundForCards
+      objectReference: {fileID: 0}
+    - target: {fileID: 5858939701360894833, guid: 3d75d3ff51e05774faff7d4b9eb4d69d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.45902905
+      objectReference: {fileID: 0}
+    - target: {fileID: 5858939701360894833, guid: 3d75d3ff51e05774faff7d4b9eb4d69d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.1424162
+      objectReference: {fileID: 0}
+    - target: {fileID: 5858939701360894833, guid: 3d75d3ff51e05774faff7d4b9eb4d69d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.012661552
+      objectReference: {fileID: 0}
+    - target: {fileID: 5858939701360894833, guid: 3d75d3ff51e05774faff7d4b9eb4d69d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.13971752
+      objectReference: {fileID: 0}
+    - target: {fileID: 5858939701360894833, guid: 3d75d3ff51e05774faff7d4b9eb4d69d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5858939701360894833, guid: 3d75d3ff51e05774faff7d4b9eb4d69d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5858939701360894833, guid: 3d75d3ff51e05774faff7d4b9eb4d69d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5858939701360894833, guid: 3d75d3ff51e05774faff7d4b9eb4d69d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5858939701360894833, guid: 3d75d3ff51e05774faff7d4b9eb4d69d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5858939701360894833, guid: 3d75d3ff51e05774faff7d4b9eb4d69d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5858939701360894833, guid: 3d75d3ff51e05774faff7d4b9eb4d69d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5858939701360894833, guid: 3d75d3ff51e05774faff7d4b9eb4d69d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3d75d3ff51e05774faff7d4b9eb4d69d, type: 3}
+--- !u!4 &641081063 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5858939701360894833, guid: 3d75d3ff51e05774faff7d4b9eb4d69d, type: 3}
+  m_PrefabInstance: {fileID: 641081062}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &690887658
 GameObject:
   m_ObjectHideFlags: 0
@@ -963,8 +1033,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "F - how many cards are in \nthe dropzone\n\nE- send your first card to
-    \nthe drop zone\n\n\n\n\n"
+  m_text: "F - how many cards are in \nthe dropzone\n\n\n\n\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 20eb4c2bc1d3bf0449232400ba2b75b4, type: 2}
   m_sharedMaterial: {fileID: -7640997074047728275, guid: 20eb4c2bc1d3bf0449232400ba2b75b4, type: 2}
@@ -1059,7 +1128,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 221, y: -122}
+  m_AnchoredPosition: {x: 221, y: -377}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1241397475
@@ -1805,7 +1874,8 @@ Transform:
   m_LocalPosition: {x: 0.0582, y: 0.2369, z: -0.02802818}
   m_LocalScale: {x: 5.2284274, y: 2.6260128, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 641081063}
   m_Father: {fileID: 1658243145}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1871443267
@@ -1853,7 +1923,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.023529412}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2001,6 +2071,37 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &2008763623
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2008763624}
+  m_Layer: 0
+  m_Name: dropzone card position
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2008763624
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008763623}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.14, y: 0.36, z: -0.024586525}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2013339098
 GameObject:
   m_ObjectHideFlags: 0
@@ -2101,3 +2202,4 @@ SceneRoots:
   - {fileID: 2013339100}
   - {fileID: 1978090070}
   - {fileID: 1658243145}
+  - {fileID: 2008763624}

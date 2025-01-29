@@ -32,6 +32,7 @@ public class TouchandMouseInputs : MonoBehaviour
     private HoverOverCard _HoverOverCardScript;
 
     public DropZone _dropzoneScript;
+   
 
 
     void Start()
@@ -67,7 +68,12 @@ public class TouchandMouseInputs : MonoBehaviour
                 RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero, 100f, LayerMask.GetMask("dropZoneLayer"));
                 if (hit.collider != null)
                 {
-                    //_dropzoneScript.CanCardBePlaced(); TODO need to make script on cards with their data for suit and rank so i can get it
+                    Debug.Log($"you hit {hit.collider.name}");
+                    var CardData = _clickedCard.GetComponent<CardScript>();
+                  
+                    Debug.Log("this should be something" + CardData.GetCardData());
+                    _dropzoneScript.PutCardInDropZone(CardData.GetCardData());
+                    
                 }
 
                 //RELEASE THE CARD KRONK
@@ -85,7 +91,7 @@ public class TouchandMouseInputs : MonoBehaviour
 
                 if (hit.collider != null)
                 {
-                    Debug.Log($"you touch/click {hit.collider.name}");
+                    //Debug.Log($"you touch/click {hit.collider.name}");
                     //get the Card thing TODO need to make script on cards with their data for suit and rank so i can get it
 
                     _clickedCard = hit.collider.gameObject;

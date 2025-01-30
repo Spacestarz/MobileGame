@@ -73,5 +73,10 @@ public class PlayerHand : MonoBehaviour
     {
         _PlayercardsList.Add(card);
         playerHandChanged?.Invoke(this);
+        if (playerHandChanged == null)
+        {
+            Debug.Log("i am lost");
+        }
+        Debug.Log($"this is card {card._suit} and {card._rank}");
     }
 }

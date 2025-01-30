@@ -16,6 +16,7 @@ public class distributeCards : MonoBehaviour
 
     void Start()
     {
+
         cardManager = GetComponent<CardManager>();
         playerHand = GetComponent<PlayerHand>();
         cardUIHandler = GetComponent<CardUIHandler>();
@@ -68,13 +69,18 @@ public class distributeCards : MonoBehaviour
         for (int i = 0; i < 3; i++) //instantiate 3 cards for the players hand
         {
             Card card = cardManager.allCardsList[0]; //get the cards top in list
-            cardManager.allCardsList.Remove(card);//removing card from allcardslist
-            playerHand._PlayercardsList.Add(card); //adding card to playerhandList
-            GameObject spawnpoint = SpawnLocationsScript.spawningPlacePlayer[i];
+            Debug.Log("instantiate 2 cards" + card.ToString());
+            //cardManager.allCardsList.Remove(card);//removing card from allcardslist
+           // cardUIHandler.GetCardUI(card._rank, card._suit);//getting the suit and rank
+            //playerHand._PlayercardsList.Add(card); //adding card to playerhandList
+            Distribute(0);
+
+            //playerHand.playerHandChanged?.Invoke(this);
+            // GameObject spawnpoint = SpawnLocationsScript.spawningPlacePlayer[i];
 
             //gets the visuals for the card.
-            cardUIHandler.GetCardUI(card._rank, card._suit); //getting the suit and rank
-            cardUIHandler._cardInstance.transform.position = spawnpoint.transform.position; //changes the position
+
+            // cardUIHandler._cardInstance.transform.position = spawnpoint.transform.position; //changes the position
         }
 
     }

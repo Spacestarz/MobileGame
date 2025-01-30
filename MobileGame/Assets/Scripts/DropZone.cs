@@ -14,6 +14,9 @@ public class DropZone : MonoBehaviour
     private TouchandMouseInputs _touchandMouseInputs;
 
     public GameObject _dropZoneLocationOfCards;
+
+    private float stackOffSet = 0.05f; //testing for effect 
+    private GameObject _latestCardInZone;
     
     
 
@@ -56,18 +59,22 @@ public class DropZone : MonoBehaviour
 
       if (_dropzoneCardList.Count > 0)
       {
-         Debug.Log("will compare to dropzone");
-        CanCardBePlaced(card, cardpos); //will check here if the card can be placed
+            Debug.Log("will compare to dropzone");
+            CanCardBePlaced(card, cardpos); //will check here if the card can be placed
       }
       else
       {
-         _dropzoneCardList.Add(card);
-         _playerhand._PlayercardsList.Remove(card);
-         _touchandMouseInputs._clickedCard.transform.position = _dropZoneLocationOfCards.transform.position;
+            Vector3 dropzonelocation = _dropZoneLocationOfCards.transform.position;
+
+            _dropzoneCardList.Add(card);
+            _playerhand._PlayercardsList.Remove(card);
+             _touchandMouseInputs._clickedCard.transform.position = _dropZoneLocationOfCards.transform.position;
+            dropzonelocation.z = _dropzoneCardList.Count * stackOffSet;
             _touchandMouseInputs._clickedCard.GetComponent<HoverOverCard>().enabled = false; //turn off hover script
             _touchandMouseInputs.FollowMouse = false;
-          _touchandMouseInputs._clickedCard = null;
-         Debug.Log($"no card in dropzone adding {card._suit} with rank {card._rank}");
+            _touchandMouseInputs._clickedCard = null;
+
+            Debug.Log($"no card in dropzone adding {card._suit} with rank {card._rank}");
       }
         // dropZone.dropzoneCardList.Add(card); //only add if you can place the card there
         
@@ -81,15 +88,37 @@ public class DropZone : MonoBehaviour
 
         if (CardData._rank > FirstcardDropZone._rank)
         {
+            Vector3 dropzonelocation = _dropZoneLocationOfCards.transform.position;
+
             Debug.Log("You can play this card");
             _dropzoneCardList.Add (CardData);
             _touchandMouseInputs._clickedCard.transform.position = _dropZoneLocationOfCards.transform.position;
+
+            dropzonelocation.z = _dropzoneCardList.Count * stackOffSet;
+
             _touchandMouseInputs._clickedCard.GetComponent<HoverOverCard>().enabled = false; //turn off hover script
             _touchandMouseInputs.FollowMouse = false;
             _touchandMouseInputs._clickedCard = null;
             Debug.Log("card go to this location" + cardpos.position);
             Debug.Log($"adding your card {CardData._suit} with rank {CardData._rank} to dropzone");
             _playerhand._PlayercardsList.Remove (CardData);
+
+            _latestCardInZone = cardpos.gameObject;            //add latest card to be put in pile in here
+
+            TextMeshPro[] textMeshProComponents = _latestCardInZone.GetComponentsInChildren<TextMeshPro>();
+
+            if (textMeshProComponents.Length > 0)
+            {
+                foreach (TextMeshPro textMeshPro in textMeshProComponents)
+                {
+                    textMeshPro.enabled = false; // Disabling the text
+                    Debug.Log("TextMeshPro component disabled.");
+                }
+            }
+            else
+            {
+                Debug.Log("No TextMeshPro components found in the children of the last card.");
+            }
 
             if (CardData._rank == 10)
             {

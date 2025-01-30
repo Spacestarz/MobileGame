@@ -12,7 +12,7 @@ public class Card
     
     public SuitEnum _suit; //suit of card
     public int _rank; //rank of card
-    private GameObject _Card; //the card itself, get how it will look depending on the rank and suit
+   // private GameObject _Card; //the card itself, get how it will look depending on the rank and suit
 
 
     public Card (SuitEnum suit , int rank) //a constructor

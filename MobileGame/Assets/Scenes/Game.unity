@@ -456,13 +456,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03a3facf0a9762544a2d841abe138891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawningPlacePlayer:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   threeSpawningCardLocation:
   - {fileID: 421679412}
   - {fileID: 1241397475}
@@ -1473,6 +1466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77bdb94fb8c205f45a9091bb8f6ea506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _CardUIHandler: {fileID: 468975534}
   _dropZoneLocationOfCards: {fileID: 2008763623}
 --- !u!1 &1670850004
 GameObject:

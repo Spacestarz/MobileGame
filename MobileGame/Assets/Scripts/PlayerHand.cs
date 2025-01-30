@@ -77,6 +77,6 @@ public class PlayerHand : MonoBehaviour
         {
             Debug.Log("i am lost");
         }
-        Debug.Log($"this is card {card._suit} and {card._rank}");
+       // Debug.Log($"this is card {card._suit} and {card._rank}");
     }
 }

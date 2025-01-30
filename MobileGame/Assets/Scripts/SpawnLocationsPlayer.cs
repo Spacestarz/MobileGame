@@ -36,7 +36,7 @@ public class SpawnLocationsPlayer : MonoBehaviour
 
     public void OnPlayerHandChanged(PlayerHand hand)
     {
-        Debug.Log("this is onplayerhandchanged thing");
+        //Debug.Log("this is onplayerhandchanged thing");
         //TODO
         //do a math formel for the cards thing check on github!
 
@@ -47,7 +47,7 @@ public class SpawnLocationsPlayer : MonoBehaviour
             Debug.Log("cardcount is 0 returning");
             return;
         }
-        Debug.Log($"player got {cardCount} cards in hand ");
+        //Debug.Log($"player got {cardCount} cards in hand ");
         //update hand visuals // move cards or something
         //check math formel to where to spawn cards? 
 

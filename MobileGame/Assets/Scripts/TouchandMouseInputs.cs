@@ -72,20 +72,37 @@ public class TouchandMouseInputs : MonoBehaviour
                 {
                    // Debug.Log($"you hit {hit.collider.name}");
                     var CardData = _clickedCard.GetComponent<CardScript>();
-                  
-                    //Debug.Log("this should be something" + CardData.GetCardData());
-                    _dropzoneScript.PutCardInDropZone(CardData.GetCardData(),_clickedCard.transform);
-                    
+
+                    Card cardInfo = CardData.GetCardData();
+
+                    if (cardInfo._rank == 10)
+                    {
+                        Debug.Log("returning you are a 10 byee");
+                        return;
+                    }
+                    else
+                    {
+                        Debug.Log("not a 10 continue");
+                        //Debug.Log("this should be something" + CardData.GetCardData());
+                        _dropzoneScript.PutCardInDropZone(CardData.GetCardData(), _clickedCard.transform);
+                        //get a index out of range here
+                    }
+
+
+
+
+
                 }
 
 
                 if (hit.collider != _dropzoneCollider) //have the dropzone collider here
                 {
-                    Debug.Log("this is not dropzone collider returning");
+                    Debug.Log("RETURNING ORGPOS");
                     //RELEASE THE CARD KRONK
                     //Debug.Log("release the card" + _clickedCard.name);
                     _clickedCard.transform.position = _orgCardPosition;
                     // Debug.Log($"go to {_orgCardPosition}");
+
                     FollowMouse = false;
                     _clickedCard = null;
                 }
@@ -99,12 +116,14 @@ public class TouchandMouseInputs : MonoBehaviour
 
                 if (hit.collider != null && hit.collider != _dropzoneCollider)
                 {
-                    //Debug.Log($"you touch/click {hit.collider.name}");
+                    Debug.Log($"you touch/click {hit.collider.name}");
                     //get the Card thing TODO need to make script on cards with their data for suit and rank so i can get it
 
                     _clickedCard = hit.collider.gameObject;
                     _clickedCardPosition = _clickedCard.transform.position;
                     _orgCardPosition = _clickedCard.transform.position;
+
+                    Debug.Log("RETURNING");
 
                 }
                 else

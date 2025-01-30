@@ -69,7 +69,7 @@ public class distributeCards : MonoBehaviour
         for (int i = 0; i < 3; i++) //instantiate 3 cards for the players hand
         {
             Card card = cardManager.allCardsList[0]; //get the cards top in list
-            Debug.Log("instantiate 2 cards" + card.ToString());
+           // Debug.Log("instantiate cards" + card.ToString());
             //cardManager.allCardsList.Remove(card);//removing card from allcardslist
            // cardUIHandler.GetCardUI(card._rank, card._suit);//getting the suit and rank
             //playerHand._PlayercardsList.Add(card); //adding card to playerhandList

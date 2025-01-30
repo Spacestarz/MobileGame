@@ -9,21 +9,27 @@ public class DropZone : MonoBehaviour
     private Card card;
     //public TextMeshProUGUI _dropZoneText;
     private GameObject _cardmanagerObject;
+    private CardManager _cardManagerScript;
     private PlayerHand _playerhand;
     private SpawnLocationsPlayer _spawnLocation;
     private TouchandMouseInputs _touchandMouseInputs;
+    public CardUIHandler _CardUIHandler;
 
     public GameObject _dropZoneLocationOfCards;
 
     private float stackOffSet = 0.05f; //testing for effect 
     private GameObject _latestCardInZone;
+
+    private GameObject _previouscard;
     
     
 
     void Start()
     {
+        
          _touchandMouseInputs = Object.FindFirstObjectByType<TouchandMouseInputs>();
         _cardmanagerObject = GameObject.Find("CardManager");
+        _cardManagerScript = _cardmanagerObject.GetComponent<CardManager>();
         _playerhand = _cardmanagerObject.GetComponent<PlayerHand>();
         _spawnLocation = GetComponent<SpawnLocationsPlayer>();
 
@@ -68,8 +74,8 @@ public class DropZone : MonoBehaviour
 
             _dropzoneCardList.Add(card);
             _playerhand._PlayercardsList.Remove(card);
-             _touchandMouseInputs._clickedCard.transform.position = _dropZoneLocationOfCards.transform.position;
             dropzonelocation.z = _dropzoneCardList.Count * stackOffSet;
+            _touchandMouseInputs._clickedCard.transform.position = _dropZoneLocationOfCards.transform.position;
             _touchandMouseInputs._clickedCard.GetComponent<HoverOverCard>().enabled = false; //turn off hover script
             _touchandMouseInputs.FollowMouse = false;
             _touchandMouseInputs._clickedCard = null;
@@ -88,47 +94,55 @@ public class DropZone : MonoBehaviour
 
         if (CardData._rank > FirstcardDropZone._rank)
         {
+
+            if (_previouscard != null )
+            {
+                CheckTextComp(_previouscard);
+                Debug.Log("this is the previous caard" + _previouscard.name);
+            }
+
+            //updates previous card
+            _previouscard = cardpos.gameObject;
+
             Vector3 dropzonelocation = _dropZoneLocationOfCards.transform.position;
 
             Debug.Log("You can play this card");
             _dropzoneCardList.Add (CardData);
-            _touchandMouseInputs._clickedCard.transform.position = _dropZoneLocationOfCards.transform.position;
-
             dropzonelocation.z = _dropzoneCardList.Count * stackOffSet;
 
+            _touchandMouseInputs._clickedCard.transform.position = _dropZoneLocationOfCards.transform.position;
+
             _touchandMouseInputs._clickedCard.GetComponent<HoverOverCard>().enabled = false; //turn off hover script
+
             _touchandMouseInputs.FollowMouse = false;
+
             _touchandMouseInputs._clickedCard = null;
             Debug.Log("card go to this location" + cardpos.position);
             Debug.Log($"adding your card {CardData._suit} with rank {CardData._rank} to dropzone");
             _playerhand._PlayercardsList.Remove (CardData);
 
-            _latestCardInZone = cardpos.gameObject;            //add latest card to be put in pile in here
-
-            TextMeshPro[] textMeshProComponents = _latestCardInZone.GetComponentsInChildren<TextMeshPro>();
-
-            if (textMeshProComponents.Length > 0)
-            {
-                foreach (TextMeshPro textMeshPro in textMeshProComponents)
-                {
-                    textMeshPro.enabled = false; // Disabling the text
-                    Debug.Log("TextMeshPro component disabled.");
-                }
-            }
-            else
-            {
-                Debug.Log("No TextMeshPro components found in the children of the last card.");
-            }
 
             if (CardData._rank == 10)
             {
                 Debug.Log("Player played a 10. Everything to discard pile");
+                
+                for (global::System.Int32 i = _dropzoneCardList.Count - 1; i>=0; i--)
+                {
+                    _dropzoneCardList.Remove(_dropzoneCardList[i]);
+                    _cardManagerScript.DiscardList.Add(_dropzoneCardList[i]);
+                    Debug.Log($"adding {_dropzoneCardList[i]} to discardlist");
+                }
             }
             else
             {
                 Debug.Log("Not a 10, checking if 4 in a row");
                 CheckIf4Row();
             }
+
+            // CheckTextComp(FirstcardDropZone.);
+
+            //here i change the card I HOLD IN HAND DAFUQ STAHP.
+
         }
         else
         {
@@ -136,6 +150,25 @@ public class DropZone : MonoBehaviour
         }
 
     }
+
+    public void CheckTextComp(GameObject card)
+    {
+        TextMeshPro[] textMeshProComponents = card.GetComponentsInChildren<TextMeshPro>();
+
+        if (textMeshProComponents.Length > 0)
+        {
+            foreach (TextMeshPro textMeshPro in textMeshProComponents)
+            {
+                textMeshPro.enabled = false; // Disabling the text
+                Debug.Log("TextMeshPro component disabled.");
+            }
+        }
+        else
+        {
+            Debug.Log("No TextMeshPro components found in the children of the last card.");
+        }
+    }
+
 
     public void CheckIf4Row()
     {

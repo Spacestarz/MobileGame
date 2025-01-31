@@ -43,6 +43,7 @@ public class TouchandMouseInputs : MonoBehaviour
 
     void Update()
     {
+
         if (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
         {
             Vector2 touchPosition = Camera.main.ScreenToWorldPoint(Input.touches[0].position);
@@ -54,10 +55,11 @@ public class TouchandMouseInputs : MonoBehaviour
                 //Debug.Log($"touched object {hit.collider.name}");
             }
         }
-//#if UNITY_EDITOR //if you are in the unity editor. Cool thing i am learning yay
-        if (Input.GetMouseButtonDown(0))
-        {
 
+
+//#if UNITY_EDITOR //if you are in the unity editor. Cool thing i am learning yay
+        if (Input.GetMouseButtonUp(0)) //changing so it will check when releasing 
+        {
             //TODO
             //do a raycast and check on just the layer for an example dropzone layer
             //if there jiho go to droplist list.
@@ -66,9 +68,11 @@ public class TouchandMouseInputs : MonoBehaviour
             {
                 //checking here if player click while over the dropzone locations
                 Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero, 100f, LayerMask.GetMask("dropZoneLayer"));
+                RaycastHit2D CheckIfDropZoneCollider = Physics2D.Raycast(mousePos, Vector2.zero, 100f, LayerMask.GetMask("dropZoneLayer"));
 
-                if (hit.collider != null)
+                RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+
+                if (CheckIfDropZoneCollider.collider != null)
                 {
                    // Debug.Log($"you hit {hit.collider.name}");
                     var CardData = _clickedCard.GetComponent<CardScript>();
@@ -88,36 +92,12 @@ public class TouchandMouseInputs : MonoBehaviour
                         //get a index out of range here
                     }
 
-
-
-
-
                 }
 
-
-                if (hit.collider != _dropzoneCollider) //have the dropzone collider here
-                {
-                    Debug.Log("RETURNING ORGPOS");
-                    //RELEASE THE CARD KRONK
-                    //Debug.Log("release the card" + _clickedCard.name);
-                    _clickedCard.transform.position = _orgCardPosition;
-                    // Debug.Log($"go to {_orgCardPosition}");
-
-                    FollowMouse = false;
-                    _clickedCard = null;
-                }
-            
-            }
-            else 
-            {
-                Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-                RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
-
-                if (hit.collider != null && hit.collider != _dropzoneCollider)
+                if (hit.collider != null && CheckIfDropZoneCollider.collider == null)
                 {
                     Debug.Log($"you touch/click {hit.collider.name}");
-                    //get the Card thing TODO need to make script on cards with their data for suit and rank so i can get it
+                    //get the Card thing TODO need to make script on cards with their data for suit and rank so i can get it. //this is done
 
                     _clickedCard = hit.collider.gameObject;
                     _clickedCardPosition = _clickedCard.transform.position;
@@ -128,15 +108,13 @@ public class TouchandMouseInputs : MonoBehaviour
                 }
                 else
                 {
-                   //Debug.Log("nothing where you clicked with collides thing");
+                    //Debug.Log("nothing where you clicked with collides thing");
                 }
 
+            }
 
                 #region badzoom
 
-                
-
-              
                 // //make clickedcard another color
                 // HighlightCard(clickedCard);
                 //
@@ -158,7 +136,7 @@ public class TouchandMouseInputs : MonoBehaviour
                 //     Debug.Log($"zooming in on {clickedCard}");
                 //     ZoomIn(clickedCard);
                 // }
-                
+
                 #endregion
 
                 #region comments
@@ -177,21 +155,49 @@ public class TouchandMouseInputs : MonoBehaviour
                 //make so the card dont go out of bound of the screen so it adapts to screen!(do math)
 
                 //also make so that card that zooms gets put above the other cards
-                #endregion  
-            }
-          
+                #endregion
+
         }
-        
-        if (_clickedCard != null)
+
+
+        if (Input.GetMouseButton(0) && FollowMouse == false) //if holding down left click button. //need to make so its only checking if clickedcard is null and follows mouse.
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            RaycastHit2D checkIfdropzone = Physics2D.Raycast(mousePos, Vector2.zero, 100f, LayerMask.GetMask("dropZoneLayer"));
 
-            _clickedCard.transform.position = mousePos; 
-            FollowMouse = true;
+            RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+
+            if (hit.collider != null && checkIfdropzone.collider == null)
+            {
+                Debug.Log($"you touch/click {hit.collider.name}");
+                //get the Card thing TODO need to make script on cards with their data for suit and rank so i can get it. //this is done
+
+                _clickedCard = hit.collider.gameObject;
+            }
+            else
+            {
+                Debug.Log("hot hit nothing lol");
+            }
+
+            if (_clickedCard != null)
+            {
+                Debug.Log("following mouse");
+                _clickedCard.transform.position = mousePos;
+                FollowMouse = true;
+            }
         }
+
+        if (FollowMouse)
+        {
+            Debug.Log("please follow please");
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            _clickedCard.transform.position = mousePos;
+        }
+      
     }
+}
 //#endif
-    }
+    
 
 
 

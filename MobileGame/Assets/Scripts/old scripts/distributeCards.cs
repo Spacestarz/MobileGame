@@ -8,7 +8,6 @@ public class distributeCards : MonoBehaviour
     private PlayerHand playerHand;
     private CardUIHandler cardUIHandler;
     private SpawnLocationsPlayer SpawnLocationsScript;
-    private CardOnTable CardOnTable;
 
     private List<GameObject> _beginnerSpawn;
 
@@ -21,7 +20,6 @@ public class distributeCards : MonoBehaviour
         playerHand = GetComponent<PlayerHand>();
         cardUIHandler = GetComponent<CardUIHandler>();
         SpawnLocationsScript = GetComponent<SpawnLocationsPlayer>();
-        CardOnTable = GetComponent<CardOnTable>();
 
         _beginnerSpawn = SpawnLocationsScript.threeSpawningCardLocation;
     }

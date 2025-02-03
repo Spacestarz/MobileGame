@@ -14,7 +14,7 @@ public class CardUIHandler : MonoBehaviour
     public GameObject _cloverPrefab;
     public GameObject _spadesPrefab;
 
-   public GameObject _cardInstance; //the instantiated card
+    public GameObject _cardInstance; //the instantiated card
     
     void Start()
     {

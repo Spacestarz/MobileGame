@@ -59,14 +59,15 @@ public class DropZone : MonoBehaviour
         }
     }
 
-    public void PutCardInDropZone(Card carddata, Transform cardpos)
+    public void PutCardInDropZone(Card carddata, GameObject CardGameObject) 
+        //pretty sure i feck up something here make sure gameobject/visuals follow!
     {
         Card card = carddata;
 
       if (_dropzoneCardList.Count > 0)
       {
             Debug.Log("will compare to dropzone");
-            CanCardBePlaced(card, cardpos); //will check here if the card can be placed
+            CanCardBePlaced(card, CardGameObject); //will check here if the card can be placed
       }
       else
       {
@@ -74,9 +75,18 @@ public class DropZone : MonoBehaviour
 
             _dropzoneCardList.Add(card);
             _playerhand._PlayercardsList.Remove(card);
+
             dropzonelocation.z = _dropzoneCardList.Count * stackOffSet;
-            _touchandMouseInputs._clickedCard.transform.position = _dropZoneLocationOfCards.transform.position;
-            _touchandMouseInputs._clickedCard.GetComponent<HoverOverCard>().enabled = false; //turn off hover script
+
+            //_touchandMouseInputs._clickedCard.transform.position = _dropZoneLocationOfCards.transform.position;
+            CardGameObject.transform.position = _dropZoneLocationOfCards.transform.position;
+            Debug.Log("testing");
+
+            // _touchandMouseInputs._clickedCard.GetComponent<HoverOverCard>().enabled = false; //turn off hover script
+            var hoveroverDisable = CardGameObject.GetComponent<HoverOverCard>();
+            hoveroverDisable.enabled = false;
+            Destroy(hoveroverDisable);
+            Debug.Log("DEFSTROY");
             _touchandMouseInputs.FollowMouse = false;
             _touchandMouseInputs._clickedCard = null;
 
@@ -86,15 +96,13 @@ public class DropZone : MonoBehaviour
         
     }
 
-    public void CanCardBePlaced(Card CardData, Transform cardpos)
+    public void CanCardBePlaced(Card CardData, GameObject CardObject)
     {
         Card FirstcardDropZone = _dropzoneCardList [0];
-
       //  Debug.Log($"rank and suit of playercard {CardData._suit} and rank {CardData._rank} ");
 
         if (CardData._rank > FirstcardDropZone._rank)
         {
-
             if (_previouscard != null )
             {
                 CheckTextComp(_previouscard);
@@ -102,7 +110,7 @@ public class DropZone : MonoBehaviour
             }
 
             //updates previous card
-            _previouscard = cardpos.gameObject;
+            _previouscard = CardObject;
 
             Vector3 dropzonelocation = _dropZoneLocationOfCards.transform.position;
 
@@ -117,7 +125,6 @@ public class DropZone : MonoBehaviour
             _touchandMouseInputs.FollowMouse = false;
 
             _touchandMouseInputs._clickedCard = null;
-            Debug.Log("card go to this location" + cardpos.position);
             Debug.Log($"adding your card {CardData._suit} with rank {CardData._rank} to dropzone");
             _playerhand._PlayercardsList.Remove (CardData);
 

@@ -11,7 +11,6 @@ public class SpawnLocationsPlayer : MonoBehaviour
     private CardUIHandler cardUIHandler;//testing
 
 
-
     public Vector3 _A;
     public Vector3 _B;
 
@@ -28,8 +27,6 @@ public class SpawnLocationsPlayer : MonoBehaviour
 
     private void Start()
     {
-       
-
        
     }
 

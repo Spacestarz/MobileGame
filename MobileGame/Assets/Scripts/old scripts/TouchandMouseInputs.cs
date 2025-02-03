@@ -2,6 +2,7 @@ using UnityEngine;
 using DG.Tweening;
 using System;
 using Unity.VisualScripting;
+using NUnit.Framework.Internal;
 
 public class TouchandMouseInputs : MonoBehaviour
 {
@@ -92,7 +93,7 @@ public class TouchandMouseInputs : MonoBehaviour
                     {
                         Debug.Log("not a 10 continue");
                         //Debug.Log("this should be something" + CardData.GetCardData());
-                        _dropzoneScript.PutCardInDropZone(CardData.GetCardData(), _clickedCard.transform);
+                        _dropzoneScript.PutCardInDropZone(CardData.GetCardData(), _clickedCard.gameObject);
                     }
 
                 }
@@ -169,6 +170,7 @@ public class TouchandMouseInputs : MonoBehaviour
             if (hit.collider != null && checkIfdropzone.collider == null)
             {
                 Debug.Log($"you touch/click {hit.collider.name}");
+                
                 //get the Card thing TODO need to make script on cards with their data for suit and rank so i can get it. //this is done
 
                 _clickedCard = hit.collider.gameObject;
@@ -177,7 +179,7 @@ public class TouchandMouseInputs : MonoBehaviour
             }
             else
             {
-                Debug.Log("hot hit nothing lol");
+                Debug.Log("you hit nothing");
             }
 
             if (_clickedCard != null)
@@ -190,7 +192,7 @@ public class TouchandMouseInputs : MonoBehaviour
 
         if (FollowMouse)
         {
-            Debug.Log("please follow please");
+            //Debug.Log("please follow please");
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             _clickedCard.transform.position = mousePos;
         }

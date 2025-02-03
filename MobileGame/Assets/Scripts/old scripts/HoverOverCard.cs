@@ -51,6 +51,7 @@ public class HoverOverCard : MonoBehaviour
             help = new Vector3(_orgposCard.x,newpos,_orgposCard.z);
         
             gameObject.transform.DOMove(help, 0.1f);
+            Debug.Log("moving up");
             DOTween.Kill(gameObject);
             _CardhasbeenMoved = true;
         }
@@ -60,6 +61,7 @@ public class HoverOverCard : MonoBehaviour
     {
         if (_CardhasbeenMoved && _lasthovocard == gameObject)
         {
+            Debug.Log("onmouseexit");
             //make a tween here too
             _lasthovocard.transform.DOMove(_orgposCard, 0.1f);
             DOTween.Kill(gameObject);

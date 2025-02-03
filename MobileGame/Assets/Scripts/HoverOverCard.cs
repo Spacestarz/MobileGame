@@ -7,7 +7,7 @@ public class HoverOverCard : MonoBehaviour
     private float MovehowMuch = 0.20f;
     private float newpos;
     private Vector3 help;
-    private Vector3 _orgposCard;
+    public Vector3 _orgposCard;
     private bool _CardhasbeenMoved = false;
     private GameObject CardClicked;
     private GameObject _lasthovocard;
@@ -25,6 +25,7 @@ public class HoverOverCard : MonoBehaviour
     void Start()
     {
         _touchandMouseInputs = FindObjectOfType<TouchandMouseInputs>();
+        _orgposCard = transform.position;// testing position
     }
     
 
@@ -43,7 +44,7 @@ public class HoverOverCard : MonoBehaviour
         
             _lasthovocard = gameObject;
       
-            _orgposCard = gameObject.transform.position;
+           // _orgposCard = gameObject.transform.position; //testing pos
     
             newpos = _orgposCard.y + MovehowMuch;
     

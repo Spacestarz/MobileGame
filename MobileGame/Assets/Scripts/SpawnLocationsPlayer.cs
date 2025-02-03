@@ -59,6 +59,7 @@ public class SpawnLocationsPlayer : MonoBehaviour
         for (int i = 1; i <= cardCount; i++)
         {
             Vector3 position = _A + direction * step * i;
+            //go through the whole playerhand list
             cardUIHandler._cardInstance.transform.position = position;
             Debug.Log("math for card placement in hand");
         }

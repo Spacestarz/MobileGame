@@ -27,12 +27,15 @@ public class TouchandMouseInputs : MonoBehaviour
 
     public GameObject _clickedCard;
     private Vector3 _clickedCardPosition;
-    private Vector2 _orgCardPosition;
+   // public Vector2 _orgCardPosition;
 
     private HoverOverCard _HoverOverCardScript;
 
     public DropZone _dropzoneScript;
     public Collider2D _dropzoneCollider;
+
+    public HoverOverCard _hoverOverCard; //test
+    public Vector3 _OrgPosFromHoverScript; //test location
    
 
 
@@ -82,6 +85,7 @@ public class TouchandMouseInputs : MonoBehaviour
                     if (cardInfo._rank == 10)
                     {
                         Debug.Log("returning you are a 10 byee");
+                        _clickedCard.transform.position = _OrgPosFromHoverScript;
                         return;
                     }
                     else
@@ -89,20 +93,15 @@ public class TouchandMouseInputs : MonoBehaviour
                         Debug.Log("not a 10 continue");
                         //Debug.Log("this should be something" + CardData.GetCardData());
                         _dropzoneScript.PutCardInDropZone(CardData.GetCardData(), _clickedCard.transform);
-                        //get a index out of range here
                     }
 
                 }
 
-                if (hit.collider != null && CheckIfDropZoneCollider.collider == null)
+                if (CheckIfDropZoneCollider.collider == null)
                 {
-                    Debug.Log($"you touch/click {hit.collider.name}");
-                    //get the Card thing TODO need to make script on cards with their data for suit and rank so i can get it. //this is done
-
-                    _clickedCard = hit.collider.gameObject;
-                    _clickedCardPosition = _clickedCard.transform.position;
-                    _orgCardPosition = _clickedCard.transform.position;
-
+                    _clickedCard.transform.position = _OrgPosFromHoverScript;
+                    FollowMouse = false;
+                    _clickedCard = null;
                     Debug.Log("RETURNING");
 
                 }
@@ -173,6 +172,8 @@ public class TouchandMouseInputs : MonoBehaviour
                 //get the Card thing TODO need to make script on cards with their data for suit and rank so i can get it. //this is done
 
                 _clickedCard = hit.collider.gameObject;
+                _hoverOverCard = _clickedCard.GetComponent<HoverOverCard>();
+                _OrgPosFromHoverScript = _hoverOverCard._orgposCard; //gets the cards original position
             }
             else
             {

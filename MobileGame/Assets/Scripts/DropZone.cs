@@ -146,7 +146,10 @@ public class DropZone : MonoBehaviour
         }
         else
         {
-            Debug.Log("You cant place this card");
+            Debug.Log("You cant place this card. Go back to orgcardpos");
+            _touchandMouseInputs._clickedCard.transform.position = _touchandMouseInputs._OrgPosFromHoverScript;
+            _touchandMouseInputs.FollowMouse =false;
+            _touchandMouseInputs._clickedCard = null;
         }
 
     }

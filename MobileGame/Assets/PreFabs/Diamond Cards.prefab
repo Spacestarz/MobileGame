@@ -366,7 +366,6 @@ GameObject:
   - component: {fileID: -6013707329456105064}
   - component: {fileID: -1387158979164182467}
   - component: {fileID: -1286577333024360663}
-  - component: {fileID: 1627066795627423177}
   m_Layer: 0
   m_Name: Diamond Cards
   m_TagString: Card
@@ -530,15 +529,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rank: 0
   suit: 0
---- !u!114 &1627066795627423177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6163235588484091234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5bbe72ea5344c34988a1a878b8728b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

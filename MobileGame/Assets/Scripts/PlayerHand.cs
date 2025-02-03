@@ -71,6 +71,7 @@ public class PlayerHand : MonoBehaviour
 
     public void DistributeCard(Card card)
     {
+      
         _PlayercardsList.Add(card);
         playerHandChanged?.Invoke(this);
         if (playerHandChanged == null)

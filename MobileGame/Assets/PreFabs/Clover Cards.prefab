@@ -366,9 +366,10 @@ GameObject:
   - component: {fileID: -5406000401513815018}
   - component: {fileID: -2447585231341232770}
   - component: {fileID: -8575306767939808445}
+  - component: {fileID: -5735763009189666235}
   m_Layer: 0
   m_Name: Clover Cards
-  m_TagString: Untagged
+  m_TagString: Card
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -529,3 +530,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rank: 0
   suit: 0
+--- !u!114 &-5735763009189666235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5765913129927860480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5bbe72ea5344c34988a1a878b8728b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

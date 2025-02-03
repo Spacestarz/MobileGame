@@ -26,7 +26,6 @@ public class SpawnLocationsPlayer : MonoBehaviour
 
     }
 
-
     private void Start()
     {
        
@@ -36,7 +35,7 @@ public class SpawnLocationsPlayer : MonoBehaviour
 
     public void OnPlayerHandChanged(PlayerHand hand)
     {
-        //Debug.Log("this is onplayerhandchanged thing");
+        Debug.Log("this is onplayerhandchanged thing");
         //TODO
         //do a math formel for the cards thing check on github!
 
@@ -52,7 +51,7 @@ public class SpawnLocationsPlayer : MonoBehaviour
         //check math formel to where to spawn cards? 
 
 
-        //testing math for card thing
+        //testing math for card thing from git!
         Vector3 direction = (_B - _A).normalized;
         float totalDistance = Vector3.Distance(_A, _B);
         float step = totalDistance / (cardCount + 1);
@@ -61,6 +60,7 @@ public class SpawnLocationsPlayer : MonoBehaviour
         {
             Vector3 position = _A + direction * step * i;
             cardUIHandler._cardInstance.transform.position = position;
+            Debug.Log("feck");
         }
 
 

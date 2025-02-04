@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class CardVisuals : MonoBehaviour
+public class CardVisuals : Card
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public GameObject CardVisualsHere;
+    public int _rank;
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         

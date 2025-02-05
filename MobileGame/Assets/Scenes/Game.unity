@@ -411,8 +411,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83ab8aad1c4475d47a83dd65701da666, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CardVisualsHere: {fileID: 0}
-  _rank: 0
+  _Rank: 0
+  _Suit: 0
+  _InstanceCard: {fileID: 886875788293509846, guid: 3d75d3ff51e05774faff7d4b9eb4d69d, type: 3}
+  HeartsPreFab: {fileID: 2351650941078651831, guid: 9715dfb62b3e6304eaf4ef2cfc3fd45b, type: 3}
+  DiamondPrefab: {fileID: 5497025608557734640, guid: 596f43f4543e3d54c93cdabc5636776d, type: 3}
+  CloverPreFab: {fileID: 815245200069831719, guid: add4470e3535cfa479a05de689eab492, type: 3}
+  SpadePreFab: {fileID: 8536988943185724681, guid: 852c3dfdc6d314a49a008e9f14401321, type: 3}
 --- !u!114 &468975525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -437,6 +442,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cb43f221e517944fba5bcf6e9f46477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _card: {fileID: 0}
+  _visuals: {fileID: 0}
 --- !u!114 &468975527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -449,6 +456,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 111041a62f1967d468d6234145a0a8e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _Rank: 0
+  _Suit: 0
+  _InstanceCard: {fileID: 886875788293509846, guid: 3d75d3ff51e05774faff7d4b9eb4d69d, type: 3}
+  HeartsPreFab: {fileID: 2351650941078651831, guid: 9715dfb62b3e6304eaf4ef2cfc3fd45b, type: 3}
+  DiamondPrefab: {fileID: 5497025608557734640, guid: 596f43f4543e3d54c93cdabc5636776d, type: 3}
+  CloverPreFab: {fileID: 815245200069831719, guid: add4470e3535cfa479a05de689eab492, type: 3}
+  SpadePreFab: {fileID: 8536988943185724681, guid: 852c3dfdc6d314a49a008e9f14401321, type: 3}
 --- !u!1 &545268779
 GameObject:
   m_ObjectHideFlags: 0
@@ -2684,8 +2698,8 @@ SceneRoots:
   - {fileID: 1073244549}
   - {fileID: 1772466632}
   - {fileID: 34470616}
-  - {fileID: 925459816}
   - {fileID: 468975523}
+  - {fileID: 925459816}
   - {fileID: 2013339100}
   - {fileID: 1978090070}
   - {fileID: 1658243145}

@@ -2,13 +2,21 @@ using UnityEngine;
 
 public class PlayerHand : CardPile
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         
     }
 
-    // Update is called once per frame
+    public override void AddCard(Card cardToAdd)
+    {
+        
+    }
+
+    public override void RemoveCard(Card cardToRemove)
+    {
+        
+    }
+
     void Update()
     {
         

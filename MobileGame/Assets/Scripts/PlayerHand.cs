@@ -25,13 +25,13 @@ public class PlayerHand : CardPile
     public override void AddCard(Card cardToAdd)
     {
         _PlayerHandcards.Add(cardToAdd);
-        Debug.Log($"Removing {cardToAdd._suit} and rank {cardToAdd._rank} from {_PlayerHandcards}");
+        Debug.Log($"Removing {cardToAdd._suit} with rank {cardToAdd._rank} from PlayerhandCardsList");
     }
 
     public override void RemoveCard(Card cardToRemove)
     {
         _PlayerHandcards.Remove(cardToRemove);
-        Debug.Log($"Removing {cardToRemove._suit} and rank {cardToRemove._rank}");
+        Debug.Log($"Removing {cardToRemove._suit} with rank {cardToRemove._rank} from PlayerhandList");
     }
 
     void Update()

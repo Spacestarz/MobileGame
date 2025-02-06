@@ -9,13 +9,13 @@ public class DiscardCards : CardPile
     public override void AddCard(Card cardToAdd)
     {
         _DiscardsCards.Add(cardToAdd);
-        Debug.Log($"Adding {cardToAdd._suit} and rank {cardToAdd._rank} to discardpile");
+        Debug.Log($"Adding {cardToAdd._suit} with rank {cardToAdd._rank} to discardpile");
     }
 
     public override void RemoveCard(Card cardToRemove)
     {
         _DiscardsCards.Remove(cardToRemove);
-        Debug.Log($"Removing {cardToRemove._suit} and rank {cardToRemove._rank} from discardpile");
+        Debug.Log($"Removing {cardToRemove._suit} with rank {cardToRemove._rank} from discardpile");
     }
 
     private void Awake()

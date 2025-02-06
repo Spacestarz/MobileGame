@@ -19,7 +19,7 @@ public class EveryCard : CardPile
     public override void RemoveCard(Card cardToRemove)
     {
         AllcardsList.Remove(cardToRemove);
-        Debug.Log($"Removing {cardToRemove._suit} and rank {cardToRemove._rank}");
+        Debug.Log($"Removing {cardToRemove._suit} with rank {cardToRemove._rank}");
     }
 
     private void Awake()

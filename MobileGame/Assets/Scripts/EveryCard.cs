@@ -19,6 +19,7 @@ public class EveryCard : CardPile
     public override void RemoveCard(Card cardToRemove)
     {
         AllcardsList.Remove(cardToRemove);
+        Debug.Log($"Removing {cardToRemove._suit} and rank {cardToRemove._rank}");
     }
 
     private void Awake()
@@ -49,6 +50,7 @@ public class EveryCard : CardPile
         }
 
         ShuffleCards();
+       GetStarterCards();
     }
 
     public void ShuffleCards() //shuffle the cards with fisher yates shuffle.
@@ -56,19 +58,67 @@ public class EveryCard : CardPile
         listextensions.shufflecards(AllcardsList);
     }
 
+
     public void GetStarterCards()
     {
+        //TODO
         //3 cards upside down to player
         //3 cards above those
         //3 cards to player hand
+         //same to the opponent
 
-        //same to the opponent
+        //players first 3 card (upside down)
         for (int i = 0; i < 3; i++)
         {
             card = AllcardsList[0];//first card in list.
-            RemoveCard(card); 
-            
+            RemoveCard(card); //removing from allcardslist
+            PlayerTableCards.instance.AddCard(card); //Adding 3 cards
         }
-      
+
+        for (int i = 0; i < 3; i++) //not upside down
+        {
+            card = AllcardsList[0];//first card in list.
+            RemoveCard(card); //removing from allcardslist
+            PlayerTableCards.instance.AddCard(card); //Adding 3 cards
+        }
+
+        for (int i = 0; i < 3; i++) //adding to playerhand
+        {
+            card = AllcardsList[0];//first card in list.
+            RemoveCard(card); //removing from allcardslist
+            PlayerHand.instance.AddCard(card);
+        }
+
+        //adding to opponent
+        for (int i = 0; i < 3; i++) //upside down first
+        {
+            card = AllcardsList[0];//first card in list.
+            RemoveCard(card); //removing from allcardslist
+            OpponentTableCard.Instance.AddCard(card);
+        }
+
+        for (int i = 0; i < 3; i++) //not upside down
+        {
+            card = AllcardsList[0];//first card in list.
+            RemoveCard(card); //removing from allcardslist
+            OpponentTableCard.Instance.AddCard(card);
+        }
+
+        //adding to opponent HAND
+        for (int i = 0; i < 3; i++) //not upside down
+        {
+            card = AllcardsList[0];//first card in list.
+            RemoveCard(card); //removing from allcardslist
+            OpponentHand.Instance.AddCard(card);
+        }
+    }
+
+    public void GetCard()
+    {
+        card = AllcardsList[0];
+        RemoveCard(card); //remove card from allcardslist
+        PlayerHand.instance.AddCard(card);
+        Debug.Log($"PlayerHand got {card._suit} with rank {card._rank}");
+
     }
 }

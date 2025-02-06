@@ -1,7 +1,8 @@
 using UnityEngine;
 
-public class CardVisuals : Card
+public class CardVisuals : MonoBehaviour
 {
+   
 
     void Start()
     {
@@ -18,6 +19,7 @@ public class CardVisuals : Card
     public void Init(Card card) //make the card get its gameobject here probarly with the prefabs? 
     {
         Debug.Log("programming jeho");
+
 
         //switch (_suit)
         //{

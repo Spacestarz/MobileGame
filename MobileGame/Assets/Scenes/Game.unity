@@ -373,10 +373,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 468975523}
-  - component: {fileID: 468975527}
   - component: {fileID: 468975526}
   - component: {fileID: 468975525}
-  - component: {fileID: 468975524}
+  - component: {fileID: 468975528}
+  - component: {fileID: 468975529}
   m_Layer: 0
   m_Name: CardManager
   m_TagString: Untagged
@@ -399,25 +399,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &468975524
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 468975521}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83ab8aad1c4475d47a83dd65701da666, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _Rank: 0
-  _Suit: 0
-  _InstanceCard: {fileID: 886875788293509846, guid: 3d75d3ff51e05774faff7d4b9eb4d69d, type: 3}
-  HeartsPreFab: {fileID: 2351650941078651831, guid: 9715dfb62b3e6304eaf4ef2cfc3fd45b, type: 3}
-  DiamondPrefab: {fileID: 5497025608557734640, guid: 596f43f4543e3d54c93cdabc5636776d, type: 3}
-  CloverPreFab: {fileID: 815245200069831719, guid: add4470e3535cfa479a05de689eab492, type: 3}
-  SpadePreFab: {fileID: 8536988943185724681, guid: 852c3dfdc6d314a49a008e9f14401321, type: 3}
 --- !u!114 &468975525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -442,9 +423,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cb43f221e517944fba5bcf6e9f46477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _card: {fileID: 0}
   _visuals: {fileID: 0}
---- !u!114 &468975527
+--- !u!114 &468975528
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -453,16 +433,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 468975521}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 111041a62f1967d468d6234145a0a8e6, type: 3}
+  m_Script: {fileID: 11500000, guid: 11d59bfafcea07b4ca64507bb93d83fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Rank: 0
-  _Suit: 0
-  _InstanceCard: {fileID: 886875788293509846, guid: 3d75d3ff51e05774faff7d4b9eb4d69d, type: 3}
-  HeartsPreFab: {fileID: 2351650941078651831, guid: 9715dfb62b3e6304eaf4ef2cfc3fd45b, type: 3}
-  DiamondPrefab: {fileID: 5497025608557734640, guid: 596f43f4543e3d54c93cdabc5636776d, type: 3}
-  CloverPreFab: {fileID: 815245200069831719, guid: add4470e3535cfa479a05de689eab492, type: 3}
-  SpadePreFab: {fileID: 8536988943185724681, guid: 852c3dfdc6d314a49a008e9f14401321, type: 3}
+--- !u!114 &468975529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468975521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a85eff11a497c1644bab6cfdbb0fec9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &545268779
 GameObject:
   m_ObjectHideFlags: 0

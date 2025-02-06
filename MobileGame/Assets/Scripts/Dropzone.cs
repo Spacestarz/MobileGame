@@ -1,14 +1,40 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Dropzone : MonoBehaviour
+public class Dropzone : CardPile
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public static Dropzone Instance;
+    public List<Card> _dropZoneList;
+
+    public override void AddCard(Card cardToAdd)
+    {
+        _dropZoneList.Add(cardToAdd);
+        Debug.Log($"Adding {cardToAdd._suit} and rank {cardToAdd._rank} from Dropzone");
+    }
+
+    public override void RemoveCard(Card cardToRemove)
+    {
+        _dropZoneList.Remove(cardToRemove);
+        Debug.Log($"Removing {cardToRemove._suit} and rank {cardToRemove._rank} from dropzone");
+    }
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+        _dropZoneList = new List<Card>();
+    }
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         

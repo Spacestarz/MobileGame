@@ -111,7 +111,7 @@ public class Dropzone : CardPile
         }
     }
 
-    public void GetDropZonePile() //this only works for player rn. 
+    public void GetDropZonePile() //this only works for player rn. //add observer to see if player cant make any more actions? same with opponent.
     {
         //removing all dropzone cards to discardpile
         for (global::System.Int32 i = 0; i < _dropZoneList.Count; i++)

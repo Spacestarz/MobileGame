@@ -2,6 +2,11 @@ using UnityEngine;
 
 public class CardVisuals : MonoBehaviour
 {
+    //this should move the visuals on the card! On the child from cardobject!
+    //so the scripts wont argue.
+
+    public bool _followMouse;
+    public bool _ClickedCard;
 
     void Start()
     {

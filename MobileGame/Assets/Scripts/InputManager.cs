@@ -2,15 +2,12 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+
     void Start()
     {
         
     }
-    
-    // tryClick
-    // trydrop
-    // etc
 
     // private bool TryDrop(out gameObject)
     // returnerar true om den lyckas droppa den på grejen
@@ -18,9 +15,26 @@ public class InputManager : MonoBehaviour
     // if false, return to pickedUp location / hand
 
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetMouseButton(0)) //when holding down left mouse button/touch
+        {
+            // tryClick
+
+            try
+            {
+
+            }
+            catch
+            {
+                Debug.Log("dident click antthing");
+            }
+            
+        }
+
+        if (Input.GetMouseButtonUp(0)) //when releasing the mouse
+        {
+            // trydrop
+        }
     }
 }

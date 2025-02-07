@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
+    //this script talks to CardVisuals script
+
     public CardVisuals currentCardVisualScript;
 
     void Start()

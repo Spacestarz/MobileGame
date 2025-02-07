@@ -27,8 +27,12 @@ public class InputManager : MonoBehaviour
 
            if (hit.collider!= null && hit.collider.CompareTag("Card"))
            {
-                Debug.Log("hit a card");
-               currentCardVisualScript = hit.collider.gameObject.GetComponentInChildren<CardVisuals>();
+                if (currentCardVisualScript == null)
+                {
+                    Debug.Log("hit a card");
+                    currentCardVisualScript = hit.collider.gameObject.GetComponentInChildren<CardVisuals>();
+                }
+                
 
                 if (hit.collider.gameObject.GetComponentInChildren<CardVisuals>() == null)
                 {
@@ -39,7 +43,7 @@ public class InputManager : MonoBehaviour
            }
            else
             {
-                Debug.Log("no card here");
+                Debug.Log("no card here or currenviscript is not null");
             }
 
             
@@ -50,6 +54,7 @@ public class InputManager : MonoBehaviour
             if (currentCardVisualScript)
             {
                 currentCardVisualScript._followMouse = false; //stop follow mouse
+                currentCardVisualScript = null;
             }
             
         }

@@ -110,5 +110,18 @@ public class Dropzone : CardPile
             DiscardCards.Instance.AddCard(card);
         }
     }
-    
+
+    public void GetDropZonePile() //this only works for player rn. 
+    {
+        //removing all dropzone cards to discardpile
+        for (global::System.Int32 i = 0; i < _dropZoneList.Count; i++)
+        {
+            card = _dropZoneList[i];
+            RemoveCard(card);
+            PlayerHand.instance.AddCard(card);
+           
+        }
+    }
 }
+    
+

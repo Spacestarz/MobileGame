@@ -6,17 +6,34 @@ public class CardVisuals : MonoBehaviour
     //so the scripts wont argue.
 
     public bool _followMouse;
-    public bool _ClickedCard;
+    public GameObject _ClickedCard;
+
+    Vector2 _orgPos;
 
     void Start()
     {
-
+        _orgPos = transform.position; //gets the cards orgpos
     }
 
     void Update()
     {
+        if (_followMouse) //when followmouse is true. FollowMouse   
+        {
+            Vector2 mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
+            _ClickedCard = this.gameObject;
+            transform.position = mousepos;
+
+        }
+        else
+        {
+            //when followmouse is false. ClickedCard is Null.
+            _ClickedCard = null;
+            transform.position = _orgPos; 
+        }
     }
+
+    
 
     public void Init(Card card) //make the card get its gameobject here probarly with the prefabs? 
     {

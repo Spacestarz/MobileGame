@@ -12,6 +12,8 @@ public class Dropzone : CardPile
 
     private Card FirstInStackCard;
 
+    private Card card;
+
     public override void AddCard(Card cardToAdd)
     {
         _dropZoneList.Add(cardToAdd);
@@ -41,15 +43,24 @@ public class Dropzone : CardPile
     {
        Card Newcard = PlayerHand.instance._PlayerHandcards[0];//testing
 
+        if (Newcard._rank == Card.RankEnum.Ten)
+        {
+            Debug.Log("Player put down a 10 card. Taking the dropzone to discard pile");
+            DropzoneToDiscardPile();
+            return;
+        }
+
+
         if (_dropZoneList.Count > 0)
         {
-            Debug.Log("i sshould not see you");
+            Debug.Log("dropzone list is above 0. Checking if playerhand card is above dropzone rank");
+
             _dropZoneList[0] = FirstInStackCard;
 
             if (Newcard._rank > FirstInStackCard._rank || Newcard._rank == FirstInStackCard._rank)
             {
-                Debug.Log("adding but i shouldent");
-                //adding the newcard to dropzone
+                Debug.Log("adding card to dropzone. Rank is higher than the one in dropzone");
+                PlayerHand.instance.RemoveCard(Newcard);
                 AddCard(Newcard);
             }
             else
@@ -72,17 +83,32 @@ public class Dropzone : CardPile
             Card ThirdCard;
             Card FourthCard;
 
-
             //  getting the cards top 4 including the players last added card
             FirstInStackCard = _dropZoneList[_dropZoneList.Count - 1];
             SecondInStackCard = _dropZoneList[_dropZoneList.Count - 2];
             ThirdCard = _dropZoneList[_dropZoneList.Count - 3];
             FourthCard = _dropZoneList [_dropZoneList.Count - 4];
+
+
+            if(FirstInStackCard._rank == SecondInStackCard._rank && SecondInStackCard._rank == ThirdCard._rank &&
+               ThirdCard._rank == FourthCard._rank )
+            {
+                Debug.Log("This is four in a row. Pile will go to discard");
+                DropzoneToDiscardPile();
+            }
         }
-        
 
+    }
 
-
+    public void DropzoneToDiscardPile()
+    {
+        //removing all dropzone cards to discardpile
+        for (global::System.Int32 i = 0; i < _dropZoneList.Count; i++)
+        {
+            card = _dropZoneList[i];
+            RemoveCard(card);
+            DiscardCards.Instance.AddCard(card);
+        }
     }
     
 }

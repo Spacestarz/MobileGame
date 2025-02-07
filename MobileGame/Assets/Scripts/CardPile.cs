@@ -8,6 +8,7 @@ public abstract class CardPile: MonoBehaviour
 
     private void Start()
     {
+
     }
 
     public abstract void AddCard(Card cardToAdd); //Here you will add cards 

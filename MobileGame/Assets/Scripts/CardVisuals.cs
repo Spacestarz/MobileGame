@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class CardVisuals : MonoBehaviour
 {
-   
 
     void Start()
     {
@@ -11,8 +10,6 @@ public class CardVisuals : MonoBehaviour
 
     void Update()
     {
-
-
 
     }
 

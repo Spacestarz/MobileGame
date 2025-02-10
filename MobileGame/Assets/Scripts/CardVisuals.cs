@@ -6,10 +6,14 @@ public class CardVisuals : MonoBehaviour
     //so the scripts wont argue.
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     public bool _followMouse;
     public GameObject _ClickedCard;
 
     Vector2 _orgPos;
+=======
+    //reference to the pic
+>>>>>>> Stashed changes
 =======
     //reference to the pic
 >>>>>>> Stashed changes
@@ -18,7 +22,11 @@ public class CardVisuals : MonoBehaviour
     void Start()
     {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         _orgPos = transform.position; //gets the cards orgpos
+=======
+        
+>>>>>>> Stashed changes
 =======
         
 >>>>>>> Stashed changes
@@ -26,6 +34,7 @@ public class CardVisuals : MonoBehaviour
 
     void Update()
     {
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
         if (_followMouse) //when followmouse is true. FollowMouse   
         {
@@ -44,6 +53,11 @@ public class CardVisuals : MonoBehaviour
     }
 
     
+=======
+     
+    }
+
+>>>>>>> Stashed changes
 =======
      
     }

@@ -196,6 +196,7 @@ BoxCollider2D:
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 --- !u!114 &5015976754945300631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,5 +243,7 @@ Transform:
   - {fileID: 243053459049049182}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes

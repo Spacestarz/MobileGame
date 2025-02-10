@@ -6,8 +6,11 @@ public class InputManager : MonoBehaviour
     //this script talks to CardVisuals script
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     public CardVisuals currentCardVisualScript;
 =======
+=======
+>>>>>>> Stashed changes
     public bool _followMouse;
 
     public GameObject _CardHeld;
@@ -51,6 +54,7 @@ public class InputManager : MonoBehaviour
            if (hit.collider!= null && hit.collider.CompareTag("Card") && _CardHeld == null)
            {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                 if (currentCardVisualScript == null)
                 {
                     Debug.Log("hit a card");
@@ -68,6 +72,10 @@ public class InputManager : MonoBehaviour
                 Debug.Log("hit a card");
                 _CardHeld = hit.collider.gameObject;              
 >>>>>>> Stashed changes
+=======
+                Debug.Log("hit a card");
+                _CardHeld = hit.collider.gameObject;              
+>>>>>>> Stashed changes
            }
            else
             {
@@ -78,6 +86,7 @@ public class InputManager : MonoBehaviour
             {
                 var cardscript = _CardHeld.GetComponent<CardInstance>();
                 _followMouse = true ;
+<<<<<<< Updated upstream
             }
 <<<<<<< Updated upstream
 
@@ -96,8 +105,33 @@ public class InputManager : MonoBehaviour
 
                 _followMouse = true;
                 _CardHeld.transform.position = mousepos;
+=======
+>>>>>>> Stashed changes
             }
-            
+        }
+
+<<<<<<< Updated upstream
+        //when releasing the mouse
+        if (Input.GetMouseButtonUp(0))
+        {
+           _followMouse = false;
+           var cardscript = _CardHeld.GetComponent<CardInstance>();
+            cardscript.GoBackOrgPos();
+            _CardHeld = null;
+        }
+
+=======
+
+        if (_CardHeld != null)
+        {
+            //when holding down mouse/touch
+            Input.GetMouseButton(0);
+            {
+                Vector2 mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+                _followMouse = true;
+                _CardHeld.transform.position = mousepos;
+            }
         }
 
         //when releasing the mouse
@@ -109,6 +143,7 @@ public class InputManager : MonoBehaviour
             _CardHeld = null;
         }
 
+>>>>>>> Stashed changes
         
     }
 }

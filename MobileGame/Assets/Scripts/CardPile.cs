@@ -11,10 +11,20 @@ public abstract class CardPile: MonoBehaviour
 
     }
 
-    public abstract void AddCard(Card cardToAdd); //Here you will add cards 
+    public virtual void AddCard(Card cardToAdd)
+    {
+        cards.Add(cardToAdd);
+    }//Here you will add cards 
     
 
-    public abstract void RemoveCard(Card cardToRemove); //Here you will remove cards
+    public virtual void RemoveCard(Card cardToRemove)
+    {
+        cards.Remove(cardToRemove);
+        if (!cards.Contains (cardToRemove))
+        {
+            Debug.Log("couldent find card you want to remove");
+        }
+    } //Here you will remove cards
 
 }
 

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5858939701360894833}
   - component: {fileID: 3908564089074356711}
+  - component: {fileID: 597274578709115530}
   m_Layer: 6
   m_Name: BackgroundForCards
   m_TagString: Untagged
@@ -87,3 +88,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &597274578709115530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886875788293509846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 013b350df2da3b74f80329bd1930876c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Rank: 0
+  _Suit: 0

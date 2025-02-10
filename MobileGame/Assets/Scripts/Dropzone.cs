@@ -8,7 +8,6 @@ using NaughtyAttributes;
 public class Dropzone : CardPile
 {
     public static Dropzone Instance;
-    public List<Card> _dropZoneList;
 
     private Card FirstInStackCard;
 
@@ -16,15 +15,18 @@ public class Dropzone : CardPile
 
     public override void AddCard(Card cardToAdd)
     {
-        _dropZoneList.Add(cardToAdd);
+        base.AddCard(cardToAdd);
+
         Debug.Log($"Adding {cardToAdd._suit} with rank {cardToAdd._rank} to Dropzone");
     }
 
     public override void RemoveCard(Card cardToRemove)
     {
-        _dropZoneList.Remove(cardToRemove);
-        Debug.Log($"Removing {cardToRemove._suit} with rank {cardToRemove._rank} from dropzone");
+       base.RemoveCard(cardToRemove);
+       Debug.Log($"Removing {cardToRemove._suit} with rank {cardToRemove._rank} from dropzone");
     }
+
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -35,13 +37,13 @@ public class Dropzone : CardPile
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        _dropZoneList = new List<Card>();
+        cards = new List<Card>();
     }
 
     [Button]
-    void CanIGoInDropZone() //in here should be Card NewCard later
+    public void CanIGoInDropZone(Card Newcard) //in here should be Card NewCard later
     {
-       Card Newcard = PlayerHand.instance._PlayerHandcards[0];//testing
+      // Card Newcard = PlayerHand.instance._PlayerHandcards[0];//testing
 
         if (Newcard._rank == Card.RankEnum.Ten)
         {
@@ -51,11 +53,11 @@ public class Dropzone : CardPile
         }
 
 
-        if (_dropZoneList.Count > 0)
+        if (cards.Count > 0)
         {
             Debug.Log("dropzone list is above 0. Checking if playerhand card is above dropzone rank");
 
-            _dropZoneList[0] = FirstInStackCard;
+            cards[0] = FirstInStackCard;
 
             if (Newcard._rank > FirstInStackCard._rank || Newcard._rank == FirstInStackCard._rank)
             {
@@ -77,17 +79,17 @@ public class Dropzone : CardPile
         }
 
 
-        if (_dropZoneList.Count >= 3) //here i will check if the all have the same rank so 4 in a row
+        if (cards.Count >= 3) //here i will check if the all have the same rank so 4 in a row
         {
             Card SecondInStackCard;
             Card ThirdCard;
             Card FourthCard;
 
             //  getting the cards top 4 including the players last added card
-            FirstInStackCard = _dropZoneList[_dropZoneList.Count - 1];
-            SecondInStackCard = _dropZoneList[_dropZoneList.Count - 2];
-            ThirdCard = _dropZoneList[_dropZoneList.Count - 3];
-            FourthCard = _dropZoneList [_dropZoneList.Count - 4];
+            FirstInStackCard = cards[cards.Count - 1];
+            SecondInStackCard = cards[cards.Count - 2];
+            ThirdCard = cards[cards.Count - 3];
+            FourthCard = cards [cards.Count - 4];
 
 
             if(FirstInStackCard._rank == SecondInStackCard._rank && SecondInStackCard._rank == ThirdCard._rank &&
@@ -103,9 +105,9 @@ public class Dropzone : CardPile
     public void DropzoneToDiscardPile()
     {
         //removing all dropzone cards to discardpile
-        for (global::System.Int32 i = 0; i < _dropZoneList.Count; i++)
+        for (global::System.Int32 i = 0; i < cards.Count; i++)
         {
-            card = _dropZoneList[i];
+            card = cards[i];
             RemoveCard(card);
             DiscardCards.Instance.AddCard(card);
         }
@@ -114,9 +116,9 @@ public class Dropzone : CardPile
     public void GetDropZonePile() //this only works for player rn. //add observer to see if player cant make any more actions? same with opponent.
     {
         //removing all dropzone cards to discardpile
-        for (global::System.Int32 i = 0; i < _dropZoneList.Count; i++)
+        for (global::System.Int32 i = 0; i < cards.Count; i++)
         {
-            card = _dropZoneList[i];
+            card = cards[i];
             RemoveCard(card);
             PlayerHand.instance.AddCard(card);
            

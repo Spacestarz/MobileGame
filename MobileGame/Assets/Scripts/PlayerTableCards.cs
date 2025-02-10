@@ -10,6 +10,7 @@ public class PlayerTableCards : CardPile
     public override void AddCard(Card cardToAdd)
     {
         _CardPlayerTable.Add(cardToAdd);
+       
         Debug.Log($"Adding {cardToAdd._suit} with rank {cardToAdd._rank} to CardPlayerCards");
     }
 
@@ -42,4 +43,6 @@ public class PlayerTableCards : CardPile
        
       
     }
+
+   
 }

@@ -5,11 +5,31 @@ public class InputManager : MonoBehaviour
 {
     //this script talks to CardVisuals script
 
+<<<<<<< Updated upstream
     public CardVisuals currentCardVisualScript;
+=======
+    public bool _followMouse;
+
+    public GameObject _CardHeld;
+
+    //will get the last card from the cardvisuals. So i can store the last card.
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+>>>>>>> Stashed changes
 
     void Start()
     {
-        
+       
     }
     // tryClick
     // trydrop
@@ -21,14 +41,16 @@ public class InputManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButton(0)) //when holding down left mouse button/touch
+        //when down thing
+        if (Input.GetMouseButtonDown(0)) 
         {
             Vector2 mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             RaycastHit2D hit = Physics2D.Raycast(mousepos, Vector2.zero);
 
-           if (hit.collider!= null && hit.collider.CompareTag("Card"))
+           if (hit.collider!= null && hit.collider.CompareTag("Card") && _CardHeld == null)
            {
+<<<<<<< Updated upstream
                 if (currentCardVisualScript == null)
                 {
                     Debug.Log("hit a card");
@@ -42,23 +64,51 @@ public class InputManager : MonoBehaviour
                 }
 
                 currentCardVisualScript._followMouse = true; 
+=======
+                Debug.Log("hit a card");
+                _CardHeld = hit.collider.gameObject;              
+>>>>>>> Stashed changes
            }
            else
             {
-                Debug.Log("no card here or currenviscript is not null");
+                Debug.Log("no card here");
             }
 
-            
-        }
-
-        if (Input.GetMouseButtonUp(0)) //when releasing the mouse
-        {
-            if (currentCardVisualScript)
+            if (_followMouse)
             {
-                currentCardVisualScript._followMouse = false; //stop follow mouse
-                currentCardVisualScript = null;
+                var cardscript = _CardHeld.GetComponent<CardInstance>();
+                _followMouse = true ;
+            }
+<<<<<<< Updated upstream
+
+            
+=======
+>>>>>>> Stashed changes
+        }
+
+
+        if (_CardHeld != null)
+        {
+            //when holding down mouse/touch
+            Input.GetMouseButton(0);
+            {
+                Vector2 mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+                _followMouse = true;
+                _CardHeld.transform.position = mousepos;
             }
             
         }
+
+        //when releasing the mouse
+        if (Input.GetMouseButtonUp(0))
+        {
+           _followMouse = false;
+           var cardscript = _CardHeld.GetComponent<CardInstance>();
+            cardscript.GoBackOrgPos();
+            _CardHeld = null;
+        }
+
+        
     }
 }

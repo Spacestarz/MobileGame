@@ -9,6 +9,7 @@ public class EveryCard : CardPile
     public List<Card> AllcardsList;
 
     public Card card;
+    [SerializeField] CardInstance _cardDataScript;
 
     public override void AddCard(Card cardToAdd)
     {
@@ -29,7 +30,6 @@ public class EveryCard : CardPile
 
     void Start()
     {
-        
         //makes the card
         //1-4 for the suit and then the rank 1-13 for each of the suits 
 
@@ -65,14 +65,17 @@ public class EveryCard : CardPile
         //3 cards upside down to player
         //3 cards above those
         //3 cards to player hand
-         //same to the opponent
 
-        //players first 3 card (upside down)
-        for (int i = 0; i < 3; i++)
+        //same to the opponent
+
+        //players first 3 card 
+        for (int i = 0; i < 3; i++)// (upside down)
         {
             card = AllcardsList[0];//first card in list.
             RemoveCard(card); //removing from allcardslist
             PlayerTableCards.instance.AddCard(card); //Adding 3 cards
+
+            MakeCards.Instance.MakeUpsideDownCard(card); //making card
         }
 
         for (int i = 0; i < 3; i++) //not upside down
@@ -80,6 +83,10 @@ public class EveryCard : CardPile
             card = AllcardsList[0];//first card in list.
             RemoveCard(card); //removing from allcardslist
             PlayerTableCards.instance.AddCard(card); //Adding 3 cards
+
+            
+            MakeCards.Instance.CreateCardObject(card); //making card
+
         }
 
         for (int i = 0; i < 3; i++) //adding to playerhand
@@ -87,9 +94,11 @@ public class EveryCard : CardPile
             card = AllcardsList[0];//first card in list.
             RemoveCard(card); //removing from allcardslist
             PlayerHand.instance.AddCard(card);
+
+            MakeCards.Instance.CreateCardObject(card); //making card
         }
 
-        //adding to opponent
+        //adding to OPPONENT
         for (int i = 0; i < 3; i++) //upside down first
         {
             card = AllcardsList[0];//first card in list.
@@ -113,12 +122,11 @@ public class EveryCard : CardPile
         }
     }
 
-    public void GetCard()
+    public void GetCard() //get card from the draw button
     {
         card = AllcardsList[0];
         RemoveCard(card); //remove card from allcardslist
         PlayerHand.instance.AddCard(card);
         Debug.Log($"PlayerHand got {card._suit} with rank {card._rank}");
-
     }
 }

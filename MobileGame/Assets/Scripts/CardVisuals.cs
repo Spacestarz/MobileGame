@@ -9,13 +9,12 @@ public class CardVisuals : MonoBehaviour
     public GameObject _ClickedCard;
 
     Vector2 _orgPos;
-    //reference to the pic
+    //this script should pretty much ONLY HAVE reference to the pic
 
 
     void Start()
     {
         _orgPos = transform.position; //gets the cards orgpos
-
     }
 
     void Update()

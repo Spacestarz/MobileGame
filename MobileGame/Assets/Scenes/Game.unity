@@ -407,6 +407,7 @@ GameObject:
   - component: {fileID: 468975526}
   - component: {fileID: 468975529}
   - component: {fileID: 468975530}
+  - component: {fileID: 468975531}
   m_Layer: 0
   m_Name: CardManager
   m_TagString: Untagged
@@ -470,6 +471,23 @@ MonoBehaviour:
   currentCardVisualScript: {fileID: 0}
   _followMouse: 0
   _CardHeld: {fileID: 0}
+--- !u!114 &468975531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468975521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebfa20cf6b508c24ca37135dcf23d7b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BackCardPreFab: {fileID: 886875788293509846, guid: 3d75d3ff51e05774faff7d4b9eb4d69d, type: 3}
+  HeartsPreFab: {fileID: 2351650941078651831, guid: 9715dfb62b3e6304eaf4ef2cfc3fd45b, type: 3}
+  DiamondPrefab: {fileID: 3954640639439772322, guid: a5eb1689a9f1dd849a35ec57dd3b7b3b, type: 3}
+  CloverPreFab: {fileID: 815245200069831719, guid: add4470e3535cfa479a05de689eab492, type: 3}
+  SpadePreFab: {fileID: 4636846207334254336, guid: fe1ac1ee4497f8f4e87fb94aa7806653, type: 3}
 --- !u!1 &545268779
 GameObject:
   m_ObjectHideFlags: 0

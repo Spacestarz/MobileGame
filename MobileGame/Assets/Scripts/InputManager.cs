@@ -10,7 +10,7 @@ public class InputManager : MonoBehaviour
     public CardVisuals currentCardVisualScript;
     public bool _followMouse;
 
-    public GameObject _CardHeld;
+    [SerializeField] GameObject _CardHeld;
 
     //will get the last card from the cardvisuals. So i can store the last card.
 
@@ -78,34 +78,16 @@ public class InputManager : MonoBehaviour
 
         }
 
-        if (_followMouse)
-        {
-            var cardscript = _CardHeld.GetComponent<CardInstance>();
-            _followMouse = true;
-        }
-
         if (_CardHeld != null)
 
             //when holding down mouse/touch
-            Input.GetMouseButton(0);
-        {
-            Vector2 mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if (Input.GetMouseButton(0))
+            {
+                Vector2 mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            _followMouse = true;
-            _CardHeld.transform.position = mousepos;
-        }
-
-
-
-
-        //when releasing the mouse
-        if (Input.GetMouseButtonUp(0))
-        {
-            _followMouse = false;
-            var cardscript = _CardHeld.GetComponent<CardInstance>();
-            cardscript.GoBackOrgPos();
-            _CardHeld = null;
-        }
+                _followMouse = true;
+                _CardHeld.transform.position = mousepos;
+            }
 
 
         if (_CardHeld != null)
@@ -129,8 +111,6 @@ public class InputManager : MonoBehaviour
             cardscript.GoBackOrgPos();
             _CardHeld = null;
         }
-
-
 
     }
 }

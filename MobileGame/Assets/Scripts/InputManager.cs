@@ -5,9 +5,9 @@ public class InputManager : MonoBehaviour
 {
     //this script talks to CardVisuals script
 
+    public static InputManager Instance;
+
     public CardVisuals currentCardVisualScript;
- Stashed changes
- Stashed changes
     public bool _followMouse;
 
     public GameObject _CardHeld;
@@ -25,11 +25,10 @@ public class InputManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
- Stashed changes
 
     void Start()
     {
-       
+
     }
     // tryClick
     // trydrop
@@ -42,38 +41,31 @@ public class InputManager : MonoBehaviour
     void Update()
     {
         //when down thing
-        if (Input.GetMouseButtonDown(0)) 
+        if (Input.GetMouseButtonDown(0))
         {
             Vector2 mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             RaycastHit2D hit = Physics2D.Raycast(mousepos, Vector2.zero);
 
-           if (hit.collider!= null && hit.collider.CompareTag("Card") && _CardHeld == null)
-           {
+            if (hit.collider != null && hit.collider.CompareTag("Card") && _CardHeld == null)
+            {
                 if (currentCardVisualScript == null)
                 {
                     Debug.Log("hit a card");
                     currentCardVisualScript = hit.collider.gameObject.GetComponentInChildren<CardVisuals>();
                 }
-                
+
 
                 if (hit.collider.gameObject.GetComponentInChildren<CardVisuals>() == null)
                 {
                     Debug.Log("cant find the cardvisual script");
                 }
 
-                currentCardVisualScript._followMouse = true; 
+                currentCardVisualScript._followMouse = true;
                 Debug.Log("hit a card");
-                _CardHeld = hit.collider.gameObject;              
- Stashed changes
-                Debug.Log("hit a card");
-                _CardHeld = hit.collider.gameObject;              
- Stashed changes
-                Debug.Log("hit a card");
-                _CardHeld = hit.collider.gameObject;              
- Stashed changes
-           }
-           else
+                _CardHeld = hit.collider.gameObject;
+            }
+            else
             {
                 Debug.Log("no card here");
             }
@@ -81,40 +73,36 @@ public class InputManager : MonoBehaviour
             if (_followMouse)
             {
                 var cardscript = _CardHeld.GetComponent<CardInstance>();
-                _followMouse = true ;
+                _followMouse = true;
             }
 
-            
- Stashed changes
-            }
-
-            if (_followMouse)
-            {
-                var cardscript = _CardHeld.GetComponent<CardInstance>();
-                _followMouse = true ;
-            }
- Stashed changes
         }
 
+        if (_followMouse)
+        {
+            var cardscript = _CardHeld.GetComponent<CardInstance>();
+            _followMouse = true;
+        }
 
         if (_CardHeld != null)
-        {
+
             //when holding down mouse/touch
             Input.GetMouseButton(0);
-            {
-                Vector2 mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        {
+            Vector2 mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-                _followMouse = true;
-                _CardHeld.transform.position = mousepos;
- Stashed changes
-            }
+            _followMouse = true;
+            _CardHeld.transform.position = mousepos;
         }
+
+
+
 
         //when releasing the mouse
         if (Input.GetMouseButtonUp(0))
         {
-           _followMouse = false;
-           var cardscript = _CardHeld.GetComponent<CardInstance>();
+            _followMouse = false;
+            var cardscript = _CardHeld.GetComponent<CardInstance>();
             cardscript.GoBackOrgPos();
             _CardHeld = null;
         }
@@ -132,21 +120,24 @@ public class InputManager : MonoBehaviour
             }
         }
 
-            }
-        }
 
- Stashed changes
         //when releasing the mouse
         if (Input.GetMouseButtonUp(0))
         {
-           _followMouse = false;
-           var cardscript = _CardHeld.GetComponent<CardInstance>();
+            _followMouse = false;
+            var cardscript = _CardHeld.GetComponent<CardInstance>();
             cardscript.GoBackOrgPos();
             _CardHeld = null;
         }
 
- Stashed changes
- Stashed changes
-        
+
+
     }
 }
+
+
+      
+
+     
+
+        

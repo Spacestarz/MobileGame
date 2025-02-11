@@ -10,21 +10,12 @@ public class CardVisuals : MonoBehaviour
 
     Vector2 _orgPos;
     //reference to the pic
- Stashed changes
-    //reference to the pic
- Stashed changes
-    //reference to the pic
- Stashed changes
 
- 
+
     void Start()
     {
         _orgPos = transform.position; //gets the cards orgpos
-        
- Stashed changes
-        
- Stashed changes
- Stashed changes
+
     }
 
     void Update()
@@ -41,21 +32,9 @@ public class CardVisuals : MonoBehaviour
         {
             //when followmouse is false. ClickedCard is Null.
             _ClickedCard = null;
-            transform.position = _orgPos; 
+            transform.position = _orgPos;
         }
     }
-
-    
-     
-    }
-
-     
-    }
-
- Stashed changes
-     
-    }
- Stashed changes
 
     public void Init(Card card) //make the card get its gameobject here probarly with the prefabs? 
     {
@@ -94,4 +73,9 @@ public class CardVisuals : MonoBehaviour
         // on card hovered - do hover visuals
         // etc
     }
+
+
 }
+
+
+

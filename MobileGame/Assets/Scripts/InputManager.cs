@@ -5,12 +5,9 @@ public class InputManager : MonoBehaviour
 {
     //this script talks to CardVisuals script
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
     public CardVisuals currentCardVisualScript;
-=======
-=======
->>>>>>> Stashed changes
+ Stashed changes
+ Stashed changes
     public bool _followMouse;
 
     public GameObject _CardHeld;
@@ -28,7 +25,7 @@ public class InputManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
->>>>>>> Stashed changes
+ Stashed changes
 
     void Start()
     {
@@ -53,8 +50,6 @@ public class InputManager : MonoBehaviour
 
            if (hit.collider!= null && hit.collider.CompareTag("Card") && _CardHeld == null)
            {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
                 if (currentCardVisualScript == null)
                 {
                     Debug.Log("hit a card");
@@ -68,14 +63,15 @@ public class InputManager : MonoBehaviour
                 }
 
                 currentCardVisualScript._followMouse = true; 
-=======
                 Debug.Log("hit a card");
                 _CardHeld = hit.collider.gameObject;              
->>>>>>> Stashed changes
-=======
+ Stashed changes
                 Debug.Log("hit a card");
                 _CardHeld = hit.collider.gameObject;              
->>>>>>> Stashed changes
+ Stashed changes
+                Debug.Log("hit a card");
+                _CardHeld = hit.collider.gameObject;              
+ Stashed changes
            }
            else
             {
@@ -86,13 +82,18 @@ public class InputManager : MonoBehaviour
             {
                 var cardscript = _CardHeld.GetComponent<CardInstance>();
                 _followMouse = true ;
-<<<<<<< Updated upstream
             }
-<<<<<<< Updated upstream
 
             
-=======
->>>>>>> Stashed changes
+ Stashed changes
+            }
+
+            if (_followMouse)
+            {
+                var cardscript = _CardHeld.GetComponent<CardInstance>();
+                _followMouse = true ;
+            }
+ Stashed changes
         }
 
 
@@ -105,12 +106,10 @@ public class InputManager : MonoBehaviour
 
                 _followMouse = true;
                 _CardHeld.transform.position = mousepos;
-=======
->>>>>>> Stashed changes
+ Stashed changes
             }
         }
 
-<<<<<<< Updated upstream
         //when releasing the mouse
         if (Input.GetMouseButtonUp(0))
         {
@@ -120,7 +119,6 @@ public class InputManager : MonoBehaviour
             _CardHeld = null;
         }
 
-=======
 
         if (_CardHeld != null)
         {
@@ -134,6 +132,10 @@ public class InputManager : MonoBehaviour
             }
         }
 
+            }
+        }
+
+ Stashed changes
         //when releasing the mouse
         if (Input.GetMouseButtonUp(0))
         {
@@ -143,7 +145,8 @@ public class InputManager : MonoBehaviour
             _CardHeld = null;
         }
 
->>>>>>> Stashed changes
+ Stashed changes
+ Stashed changes
         
     }
 }

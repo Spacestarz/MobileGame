@@ -5,37 +5,30 @@ public class CardVisuals : MonoBehaviour
     //this should move the visuals on the card! On the child from cardobject!
     //so the scripts wont argue.
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
     public bool _followMouse;
     public GameObject _ClickedCard;
 
     Vector2 _orgPos;
-=======
     //reference to the pic
->>>>>>> Stashed changes
-=======
+ Stashed changes
     //reference to the pic
->>>>>>> Stashed changes
+ Stashed changes
+    //reference to the pic
+ Stashed changes
 
  
     void Start()
     {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
         _orgPos = transform.position; //gets the cards orgpos
-=======
         
->>>>>>> Stashed changes
-=======
+ Stashed changes
         
->>>>>>> Stashed changes
+ Stashed changes
+ Stashed changes
     }
 
     void Update()
     {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
         if (_followMouse) //when followmouse is true. FollowMouse   
         {
             Vector2 mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -53,16 +46,16 @@ public class CardVisuals : MonoBehaviour
     }
 
     
-=======
      
     }
 
->>>>>>> Stashed changes
-=======
      
     }
 
->>>>>>> Stashed changes
+ Stashed changes
+     
+    }
+ Stashed changes
 
     public void Init(Card card) //make the card get its gameobject here probarly with the prefabs? 
     {

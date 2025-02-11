@@ -195,11 +195,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83ab8aad1c4475d47a83dd65701da666, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
   _followMouse: 0
   _ClickedCard: {fileID: 0}
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+ Stashed changes
+ Stashed changes
+ Stashed changes

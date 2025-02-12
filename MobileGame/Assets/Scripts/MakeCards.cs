@@ -71,7 +71,7 @@ public class MakeCards : MonoBehaviour
 
         CardInstance cardObject = Instantiate(prefabToInstantiate);
 
-         cardObject.Init(UpSideDownCard);
+        cardObject.Init(UpSideDownCard);
         return cardObject;
     }
 }

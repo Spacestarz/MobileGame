@@ -44,13 +44,6 @@ public class Card
         King = 13,
     }
 
-   //maybe have a dictonary instead of a list?
-
-    void Start()
-    {
-        
-    }
-
     // Constructor
     public Card(SuitEnum suit, RankEnum rank)
     {
@@ -59,10 +52,6 @@ public class Card
 
     }
 
-    void Update()
-    {
-        
-    }
 
     #region laterVisuals
     //not needed right now work in behind the scenes

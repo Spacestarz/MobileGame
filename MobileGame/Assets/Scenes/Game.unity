@@ -1534,6 +1534,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11d59bfafcea07b4ca64507bb93d83fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startAPlayer: {x: -2.68, y: -4.17, z: -0.02362273}
+  StartBPlayer: {x: 2.5, y: -4.17, z: -0.02362273}
 --- !u!1 &1073244546
 GameObject:
   m_ObjectHideFlags: 0

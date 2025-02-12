@@ -9,30 +9,31 @@ public class SpawnLocations : MonoBehaviour
 
     private CardInstance cardInstance;
 
+    //got this in the playerhand script instead
     public void CardLocationPlayerHand()
     {
-        if (PlayerHand.instance._PlayerHandcards.Count >0)
+        if (PlayerHand.instance.cards.Count >0)
         {
-            for (int i = 0; i < PlayerHand.instance._PlayerHandcards.Count; i++)
+            for (int i = 0; i < PlayerHand.instance.cards.Count; i++)
             {
                // cardInstance = PlayerHand.instance._PlayerHandcards[i].GetComponent<CardInstance>();
             }
         }
 
-        var objectcount = PlayerHand.instance._PlayerHandcards.Count;
+        var objectcount = PlayerHand.instance.cards.Count;
 
         var A = startAPlayer;
         var B = StartBPlayer;
 
         Vector3 direction = (B - A).normalized;
         float totalDistance = Vector3.Distance(A, B);
-        float step = totalDistance / (PlayerHand.instance._PlayerHandcards.Count + 1);
+        float step = totalDistance / (PlayerHand.instance.cards.Count + 1);
 
-        for (int i = 1; i <= PlayerHand.instance._PlayerHandcards.Count; i++)
+        for (int i = 1; i <= PlayerHand.instance.cards.Count; i++)
         {
             Vector3 position = A + direction * step * i;
 
-            //PlayerHand.instance._PlayerHandcards[i].transform.position = position;
+           // PlayerHand.instance._PlayerHandcards[i].transform.position = position;
 
 
         //from github from gamedev math:

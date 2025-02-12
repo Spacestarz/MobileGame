@@ -6,10 +6,7 @@ public abstract class CardPile: MonoBehaviour
 {
     public List<Card> cards;
 
-    private void Start()
-    {
-
-    }
+   
 
     public virtual void AddCard(Card cardToAdd)
     {
@@ -25,7 +22,6 @@ public abstract class CardPile: MonoBehaviour
             Debug.Log("couldent find card you want to remove");
         }
     } 
-
 }
 
 

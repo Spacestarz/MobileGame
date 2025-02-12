@@ -19,13 +19,13 @@ public class PlayerHand : CardPile
         instance = this;
         DontDestroyOnLoad (gameObject);
         _PlayerHandcards = new List<Card>();
-
     }
 
     public override void AddCard(Card cardToAdd)
     {
         _PlayerHandcards.Add(cardToAdd);
         Debug.Log($"Removing {cardToAdd._suit} with rank {cardToAdd._rank} from PlayerhandCardsList");
+        InstantiateCard(cardToAdd);
     }
 
     public override void RemoveCard(Card cardToRemove)
@@ -36,13 +36,17 @@ public class PlayerHand : CardPile
 
     void Update()
     {
-       if (Input.GetKeyUp(KeyCode.P))
-        {
-            foreach (Card card in PlayerTableCards.instance._CardPlayerTable)
-            {
-                Debug.Log($"{card._suit} with rank {card._rank}");
-            }
-        }
+       
+    }
+
+    public void InstantiateCard(Card card)
+    {
+       MakeCards.Instance.CreateCardObject(card);
+    }
+
+    public void UpdateHand()
+    {
+        //make so it will update its position etc
     }
 
 

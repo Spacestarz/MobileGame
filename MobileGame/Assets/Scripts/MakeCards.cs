@@ -5,11 +5,11 @@ public class MakeCards : MonoBehaviour
 {
     public static MakeCards Instance;
 
-    public GameObject BackCardPreFab;
-    public GameObject HeartsPreFab;
-    public GameObject DiamondPrefab;
-    public GameObject CloverPreFab;
-    public GameObject SpadePreFab;
+    public CardInstance BackCardPreFab;
+    public CardInstance HeartsPreFab;
+    public CardInstance DiamondPrefab;
+    public CardInstance CloverPreFab;
+    public CardInstance SpadePreFab;
 
 
 
@@ -28,9 +28,9 @@ public class MakeCards : MonoBehaviour
 
 
 
-    public GameObject CreateCardObject(Card card)
+    public CardInstance CreateCardObject(Card card)
     {
-        GameObject prefabToInstantiate = null;
+        CardInstance prefabToInstantiate = null;
 
         switch (card._suit)
         {
@@ -50,32 +50,28 @@ public class MakeCards : MonoBehaviour
                 prefabToInstantiate = CloverPreFab;
                 break;
 
-
             default:
                 {
-
                     return null;
                 }
         }
 
-        GameObject cardobject = Instantiate(prefabToInstantiate);
+        CardInstance cardobject = Instantiate(prefabToInstantiate);
 
-        CardInstance cardComponent = cardobject.GetComponent<CardInstance>();
-        cardComponent.Init(card);
+        cardobject.Init(card);
 
         return cardobject;
     }
 
-    public GameObject MakeUpsideDownCard(Card UpSideDownCard)
+    public CardInstance MakeUpsideDownCard(Card UpSideDownCard)
     {
         Debug.Log("MakeUpsidedown card method");
-        GameObject prefabToInstantiate = null;
+        CardInstance prefabToInstantiate = null;
         prefabToInstantiate = BackCardPreFab;
 
-        GameObject cardObject = Instantiate(prefabToInstantiate);
+        CardInstance cardObject = Instantiate(prefabToInstantiate);
 
-        CardInstance cardComponent = cardObject.GetComponent<CardInstance>();
-        cardComponent.Init(UpSideDownCard);
+         cardObject.Init(UpSideDownCard);
         return cardObject;
     }
 }

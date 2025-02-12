@@ -83,7 +83,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0010705292, y: 0.0021409988}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -93,7 +93,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.1434457, y: 1.5652182}
   m_EdgeRadius: 0
 --- !u!1 &7721951098640285237
 GameObject:
@@ -195,8 +195,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83ab8aad1c4475d47a83dd65701da666, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _followMouse: 0
-  _ClickedCard: {fileID: 0}
- Stashed changes
- Stashed changes
- Stashed changes

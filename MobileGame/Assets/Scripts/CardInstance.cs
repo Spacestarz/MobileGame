@@ -14,7 +14,7 @@ public class CardInstance : MonoBehaviour
     public Card Card;
 
 
-    //took these from carvisual this should handle the things
+    //took these from cardvisual this should handle the things
     public Vector3 _orgPos;
 
     public void Init(Card card)
@@ -31,6 +31,13 @@ public class CardInstance : MonoBehaviour
 
     void Update()
     {
+        //BE AWARE THIS CHANGE EVERY FREAKING CARD 
+
+        //if (InputManager.Instance._followMouse == true)
+        //{
+        //    Vector2 mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //    transform.position = mousepos;
+        //}
 
         ////when holding down left mouse button/touch
         //if (Input.GetMouseButton(0)) 
@@ -74,12 +81,8 @@ public class CardInstance : MonoBehaviour
 
         //}
 
-        //if (InputManager.Instance._followMouse == true)
-        //{
-        //    Vector2 mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //    transform.position = mousepos;
-        //}
-       
+
+
     }
 
     public void GoBackOrgPos()

@@ -73,7 +73,7 @@ public class EveryCard : CardPile
         {
             card = AllcardsList[0];//first card in list.
             RemoveCard(card); //removing from allcardslist
-            PlayerTableCards.instance.AddCard(card); //Adding 3 cards
+            PlayerTableCards.instance.AddCard(card); //Adding 3 cards tO TABLECARD
 
             MakeCards.Instance.MakeUpsideDownCard(card); //making card
         }
@@ -82,8 +82,7 @@ public class EveryCard : CardPile
         {
             card = AllcardsList[0];//first card in list.
             RemoveCard(card); //removing from allcardslist
-            PlayerTableCards.instance.AddCard(card); //Adding 3 cards
-
+            PlayerTableCards.instance.AddCard(card); //Adding 3 cards TO TABLECARD
             
             MakeCards.Instance.CreateCardObject(card); //making card
 
@@ -94,8 +93,6 @@ public class EveryCard : CardPile
             card = AllcardsList[0];//first card in list.
             RemoveCard(card); //removing from allcardslist
             PlayerHand.instance.AddCard(card);
-
-            MakeCards.Instance.CreateCardObject(card); //making card
         }
 
         //adding to OPPONENT

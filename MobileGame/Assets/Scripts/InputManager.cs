@@ -9,7 +9,7 @@ public class InputManager : MonoBehaviour
 
     public bool _followMouse;
 
-    [SerializeField] GameObject _CardHeld;
+    public GameObject _CardHeld;
 
 
     private void Awake()
@@ -79,15 +79,34 @@ public class InputManager : MonoBehaviour
         //when releasing the mouse
         if (Input.GetMouseButtonUp(0))
         {
+            Vector2 mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            RaycastHit2D CheckIfDropZoneCollider = Physics2D.Raycast(mousepos, Vector2.zero, 100f, LayerMask.GetMask("dropZoneLayer"));
+
+            //if releasing over dropzone and holding a card
+            if (CheckIfDropZoneCollider.collider != null && _CardHeld)
+            {
+                var CardinstanceScript =  _CardHeld.GetComponent<CardInstance>();
+                var cardHeldCard = CardinstanceScript.GetCardData();
+
+                Dropzone.Instance.WantbothInThisScript(cardHeldCard, CardinstanceScript);
+               //add to dropzone dictonary
+            }
+            else
+            {
+                Debug.Log("dropzone not here");
+            }
+
+
             _followMouse = false;
 
-            if (_CardHeld)
+            if (_CardHeld && CheckIfDropZoneCollider.collider == null)
             {
                 var cardscript = _CardHeld.GetComponent<CardInstance>();
                 cardscript.GoBackOrgPos();
                 _CardHeld = null;
             }
-            
+            _CardHeld = null ;
         }
 
     }

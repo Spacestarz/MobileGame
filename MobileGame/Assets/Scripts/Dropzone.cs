@@ -9,18 +9,29 @@ public class Dropzone : CardPile
 
     private Card FirstInStackCard;
 
-    private Card card;
+    public Dictionary<Card, CardInstance> _CardDictoDropZone = new Dictionary<Card, CardInstance>();
+
+    private Card _card;
+    private CardInstance _cardInstance;
 
     public override void AddCard(Card cardToAdd)
     {
         base.AddCard(cardToAdd);
-
+        //also adding to the dictonary
+        _CardDictoDropZone.Add(cardToAdd,_cardInstance);
+        Debug.Log("adding card to dropzone dictonary");
         Debug.Log($"Adding {cardToAdd._suit} with rank {cardToAdd._rank} to Dropzone");
     }
 
     public override void RemoveCard(Card cardToRemove)
     {
        base.RemoveCard(cardToRemove);
+        if(_CardDictoDropZone.TryGetValue(cardToRemove, out _cardInstance))
+        {
+            _CardDictoDropZone.Remove(cardToRemove);
+            Debug.Log("removed card from the dropzone dictonary also");
+        }
+
        Debug.Log($"Removing {cardToRemove._suit} with rank {cardToRemove._rank} from dropzone");
     }
 
@@ -38,10 +49,21 @@ public class Dropzone : CardPile
         cards = new List<Card>();
     }
 
-    [Button]
-    public void CanIGoInDropZone(Card Newcard) //in here should be Card NewCard later
+    public void WantbothInThisScript(Card Card, CardInstance instanceCard)
     {
-      // Card Newcard = PlayerHand.instance._PlayerHandcards[0];//testing
+        _card = Card;
+        _cardInstance = instanceCard;
+
+        Debug.Log($"this is card thing from wantboth {_card._suit} and rank {Card._rank}");
+
+        //will see now if this card can go in dropzone
+        CanIGoInDropZone(_card);
+
+    }
+
+    //need to change a bit in code so this works with opponent also (maybe a bool which turn it is on player or opponent?)
+    public void CanIGoInDropZone(Card Newcard) 
+    {
 
         if (Newcard._rank == Card.RankEnum.Ten)
         {
@@ -55,13 +77,15 @@ public class Dropzone : CardPile
         {
             Debug.Log("dropzone list is above 0. Checking if playerhand card is above dropzone rank");
 
-            cards[0] = FirstInStackCard;
+            cards[0] = FirstInStackCard; //this is null fix this 
 
             if (Newcard._rank > FirstInStackCard._rank || Newcard._rank == FirstInStackCard._rank)
             {
                 Debug.Log("adding card to dropzone. Rank is higher than the one in dropzone");
                 PlayerHand.instance.RemoveCard(Newcard);
                 AddCard(Newcard);
+                InputManager.Instance._CardHeld = null;
+                _cardInstance.DropZonePosition();
             }
             else
             {
@@ -72,7 +96,8 @@ public class Dropzone : CardPile
         else
         {
             AddCard(Newcard);
-            PlayerHand.instance.RemoveCard(Newcard);
+            PlayerHand.instance.RemoveCard(Newcard); //removing card from playerhand
+            _cardInstance.DropZonePosition();
             Debug.Log($"adding a new card to dropzone (dropzone script here... {Newcard._suit} with rank {Newcard._rank})");
         }
 
@@ -105,9 +130,10 @@ public class Dropzone : CardPile
         //removing all dropzone cards to discardpile
         for (global::System.Int32 i = 0; i < cards.Count; i++)
         {
-            card = cards[i];
-            RemoveCard(card);
-            DiscardCards.Instance.AddCard(card);
+            _card = cards[i];
+            RemoveCard(_card);
+            DiscardCards.Instance.AddCard(_card);
+           
         }
     }
 
@@ -116,9 +142,9 @@ public class Dropzone : CardPile
         //removing all dropzone cards to discardpile
         for (global::System.Int32 i = 0; i < cards.Count; i++)
         {
-            card = cards[i];
-            RemoveCard(card);
-            PlayerHand.instance.AddCard(card);
+            _card = cards[i];
+            RemoveCard(_card);
+            PlayerHand.instance.AddCard(_card);
            
         }
     }

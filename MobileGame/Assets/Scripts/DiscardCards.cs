@@ -8,7 +8,7 @@ public class DiscardCards : CardPile
     public override void AddCard(Card cardToAdd)
     {
         cards.Add(cardToAdd);
-        Debug.Log($"Adding {cardToAdd._suit} with rank {cardToAdd._rank} to discardpile");
+       Debug.Log($"Adding {cardToAdd._suit} with rank {cardToAdd._rank} to discardpile");
     }
 
     public override void RemoveCard(Card cardToRemove)

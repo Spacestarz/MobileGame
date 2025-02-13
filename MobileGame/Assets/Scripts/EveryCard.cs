@@ -18,7 +18,7 @@ public class EveryCard : CardPile
     public override void RemoveCard(Card cardToRemove)
     {
         cards.Remove(cardToRemove);
-        Debug.Log($"Removing {cardToRemove._suit} with rank {cardToRemove._rank}");
+      //  Debug.Log($"Removing {cardToRemove._suit} with rank {cardToRemove._rank}");
     }
 
     private void Awake()
@@ -72,8 +72,6 @@ public class EveryCard : CardPile
             card = cards[0];//first card in list.
             RemoveCard(card); //removing from allcardslist
             PlayerTableCards.instance.AddCard(card); //Adding 3 cards tO TABLECARD
-
-            MakeCards.Instance.MakeUpsideDownCard(card); //making card
         }
 
         for (int i = 0; i < 3; i++) //not upside down
@@ -82,7 +80,6 @@ public class EveryCard : CardPile
             RemoveCard(card); //removing from allcardslist
             PlayerTableCards.instance.AddCard(card); //Adding 3 cards TO TABLECARD
             
-            MakeCards.Instance.CreateCardObject(card); //making card
         }
 
         for (int i = 0; i < 3; i++) //adding to playerhand
@@ -92,7 +89,7 @@ public class EveryCard : CardPile
             PlayerHand.instance.AddCard(card);
         }
 
-        //adding to OPPONENT
+        //adding to OPPONENT NEED TO FIX PLACEMENT OF OPPONENT LATER
         for (int i = 0; i < 3; i++) //upside down first
         {
             card = cards[0];//first card in list.
@@ -118,6 +115,7 @@ public class EveryCard : CardPile
 
     public void GetCard() //get card from the draw button
     {
+        Debug.Log("getcard from button");
         card = cards[0];
         RemoveCard(card); //remove card from allcardslist
         PlayerHand.instance.AddCard(card);

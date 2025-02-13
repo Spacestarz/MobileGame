@@ -26,7 +26,7 @@ public class CardInstance : MonoBehaviour
     void Start()
     {
         _orgPos = transform.position;
-        Debug.Log($"suit {_Suit} with rank {_Rank} in the CARDINSTANCE CLASS");
+        //Debug.Log($"suit {_Suit} with rank {_Rank} in the CARDINSTANCE CLASS");
     }
 
     void Update()
@@ -88,6 +88,22 @@ public class CardInstance : MonoBehaviour
     public void GoBackOrgPos()
     {
         transform.position = _orgPos;
-        Debug.Log("going back orgpos");
+       // Debug.Log("going back orgpos");
+    }
+
+    public void DropZonePosition()
+    {
+        transform.position = SpawnLocations.instance.dropzoneLocationForCards.transform.position;
+        Debug.Log("Card should now be in dropzone");
+    }
+
+    public void DiscardLocation()
+    {
+        transform.position = SpawnLocations.instance.discardLocation.transform.position;
+    }
+
+    public Card GetCardData()
+    {
+        return Card;
     }
 }

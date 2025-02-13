@@ -6,13 +6,10 @@ public abstract class CardPile: MonoBehaviour
 {
     public List<Card> cards;
 
-   
-
     public virtual void AddCard(Card cardToAdd)
     {
         cards.Add(cardToAdd);//Here you will add cards 
     }
-    
 
     public virtual void RemoveCard(Card cardToRemove)
     {

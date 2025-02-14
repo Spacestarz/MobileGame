@@ -91,13 +91,13 @@ public class CardInstance : MonoBehaviour
        // Debug.Log("going back orgpos");
     }
 
-    public void DropZonePosition()
+    public void GoToDropZonePosition()
     {
         transform.position = SpawnLocations.instance.dropzoneLocationForCards.transform.position;
         Debug.Log("Card should now be in dropzone");
     }
 
-    public void DiscardLocation()
+    public void GoToDiscardLocation()
     {
         transform.position = SpawnLocations.instance.discardLocation.transform.position;
     }

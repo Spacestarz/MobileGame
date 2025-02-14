@@ -26,6 +26,7 @@ public class Dropzone : CardPile
     public override void RemoveCard(Card cardToRemove)
     {
        base.RemoveCard(cardToRemove);
+
         if(_CardDictoDropZone.TryGetValue(cardToRemove, out _cardInstance))
         {
             _CardDictoDropZone.Remove(cardToRemove);
@@ -68,6 +69,7 @@ public class Dropzone : CardPile
         if (Newcard._rank == Card.RankEnum.Ten)
         {
             Debug.Log("Player put down a 10 card. Taking the dropzone to discard pile");
+            AddCard(Newcard);
             DropzoneToDiscardPile();
             return;
         }
@@ -84,7 +86,7 @@ public class Dropzone : CardPile
                 PlayerHand.instance.RemoveCard(Newcard);
                 AddCard(Newcard);
                 InputManager.Instance._CardHeld = null;
-                _cardInstance.DropZonePosition();
+                _cardInstance.GoToDropZonePosition();
             }
             else
             {
@@ -97,12 +99,12 @@ public class Dropzone : CardPile
         {
             AddCard(Newcard);
             PlayerHand.instance.RemoveCard(Newcard); //removing card from playerhand
-            _cardInstance.DropZonePosition();
+            _cardInstance.GoToDropZonePosition();
             Debug.Log($"adding a new card to dropzone (dropzone script here... {Newcard._suit} with rank {Newcard._rank})");
         }
 
 
-        if (cards.Count >= 3) //here i will check if the all have the same rank so 4 in a row
+        if (cards.Count >= 4) //here i will check if the all have the same rank so 4 in a row
         {
             Card SecondInStackCard;
             Card ThirdCard;
@@ -129,12 +131,9 @@ public class Dropzone : CardPile
     {
         foreach (var entry in _CardDictoDropZone)
         {
-            DiscardCards.Instance._CardDictoDiscard[entry.Key] = entry.Value;
-            RemoveCard(_card);
-
+            DiscardCards.Instance.addToDictonary(entry.Key, entry.Value);
+            RemoveCard(entry.Key);
         }
-
-        
     }
 
     public void GetDropZonePile() //this only works for player rn. //add observer to see if player cant make any more actions? same with opponent.

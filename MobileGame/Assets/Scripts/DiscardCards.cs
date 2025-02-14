@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class DiscardCards : CardPile
 {
@@ -9,6 +11,9 @@ public class DiscardCards : CardPile
 
     private Card _card;
     private CardInstance _cardInstance;
+
+
+    public static event Action<Card , CardInstance> OnAddedCardToDicto;
 
     public override void AddCard(Card cardToAdd)
     {
@@ -40,14 +45,24 @@ public class DiscardCards : CardPile
         Instance = this;
         DontDestroyOnLoad(gameObject);
         cards = new List<Card>();
+
+        OnAddedCardToDicto += OnAddedCardToDictonary;
     }
 
-    public void OnAddedCardToDicto()
+    public void OnAddedCardToDictonary(Card card, CardInstance cardInstance)
     {
-
+        AddCard(card);
+        if (_CardDictoDiscard.TryGetValue(card, out CardInstance foundCardInstance))
+        {
+            foundCardInstance.GoToDiscardLocation(); //this works but need to get that card player added like the ten to also go here
+        }
+        Debug.Log("onaddedcardtodicto");
     }
 
-    //TODO have an observer is something is added in the dictonary to add it to the list also?
-  
+    public void addToDictonary(Card card, CardInstance cardInstance)
+    {
+        _CardDictoDiscard.Add(card, cardInstance);
+        OnAddedCardToDicto?.Invoke(card, cardInstance);
+    }
 
 }

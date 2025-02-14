@@ -7,7 +7,7 @@ public class Dropzone : CardPile
 {
     public static Dropzone Instance;
 
-    private Card FirstInStackCard;
+    private Card _FirstInStackCard;
 
     public Dictionary<Card, CardInstance> _CardDictoDropZone = new Dictionary<Card, CardInstance>();
 
@@ -76,10 +76,9 @@ public class Dropzone : CardPile
         if (cards.Count > 0)
         {
             Debug.Log("dropzone list is above 0. Checking if playerhand card is above dropzone rank");
+            _FirstInStackCard = cards[cards.Count - 1];
 
-            cards[0] = FirstInStackCard; //this is null fix this 
-
-            if (Newcard._rank > FirstInStackCard._rank || Newcard._rank == FirstInStackCard._rank)
+            if (Newcard._rank > _FirstInStackCard._rank || Newcard._rank == _FirstInStackCard._rank)
             {
                 Debug.Log("adding card to dropzone. Rank is higher than the one in dropzone");
                 PlayerHand.instance.RemoveCard(Newcard);
@@ -90,6 +89,7 @@ public class Dropzone : CardPile
             else
             {
                 Debug.Log("You cant add this card");
+                _cardInstance.GoBackOrgPos();
                 return;
             }
         }
@@ -109,13 +109,13 @@ public class Dropzone : CardPile
             Card FourthCard;
 
             //  getting the cards top 4 including the players last added card
-            FirstInStackCard = cards[cards.Count - 1];
+            _FirstInStackCard = cards[cards.Count - 1];
             SecondInStackCard = cards[cards.Count - 2];
             ThirdCard = cards[cards.Count - 3];
             FourthCard = cards [cards.Count - 4];
 
 
-            if(FirstInStackCard._rank == SecondInStackCard._rank && SecondInStackCard._rank == ThirdCard._rank &&
+            if(_FirstInStackCard._rank == SecondInStackCard._rank && SecondInStackCard._rank == ThirdCard._rank &&
                ThirdCard._rank == FourthCard._rank )
             {
                 Debug.Log("This is four in a row. Pile will go to discard");
@@ -127,14 +127,14 @@ public class Dropzone : CardPile
 
     public void DropzoneToDiscardPile()
     {
-        //removing all dropzone cards to discardpile
-        for (global::System.Int32 i = 0; i < cards.Count; i++)
+        foreach (var entry in _CardDictoDropZone)
         {
-            _card = cards[i];
+            DiscardCards.Instance._CardDictoDiscard[entry.Key] = entry.Value;
             RemoveCard(_card);
-            DiscardCards.Instance.AddCard(_card);
-           
+
         }
+
+        
     }
 
     public void GetDropZonePile() //this only works for player rn. //add observer to see if player cant make any more actions? same with opponent.

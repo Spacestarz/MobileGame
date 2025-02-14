@@ -29,8 +29,4 @@ public class TestEventSubscriber : MonoBehaviour
         Debug.Log("unityevent here");
     }
 
-    void Update()
-    {
-        
-    }
 }

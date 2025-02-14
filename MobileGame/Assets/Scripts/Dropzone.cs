@@ -39,6 +39,9 @@ public class Dropzone : CardPile
 
     private void Awake()
     {
+        EventsHere.Instance.OnActionEvent -= EventsHere.Instance.TestMethod;
+        EventsHere.Instance.OnActionEvent += EventsHere.Instance.TestMethod;
+
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -65,6 +68,7 @@ public class Dropzone : CardPile
     //need to change a bit in code so this works with opponent also (maybe a bool which turn it is on player or opponent?)
     public void CanIGoInDropZone(Card Newcard) 
     {
+       
 
         if (Newcard._rank == Card.RankEnum.Ten)
         {
@@ -129,6 +133,9 @@ public class Dropzone : CardPile
 
     public void DropzoneToDiscardPile()
     {
+        //calling to trigger an action
+        EventsHere.Instance.OnActionEvent?.Invoke();
+
         foreach (var entry in _CardDictoDropZone)
         {
             DiscardCards.Instance.addToDictonary(entry.Key, entry.Value);

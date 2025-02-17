@@ -3,7 +3,7 @@ using UnityEngine.Serialization;
 using System.Collections.Generic;
 using static CardPile;
 
-public class Card
+public class Card : MonoBehaviour 
 {
     //just a thing
     //have singleton instead of a bunch of findobjectoftype

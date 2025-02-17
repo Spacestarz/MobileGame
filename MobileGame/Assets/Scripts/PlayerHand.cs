@@ -64,7 +64,10 @@ public class PlayerHand : CardPile
         {
             Vector3 position = A + direction * step * i;
 
-            thing.transform.position = position; //look a bit meh need to fix
+            thing.transform.position = position; //look a bit meh need to fix //something is wach with math need to check  on it
         }
+
+        //testing 
+        TrackingTurns.Instance.CheckCardsVSDropZone();
     }
 }

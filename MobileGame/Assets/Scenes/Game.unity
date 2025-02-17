@@ -231,6 +231,7 @@ GameObject:
   - component: {fileID: 468975529}
   - component: {fileID: 468975530}
   - component: {fileID: 468975531}
+  - component: {fileID: 468975532}
   m_Layer: 0
   m_Name: CardManager
   m_TagString: Untagged
@@ -310,6 +311,19 @@ MonoBehaviour:
   DiamondPrefab: {fileID: 5392521065050632024, guid: a5eb1689a9f1dd849a35ec57dd3b7b3b, type: 3}
   CloverPreFab: {fileID: 4796949902896175446, guid: add4470e3535cfa479a05de689eab492, type: 3}
   SpadePreFab: {fileID: 8024183325894661840, guid: fe1ac1ee4497f8f4e87fb94aa7806653, type: 3}
+--- !u!114 &468975532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468975521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 512a28db360c13748b1831cfe2930f77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DisableInput: 0
 --- !u!1 &545268779
 GameObject:
   m_ObjectHideFlags: 0

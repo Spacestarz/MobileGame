@@ -28,9 +28,5 @@ public class EventsHere : MonoBehaviour
     {
         Debug.Log("Hello, the event is working!");
     }
-
-    void Update()
-    {
-        
-    }
+  
 }

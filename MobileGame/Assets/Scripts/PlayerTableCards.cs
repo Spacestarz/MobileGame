@@ -81,7 +81,7 @@ public class PlayerTableCards : CardPile
             }
             else if (i < 6) 
             {
-                Debug.Log("above 3 thing");
+               // Debug.Log("above 3 thing");
                 spawnpoint = _TablePlayerLocations[i-3];
 
                 Vector3 newPos = spawnpoint.transform.position;

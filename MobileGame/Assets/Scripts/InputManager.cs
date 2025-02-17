@@ -42,6 +42,13 @@ public class InputManager : MonoBehaviour
     void Update()
     {
         //when down thing
+
+        if (TrackingTurns.Instance.DisableInput)
+        {
+            Debug.Log("disableinput is true");
+            return;
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             Vector2 mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);

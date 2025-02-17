@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class CardInstance : MonoBehaviour
@@ -22,6 +23,15 @@ public class CardInstance : MonoBehaviour
         Card = card;
         _Suit = card._suit;
         _Rank = card._rank;
+
+        TextMeshPro[] textComponents = GetComponentsInChildren<TextMeshPro>();
+
+        foreach (var textMeshPro in textComponents)
+        {
+            textMeshPro.text = ((int)_Rank).ToString();
+        }
+
+
     }
     void Start()
     {

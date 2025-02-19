@@ -6,25 +6,22 @@ public class PlayerTableCards : CardPile
 {
     public static PlayerTableCards instance;
 
-    [SerializeField] List<GameObject> _TablePlayerLocations; //change this??
-
-    public Dictionary<Card, CardInstance> _CardDictoTable = new Dictionary<Card, CardInstance>();
-
+    [SerializeField] List<GameObject> _TablePlayerLocations; 
 
     public override void AddCard(Card cardToAdd)
     {
         cards.Add(cardToAdd);
         Debug.Log($"Adding {cardToAdd._suit} with rank {cardToAdd._rank} to PlayerTABLEcards");
+
         if (cards.Count <=3)
         {
-            GetCardInstanceUpsideDown(cardToAdd);
+           // GetCardInstanceUpsideDown(cardToAdd);
             Debug.Log("getting upside down card");
         }
         else
         {
             GetCardInstance(cardToAdd);
             Debug.Log("getting NORMAL card");
-
         }
     }
 
@@ -36,7 +33,6 @@ public class PlayerTableCards : CardPile
 
     private void Awake()
     {
-
         if (instance != null && instance != this)
         {
             Destroy(gameObject);
@@ -51,8 +47,7 @@ public class PlayerTableCards : CardPile
     //trying to make it like playerhand kinda
     public void GetCardInstance(Card card)
     {
-        var CardInstanceThing = MakeCards.Instance.CreateCardObject(card);
-        _CardDictoTable.Add(card, CardInstanceThing);
+      //  var CardInstanceThing = MakeCards.Instance.CreateCardObject(card);
 
         UpdateTable();
     }
@@ -61,12 +56,9 @@ public class PlayerTableCards : CardPile
     {
         int i = 0;
 
-
-        foreach (var entry in _CardDictoTable)
+        foreach (var card in cards)
         {
             GameObject spawnpoint;
-
-            CardInstance currentCardInstance = entry.Value;
 
             if (i >= 6)
             {
@@ -77,7 +69,7 @@ public class PlayerTableCards : CardPile
             if (i < 3)
             {
                 spawnpoint = _TablePlayerLocations[i];
-                currentCardInstance.transform.position = spawnpoint.transform.position;
+                card.transform.position = spawnpoint.transform.position;
             }
             else if (i < 6) 
             {
@@ -90,7 +82,7 @@ public class PlayerTableCards : CardPile
 
                 newPos.y += yOffset;
 
-                currentCardInstance.transform.position = newPos;
+                card.transform.position = newPos;
 
                // Debug.Log($"Placing {currentCardInstance.name} at spawn point {spawnpoint.transform.position}");
             }
@@ -99,12 +91,10 @@ public class PlayerTableCards : CardPile
 
     }
 
-    public void GetCardInstanceUpsideDown(Card card)
-    {
-        var CardInstanceThing = MakeCards.Instance.MakeUpsideDownCard(card);
-        _CardDictoTable.Add(card, CardInstanceThing);
+    //public void GetCardInstanceUpsideDown(Card card)
+    //{
+    //    var CardInstanceThing = MakeCards.Instance.MakeUpsideDownCard(card);
+    //    UpdateTable();
+    //}
 
-        UpdateTable();
-    }
-   
 }

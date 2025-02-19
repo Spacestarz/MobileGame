@@ -13,12 +13,6 @@ public class Card : MonoBehaviour
 
     public GameObject _InstanceCard;
 
-    //The Prefabs gameobjects, not needed here but can copy paste later so will leave it
-    public GameObject HeartsPreFab;
-    public GameObject DiamondPrefab;
-    public GameObject CloverPreFab;
-    public GameObject SpadePreFab;
-
     public enum SuitEnum //Here is the suits
     {
         Hearts = 1,
@@ -44,12 +38,11 @@ public class Card : MonoBehaviour
         King = 13,
     }
 
-    // Constructor
-    public Card(SuitEnum suit, RankEnum rank)
+    
+    public void Initialize(SuitEnum suit, RankEnum rank)
     {
         _suit = suit;
         _rank = rank;
-
     }
 
 

@@ -275,7 +275,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6117321898250909298}
   - component: {fileID: 4218165196393387932}
-  - component: {fileID: 5392521065050632024}
+  - component: {fileID: 2990489804544276748}
+  - component: {fileID: 512177118316480295}
   m_Layer: 0
   m_Name: DiamondCard
   m_TagString: Card
@@ -345,7 +346,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.1430893, y: 1.5670575}
   m_EdgeRadius: 0
---- !u!114 &5392521065050632024
+--- !u!114 &2990489804544276748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3954640639439772322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 111041a62f1967d468d6234145a0a8e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _InstanceCard: {fileID: 0}
+--- !u!114 &512177118316480295
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -359,6 +373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Rank: 0
   _Suit: 0
+  Card: {fileID: 0}
   _orgPos: {x: 0, y: 0, z: 0}
 --- !u!1 &9083368394421026609
 GameObject:

@@ -266,6 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cb43f221e517944fba5bcf6e9f46477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _card: {fileID: 0}
   _visuals: {fileID: 0}
 --- !u!114 &468975529
 MonoBehaviour:
@@ -279,7 +280,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a85eff11a497c1644bab6cfdbb0fec9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cardDataScript: {fileID: 0}
+  cards: []
+  card: {fileID: 0}
+  allLocation: {fileID: 34470614}
 --- !u!114 &468975530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,11 +309,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebfa20cf6b508c24ca37135dcf23d7b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BackCardPreFab: {fileID: 597274578709115530, guid: 3d75d3ff51e05774faff7d4b9eb4d69d, type: 3}
-  HeartsPreFab: {fileID: 9130233055412140238, guid: 9715dfb62b3e6304eaf4ef2cfc3fd45b, type: 3}
-  DiamondPrefab: {fileID: 5392521065050632024, guid: a5eb1689a9f1dd849a35ec57dd3b7b3b, type: 3}
-  CloverPreFab: {fileID: 4796949902896175446, guid: add4470e3535cfa479a05de689eab492, type: 3}
-  SpadePreFab: {fileID: 8024183325894661840, guid: fe1ac1ee4497f8f4e87fb94aa7806653, type: 3}
+  _BackCardPreFab: {fileID: 886875788293509846, guid: 3d75d3ff51e05774faff7d4b9eb4d69d, type: 3}
+  _HeartsPreFab: {fileID: 2351650941078651831, guid: 9715dfb62b3e6304eaf4ef2cfc3fd45b, type: 3}
+  _DiamondPrefab: {fileID: 3954640639439772322, guid: a5eb1689a9f1dd849a35ec57dd3b7b3b, type: 3}
+  _CloverPreFab: {fileID: 815245200069831719, guid: add4470e3535cfa479a05de689eab492, type: 3}
+  _SpadePreFab: {fileID: 4636846207334254336, guid: fe1ac1ee4497f8f4e87fb94aa7806653, type: 3}
 --- !u!114 &468975532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -486,6 +489,37 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.04875432, y: -0.2589774, z: 0.05047279}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &560991723
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 560991724}
+  m_Layer: 0
+  m_Name: AllcardsLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &560991724
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 560991723}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1062,6 +1096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b01d98ff0cfc4b34384d5f9e8011c877, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cards: []
   _TablePlayerLocations:
   - {fileID: 421679412}
   - {fileID: 1241397475}
@@ -1110,6 +1145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab2803bf7215152408dde63205ea63c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cards: []
 --- !u!4 &932022879
 Transform:
   m_ObjectHideFlags: 0
@@ -1231,6 +1267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11d59bfafcea07b4ca64507bb93d83fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cards: []
   startAPlayer: {x: -2.68, y: -4.17, z: -0.02362273}
   StartBPlayer: {x: 2.5, y: -4.17, z: -0.02362273}
 --- !u!1 &1073244546
@@ -1430,6 +1467,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21eb758e1e1f1f54f8d2709f7f361aff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cards: []
+  _TableOpponentCards: []
 --- !u!4 &1254637282
 Transform:
   m_ObjectHideFlags: 0
@@ -1695,6 +1734,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82bf85ef2a635af49868f5319c317ec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cards: []
+  _OpponentHandCards: []
 --- !u!4 &1396152553
 Transform:
   m_ObjectHideFlags: 0
@@ -1944,6 +1985,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6128c64e8d38f54d9162249f3626e07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cards: []
 --- !u!4 &1706587750
 Transform:
   m_ObjectHideFlags: 0
@@ -2391,6 +2433,7 @@ SceneRoots:
   - {fileID: 579759063}
   - {fileID: 958395816}
   - {fileID: 1000854638}
+  - {fileID: 560991724}
   - {fileID: 150267800}
   - {fileID: 1856017075}
   - {fileID: 468975523}

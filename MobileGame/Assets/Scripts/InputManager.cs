@@ -96,7 +96,7 @@ public class InputManager : MonoBehaviour
                 var CardinstanceScript =  _CardHeld.GetComponent<CardInstance>();
                 var cardHeldCard = CardinstanceScript.GetCardData();
 
-                Dropzone.Instance.WantbothInThisScript(cardHeldCard, CardinstanceScript);
+                //Dropzone.Instance.WantbothInThisScript(cardHeldCard, CardinstanceScript);
                //add to dropzone dictonary
             }
             else

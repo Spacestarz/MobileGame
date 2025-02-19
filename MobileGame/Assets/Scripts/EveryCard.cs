@@ -7,11 +7,12 @@ using Listsextensions;
 public class EveryCard : CardPile
 {
     public Card card;
-    [SerializeField] CardInstance _cardDataScript;
+    public GameObject allLocation;
 
     public override void AddCard(Card cardToAdd)
     {
         cards.Add(cardToAdd);
+        MoveToallCardsLocation();
         //Debug.Log($"adding {cardToAdd._suit} and rank {cardToAdd._rank}");
     }
 
@@ -41,8 +42,10 @@ public class EveryCard : CardPile
                 RankEnum rank = (RankEnum)r;
                 // Debug.Log($"Creating card with Suit: {suit}, Rank: {rank}");
                 //now add card to allcardsLIST
-                card = new Card(suit, rank);
-                
+                Card card = MakeCards.Instance.CreateCardObject(suit, rank);
+
+                //AFTER HERE INSTANTIATE THE CARDS
+
                 AddCard(card);
             }
         }
@@ -118,7 +121,15 @@ public class EveryCard : CardPile
         Debug.Log("getcard from button");
         card = cards[0];
         RemoveCard(card); //remove card from allcardslist
-        PlayerHand.instance.AddCard(card);
         Debug.Log($"PlayerHand got {card._suit} with rank {card._rank}");
+    }
+
+    private void MoveToallCardsLocation()
+    {
+        foreach (var item in cards)
+        {
+            item.gameObject.transform.position = allLocation.transform.position;
+           // Debug.Log("move plz");
+        }
     }
 }

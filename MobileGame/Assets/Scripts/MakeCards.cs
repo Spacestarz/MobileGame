@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using static Card;
 
@@ -5,13 +6,11 @@ public class MakeCards : MonoBehaviour
 {
     public static MakeCards Instance;
 
-    public CardInstance BackCardPreFab;
-    public CardInstance HeartsPreFab;
-    public CardInstance DiamondPrefab;
-    public CardInstance CloverPreFab;
-    public CardInstance SpadePreFab;
-
-
+    public GameObject _BackCardPreFab;
+    public GameObject _HeartsPreFab;
+    public GameObject _DiamondPrefab;
+    public GameObject _CloverPreFab;
+    public GameObject _SpadePreFab;
 
     private void Awake()
     {
@@ -25,29 +24,26 @@ public class MakeCards : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-
-
-
-    public CardInstance CreateCardObject(Card card)
+    public Card CreateCardObject(SuitEnum suit, RankEnum rank)
     {
-        CardInstance prefabToInstantiate = null;
+        GameObject prefabToInstantiate = null;
 
-        switch (card._suit)
+        switch (suit)
         {
             case SuitEnum.Hearts:
-                prefabToInstantiate = HeartsPreFab;
+                prefabToInstantiate = _HeartsPreFab;
                 break;
 
             case SuitEnum.Diamonds:
-                prefabToInstantiate = DiamondPrefab;
+                prefabToInstantiate = _DiamondPrefab;
                 break;
 
             case SuitEnum.Spades:
-                prefabToInstantiate = SpadePreFab;
+                prefabToInstantiate = _SpadePreFab;
                 break;
 
             case SuitEnum.Clubs:
-                prefabToInstantiate = CloverPreFab;
+                prefabToInstantiate = _CloverPreFab;
                 break;
 
             default:
@@ -56,22 +52,43 @@ public class MakeCards : MonoBehaviour
                 }
         }
 
-        CardInstance cardobject = Instantiate(prefabToInstantiate);
+        GameObject cardobject = Instantiate(prefabToInstantiate);
 
-        cardobject.Init(card);
+        Card cardComponent  = cardobject.GetComponent<Card>();
 
-        return cardobject;
+        if (cardComponent != null)
+        {
+            cardComponent.Initialize(suit, rank);
+        }
+        else
+        {
+            Debug.LogError("Card component not here wut");
+        }
+
+        return cardComponent;
     }
 
-    public CardInstance MakeUpsideDownCard(Card UpSideDownCard)
+    public GameObject MakeUpsideDownCard(SuitEnum suit, RankEnum rank)
     {
+        GameObject prefabToInstantiate;
+
         Debug.Log("MakeUpsidedown card method");
-        CardInstance prefabToInstantiate = null;
-        prefabToInstantiate = BackCardPreFab;
+        prefabToInstantiate = _BackCardPreFab;
 
-        CardInstance cardObject = Instantiate(prefabToInstantiate);
+        GameObject cardObject = Instantiate(prefabToInstantiate);
 
-        cardObject.Init(UpSideDownCard);
+        Card cardComponent = cardObject.GetComponent<Card>();
+
+        if (cardComponent != null)
+        {
+            // Initialize the Card component with the correct suit and rank
+            cardComponent.Initialize(suit, rank);
+        }
+        else
+        {
+            Debug.LogError("Card component not here wut");
+        }
+
         return cardObject;
     }
 }

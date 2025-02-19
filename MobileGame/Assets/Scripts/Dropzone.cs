@@ -9,30 +9,17 @@ public class Dropzone : CardPile
 
     private Card _FirstInStackCard;
 
-    public Dictionary<Card, CardInstance> _CardDictoDropZone = new Dictionary<Card, CardInstance>();
-
     private Card _card;
-    private CardInstance _cardInstance;
 
     public override void AddCard(Card cardToAdd)
     {
         base.AddCard(cardToAdd);
-        //also adding to the dictonary
-        _CardDictoDropZone.Add(cardToAdd,_cardInstance);
-        Debug.Log("adding card to dropzone dictonary");
         Debug.Log($"Adding {cardToAdd._suit} with rank {cardToAdd._rank} to Dropzone");
     }
 
     public override void RemoveCard(Card cardToRemove)
     {
        base.RemoveCard(cardToRemove);
-
-        if(_CardDictoDropZone.TryGetValue(cardToRemove, out _cardInstance))
-        {
-            _CardDictoDropZone.Remove(cardToRemove);
-            Debug.Log("removed card from the dropzone dictonary also");
-        }
-
        Debug.Log($"Removing {cardToRemove._suit} with rank {cardToRemove._rank} from dropzone");
     }
 
@@ -51,17 +38,6 @@ public class Dropzone : CardPile
         cards = new List<Card>();
     }
 
-    public void WantbothInThisScript(Card Card, CardInstance instanceCard)
-    {
-        _card = Card;
-        _cardInstance = instanceCard;
-
-        Debug.Log($"this is card thing from wantboth {_card._suit} and rank {Card._rank}");
-
-        //will see now if this card can go in dropzone
-        CanIGoInDropZone(_card);
-
-    }
 
     //need to change a bit in code so this works with opponent also (maybe a bool which turn it is on player or opponent?)
     public void CanIGoInDropZone(Card Newcard) 
@@ -86,12 +62,12 @@ public class Dropzone : CardPile
                 PlayerHand.instance.RemoveCard(Newcard);
                 AddCard(Newcard);
                 InputManager.Instance._CardHeld = null;
-                _cardInstance.GoToDropZonePosition();
+                //insert card go to dropzone
             }
             else
             {
                 Debug.Log("You cant add this card");
-                _cardInstance.GoBackOrgPos();
+              //insert card go to orgpos
                 return;
             }
         }
@@ -99,7 +75,7 @@ public class Dropzone : CardPile
         {
             AddCard(Newcard);
             PlayerHand.instance.RemoveCard(Newcard); //removing card from playerhand
-            _cardInstance.GoToDropZonePosition();
+             //insert card go to dropzone
             Debug.Log($"adding a new card to dropzone (dropzone script here... {Newcard._suit} with rank {Newcard._rank})");
         }
 
@@ -129,14 +105,7 @@ public class Dropzone : CardPile
 
     public void DropzoneToDiscardPile()
     {
-        foreach (var entry in _CardDictoDropZone) //move each card instead 
-        {
-            DiscardCards.Instance.addToDictonary(entry.Key, entry.Value);
-            RemoveCard(entry.Key);
-
-            DiscardCards.Instance.AddCards(cards);
-
-        }
+       
     }
 
     public void GetDropZonePile() //this only works for player rn. //add observer to see if player cant make any more actions? same with opponent.

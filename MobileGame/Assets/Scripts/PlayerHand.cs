@@ -7,8 +7,6 @@ public class PlayerHand : CardPile
 {
     public static PlayerHand instance;
 
-    public Dictionary<Card, CardInstance> _CardDicto = new Dictionary<Card, CardInstance>();
-
     public Vector3 startAPlayer;
     public Vector3 StartBPlayer;
 
@@ -40,10 +38,9 @@ public class PlayerHand : CardPile
 
     public void GetCardInstance(Card card)
     {
-        var CardInstanceThing = MakeCards.Instance.CreateCardObject(card);
-        _CardDicto.Add(card, CardInstanceThing);
+        //var CardInstanceThing = MakeCards.Instance.CreateCardObject(card);
 
-        UpdateHand(card, CardInstanceThing);
+        //UpdateHand(card);
     }
 
     public void UpdateHand(Card card, CardInstance thing)

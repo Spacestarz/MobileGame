@@ -275,7 +275,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1970169814597943132}
   - component: {fileID: 109471811396437439}
-  - component: {fileID: 8024183325894661840}
+  - component: {fileID: 7971229299565733870}
+  - component: {fileID: 1938519223914808755}
   m_Layer: 0
   m_Name: SpaderCard
   m_TagString: Card
@@ -345,7 +346,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.1327405, y: 1.5695001}
   m_EdgeRadius: 0
---- !u!114 &8024183325894661840
+--- !u!114 &7971229299565733870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4636846207334254336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 111041a62f1967d468d6234145a0a8e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _InstanceCard: {fileID: 0}
+--- !u!114 &1938519223914808755
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -359,6 +373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Rank: 0
   _Suit: 0
+  Card: {fileID: 0}
   _orgPos: {x: 0, y: 0, z: 0}
 --- !u!1 &7420681505232708847
 GameObject:

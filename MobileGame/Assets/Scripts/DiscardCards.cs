@@ -7,7 +7,6 @@ public class DiscardCards : CardPile
 {
     public static DiscardCards Instance;
 
-    public Dictionary<Card, CardInstance> _CardDictoDiscard = new Dictionary<Card, CardInstance>();
 
     private Card _card;
     private CardInstance _cardInstance;
@@ -25,12 +24,6 @@ public class DiscardCards : CardPile
     {
         base.RemoveCard(cardToRemove);
 
-        if (_CardDictoDiscard.TryGetValue(cardToRemove, out _cardInstance))
-        {
-            _CardDictoDiscard.Remove(cardToRemove);
-            Debug.Log("removed card from the dropzone dictonary also");
-        }
-
         Debug.Log($"Removing {cardToRemove._suit} with rank {cardToRemove._rank} from discardpile");
     }
 
@@ -46,23 +39,6 @@ public class DiscardCards : CardPile
         DontDestroyOnLoad(gameObject);
         cards = new List<Card>();
 
-        OnAddedCardToDicto += OnAddedCardToDictonary;
-    }
-
-    public void OnAddedCardToDictonary(Card card, CardInstance cardInstance)
-    {
-        AddCard(card);
-        if (_CardDictoDiscard.TryGetValue(card, out CardInstance foundCardInstance))
-        {
-            foundCardInstance.GoToDiscardLocation(); //this works but need to get that card player added like the ten to also go here
-        }
-        Debug.Log("onaddedcardtodicto");
-    }
-
-    public void addToDictonary(Card card, CardInstance cardInstance)
-    {
-        _CardDictoDiscard.Add(card, cardInstance);
-        OnAddedCardToDicto?.Invoke(card, cardInstance);
     }
 
 }

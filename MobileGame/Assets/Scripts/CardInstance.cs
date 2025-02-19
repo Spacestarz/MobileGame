@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using static Card;
 
 public class CardInstance : MonoBehaviour
 {
@@ -20,19 +21,26 @@ public class CardInstance : MonoBehaviour
 
     public void Init(Card card)
     {
-        Card = card;
+       var cardscript = GetComponent<Card>();
+
+         Card = card;
         _Suit = card._suit;
         _Rank = card._rank;
 
         TextMeshPro[] textComponents = GetComponentsInChildren<TextMeshPro>();
 
+        
         foreach (var textMeshPro in textComponents)
         {
             textMeshPro.text = ((int)_Rank).ToString();
+
+            bool isFaceUp = cardscript._visualsUp.activeSelf;
+            textMeshPro.gameObject.SetActive(isFaceUp);
         }
 
-
     }
+
+
     void Start()
     {
         _orgPos = transform.position;

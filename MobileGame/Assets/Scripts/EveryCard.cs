@@ -38,14 +38,14 @@ public class EveryCard : CardPile
             //second for ranks
             for (int r = 1; r <= 13; r++)
             {
+                //here i am making ALLLLL the cards
                 SuitEnum suit = (SuitEnum)s; 
                 RankEnum rank = (RankEnum)r;
-                // Debug.Log($"Creating card with Suit: {suit}, Rank: {rank}");
+
+                //making the cards but upside down
+                Card card = MakeCards.Instance.MakeCard(suit, rank); //now i am making all the cards upside down
+
                 //now add card to allcardsLIST
-                Card card = MakeCards.Instance.CreateCardObject(suit, rank);
-
-                //AFTER HERE INSTANTIATE THE CARDS
-
                 AddCard(card);
             }
         }
@@ -58,7 +58,6 @@ public class EveryCard : CardPile
     {
         listextensions.shufflecards(cards);
     }
-
 
     public void GetStarterCards()
     {
@@ -129,7 +128,6 @@ public class EveryCard : CardPile
         foreach (var item in cards)
         {
             item.gameObject.transform.position = allLocation.transform.position;
-           // Debug.Log("move plz");
         }
     }
 }

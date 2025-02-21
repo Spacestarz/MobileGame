@@ -14,11 +14,6 @@ public class MakeCards : MonoBehaviour
     public Sprite _SpadeSprite;
     public Sprite _CloverSprite;
 
-    //public GameObject _BackCardPreFab;
-    //public GameObject _HeartsPreFab;
-    //public GameObject _DiamondPrefab;
-    //public GameObject _CloverPreFab;
-    //public GameObject _SpadePreFab;
 
     private void Awake()
     {

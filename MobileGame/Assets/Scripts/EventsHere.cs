@@ -10,7 +10,6 @@ public class EventsHere : MonoBehaviour
 
     public Action OnActionEvent;
 
-
     private void Awake()
     {
         if (Instance != null && Instance != this)

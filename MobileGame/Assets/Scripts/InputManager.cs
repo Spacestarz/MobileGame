@@ -11,7 +11,6 @@ public class InputManager : MonoBehaviour
 
     public GameObject _CardHeld;
 
-
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -45,7 +44,6 @@ public class InputManager : MonoBehaviour
 
         if (TrackingTurns.Instance.DisableInput)
         {
-            Debug.Log("disableinput is true");
             return;
         }
 
@@ -95,10 +93,9 @@ public class InputManager : MonoBehaviour
             if (CheckIfDropZoneCollider.collider != null && _CardHeld)
             {
                 var CardinstanceScript =  _CardHeld.GetComponent<CardInstance>();
-                var cardHeldCard = CardinstanceScript.GetCardData();
-
-                //Dropzone.Instance.WantbothInThisScript(cardHeldCard, CardinstanceScript);
-               //add to dropzone dictonary
+                // var cardHeldCard = CardinstanceScript.GetCardData();
+                Dropzone.Instance.CanIGoInDropZone(_CardHeld.GetComponent<Card>());
+              
             }
             else
             {

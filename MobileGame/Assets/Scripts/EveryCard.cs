@@ -8,7 +8,6 @@ public class EveryCard : CardPile
 {
     public Card card;
     public GameObject allLocation;
-
     public override void AddCard(Card cardToAdd)
     {
         cards.Add(cardToAdd);
@@ -120,6 +119,8 @@ public class EveryCard : CardPile
         Debug.Log("getcard from button");
         card = cards[0];
         RemoveCard(card); //remove card from allcardslist
+        //insert if its playerturn or opponentturn
+        PlayerHand.instance.AddCard(card);
         Debug.Log($"PlayerHand got {card._suit} with rank {card._rank}");
     }
 

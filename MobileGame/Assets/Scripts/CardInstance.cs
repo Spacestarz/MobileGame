@@ -15,10 +15,7 @@ public class CardInstance : MonoBehaviour
 
     public Card Card;
 
-
-    //took these from cardvisual this should handle the things
     public Vector3 _orgPos;
-
     public void Init(Card card)
     {
        var cardscript = GetComponent<Card>();
@@ -27,19 +24,15 @@ public class CardInstance : MonoBehaviour
         _Suit = card._suit;
         _Rank = card._rank;
 
-        TextMeshPro[] textComponents = GetComponentsInChildren<TextMeshPro>();
+        TextMeshPro[] textComponents = GetComponentsInChildren<TextMeshPro>(true); //checking inactivated things
 
-        
         foreach (var textMeshPro in textComponents)
         {
             textMeshPro.text = ((int)_Rank).ToString();
-
-            bool isFaceUp = cardscript._visualsUp.activeSelf;
-            textMeshPro.gameObject.SetActive(isFaceUp);
         }
 
+        card.IsUp();
     }
-
 
     void Start()
     {

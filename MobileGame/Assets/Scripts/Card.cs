@@ -4,17 +4,19 @@ using System.Collections.Generic;
 using static CardPile;
 using TMPro;
 
-public class Card : MonoBehaviour 
+public class Card : MonoBehaviour
 {
     public SuitEnum _suit { get; private set; }
     public RankEnum _rank { get; private set; }
 
-    public GameObject _visualsUp;
-    public GameObject _visualsDown;
+    [SerializeField] private GameObject _visualsUp;
+    [SerializeField] private GameObject _visualsDown;
 
     private SpriteRenderer _renderUp;
     private SpriteRenderer _renderDown;
 
+
+    private bool _isUp = false;
 
     public enum SuitEnum //Here is the suits
     {
@@ -44,13 +46,10 @@ public class Card : MonoBehaviour
 
     private void Awake()
     {
-        _visualsUp = transform.Find("Visual Up").gameObject;
-        _visualsDown = transform.Find("Visual Down").gameObject;
+        _renderUp = _visualsUp.GetComponent<SpriteRenderer>();
+        _renderDown = _visualsDown.GetComponent<SpriteRenderer>();
 
-       _renderUp = _visualsUp.GetComponent<SpriteRenderer>();
-       _renderDown = _visualsDown.GetComponent<SpriteRenderer>();
-
-       _renderDown.sprite = MakeCards.Instance._backSprite;
+        _renderDown.sprite = MakeCards.Instance._backSprite;
 
         if (_visualsUp == null || _visualsDown == null)
         {
@@ -64,24 +63,72 @@ public class Card : MonoBehaviour
 
         _visualsUp.SetActive(false);
         _visualsDown.SetActive(true);
+
+        TextMeshPro[] textComponents = GetComponentsInChildren<TextMeshPro>();
+
+        foreach (var textMeshPro in textComponents)
+        {
+           textMeshPro.gameObject.SetActive(false); //no textmesh
+        }
+
     }
 
     public void FlipCard() 
     {
-       if(_visualsUp != null && _visualsDown != null)
-       {
-            bool isFaceup = _visualsUp.activeSelf;
+        if (_visualsUp != null && _visualsDown != null)
+        {
+            _isUp = !_isUp;
 
-            _visualsUp.SetActive(!isFaceup);
-            _visualsDown.SetActive(isFaceup);
+            bool seIfActive = !_visualsUp.activeSelf;
 
-            TextMeshPro[] textComponents = GetComponentsInChildren<TextMeshPro>();
+            _visualsUp.SetActive(seIfActive);
+            _visualsDown.SetActive(!seIfActive);
+
+            _isUp = seIfActive;
+
+
+            if (_isUp)
+            {
+                _visualsDown.SetActive(false);
+                _visualsUp.SetActive(true);
+            }
+
+            if (!_isUp)
+            {
+                _visualsUp.SetActive(false) ;
+                _visualsDown.SetActive(true);
+            }
+
+            TextMeshPro[] textComponents = GetComponentsInChildren<TextMeshPro>(true); //when having true it checks inactive object too
+
+            //Debug.Log("textcomponent lenghts is " + " " + textComponents.Length); 
 
             foreach (var textMeshPro in textComponents)
             {
-                textMeshPro.gameObject.SetActive(!isFaceup); //shows when face is up 
+                textMeshPro.gameObject.SetActive(_isUp);
             }
-          
+
+        }
+    }
+
+    public bool IsUp()
+    {
+
+        _isUp = _visualsUp.activeSelf;
+        Debug.Log("is up bool is " + " " + _isUp);
+        return _isUp;
+        //see if visual is up or down
+
+        bool isFaceup = _visualsUp.activeSelf;
+
+        Debug.Log($"card face is {isFaceup}");
+
+        TextMeshPro[] textComponents = GetComponentsInChildren<TextMeshPro>();
+
+        foreach (var textMeshPro in textComponents)
+        {
+            textMeshPro.gameObject.SetActive(!isFaceup); //shows when face is up 
+            Debug.Log($"text is {!isFaceup}");
         }
     }
 

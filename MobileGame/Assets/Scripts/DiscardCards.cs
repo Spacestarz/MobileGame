@@ -38,7 +38,5 @@ public class DiscardCards : CardPile
         Instance = this;
         DontDestroyOnLoad(gameObject);
         cards = new List<Card>();
-
     }
-
 }

@@ -25,9 +25,12 @@ public class PlayerHand : CardPile
 
     public override void AddCard(Card cardToAdd)
     {
+        Debug.Log("playerhand is getting a card");
         cards.Add(cardToAdd);
+        cardToAdd.FlipCard();
+        UpdateHand();
         //Debug.Log($"Removing {cardToAdd._suit} with rank {cardToAdd._rank} from PlayerhandCardsList");
-        GetCardInstance(cardToAdd);
+        //GetCardInstance(cardToAdd);
     }
 
     public override void RemoveCard(Card cardToRemove)
@@ -39,14 +42,11 @@ public class PlayerHand : CardPile
     public void GetCardInstance(Card card)
     {
         //var CardInstanceThing = MakeCards.Instance.CreateCardObject(card);
-
         //UpdateHand(card);
     }
 
-    public void UpdateHand(Card card, CardInstance thing)
+    public void UpdateHand()
     {
-        //will need the dictonary here
-
         //make so it will update its position etc
         var objectcount = cards.Count;
 
@@ -57,11 +57,12 @@ public class PlayerHand : CardPile
         float totalDistance = Vector3.Distance(A, B);
         float step = totalDistance / (cards.Count + 1);
 
-        for (int i = 1; i <= cards.Count; i++)
+        for (int i = 0; i < cards.Count; i++)
         {
-            Vector3 position = A + direction * step * i;
+            Vector3 position = A + direction * step * (i + 1);
 
-            thing.transform.position = position; //look a bit meh need to fix //something is wach with math need to check  on it
+            cards[i].transform.position = position;
+            // card.gameObject.transform.position = position;
         }
 
         //testing 

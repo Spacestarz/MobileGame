@@ -14,6 +14,7 @@ public class Dropzone : CardPile
     public override void AddCard(Card cardToAdd)
     {
         base.AddCard(cardToAdd);
+        TrackingTurns.Instance._OnCardDropZone?.Invoke();
         Debug.Log($"Adding {cardToAdd._suit} with rank {cardToAdd._rank} to Dropzone");
     }
 
@@ -42,6 +43,8 @@ public class Dropzone : CardPile
     //need to change a bit in code so this works with opponent also (maybe a bool which turn it is on player or opponent?)
     public void CanIGoInDropZone(Card Newcard) 
     {
+       var cardInstanceScript = Newcard.GetComponent<CardInstance>();
+
         if (Newcard._rank == Card.RankEnum.Ten)
         {
             Debug.Log("Player put down a 10 card. Taking the dropzone to discard pile");
@@ -49,7 +52,6 @@ public class Dropzone : CardPile
             DropzoneToDiscardPile();
             return;
         }
-
 
         if (cards.Count > 0)
         {
@@ -62,12 +64,12 @@ public class Dropzone : CardPile
                 PlayerHand.instance.RemoveCard(Newcard);
                 AddCard(Newcard);
                 InputManager.Instance._CardHeld = null;
-                //insert card go to dropzone
+                cardInstanceScript.GoToDropZonePosition();
             }
             else
             {
                 Debug.Log("You cant add this card");
-              //insert card go to orgpos
+                cardInstanceScript.GoBackOrgPos();
                 return;
             }
         }
@@ -76,9 +78,9 @@ public class Dropzone : CardPile
             AddCard(Newcard);
             PlayerHand.instance.RemoveCard(Newcard); //removing card from playerhand
              //insert card go to dropzone
+            cardInstanceScript.GoToDropZonePosition();
             Debug.Log($"adding a new card to dropzone (dropzone script here... {Newcard._suit} with rank {Newcard._rank})");
         }
-
 
         if (cards.Count >= 4) //here i will check if the all have the same rank so 4 in a row
         {
@@ -92,7 +94,6 @@ public class Dropzone : CardPile
             ThirdCard = cards[cards.Count - 3];
             FourthCard = cards [cards.Count - 4];
 
-
             if(_FirstInStackCard._rank == SecondInStackCard._rank && SecondInStackCard._rank == ThirdCard._rank &&
                ThirdCard._rank == FourthCard._rank )
             {
@@ -105,7 +106,7 @@ public class Dropzone : CardPile
 
     public void DropzoneToDiscardPile()
     {
-       
+        Debug.Log("dropzonetodiscardpile method here");
     }
 
     public void GetDropZonePile() //this only works for player rn. //add observer to see if player cant make any more actions? same with opponent.
@@ -116,7 +117,6 @@ public class Dropzone : CardPile
             _card = cards[i];
             RemoveCard(_card);
             PlayerHand.instance.AddCard(_card);
-           
         }
     }
 }

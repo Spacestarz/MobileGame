@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using static TrackingTurns;
 
 public class InputManager : MonoBehaviour
 {
@@ -42,7 +43,7 @@ public class InputManager : MonoBehaviour
     {
         //when down thing
 
-        if (TrackingTurns.Instance.DisableInput)
+        if (TrackingTurns.Instance.DisableInput || TrackingTurns.Instance._CurrentTurn == TurnState.OpponentTurn)
         {
             return;
         }

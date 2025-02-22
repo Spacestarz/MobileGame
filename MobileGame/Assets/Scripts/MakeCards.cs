@@ -75,7 +75,7 @@ public class MakeCards : MonoBehaviour
 
     public Card MakeCard(SuitEnum suit, RankEnum rank)
     {
-        Debug.Log("MakeUpsidedown card method");
+       // Debug.Log("MakeUpsidedown card method");
 
         GameObject cardObject = Instantiate(_PrefabCard);
 

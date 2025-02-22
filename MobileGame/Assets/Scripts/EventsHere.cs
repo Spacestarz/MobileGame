@@ -22,7 +22,6 @@ public class EventsHere : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-
     public void TestMethod()
     {
         Debug.Log("Hello, the event is working!");

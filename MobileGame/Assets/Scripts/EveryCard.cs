@@ -110,7 +110,7 @@ public class EveryCard : CardPile
         {
             card = cards[0];//first card in list.
             RemoveCard(card); //removing from allcardslist
-            OpponentHand.Instance.AddCard(card);
+            OpponentHand.instance.AddCard(card);
         }
     }
 

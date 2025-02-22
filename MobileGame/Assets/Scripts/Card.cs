@@ -115,7 +115,7 @@ public class Card : MonoBehaviour
     {
 
         _isUp = _visualsUp.activeSelf;
-        Debug.Log("is up bool is " + " " + _isUp);
+       // Debug.Log("is up bool is " + " " + _isUp);
         return _isUp;
         //see if visual is up or down
 

@@ -11,7 +11,7 @@ public class PlayerTableCards : CardPile
     public override void AddCard(Card cardToAdd)
     {
         cards.Add(cardToAdd);
-        Debug.Log($"Adding {cardToAdd._suit} with rank {cardToAdd._rank} to PlayerTABLEcards");
+       // Debug.Log($"Adding {cardToAdd._suit} with rank {cardToAdd._rank} to PlayerTABLEcards");
 
         if (cards.Count <=3)
         {
@@ -21,7 +21,7 @@ public class PlayerTableCards : CardPile
         else
         {
             GetCardInstance(cardToAdd);
-            Debug.Log("getting NORMAL card");
+           // Debug.Log("getting NORMAL card");
         }
     }
 

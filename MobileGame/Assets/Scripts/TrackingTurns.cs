@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using NUnit.Framework.Constraints;
 using System;
 using TMPro;
@@ -9,7 +10,14 @@ public class TrackingTurns : MonoBehaviour
 
     public Action _OnCardDropZone;
 
+    public Action _OnDrawnCard;
+
     [SerializeField] private TextMeshProUGUI _WhichTurnText;
+
+    [SerializeField] private TextMeshProUGUI _textOnDrawButton;
+
+    private string _DefaultTextDrawButton = "Draw";
+    private float _DefaultFontSizeDrawButton = 24;
 
 
     //bools
@@ -37,6 +45,10 @@ public class TrackingTurns : MonoBehaviour
 
     private void Awake()
     {
+        _DefaultTextDrawButton = _textOnDrawButton.text;
+        _DefaultFontSizeDrawButton = _textOnDrawButton.fontSize;
+
+
         _OnCardDropZone -= OnAddedToDropZone;
         _OnCardDropZone += OnAddedToDropZone;
 
@@ -61,6 +73,7 @@ public class TrackingTurns : MonoBehaviour
     public void OnAddedToDropZone()
     {
         Debug.Log("a card was added to the dropzone... making so that input will be disabled");
+        Debug.Log("Highlight on end turn (not implemented yet");
         DisableInput = true;
     }
 
@@ -82,40 +95,56 @@ public class TrackingTurns : MonoBehaviour
         //so the only option left will be to click the end turn button
     }
 
+    [Button]
     public void CheckCardsVSDropZone()
     {
-      //  Debug.Log("CheckCardsVSdropzone method");
+        Debug.Log("CheckCardsVSdropzone method");
 
         if (Dropzone.Instance.cards.Count > 0)
        {
             var latestCard = Dropzone.Instance.cards[Dropzone.Instance.cards.Count - 1];
 
-            if (_CurrentTurn == TurnState.Playerturn)
+            if (_CurrentTurn == TurnState.Playerturn) 
             {
                 foreach (var card in PlayerHand.instance.cards) //this is for playerhand
                 {
                     if (card._rank >= latestCard._rank)
                     {
-                    Debug.Log($"{card._suit} with rank {card._rank} can be put in cardzone");
+                         Debug.Log($"{card._suit} with rank {card._rank} can be put in cardzone");
                     }
                     else
                     {
-                    Debug.LogWarning("player cant put any card in dropzone");
+                         Debug.LogWarning("player cant put any card in dropzone");
 
-                   // Debug.LogWarning("sending an observer to change draw card text");
-                    //player can now end turn (and pick up the whole cardpile or do a guess draw)
-                    DisableInput = true;
+                        _textOnDrawButton.text = "Take a chance"; //take a leap
+                        _textOnDrawButton.fontSize = 19;
+
+                        // Debug.LogWarning("sending an observer to change draw card text");
+                        //player can now end turn (and pick up the whole cardpile or do a guess draw)
+                        DisableInput = true;
                     }
                 }
-
             }
-            else
+            else if (_CurrentTurn == TurnState.OpponentTurn) 
             {
+                Debug.Log("checkthing opponenthand");
+
+                Card lowestValidCard = null;
+
+
                 foreach (var card in OpponentHand.instance.cards) //this is for opponent hand
                 {
                     if (card._rank >= latestCard._rank)
                     {
                         Debug.Log($"{card._suit} with rank {card._rank} can be put in cardzone");
+
+                        if (lowestValidCard == null || card._rank < lowestValidCard._rank)
+                        {
+                            lowestValidCard = card;
+
+                            Debug.Log($"the lowest valid card in the opponenthand is {card._suit} with rank {card._rank}");
+                        } 
+
                     }
                     else
                     {
@@ -127,9 +156,17 @@ public class TrackingTurns : MonoBehaviour
 
                     }
                 }
+
+                if (lowestValidCard != null)
+                {
+                    Debug.Log($"Opponent plays the lowest valid card: {lowestValidCard._suit} with rank {lowestValidCard._rank}");
+                    Dropzone.Instance.PutCardInDropzone(lowestValidCard);
+                }
+
             }
         }
     }
+
 
     public void OpponentCheck()
     {
@@ -146,6 +183,12 @@ public class TrackingTurns : MonoBehaviour
             _CurrentTurn = TurnState.OpponentTurn;
             _WhichTurnText.text = ("Opponent Turn");
 
+            if (_textOnDrawButton.text != _DefaultTextDrawButton || _textOnDrawButton.fontSize != _DefaultFontSizeDrawButton)
+            {
+                _textOnDrawButton.text   = _DefaultTextDrawButton;
+                _textOnDrawButton.fontSize = _DefaultFontSizeDrawButton;
+            }
+
             _WhichTurnText.color = Color.red;
 
             OpponentAi.instance.OpponentTurn();
@@ -157,6 +200,7 @@ public class TrackingTurns : MonoBehaviour
             _WhichTurnText.text = ("Your Turn");
 
             _WhichTurnText.color = Color.green;
+            DisableInput = false;
         }
     }
 }

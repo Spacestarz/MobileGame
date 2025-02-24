@@ -88,7 +88,6 @@ public class PlayerTableCards : CardPile
             }
             i++;
         }
-
     }
 
     //public void GetCardInstanceUpsideDown(Card card)

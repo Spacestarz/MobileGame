@@ -95,8 +95,8 @@ public class InputManager : MonoBehaviour
             {
                 var CardinstanceScript =  _CardHeld.GetComponent<CardInstance>();
                 // var cardHeldCard = CardinstanceScript.GetCardData();
-                Dropzone.Instance.CanIGoInDropZone(_CardHeld.GetComponent<Card>());
-              
+                 Dropzone.Instance.PutCardInDropzone(_CardHeld.GetComponent<Card>());
+
             }
             else
             {

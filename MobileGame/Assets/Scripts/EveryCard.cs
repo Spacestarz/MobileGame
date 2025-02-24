@@ -8,6 +8,7 @@ public class EveryCard : CardPile
 {
     public Card card;
     public GameObject allLocation;
+
     public override void AddCard(Card cardToAdd)
     {
         cards.Add(cardToAdd);
@@ -117,11 +118,22 @@ public class EveryCard : CardPile
     public void GetCard() //get card from the draw button
     {
         Debug.Log("getcard from button");
+
         card = cards[0];
         RemoveCard(card); //remove card from allcardslist
         //insert if its playerturn or opponentturn
-        PlayerHand.instance.AddCard(card);
-        Debug.Log($"PlayerHand got {card._suit} with rank {card._rank}");
+
+        if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.Playerturn)
+        {
+            PlayerHand.instance.AddCard(card);
+            Debug.Log($"PlayerHand got {card._suit} with rank {card._rank}");
+
+        }
+        else
+        {
+            OpponentHand.instance.AddCard(card);
+            Debug.Log($"OpponentHand got {card._suit} with rank {card._rank}");
+        }
     }
 
     private void MoveToallCardsLocation()
@@ -130,5 +142,27 @@ public class EveryCard : CardPile
         {
             item.gameObject.transform.position = allLocation.transform.position;
         }
+    }
+
+    public void GuessCard()
+    {
+        //when player/opponent cant play any cards in their hand they can guess a card
+        Debug.Log("guessing card method");
+        card = cards[0];
+        RemoveCard(card);
+
+        if ((TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.Playerturn))
+        {
+            //check if card can go in dropzone
+            //when it comes to the visual make the card look like it goes to dropzone and
+            //have a sound cue if it can go or not
+
+
+        }
+        else
+        {
+
+        }
+
     }
 }

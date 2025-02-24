@@ -347,6 +347,7 @@ GameObject:
   - component: {fileID: 468975529}
   - component: {fileID: 468975531}
   - component: {fileID: 468975532}
+  - component: {fileID: 468975533}
   m_Layer: 0
   m_Name: CardManager
   m_TagString: Untagged
@@ -429,10 +430,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _WhichTurnText: {fileID: 954461045}
+  _textOnDrawButton: {fileID: 642257531}
   DisableInput: 0
   HasDrawnCard: 0
   GuessCard: 0
   _CurrentTurn: 0
+--- !u!114 &468975533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468975521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63b0db9cb2cecdb4e95a9fecd44ba03f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cards: []
 --- !u!1 &545268779
 GameObject:
   m_ObjectHideFlags: 0
@@ -1262,6 +1277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cards: []
+  _IsTakingAChance: 0
 --- !u!4 &932022879
 Transform:
   m_ObjectHideFlags: 0

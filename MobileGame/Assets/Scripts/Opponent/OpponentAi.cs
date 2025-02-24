@@ -27,9 +27,9 @@ public class OpponentAi : CardPile
 
     private void CanIPlayAnyCard()
     {
+        Debug.Log("can i play anycard opponent method");
         TrackingTurns.Instance.CheckCardsVSDropZone();
     }
-
 
 
 }

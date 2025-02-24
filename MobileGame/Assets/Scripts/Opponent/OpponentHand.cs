@@ -40,7 +40,6 @@ public class OpponentHand : CardPile
 
     public void UpdateHandOpponent()
     {
-
         Debug.Log("Opponenthand Update");
         //make so it will update its position etc
         var objectcount = cards.Count;

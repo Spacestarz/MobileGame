@@ -3,7 +3,9 @@ using System.Linq.Expressions;
 using UnityEngine;
 using NaughtyAttributes;
 using System.Collections;
-
+using DG.Tweening;
+using TMPro;
+using UnityEngine.UI;
 
 
 public enum CardResults
@@ -22,11 +24,20 @@ public class Dropzone : CardPile
 
     private Card _card;
 
-    public bool _IsTakingAChance;
+    public bool _IsTakingAChance; //i change the draw text on trackingturns script on checkcardvsdropzone!!!
+
+    [SerializeField] private TextMeshProUGUI _textOnDrawButton;
+
+    private string _DefaultTextDrawButton = "Draw";
+    private float _DefaultFontSizeDrawButton = 24;
+    public Button DrawButton;
 
     public override void AddCard(Card cardToAdd)
     {
         base.AddCard(cardToAdd);
+        var cardInstanceScript = cardToAdd.GetComponent<CardInstance>();
+
+        Debug.Log("addcard for dropzone");
 
         if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.Playerturn)
         {
@@ -39,6 +50,7 @@ public class Dropzone : CardPile
         }
 
         Debug.Log($"Adding {cardToAdd._suit} with rank {cardToAdd._rank} to Dropzone");
+        cardInstanceScript.GoToDropZonePosition();
     }
 
     public override void RemoveCard(Card cardToRemove)
@@ -59,17 +71,34 @@ public class Dropzone : CardPile
         Instance = this;
         DontDestroyOnLoad(gameObject);
         cards = new List<Card>();
+
+       
+    }
+
+    public void DefaultValueDrawButton()
+    {
+        _DefaultTextDrawButton = _textOnDrawButton.text;
+        _DefaultFontSizeDrawButton = _textOnDrawButton.fontSize;
+    }
+
+    public void CheckIfNeedChangeDrawText()
+    {
+        if (_textOnDrawButton.text != _DefaultTextDrawButton || _textOnDrawButton.fontSize != _DefaultFontSizeDrawButton)
+        {
+            _textOnDrawButton.text = _DefaultTextDrawButton;
+            _textOnDrawButton.fontSize = _DefaultFontSizeDrawButton;
+        }
     }
 
 
     public CardResults CanIGoInDropzone(Card Newcard)
     {
 
-        if (Newcard._rank == Card.RankEnum.Ten)
-        {
-            Debug.Log("Player put down a 10 card. Taking the dropzone to discard pile");
-            return CardResults.Ten;
-        }
+        //if (newcard._rank == card.rankenum.ten)
+        //{
+        //    debug.log("player put down a 10 card. taking the dropzone to discard pile");
+        //    return cardresults.ten;
+        //}
 
         if (cards.Count >= 4) //here i will check if the all have the same rank so 4 in a row
         {
@@ -104,8 +133,6 @@ public class Dropzone : CardPile
             {
                  return CardResults.Illegal;
             }
-
-
         }
         else
         {
@@ -119,52 +146,62 @@ public class Dropzone : CardPile
 
     public void PutCardInDropzone(Card Newcard) 
     {
+        var result = CanIGoInDropzone(Newcard);
+
         var cardInstanceScript = Newcard.GetComponent<CardInstance>();
 
         switch (CanIGoInDropzone(Newcard))
         {
              case CardResults.Ten:
                 
-                Debug.Log("ned");
-
+                Debug.Log("ten card");
+                Debug.Log("Player put down a 10 card. Taking the dropzone to discard pile");
+                AddCard(Newcard);
+                DropzoneToDiscardPile();
                 break;
 
 
             case CardResults.FourInARow:
                  Debug.Log("4 in a row");
-                    break;
+                AddCard(Newcard);
+                DropzoneToDiscardPile();
+                break;
 
                 case CardResults.NormalHigher:
                 Debug.Log("normal higher");
+                AddCard(Newcard);
                     break;
 
 
-                case CardResults.Illegal:
+               case CardResults.Illegal:
                 Debug.Log("illegal card");
+                _IsTakingAChance = true;
+                cardInstanceScript.GoBackOrgPos();
                 break;
 
             default:
-                Debug.Log("default in swsitch case wtf");
+                Debug.Log("default in switch case wtf");
 
                 break;
         }
 
-        //var result = CanIGoInDropzone(Newcard);
-        //if (result != CardResults.Illegal)
-        //    start coroutine animation
-        //    wait coroutine stuf
 
+        if (result != CardResults.Illegal && _IsTakingAChance) 
+        {
+            StartCoroutine("animateToDropZone", Newcard);
+            Debug.Log("takinga chance method moving with dotween");
+            // start coroutine animation
+            //wait coroutine stuff
+        }
 
+        if (_IsTakingAChance)
+        {
+            Debug.Log("taking a chance bool is on");
 
-
-
-
-        //if (_IsTakingAChance)
-        //{
-        //    StartCoroutine(TakingAChance(Newcard, cardInstanceScript));
-        //    return;
-        //}
-
+            //StartCoroutine(TakingAChance(Newcard, cardInstanceScript));
+            return;
+        }
+        #region shit
         //if (Newcard._rank == Card.RankEnum.Ten)
         //{
         //    Debug.Log("Player put down a 10 card. Taking the dropzone to discard pile");
@@ -219,31 +256,47 @@ public class Dropzone : CardPile
         //        Debug.Log("removing card from opponenthand");
         //    }
 
-        //    insert card go to dropzone
+        //    //insert card go to dropzone
         //    cardInstanceScript.GoToDropZonePosition();
         //    Debug.Log($"adding a new card to dropzone (dropzone script here... {Newcard._suit} with rank {Newcard._rank})");
         //}
 
-        //if (cards.Count >= 4) //here i will check if the all have the same rank so 4 in a row
-        //{
-        //    Card SecondInStackCard;
-        //    Card ThirdCard;
-        //    Card FourthCard;
-
-        //    getting the cards top 4 including the players last added card
-        //    _FirstInStackCard = cards[cards.Count - 1];
-        //    SecondInStackCard = cards[cards.Count - 2];
-        //    ThirdCard = cards[cards.Count - 3];
-        //    FourthCard = cards[cards.Count - 4];
-
-        //    if (_FirstInStackCard._rank == SecondInStackCard._rank && SecondInStackCard._rank == ThirdCard._rank &&
-        //       ThirdCard._rank == FourthCard._rank)
+        //    if (cards.Count >= 4) //here i will check if the all have the same rank so 4 in a row
         //    {
-        //        Debug.Log("This is four in a row. Pile will go to discard");
-        //        DropzoneToDiscardPile();
-        //    }
-        //}
+        //        Card SecondInStackCard;
+        //        Card ThirdCard;
+        //        Card FourthCard;
 
+        //       // getting the cards top 4 including the players last added card
+        //        _FirstInStackCard = cards[cards.Count - 1];
+        //        SecondInStackCard = cards[cards.Count - 2];
+        //        ThirdCard = cards[cards.Count - 3];
+        //        FourthCard = cards[cards.Count - 4];
+
+        //        if (_FirstInStackCard._rank == SecondInStackCard._rank && SecondInStackCard._rank == ThirdCard._rank &&
+        //           ThirdCard._rank == FourthCard._rank)
+        //        {
+        //            Debug.Log("This is four in a row. Pile will go to discard");
+        //            DropzoneToDiscardPile();
+        //        }
+        //    }
+        #endregion
+    }
+
+    public void ChangeDrawCardText()
+    {
+        _IsTakingAChance = true;
+        _textOnDrawButton.text = "Take a chance"; //take a leap
+        _textOnDrawButton.fontSize = 19;
+    }
+
+    private IEnumerator animateToDropZone(Card NewCard) //working to make this wurk
+    {
+        Debug.Log("ienumator to dropzone will use dotween");
+        //this will happened when you "guess" a card
+
+        yield return NewCard.transform.DOMove(SpawnLocations.instance.dropzoneLocationForCards.transform.position, 2f)
+            .WaitForCompletion();
     }
 
     public void DropzoneToDiscardPile()
@@ -262,7 +315,6 @@ public class Dropzone : CardPile
             {
                 PlayerHand.instance.AddCard(_card);
                 Debug.Log("adding all cards from dropzonepile to PlayerHand");
-
             }
             else
             {

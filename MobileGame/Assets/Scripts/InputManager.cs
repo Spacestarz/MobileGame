@@ -64,7 +64,6 @@ public class InputManager : MonoBehaviour
             {
                 Debug.Log("no card here");
             }
-
         }
 
         if (_CardHeld != null)
@@ -103,7 +102,6 @@ public class InputManager : MonoBehaviour
                 Debug.Log("dropzone not here");
             }
 
-
             _followMouse = false;
 
             if (_CardHeld && CheckIfDropZoneCollider.collider == null)
@@ -112,6 +110,7 @@ public class InputManager : MonoBehaviour
                 cardscript.GoBackOrgPos();
                 _CardHeld = null;
             }
+
             _CardHeld = null ;
         }
 

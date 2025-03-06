@@ -3,6 +3,7 @@ using NUnit.Framework.Constraints;
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TrackingTurns : MonoBehaviour
 {
@@ -12,21 +13,27 @@ public class TrackingTurns : MonoBehaviour
 
     public Action _OnDrawnCard;
 
+    public Action _OnHighlightEndTurn;
+
+    public Action _OnDisableHighLight;
+
+    public Action _OnCanInteractWithButton;
+
     [SerializeField] private TextMeshProUGUI _WhichTurnText;
 
-    [SerializeField] private TextMeshProUGUI _textOnDrawButton;
+    //[SerializeField] private TextMeshProUGUI _textOnDrawButton;
 
     private string _DefaultTextDrawButton = "Draw";
     private float _DefaultFontSizeDrawButton = 24;
+
+    public Button _EndButton;
+    public Button _DrawButton;
 
 
     //bools
     public bool DisableInput = false; 
 
     public bool HasDrawnCard = false;
-
-    public bool GuessCard = false;
-
 
 
     public enum TurnState
@@ -45,12 +52,19 @@ public class TrackingTurns : MonoBehaviour
 
     private void Awake()
     {
-        _DefaultTextDrawButton = _textOnDrawButton.text;
-        _DefaultFontSizeDrawButton = _textOnDrawButton.fontSize;
+        //_DefaultTextDrawButton = _textOnDrawButton.text;
+        //_DefaultFontSizeDrawButton = _textOnDrawButton.fontSize;
 
 
         _OnCardDropZone -= OnAddedToDropZone;
         _OnCardDropZone += OnAddedToDropZone;
+
+        _OnHighlightEndTurn -= OnHighlightEndTurn;
+        _OnHighlightEndTurn += OnHighlightEndTurn;
+
+        _OnDisableHighLight -= OnDisableHighLight;
+        _OnDisableHighLight += OnDisableHighLight;
+
 
         _WhichTurnText.text = ("Your Turn");
         _WhichTurnText.color = Color.green;
@@ -70,16 +84,34 @@ public class TrackingTurns : MonoBehaviour
     //just make a square with eh color underneath..
     //what i want to highlight and activate/disable it
 
+    private void Start()
+    {
+        
+    }
+
     public void OnAddedToDropZone()
     {
         Debug.Log("a card was added to the dropzone... making so that input will be disabled");
-        Debug.Log("Highlight on end turn (not implemented yet");
+        OnHighlightEndTurn();
         DisableInput = true;
     }
 
     public void OnHighlightEndTurn()
     {
         //will want to highlight end turn
+        HighLight.Instance.HighLightMe();
+        Debug.Log("highlighting end turn button");
+    }
+
+    public void OnDisableHighLight()
+    {
+        HighLight.Instance.DisableHighLight();
+        Debug.Log("diables highlight end tunr");
+    }
+
+    public void OnCanInteractWithButton ()
+    {
+        Debug.Log("interact button");
     }
 
 
@@ -102,6 +134,7 @@ public class TrackingTurns : MonoBehaviour
 
         if (Dropzone.Instance.cards.Count > 0)
        {
+            Debug.Log("dropzone cards is above 0");
             var latestCard = Dropzone.Instance.cards[Dropzone.Instance.cards.Count - 1];
 
             if (_CurrentTurn == TurnState.Playerturn) 
@@ -110,14 +143,16 @@ public class TrackingTurns : MonoBehaviour
                 {
                     if (card._rank >= latestCard._rank)
                     {
-                         Debug.Log($"{card._suit} with rank {card._rank} can be put in cardzone");
+                         Debug.Log($"{card._suit} with rank {card._rank} can be put in cardzone PLAYER");
                     }
                     else
                     {
                          Debug.LogWarning("player cant put any card in dropzone");
 
-                        _textOnDrawButton.text = "Take a chance"; //take a leap
-                        _textOnDrawButton.fontSize = 19;
+                        Dropzone.Instance._IsTakingAChance = true;
+                        Debug.Log("takingachance is true make a action or something");
+                        //_textOnDrawButton.text = "Take a chance"; //take a leap
+                        //_textOnDrawButton.fontSize = 19;
 
                         // Debug.LogWarning("sending an observer to change draw card text");
                         //player can now end turn (and pick up the whole cardpile or do a guess draw)
@@ -167,6 +202,10 @@ public class TrackingTurns : MonoBehaviour
         }
     }
 
+    
+
+
+
 
     public void OpponentCheck()
     {
@@ -183,13 +222,12 @@ public class TrackingTurns : MonoBehaviour
             _CurrentTurn = TurnState.OpponentTurn;
             _WhichTurnText.text = ("Opponent Turn");
 
-            if (_textOnDrawButton.text != _DefaultTextDrawButton || _textOnDrawButton.fontSize != _DefaultFontSizeDrawButton)
-            {
-                _textOnDrawButton.text   = _DefaultTextDrawButton;
-                _textOnDrawButton.fontSize = _DefaultFontSizeDrawButton;
-            }
+            Debug.Log("add to change draw text if not default got a method in dropzone");
+            Dropzone.Instance.CheckIfNeedChangeDrawText();
 
             _WhichTurnText.color = Color.red;
+
+            OnDisableHighLight(); 
 
             OpponentAi.instance.OpponentTurn();
         }

@@ -21,13 +21,15 @@ public class TrackingTurns : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI _WhichTurnText;
 
+    [SerializeField] private ButtonInteractable _DrawButtonInteractScript;
+
     //[SerializeField] private TextMeshProUGUI _textOnDrawButton;
 
-    private string _DefaultTextDrawButton = "Draw";
-    private float _DefaultFontSizeDrawButton = 24;
+    //private string _DefaultTextDrawButton = "Draw";
+    //private float _DefaultFontSizeDrawButton = 24;
 
-    public Button _EndButton;
-    public Button _DrawButton;
+    //public Button _EndButton;
+    //public Button _DrawButton;
 
 
     //bools
@@ -64,6 +66,11 @@ public class TrackingTurns : MonoBehaviour
 
         _OnDisableHighLight -= OnDisableHighLight;
         _OnDisableHighLight += OnDisableHighLight;
+
+        _OnCanInteractWithButton += OnCanInteractWithButton;
+        _OnCanInteractWithButton -= OnCanInteractWithButton;
+
+        
 
 
         _WhichTurnText.text = ("Your Turn");
@@ -109,15 +116,14 @@ public class TrackingTurns : MonoBehaviour
         Debug.Log("diables highlight end tunr");
     }
 
-    public void OnCanInteractWithButton ()
+    public void OnCanInteractWithButton()
     {
-        Debug.Log("interact button");
+        Debug.Log("interact action here should also launch the buttoninteratable script");
     }
 
 
     public void PlayerCheck()
     {
-
         if (DisableInput) ;
         //if player has successfully put a card in dropzone 
 
@@ -126,6 +132,7 @@ public class TrackingTurns : MonoBehaviour
         //here i will check if player has done all they can do
         //so the only option left will be to click the end turn button
     }
+
 
     [Button]
     public void CheckCardsVSDropZone()
@@ -149,14 +156,11 @@ public class TrackingTurns : MonoBehaviour
                     {
                          Debug.LogWarning("player cant put any card in dropzone");
 
-                        Dropzone.Instance._IsTakingAChance = true;
-                        Debug.Log("takingachance is true make a action or something");
-                        //_textOnDrawButton.text = "Take a chance"; //take a leap
-                        //_textOnDrawButton.fontSize = 19;
-
+                        _OnCanInteractWithButton?.Invoke();
                         // Debug.LogWarning("sending an observer to change draw card text");
                         //player can now end turn (and pick up the whole cardpile or do a guess draw)
-                        DisableInput = true;
+
+                        DisableInput = true; 
                     }
                 }
             }
@@ -165,7 +169,6 @@ public class TrackingTurns : MonoBehaviour
                 Debug.Log("checkthing opponenthand");
 
                 Card lowestValidCard = null;
-
 
                 foreach (var card in OpponentHand.instance.cards) //this is for opponent hand
                 {
@@ -222,8 +225,10 @@ public class TrackingTurns : MonoBehaviour
             _CurrentTurn = TurnState.OpponentTurn;
             _WhichTurnText.text = ("Opponent Turn");
 
-            Debug.Log("add to change draw text if not default got a method in dropzone");
-            Dropzone.Instance.CheckIfNeedChangeDrawText();
+            if (Dropzone.Instance._IsTakingAChance)
+            {
+                Dropzone.Instance.CheckIfNeedChangeDrawText();
+            }
 
             _WhichTurnText.color = Color.red;
 

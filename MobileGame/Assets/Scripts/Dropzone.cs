@@ -29,7 +29,9 @@ public class Dropzone : CardPile
     [SerializeField] private TextMeshProUGUI _textOnDrawButton;
 
     private string _DefaultTextDrawButton = "Draw";
+
     private float _DefaultFontSizeDrawButton = 24;
+
     public Button DrawButton;
 
     public override void AddCard(Card cardToAdd)
@@ -72,7 +74,7 @@ public class Dropzone : CardPile
         DontDestroyOnLoad(gameObject);
         cards = new List<Card>();
 
-       
+        DefaultValueDrawButton();// getting default value on drawbutton
     }
 
     public void DefaultValueDrawButton()
@@ -88,6 +90,9 @@ public class Dropzone : CardPile
             _textOnDrawButton.text = _DefaultTextDrawButton;
             _textOnDrawButton.fontSize = _DefaultFontSizeDrawButton;
         }
+        _IsTakingAChance = false;
+        Debug.Log("taking a chance bool is now false");
+
     }
 
 
@@ -288,6 +293,7 @@ public class Dropzone : CardPile
         _IsTakingAChance = true;
         _textOnDrawButton.text = "Take a chance"; //take a leap
         _textOnDrawButton.fontSize = 19;
+
     }
 
     private IEnumerator animateToDropZone(Card NewCard) //working to make this wurk

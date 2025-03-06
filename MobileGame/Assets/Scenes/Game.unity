@@ -617,9 +617,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _WhichTurnText: {fileID: 954461045}
-  _textOnDrawButton: {fileID: 642257531}
-  _EndButton: {fileID: 545268781}
-  _DrawButton: {fileID: 827815383}
+  _DrawButtonInteractScript: {fileID: 827815386}
   DisableInput: 0
   HasDrawnCard: 0
   _CurrentTurn: 0
@@ -1479,6 +1477,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cards: []
   _IsTakingAChance: 0
+  _textOnDrawButton: {fileID: 642257531}
+  DrawButton: {fileID: 827815383}
 --- !u!4 &932022879
 Transform:
   m_ObjectHideFlags: 0

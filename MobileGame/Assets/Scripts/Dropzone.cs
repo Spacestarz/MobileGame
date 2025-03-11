@@ -24,7 +24,7 @@ public class Dropzone : CardPile
 
     private Card _card;
 
-    public bool _IsTakingAChance; //i change the draw text on trackingturns script on checkcardvsdropzone!!!
+    public bool _IsTakingAChance; //got a method here with changing draw text
 
     [SerializeField] private TextMeshProUGUI _textOnDrawButton;
 
@@ -40,6 +40,17 @@ public class Dropzone : CardPile
         var cardInstanceScript = cardToAdd.GetComponent<CardInstance>();
 
         Debug.Log("addcard for dropzone");
+
+        if ( _FirstInStackCard != null ) 
+        {
+            Debug.Log("firstinstackcard is not nuul");
+           var UnderMe = _FirstInStackCard.GetComponent<CardInstance>();
+            if ( UnderMe == null )
+            {
+                Debug.Log("i dont have cardinstance from _firststackincard");
+            }
+            UnderMe.SetTextVisability(false); //disables the textmesh
+        }
 
         if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.Playerturn)
         {
@@ -203,7 +214,7 @@ public class Dropzone : CardPile
         {
             Debug.Log("taking a chance bool is on");
 
-            //StartCoroutine(TakingAChance(Newcard, cardInstanceScript));
+
             return;
         }
         #region shit

@@ -11,8 +11,6 @@ public class SpawnLocations : MonoBehaviour
 
     private CardInstance cardInstance;
 
-
-
     private void Awake()
     {
         if (instance != null && instance != this)

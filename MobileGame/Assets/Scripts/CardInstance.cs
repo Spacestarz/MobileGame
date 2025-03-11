@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using static Card;
@@ -16,6 +17,11 @@ public class CardInstance : MonoBehaviour
     public Card Card;
 
     public Vector3 _orgPos;
+
+    private Action<bool> _OnTextVisibilityChanged;
+
+    private bool isTextEnabled = true;
+
     public void Init(Card card)
     {
        var cardscript = GetComponent<Card>();
@@ -37,8 +43,12 @@ public class CardInstance : MonoBehaviour
     void Start()
     {
         _orgPos = transform.position;
+
+        _OnTextVisibilityChanged -= OntextVisibilityChanges;
+        _OnTextVisibilityChanged += OntextVisibilityChanges;
         //Debug.Log($"suit {_Suit} with rank {_Rank} in the CARDINSTANCE CLASS");
     }
+
 
     void Update()
     {
@@ -95,6 +105,28 @@ public class CardInstance : MonoBehaviour
 
 
     }
+
+    public void SetTextVisability (bool enable)
+    {
+        if (isTextEnabled != enable)
+        {
+            Debug.Log("textenable is not the same as i want it...changing");
+
+            isTextEnabled = enable;
+            _OnTextVisibilityChanged?.Invoke(isTextEnabled);
+        }
+    }
+
+
+    public void OntextVisibilityChanges(bool enable)
+    {
+        var textMesh = GetComponentsInChildren<TextMeshPro>(true);
+        foreach (var textmeshpro in textMesh)
+        {
+            textmeshpro.enabled = enable;
+        }
+    }
+
 
     public void GoBackOrgPos()
     {

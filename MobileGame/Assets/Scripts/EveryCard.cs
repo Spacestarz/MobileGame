@@ -156,8 +156,6 @@ public class EveryCard : CardPile
             //check if card can go in dropzone
             //when it comes to the visual make the card look like it goes to dropzone and
             //have a sound cue if it can go or not
-
-
         }
         else
         {

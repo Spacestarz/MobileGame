@@ -17,7 +17,6 @@ public class PlayerHand : CardPile
             Destroy(gameObject);
             return;
         }
-
         instance = this;
         DontDestroyOnLoad(gameObject);
         cards = new List<Card>();

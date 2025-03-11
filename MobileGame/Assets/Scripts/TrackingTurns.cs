@@ -156,7 +156,8 @@ public class TrackingTurns : MonoBehaviour
                     {
                          Debug.LogWarning("player cant put any card in dropzone");
 
-                        _OnCanInteractWithButton?.Invoke();
+                        _OnCanInteractWithButton?.Invoke(); //player can interact with button
+
                         // Debug.LogWarning("sending an observer to change draw card text");
                         //player can now end turn (and pick up the whole cardpile or do a guess draw)
 

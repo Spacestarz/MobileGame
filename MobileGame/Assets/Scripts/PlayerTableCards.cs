@@ -11,16 +11,25 @@ public class PlayerTableCards : CardPile
     public override void AddCard(Card cardToAdd)
     {
         cards.Add(cardToAdd);
+       
        // Debug.Log($"Adding {cardToAdd._suit} with rank {cardToAdd._rank} to PlayerTABLEcards");
 
         if (cards.Count <=3)
         {
-           // GetCardInstanceUpsideDown(cardToAdd);
+            cardToAdd.gameObject.name = "TableCardPlayerUpsideDown";
+            GameObject parentObject = GameObject.Find("PlayersCardTableFolder");
+            cardToAdd.gameObject.transform.SetParent(parentObject.transform, false);
+            // GetCardInstanceUpsideDown(cardToAdd);
             Debug.Log("getting upside down card");
         }
         else
         {
+            cardToAdd.gameObject.name = "TableCardPlayerVisible";
+            GameObject parentObject = GameObject.Find("PlayersCardTableFolder");
+            cardToAdd.gameObject.transform.SetParent(parentObject.transform, false);
             GetCardInstance(cardToAdd);
+            cardToAdd.FlipCard(); //3 should now be up
+            Debug.Log("3 should be able to be visible");
            // Debug.Log("getting NORMAL card");
         }
     }

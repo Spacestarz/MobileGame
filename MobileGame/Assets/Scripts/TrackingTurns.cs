@@ -70,8 +70,6 @@ public class TrackingTurns : MonoBehaviour
         _OnCanInteractWithButton += OnCanInteractWithButton;
         _OnCanInteractWithButton -= OnCanInteractWithButton;
 
-        
-
 
         _WhichTurnText.text = ("Your Turn");
         _WhichTurnText.color = Color.green;

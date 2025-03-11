@@ -49,6 +49,7 @@ public class Dropzone : CardPile
             {
                 Debug.Log("i dont have cardinstance from _firststackincard");
             }
+
             UnderMe.SetTextVisability(false); //disables the textmesh
         }
 

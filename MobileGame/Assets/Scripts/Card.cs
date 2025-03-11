@@ -106,30 +106,19 @@ public class Card : MonoBehaviour
             foreach (var textMeshPro in textComponents)
             {
                 textMeshPro.gameObject.SetActive(_isUp);
+                textMeshPro.sortingOrder = 2;
             }
 
+            ChangeSortingOrder();
         }
     }
 
     public bool IsUp()
     {
-
         _isUp = _visualsUp.activeSelf;
        // Debug.Log("is up bool is " + " " + _isUp);
         return _isUp;
-        //see if visual is up or down
-
-        bool isFaceup = _visualsUp.activeSelf;
-
-        Debug.Log($"card face is {isFaceup}");
-
-        TextMeshPro[] textComponents = GetComponentsInChildren<TextMeshPro>();
-
-        foreach (var textMeshPro in textComponents)
-        {
-            textMeshPro.gameObject.SetActive(!isFaceup); //shows when face is up 
-            Debug.Log($"text is {!isFaceup}");
-        }
+       
     }
 
     public void Initialize(SuitEnum suit, RankEnum rank)
@@ -140,6 +129,22 @@ public class Card : MonoBehaviour
         _renderUp.sprite = GetSprite(this);
 
         GetComponent<CardInstance>().Init(this);
+    }
+
+    public void ChangeSortingOrder()
+    {
+        //make so faceup is above the renderdown the sorting order. 
+
+        if (_isUp == true)
+        {
+            _renderUp.sortingOrder = 1;
+            Debug.Log("sortingorder of this card is now 1");
+        }
+        else
+        {
+            _renderDown.sortingOrder = 0;
+            Debug.Log("sortingorder of this card is now 0");
+        }
     }
 
 

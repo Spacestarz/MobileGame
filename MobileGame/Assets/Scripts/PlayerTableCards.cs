@@ -16,6 +16,7 @@ public class PlayerTableCards : CardPile
 
         if (cards.Count <=3)
         {
+            //changing parent and name for better visability in inspector 
             cardToAdd.gameObject.name = "TableCardPlayerUpsideDown";
             GameObject parentObject = GameObject.Find("PlayersCardTableFolder");
             cardToAdd.gameObject.transform.SetParent(parentObject.transform, false);
@@ -24,9 +25,15 @@ public class PlayerTableCards : CardPile
         }
         else
         {
+            // change the card layeroption so it gets aboeve the upside down cards
+
+            //changing parent and name for better visability in inspector 
             cardToAdd.gameObject.name = "TableCardPlayerVisible";
             GameObject parentObject = GameObject.Find("PlayersCardTableFolder");
             cardToAdd.gameObject.transform.SetParent(parentObject.transform, false);
+
+          
+
             GetCardInstance(cardToAdd);
             cardToAdd.FlipCard(); //3 should now be up
             Debug.Log("3 should be able to be visible");

@@ -43,8 +43,9 @@ public class Dropzone : CardPile
 
         if ( _FirstInStackCard != null ) 
         {
-            Debug.Log("firstinstackcard is not nuul");
-           var UnderMe = _FirstInStackCard.GetComponent<CardInstance>();
+            Debug.LogWarning($"{_FirstInStackCard._suit} and rank {_FirstInStackCard._rank} is _firstinstackcard will DISABLE textmesh (dropzone row 46)");
+
+            var UnderMe = _FirstInStackCard.GetComponent<CardInstance>();
             if ( UnderMe == null )
             {
                 Debug.Log("i dont have cardinstance from _firststackincard");
@@ -136,11 +137,18 @@ public class Dropzone : CardPile
             }
         }
 
+        if (Newcard._rank == Card.RankEnum.Ten)
+        {
+            _FirstInStackCard = cards[cards.Count - 1];
+            return CardResults.Ten;
+        }
+
 
         if (cards.Count > 0)
         {
             Debug.Log("dropzone list is above 0. Checking if card is above dropzone rank");
             _FirstInStackCard = cards[cards.Count - 1];
+            Debug.Log("getting new firstinstackcard");
 
             if (Newcard._rank > _FirstInStackCard._rank || Newcard._rank == _FirstInStackCard._rank)
             {
@@ -163,11 +171,12 @@ public class Dropzone : CardPile
 
     public void PutCardInDropzone(Card Newcard) 
     {
+        _FirstInStackCard = null;
         var result = CanIGoInDropzone(Newcard);
 
         var cardInstanceScript = Newcard.GetComponent<CardInstance>();
 
-        switch (CanIGoInDropzone(Newcard))
+        switch (result)
         {
              case CardResults.Ten:
                 
@@ -202,7 +211,6 @@ public class Dropzone : CardPile
                 break;
         }
 
-
         if (result != CardResults.Illegal && _IsTakingAChance) 
         {
             StartCoroutine("animateToDropZone", Newcard);
@@ -214,8 +222,6 @@ public class Dropzone : CardPile
         if (_IsTakingAChance)
         {
             Debug.Log("taking a chance bool is on");
-
-
             return;
         }
         #region shit
@@ -319,16 +325,32 @@ public class Dropzone : CardPile
 
     public void DropzoneToDiscardPile()
     {
-        Debug.Log("dropzonetodiscardpile method here");
+        //removing all dropzone cards to discardpile
+        for (global::System.Int32 i = 0; i < cards.Count; i++)
+        {
+            List<Card> tempcard =  new List<Card> (cards); //copy of cards list
+
+            foreach (var card in tempcard)
+            {
+                RemoveCard (card);
+                DiscardCards.Instance.AddCard(card);
+            }
+        }
+        Debug.Log("adding all cards from dropzonepile to PlayerHand. (dropzone row 341, method dropzonetodiscardpile)");
+        Debug.Log($"Cards left in dropzone: {cards.Count}");
     }
 
     public void GetDropZonePile() //this only works for player rn. //add observer to see if player cant make any more actions? same with opponent.
     {
-        //removing all dropzone cards to discardpile
-        for (global::System.Int32 i = 0; i < cards.Count; i++)
+
+        //removing all dropzone cards to player/opponent hand.
+
+        List<Card> tempcard = new List<Card>(cards); //copy of cards list
+
+        foreach (var card in tempcard)
         {
-            _card = cards[i];
-            RemoveCard(_card);
+            RemoveCard(card);
+
             if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.Playerturn)
             {
                 PlayerHand.instance.AddCard(_card);
@@ -339,7 +361,10 @@ public class Dropzone : CardPile
                 OpponentHand.instance.AddCard(_card);
                 Debug.Log("adding all cards from dropzonepile to opponenthand");
             }
+
         }
+
+        Debug.Log($"Cards left in dropzone: {cards.Count}");
     }
 }
     

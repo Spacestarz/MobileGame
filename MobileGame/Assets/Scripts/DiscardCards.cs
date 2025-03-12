@@ -7,16 +7,16 @@ public class DiscardCards : CardPile
 {
     public static DiscardCards Instance;
 
-
     private Card _card;
     private CardInstance _cardInstance;
 
 
-    public static event Action<Card , CardInstance> OnAddedCardToDicto;
-
     public override void AddCard(Card cardToAdd)
     {
         base.AddCard(cardToAdd);
+        var cardinstanceRef = cardToAdd.GetComponent<CardInstance>();
+        cardinstanceRef.GoToDiscardLocation();
+           
        Debug.Log($"Adding {cardToAdd._suit} with rank {cardToAdd._rank} to discardpile");
     }
 

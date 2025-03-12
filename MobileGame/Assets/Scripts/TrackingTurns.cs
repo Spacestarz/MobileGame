@@ -185,12 +185,7 @@ public class TrackingTurns : MonoBehaviour
                     }
                     else
                     {
-                        Debug.LogWarning("opponent cant put any card in dropzone");
-
                         // Debug.LogWarning("sending an observer to change draw card text");
-
-                        Debug.Log("opponent cant play any cards");
-
                     }
                 }
 
@@ -198,6 +193,10 @@ public class TrackingTurns : MonoBehaviour
                 {
                     Debug.Log($"Opponent plays the lowest valid card: {lowestValidCard._suit} with rank {lowestValidCard._rank}");
                     Dropzone.Instance.PutCardInDropzone(lowestValidCard);
+                }
+                else
+                {
+                    Debug.Log("opponent cant play any cards in TRACKINGTURN script");
                 }
 
             }

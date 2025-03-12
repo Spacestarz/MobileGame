@@ -14,7 +14,7 @@ public abstract class CardPile: MonoBehaviour
     public virtual void RemoveCard(Card cardToRemove)
     {
         cards.Remove(cardToRemove); //Here you will remove cards
-        if (!cards.Contains (cardToRemove))
+        if (!cards.Remove(cardToRemove));
         {
             Debug.Log("couldent find card you want to remove");
         }

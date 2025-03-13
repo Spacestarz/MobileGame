@@ -31,5 +31,10 @@ public class OpponentAi : CardPile
         TrackingTurns.Instance.CheckCardsVSDropZone();
     }
 
+    private void EndMyTurn()
+    {
+
+    }
+
 
 }

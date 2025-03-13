@@ -15,8 +15,12 @@ public class Card : MonoBehaviour
     private SpriteRenderer _renderUp;
     private SpriteRenderer _renderDown;
 
+    public bool shouldFlip = true;
+
 
     private bool _isUp = false;
+
+
 
     public enum SuitEnum //Here is the suits
     {
@@ -75,6 +79,24 @@ public class Card : MonoBehaviour
 
     public void FlipCard() 
     {
+        TextMeshPro[] textComponents = GetComponentsInChildren<TextMeshPro>(true);
+        
+        Debug.Log("textcomponent lenghts is " + " " + textComponents.Length);
+
+        if (!shouldFlip)
+        {
+            shouldFlip = true; //reset the bool for future flips
+            foreach (var textMeshPro in textComponents)
+            {
+               var instanceRef = this.GetComponent<CardInstance>();
+               instanceRef.SetTextVisability(true);
+
+                textMeshPro.gameObject.SetActive(_isUp);
+                textMeshPro.sortingOrder = 2;
+            }
+            return;
+        }
+
         if (_visualsUp != null && _visualsDown != null)
         {
             _isUp = !_isUp;
@@ -84,24 +106,21 @@ public class Card : MonoBehaviour
             _visualsUp.SetActive(seIfActive);
             _visualsDown.SetActive(!seIfActive);
 
-            _isUp = seIfActive;
+            //_isUp = seIfActive;
 
 
-            if (_isUp)
-            {
-                _visualsDown.SetActive(false);
-                _visualsUp.SetActive(true);
-            }
+            //if (_isUp)
+            //{
+            //    _visualsDown.SetActive(false);
+            //    _visualsUp.SetActive(true);
+            //}
 
-            if (!_isUp)
-            {
-                _visualsUp.SetActive(false) ;
-                _visualsDown.SetActive(true);
-            }
+            //if (!_isUp)
+            //{
+            //    _visualsUp.SetActive(false) ;
+            //    _visualsDown.SetActive(true);
+            //}
 
-            TextMeshPro[] textComponents = GetComponentsInChildren<TextMeshPro>(true); //when having true it checks inactive object too
-
-            //Debug.Log("textcomponent lenghts is " + " " + textComponents.Length); 
 
             foreach (var textMeshPro in textComponents)
             {

@@ -127,7 +127,6 @@ public class CardInstance : MonoBehaviour
         }
     }
 
-
     public void GoBackOrgPos()
     {
         transform.position = _orgPos;

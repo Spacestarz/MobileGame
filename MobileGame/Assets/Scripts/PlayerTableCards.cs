@@ -10,7 +10,7 @@ public class PlayerTableCards : CardPile
 
     public override void AddCard(Card cardToAdd)
     {
-        cards.Add(cardToAdd);
+        base.AddCard(cardToAdd);
        
        // Debug.Log($"Adding {cardToAdd._suit} with rank {cardToAdd._rank} to PlayerTABLEcards");
 
@@ -43,7 +43,7 @@ public class PlayerTableCards : CardPile
 
     public override void RemoveCard(Card cardToRemove)
     {
-        cards.Remove(cardToRemove);
+        base.RemoveCard(cardToRemove);
         Debug.Log($"Removing {cardToRemove._suit}  with rank  {cardToRemove._rank}  from PlayerTableCard");
     }
 

@@ -340,31 +340,48 @@ public class Dropzone : CardPile
         Debug.Log($"Cards left in dropzone: {cards.Count}");
     }
 
+
+    [Button]
     public void GetDropZonePile() //this only works for player rn. //add observer to see if player cant make any more actions? same with opponent.
     {
-
+        Debug.Log("getdropzonepile method");
         //removing all dropzone cards to player/opponent hand.
 
         List<Card> tempcard = new List<Card>(cards); //copy of cards list
 
+        var currentTurn = TrackingTurns.Instance._CurrentTurn;
+
         foreach (var card in tempcard)
         {
-            RemoveCard(card);
+            Debug.Log($"Attempting to remove card: {card} from dropzone (cards count: {cards.Count})");
 
-            if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.Playerturn)
+
+            if (cards.Contains(card))
             {
-                PlayerHand.instance.AddCard(_card);
+                card.shouldFlip = false;
+                RemoveCard(card);
+            }
+            else
+            {
+                Debug.LogWarning($"Card {card} not found in dropzone before removal");
+            }
+            //RemoveCard(card);
+
+            if (currentTurn == TrackingTurns.TurnState.Playerturn)
+            {
+                PlayerHand.instance.AddCard(card);
                 Debug.Log("adding all cards from dropzonepile to PlayerHand");
             }
             else
             {
-                OpponentHand.instance.AddCard(_card);
+                OpponentHand.instance.AddCard(card);
                 Debug.Log("adding all cards from dropzonepile to opponenthand");
             }
 
         }
 
         Debug.Log($"Cards left in dropzone: {cards.Count}");
+        Debug.Log($" disable input is: {TrackingTurns.Instance.DisableInput}");
     }
 }
     

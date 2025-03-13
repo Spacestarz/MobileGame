@@ -10,7 +10,6 @@ public class DiscardCards : CardPile
     private Card _card;
     private CardInstance _cardInstance;
 
-
     public override void AddCard(Card cardToAdd)
     {
         base.AddCard(cardToAdd);

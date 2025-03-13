@@ -37,7 +37,6 @@ public class TrackingTurns : MonoBehaviour
 
     public bool HasDrawnCard = false;
 
-
     public enum TurnState
     {
         Playerturn,
@@ -84,7 +83,6 @@ public class TrackingTurns : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-
     //if i want to highlight..
     //just make a square with eh color underneath..
     //what i want to highlight and activate/disable it
@@ -116,7 +114,7 @@ public class TrackingTurns : MonoBehaviour
 
     public void OnCanInteractWithButton()
     {
-        Debug.Log("interact action here should also launch the buttoninteratable script");
+        Debug.Log("interact act+ion here should also launch the buttoninteratable script");
     }
 
 
@@ -133,7 +131,7 @@ public class TrackingTurns : MonoBehaviour
 
 
     [Button]
-    public void CheckCardsVSDropZone()
+    public void CheckCardsVSDropZone() //
     {
         Debug.Log("CheckCardsVSdropzone method");
 
@@ -141,7 +139,7 @@ public class TrackingTurns : MonoBehaviour
        {
             Debug.Log("dropzone cards is above 0");
             var latestCard = Dropzone.Instance.cards[Dropzone.Instance.cards.Count - 1];
-
+            bool canPLaceCard = false;
             if (_CurrentTurn == TurnState.Playerturn) 
             {
                 foreach (var card in PlayerHand.instance.cards) //this is for playerhand
@@ -149,18 +147,20 @@ public class TrackingTurns : MonoBehaviour
                     if (card._rank >= latestCard._rank)
                     {
                          Debug.Log($"{card._suit} with rank {card._rank} can be put in cardzone PLAYER");
+                         canPLaceCard = true;
                     }
-                    else
-                    {
-                         Debug.LogWarning("player cant put any card in dropzone");
+                }
 
-                        _OnCanInteractWithButton?.Invoke(); //player can interact with button
+                if (!canPLaceCard)
+                {
+                    Debug.LogWarning("player cant put any card in dropzone");
 
-                        // Debug.LogWarning("sending an observer to change draw card text");
-                        //player can now end turn (and pick up the whole cardpile or do a guess draw)
+                    _OnCanInteractWithButton?.Invoke(); //player can interact with button
 
-                        DisableInput = true; 
-                    }
+                    // Debug.LogWarning("sending an observer to change draw card text");
+                    //player can now end turn (and pick up the whole cardpile or do a guess draw)
+
+                    DisableInput = true;
                 }
             }
             else if (_CurrentTurn == TurnState.OpponentTurn) 
@@ -203,10 +203,6 @@ public class TrackingTurns : MonoBehaviour
         }
     }
 
-    
-
-
-
 
     public void OpponentCheck()
     {
@@ -239,6 +235,11 @@ public class TrackingTurns : MonoBehaviour
             Debug.LogWarning("Opponent turn ended....switching to player turn");
             _CurrentTurn = TurnState.Playerturn;
             _WhichTurnText.text = ("Your Turn");
+
+            while (PlayerHand.instance.cards.Count < 3)
+            {
+                EveryCard.instance.GetCard();
+            }
 
             _WhichTurnText.color = Color.green;
             DisableInput = false;

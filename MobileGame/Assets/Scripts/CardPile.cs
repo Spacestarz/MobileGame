@@ -13,10 +13,16 @@ public abstract class CardPile: MonoBehaviour
 
     public virtual void RemoveCard(Card cardToRemove)
     {
-        cards.Remove(cardToRemove); //Here you will remove cards
-        if (!cards.Remove(cardToRemove));
+       // cards.Remove(cardToRemove); //Here you will remove cards
+        bool removed = cards.Remove(cardToRemove); // Try to remove the card
+
+        if (removed)
         {
-            Debug.Log("couldent find card you want to remove");
+            Debug.Log($"Card {cardToRemove._suit} with rank {cardToRemove._rank} successfully removed.");
+        }
+        else
+        {
+            Debug.LogWarning($"couldent find the card you want to remove.");
         }
     } 
 }

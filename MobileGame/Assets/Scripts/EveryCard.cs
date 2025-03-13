@@ -6,24 +6,33 @@ using Listsextensions;
 
 public class EveryCard : CardPile
 {
-    public Card card;
+    private Card card;
     public GameObject allLocation;
+
+    public static EveryCard instance;
 
     public override void AddCard(Card cardToAdd)
     {
-        cards.Add(cardToAdd);
+        base.AddCard(cardToAdd);
         MoveToallCardsLocation();
         //Debug.Log($"adding {cardToAdd._suit} and rank {cardToAdd._rank}");
     }
 
     public override void RemoveCard(Card cardToRemove)
     {
-        cards.Remove(cardToRemove);
+        base.RemoveCard(cardToRemove);
       //  Debug.Log($"Removing {cardToRemove._suit} with rank {cardToRemove._rank}");
     }
 
     private void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
         cards = new List<Card>();
     }
 

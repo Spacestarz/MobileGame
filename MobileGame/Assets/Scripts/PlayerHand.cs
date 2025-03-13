@@ -25,7 +25,7 @@ public class PlayerHand : CardPile
     public override void AddCard(Card cardToAdd)
     {
         Debug.Log("playerhand is getting a card");
-        cards.Add(cardToAdd);
+        base.AddCard(cardToAdd);
         cardToAdd.FlipCard();
         UpdateHand();
         //Debug.Log($"Removing {cardToAdd._suit} with rank {cardToAdd._rank} from PlayerhandCardsList");
@@ -34,7 +34,7 @@ public class PlayerHand : CardPile
 
     public override void RemoveCard(Card cardToRemove)
     {
-        cards.Remove(cardToRemove);
+        base.RemoveCard(cardToRemove);
        // Debug.Log($"Removing {cardToRemove._suit} with rank {cardToRemove._rank} from PlayerhandList");
     }
 

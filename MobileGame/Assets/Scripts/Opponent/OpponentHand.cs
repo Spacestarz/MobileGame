@@ -25,7 +25,7 @@ public class OpponentHand : CardPile
     public override void AddCard(Card cardToAdd)
     {
         Debug.Log("OpponentHand is getting a card to their hand");
-        cards.Add(cardToAdd);
+        base.AddCard(cardToAdd);
         UpdateHandOpponent();
         //Debug.Log($"Removing {cardToAdd._suit} with rank {cardToAdd._rank} from PlayerhandCardsList");
         //GetCardInstance(cardToAdd);
@@ -33,7 +33,7 @@ public class OpponentHand : CardPile
 
     public override void RemoveCard(Card cardToRemove)
     {
-        cards.Remove(cardToRemove);
+        base.RemoveCard(cardToRemove);
         // Debug.Log($"Removing {cardToRemove._suit} with rank {cardToRemove._rank} from PlayerhandList");
     }
 

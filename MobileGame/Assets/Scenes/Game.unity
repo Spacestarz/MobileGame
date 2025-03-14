@@ -1460,6 +1460,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cards: []
+  _failSound: {fileID: 8300000, guid: bb3511115a48ed5469ac710e629fdec3, type: 3}
+  _successSound: {fileID: 8300000, guid: 2d5de123e108509448a906a2871d07b5, type: 3}
   _IsTakingAChance: 0
   _textOnDrawButton: {fileID: 642257531}
   DrawButton: {fileID: 827815383}

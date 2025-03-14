@@ -20,7 +20,6 @@ public class SoundFXManager : MonoBehaviour
     public void PlaySoundEffectClip(AudioClip audioClip, Transform spawnTransform, float volume)
     {
         //spawn in gameobject
-
         AudioSource audioSource = Instantiate(soundFXObject, spawnTransform.position, Quaternion.identity);
 
         //assign the audioclip

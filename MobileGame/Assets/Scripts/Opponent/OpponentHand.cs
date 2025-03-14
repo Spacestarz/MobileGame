@@ -26,7 +26,6 @@ public class OpponentHand : CardPile
     {
         Debug.Log("OpponentHand is getting a card to their hand");
         base.AddCard(cardToAdd);
-        cardToAdd.FlipCard();
         UpdateHandOpponent();
         //Debug.Log($"Removing {cardToAdd._suit} with rank {cardToAdd._rank} from PlayerhandCardsList");
         //GetCardInstance(cardToAdd);

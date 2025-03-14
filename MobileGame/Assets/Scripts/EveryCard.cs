@@ -99,6 +99,8 @@ public class EveryCard : CardPile
             RemoveCard(card); //removing from allcardslist
             PlayerHand.instance.AddCard(card);
         }
+        /////////////////////////////////////////////////////////////////////////////
+        ///OPPONENT
 
         //adding to OPPONENT NEED TO FIX PLACEMENT OF OPPONENT LATER
         for (int i = 0; i < 3; i++) //upside down first
@@ -136,8 +138,8 @@ public class EveryCard : CardPile
             //here i check if takingaturn is true
             //will see if the card can go in the dropzone when player or
             //opponent cant play any card they have in hand
-
-
+            Dropzone.Instance.PutCardInDropzone(card);
+            Debug.Log(" moving on to putcardindropzone method (getcard method everycard script 140");
 
         }
 

@@ -19,13 +19,17 @@ public enum CardResults
 
 public class Dropzone : CardPile
 {
+    [SerializeField] private AudioClip _failSound;
+    [SerializeField] private AudioClip _successSound;
+
+
     public static Dropzone Instance;
 
     private Card _FirstInStackCard;
 
     private Card _card;
 
-    public bool _IsTakingAChance; //got a method here with changing draw text
+    public bool _IsTakingAChance = false; //got a method here with changing draw text
 
     [SerializeField] private TextMeshProUGUI _textOnDrawButton;
 
@@ -209,6 +213,14 @@ public class Dropzone : CardPile
                     Debug.Log("ten card");
                     Debug.Log("Player put down a 10 card. Taking the dropzone to discard pile");
                     AddCard(Newcard);
+                    if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.Playerturn)
+                    {
+                        PlayerHand.instance.RemoveCard(Newcard);
+                    }
+                    else
+                    {
+                        OpponentHand.instance.RemoveCard(Newcard);
+                    }
                     DropzoneToDiscardPile();
                     break;
 
@@ -216,12 +228,29 @@ public class Dropzone : CardPile
                 case CardResults.FourInARow:
                     Debug.Log("4 in a row");
                     AddCard(Newcard);
+                    if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.Playerturn)
+                    {
+                        PlayerHand.instance.RemoveCard(Newcard);
+                    }
+                    else
+                    {
+                        OpponentHand.instance.RemoveCard(Newcard);
+                    }
+
                     DropzoneToDiscardPile();
                     break;
 
                 case CardResults.NormalHigher:
                     Debug.Log("normal higher");
                     AddCard(Newcard);
+                    if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.Playerturn)
+                    {
+                        PlayerHand.instance.RemoveCard(Newcard);
+                    }
+                    else
+                    {
+                        OpponentHand.instance.RemoveCard(Newcard);
+                    }
                     break;
 
 
@@ -237,12 +266,11 @@ public class Dropzone : CardPile
                     break;
             }
         }
-        
 
          
         if (_IsTakingAChance) 
         {
-            StartCoroutine("animateToDropZone", Newcard);
+            StartCoroutine(animateToDropZone( Newcard, result));
             Debug.Log("takinga chance method moving with dotween");
             // start coroutine animation
             //wait coroutine stuff
@@ -344,15 +372,30 @@ public class Dropzone : CardPile
     }
 
     //will need the reference of the cardresults here so i can make sound depending if fail on not
-    private IEnumerator animateToDropZone(Card NewCard) //working to make this wurk
+    private IEnumerator animateToDropZone(Card NewCard, CardResults cardresult) //working to make this wurk
     {
         Debug.Log("ienumator to dropzone will use dotween");
+        Debug.Log($"the cardresult is {cardresult}");
         //this will happened when you "guess" a card
 
         yield return NewCard.transform.DOMove(SpawnLocations.instance.dropzoneLocationForCards.transform.position, 2f)
             .WaitForCompletion();
 
         yield return new WaitForSeconds(1);
+
+        //insert flip the card
+
+        //play audio if fail or not
+        if (cardresult == CardResults.Illegal)
+        {
+            SoundFXManager.instance.PlaySoundEffectClip(_failSound, transform, 20);
+        }
+        else
+        {
+            
+           SoundFXManager.instance.PlaySoundEffectClip(_successSound, transform, 20);
+
+        }
     }
 
     public void DropzoneToDiscardPile()

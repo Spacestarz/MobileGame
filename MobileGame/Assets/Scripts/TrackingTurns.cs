@@ -95,6 +95,7 @@ public class TrackingTurns : MonoBehaviour
     public void OnAddedToDropZone()
     {
         Debug.Log("a card was added to the dropzone... making so that input will be disabled");
+
         OnHighlightEndTurn();
         DisableInput = true;
     }
@@ -245,6 +246,8 @@ public class TrackingTurns : MonoBehaviour
             Debug.LogWarning("Opponent turn ended....switching to player turn");
             _CurrentTurn = TurnState.Playerturn;
             _WhichTurnText.text = ("Your Turn");
+
+            Debug.Log($"playerHAND cards count is: {PlayerHand.instance.cards.Count}");
 
             while (PlayerHand.instance.cards.Count < 3)
             {

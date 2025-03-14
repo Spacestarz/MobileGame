@@ -17,6 +17,7 @@ public class PlayerHand : CardPile
             Destroy(gameObject);
             return;
         }
+
         instance = this;
         DontDestroyOnLoad(gameObject);
         cards = new List<Card>();
@@ -24,7 +25,6 @@ public class PlayerHand : CardPile
 
     public override void AddCard(Card cardToAdd)
     {
-        Debug.Log("playerhand is getting a card");
         base.AddCard(cardToAdd);
         cardToAdd.FlipCard();
         UpdateHand();
@@ -35,7 +35,7 @@ public class PlayerHand : CardPile
     public override void RemoveCard(Card cardToRemove)
     {
         base.RemoveCard(cardToRemove);
-       // Debug.Log($"Removing {cardToRemove._suit} with rank {cardToRemove._rank} from PlayerhandList");
+        // Debug.Log($"Removing {cardToRemove._suit} with rank {cardToRemove._rank} from PlayerhandList");
     }
 
     public void GetCardInstance(Card card)

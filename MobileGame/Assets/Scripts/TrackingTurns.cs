@@ -197,6 +197,11 @@ public class TrackingTurns : MonoBehaviour
                 else
                 {
                     Debug.Log("opponent cant play any cards in TRACKINGTURN script");
+                    Dropzone.Instance._IsTakingAChance = true;
+                    Dropzone.Instance._OnChangedChanceBool?.Invoke(); //invoke the action _onchangedchancebool in dropzone
+                    //insert guess card logic
+                    //its in dropzone script row 
+                    //also got a animatetodropzone in drozone row 316
                 }
 
             }
@@ -218,6 +223,11 @@ public class TrackingTurns : MonoBehaviour
             Debug.LogWarning("Player turn ended...Switching to opponent");
             _CurrentTurn = TurnState.OpponentTurn;
             _WhichTurnText.text = ("Opponent Turn");
+
+            while (PlayerHand.instance.cards.Count < 3)
+            {
+                EveryCard.instance.GetCard();
+            }
 
             if (Dropzone.Instance._IsTakingAChance)
             {

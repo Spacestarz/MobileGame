@@ -6,6 +6,7 @@ using System.Collections;
 using DG.Tweening;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 
 public enum CardResults
@@ -34,6 +35,8 @@ public class Dropzone : CardPile
 
     public Button DrawButton;
 
+    public Action _OnChangedChanceBool;
+
     public override void AddCard(Card cardToAdd)
     {
         base.AddCard(cardToAdd);
@@ -57,7 +60,6 @@ public class Dropzone : CardPile
         if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.Playerturn)
         {
             TrackingTurns.Instance._OnCardDropZone?.Invoke();
-            Debug.Log("i should show only when in playerturn");
         }
         else
         {
@@ -82,6 +84,10 @@ public class Dropzone : CardPile
             Destroy(gameObject);
             return;
         }
+
+        //if the bool off _ istakingachance is changing this gets invoked
+        _OnChangedChanceBool -= OnBoolChange;
+        _OnChangedChanceBool += OnBoolChange;
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
@@ -168,50 +174,73 @@ public class Dropzone : CardPile
         return CardResults.Illegal; //default
     }
 
+    private void OnBoolChange()
+    {
+        if (_IsTakingAChance == true)
+        {
+            //insert to change draw card text and be able to guess a card
+            ChangeDrawCardText();
 
-    public void PutCardInDropzone(Card Newcard) 
+            if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.OpponentTurn)
+            {
+                OpponentAi.instance.GuessCard();
+            }
+        }
+        else
+        {
+
+        }
+    }
+
+
+    public void PutCardInDropzone(Card Newcard) //make take achange bool chagne some stuff? 
     {
         _FirstInStackCard = null;
         var result = CanIGoInDropzone(Newcard);
 
         var cardInstanceScript = Newcard.GetComponent<CardInstance>();
 
-        switch (result)
+        if (!_IsTakingAChance)
         {
-             case CardResults.Ten:
-                
-                Debug.Log("ten card");
-                Debug.Log("Player put down a 10 card. Taking the dropzone to discard pile");
-                AddCard(Newcard);
-                DropzoneToDiscardPile();
-                break;
+            switch (result)
+            {
+                case CardResults.Ten:
 
-
-            case CardResults.FourInARow:
-                 Debug.Log("4 in a row");
-                AddCard(Newcard);
-                DropzoneToDiscardPile();
-                break;
-
-                case CardResults.NormalHigher:
-                Debug.Log("normal higher");
-                AddCard(Newcard);
+                    Debug.Log("ten card");
+                    Debug.Log("Player put down a 10 card. Taking the dropzone to discard pile");
+                    AddCard(Newcard);
+                    DropzoneToDiscardPile();
                     break;
 
 
-               case CardResults.Illegal:
-                Debug.Log("illegal card");
-                _IsTakingAChance = true;
-                cardInstanceScript.GoBackOrgPos();
-                break;
+                case CardResults.FourInARow:
+                    Debug.Log("4 in a row");
+                    AddCard(Newcard);
+                    DropzoneToDiscardPile();
+                    break;
 
-            default:
-                Debug.Log("default in switch case wtf");
+                case CardResults.NormalHigher:
+                    Debug.Log("normal higher");
+                    AddCard(Newcard);
+                    break;
 
-                break;
+
+                case CardResults.Illegal:
+                    Debug.Log("illegal card");
+                    _IsTakingAChance = true;
+                    cardInstanceScript.GoBackOrgPos();
+                    break;
+
+                default:
+                    Debug.Log("default in switch case wtf");
+
+                    break;
+            }
         }
+        
 
-        if (result != CardResults.Illegal && _IsTakingAChance) 
+         
+        if (_IsTakingAChance) 
         {
             StartCoroutine("animateToDropZone", Newcard);
             Debug.Log("takinga chance method moving with dotween");
@@ -314,6 +343,7 @@ public class Dropzone : CardPile
 
     }
 
+    //will need the reference of the cardresults here so i can make sound depending if fail on not
     private IEnumerator animateToDropZone(Card NewCard) //working to make this wurk
     {
         Debug.Log("ienumator to dropzone will use dotween");
@@ -321,6 +351,8 @@ public class Dropzone : CardPile
 
         yield return NewCard.transform.DOMove(SpawnLocations.instance.dropzoneLocationForCards.transform.position, 2f)
             .WaitForCompletion();
+
+        yield return new WaitForSeconds(1);
     }
 
     public void DropzoneToDiscardPile()

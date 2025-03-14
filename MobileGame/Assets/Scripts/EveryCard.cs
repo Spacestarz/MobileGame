@@ -126,10 +126,21 @@ public class EveryCard : CardPile
 
     public void GetCard() //get card from the draw button
     {
-        Debug.Log("getcard from button");
+        Debug.Log("getcard from everycard script 129");
 
         card = cards[0];
         RemoveCard(card); //remove card from allcardslist
+
+        if (Dropzone.Instance._IsTakingAChance)
+        {
+            //here i check if takingaturn is true
+            //will see if the card can go in the dropzone when player or
+            //opponent cant play any card they have in hand
+
+
+
+        }
+
         //insert if its playerturn or opponentturn
 
         if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.Playerturn)

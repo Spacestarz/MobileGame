@@ -31,6 +31,12 @@ public class OpponentAi : CardPile
         TrackingTurns.Instance.CheckCardsVSDropZone();
     }
 
+    public void GuessCard()
+    {
+        //make the ai guess a card if they cant play any card
+        EveryCard.instance.GetCard();
+    }
+
     private void EndMyTurn()
     {
 

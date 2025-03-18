@@ -141,6 +141,8 @@ public class EveryCard : CardPile
             Dropzone.Instance.PutCardInDropzone(card);
             Debug.Log(" moving on to putcardindropzone method (getcard method everycard script 140");
 
+            return; //make so if takingachance is true to not continue with script if its true
+
         }
 
         //insert if its playerturn or opponentturn

@@ -9,15 +9,15 @@ public class OpponentTableCard : CardPile
 
     public override void AddCard(Card cardToAdd)
     {
-        cards.Add(cardToAdd);
+        base.AddCard(cardToAdd);
         UpdateTable();
-        Debug.Log($"Adding {cardToAdd._suit} with rank {cardToAdd._rank} to TableOpponentCards");
+       // Debug.Log($"Adding {cardToAdd._suit} with rank {cardToAdd._rank} to TableOpponentCards");
     }
 
     public override void RemoveCard(Card cardToRemove)
     {
-        cards.Remove(cardToRemove);
-        Debug.Log($"Removing {cardToRemove._suit} with rank {cardToRemove._rank} from TableOpponentCards");
+        base.RemoveCard(cardToRemove);
+       // Debug.Log($"Removing {cardToRemove._suit} with rank {cardToRemove._rank} from TableOpponentCards");
     }
 
     private void Awake()

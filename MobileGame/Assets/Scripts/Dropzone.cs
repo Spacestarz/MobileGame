@@ -388,11 +388,12 @@ public class Dropzone : CardPile
         //play audio if fail or not
         if (cardresult == CardResults.Illegal)
         {
+            Debug.Log("PLay sound illegal");
             SoundFXManager.instance.PlaySoundEffectClip(_failSound, transform, 20);
         }
         else
         {
-            
+            Debug.Log("Play sound YAY");
            SoundFXManager.instance.PlaySoundEffectClip(_successSound, transform, 20);
 
         }

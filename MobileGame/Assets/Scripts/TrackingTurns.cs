@@ -225,10 +225,7 @@ public class TrackingTurns : MonoBehaviour
             _CurrentTurn = TurnState.OpponentTurn;
             _WhichTurnText.text = ("Opponent Turn");
 
-            while (PlayerHand.instance.cards.Count < 3)
-            {
-                EveryCard.instance.GetCard();
-            }
+           // Debug.Log($"OpponentHAAAND cards count is: {OpponentHand.instance.cards.Count});");
 
             if (Dropzone.Instance._IsTakingAChance)
             {

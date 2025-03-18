@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,8 +32,10 @@ public class OpponentAi : CardPile
         TrackingTurns.Instance.CheckCardsVSDropZone();
     }
 
+    [Button]
     public void GuessCard()
     {
+        Debug.Log("opponentAI script guesscard method");
         //make the ai guess a card if they cant play any card
         EveryCard.instance.GetCard();
     }

@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using static Card;
+using DG.Tweening;
 
 public class CardInstance : MonoBehaviour
 {
@@ -147,5 +148,19 @@ public class CardInstance : MonoBehaviour
     public Card GetCardData()
     {
         return Card;
+    }
+
+    
+    public void Shake()
+    {
+        Sequence mySequence = DOTween.Sequence();
+
+        // Reduce the shake intensity by using smaller values
+        mySequence.Append(Card.transform.DOShakePosition(0.3f, new Vector3(0.3f, 0, 0), 10, 0, false, true));  
+        // Less intense shake
+
+        // Adjust rotation shake: reduce intensity and frequency for better control
+        mySequence.Join(Card.transform.DOShakeRotation(0.3f, new Vector3(0, 0, 1f), 5, 0, true)); 
+        // Slightly smaller rotation
     }
 }

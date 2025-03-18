@@ -159,6 +159,7 @@ public class Dropzone : CardPile
             Debug.Log("dropzone list is above 0. Checking if card is above dropzone rank");
             _FirstInStackCard = cards[cards.Count - 1];
             Debug.Log("getting new firstinstackcard");
+            Debug.Log($"firstCardInsStack is {_FirstInStackCard._suit} with rank {_FirstInStackCard._rank}");
 
             if (Newcard._rank > _FirstInStackCard._rank || Newcard._rank == _FirstInStackCard._rank)
             {
@@ -256,7 +257,12 @@ public class Dropzone : CardPile
 
                 case CardResults.Illegal:
                     Debug.Log("illegal card");
-                    _IsTakingAChance = true;
+                    //play sound to indicate player cant play this card
+                    //when the sound plays i want the card to shake
+                    SoundFXManager.instance.PlaySoundEffectClip(_failSound, transform, 20);
+                    Debug.Log("fixing things here with sound not done here yet");
+
+                    //_IsTakingAChance = true;
                     cardInstanceScript.GoBackOrgPos();
                     break;
 
@@ -376,6 +382,7 @@ public class Dropzone : CardPile
     {
         Debug.Log("ienumator to dropzone will use dotween");
         Debug.Log($"the cardresult is {cardresult}");
+        var cardInstanceScript = NewCard.GetComponent<CardInstance>();
         //this will happened when you "guess" a card
 
         yield return NewCard.transform.DOMove(SpawnLocations.instance.dropzoneLocationForCards.transform.position, 2f)
@@ -383,18 +390,35 @@ public class Dropzone : CardPile
 
         yield return new WaitForSeconds(1);
 
+
         //insert flip the card
+        //make so the card gets added to dropzone
+        //so it gets the correct thing so it doesent get under
+        //the card that already there
 
         //play audio if fail or not
         if (cardresult == CardResults.Illegal)
         {
             Debug.Log("PLay sound illegal");
+            //flip the card 
+            cardInstanceScript.DOFlip(); 
+            //play sound
             SoundFXManager.instance.PlaySoundEffectClip(_failSound, transform, 20);
+
+            if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.Playerturn)
+            {
+                PlayerHand.instance.AddCard(NewCard);
+            }
+            else
+            {
+                OpponentHand.instance.AddCard(NewCard);
+            }
         }
         else
         {
             Debug.Log("Play sound YAY");
-           SoundFXManager.instance.PlaySoundEffectClip(_successSound, transform, 20);
+            SoundFXManager.instance.PlaySoundEffectClip(_successSound, transform, 20);
+            AddCard(NewCard);
 
         }
     }

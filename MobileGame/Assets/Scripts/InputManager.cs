@@ -72,6 +72,8 @@ public class InputManager : MonoBehaviour
             if (Input.GetMouseButton(0))
             {
                 var cardscript = _CardHeld.GetComponent<CardInstance>();
+                cardscript.Shake(); //test
+                Debug.Log("shake, inputmanager row 75");
                 _followMouse = true;
             }
 

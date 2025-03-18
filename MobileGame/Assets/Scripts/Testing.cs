@@ -27,4 +27,5 @@ public class Testing : MonoBehaviour
         Dropzone.Instance._OnChangedChanceBool?.Invoke();
     }
 
+
 }

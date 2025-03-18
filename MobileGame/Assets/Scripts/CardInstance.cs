@@ -134,6 +134,11 @@ public class CardInstance : MonoBehaviour
        // Debug.Log("going back orgpos");
     }
 
+    public void UpdateOrgPos(Vector3 newOrgPos)
+    {
+        _orgPos = newOrgPos;
+    }
+
     public void GoToDropZonePosition()
     {
         transform.position = SpawnLocations.instance.dropzoneLocationForCards.transform.position;

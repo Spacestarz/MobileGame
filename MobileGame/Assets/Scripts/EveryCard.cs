@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Card;
 using Listsextensions;
+using NaughtyAttributes;
 
 public class EveryCard : CardPile
 {
@@ -126,6 +127,7 @@ public class EveryCard : CardPile
         }
     }
 
+    [Button]
     public void GetCard() //get card from the draw button
     {
         Debug.Log("getcard from everycard script 129");

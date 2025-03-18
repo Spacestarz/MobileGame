@@ -61,6 +61,10 @@ public class PlayerHand : CardPile
             Vector3 position = A + direction * step * (i + 1);
 
             cards[i].transform.position = position;
+
+            var cardinstance = cards[i].GetComponent<CardInstance>();
+            cardinstance.UpdateOrgPos(position);
+
             // card.gameObject.transform.position = position;
         }
 

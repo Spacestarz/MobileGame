@@ -3,6 +3,7 @@ using UnityEngine.Serialization;
 using System.Collections.Generic;
 using static CardPile;
 using TMPro;
+using Unity.VisualScripting;
 
 public class Card : MonoBehaviour
 {
@@ -152,7 +153,43 @@ public class Card : MonoBehaviour
 
     public void ChangeSortingOrder()
     {
-        //make so faceup is above the renderdown the sorting order. 
+        //make so faceup is above the renderdown the sorting order.
+        //
+
+        if (Dropzone.Instance._IsTakingAChance == true)
+        {
+
+            // Check which sprite is active using your _isUp flag.
+            if (_isUp)
+            {
+                // The up sprite is active. Toggle its sorting order.
+                if (_renderUp.sortingOrder == 1)
+                {
+                    _renderUp.sortingOrder = 0;
+                }
+                else
+                {
+                    _renderUp.sortingOrder = 1;
+                }
+                Debug.Log("Toggled sorting order for _renderUp to " + _renderUp.sortingOrder);
+            }
+            else
+            {
+                // The down sprite is active. Toggle its sorting order.
+                if (_renderDown.sortingOrder == 0)
+                {
+                    _renderDown.sortingOrder = 1;
+                }
+                else
+                {
+                    _renderDown.sortingOrder = 0;
+                }
+                Debug.Log("Toggled sorting order for _renderDown to " + _renderDown.sortingOrder);
+            }
+            return;
+        }
+
+        //if takingachance is not true do the normal thing
 
         if (_isUp == true)
         {

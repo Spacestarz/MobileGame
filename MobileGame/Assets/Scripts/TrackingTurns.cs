@@ -229,7 +229,7 @@ public class TrackingTurns : MonoBehaviour
 
             if (Dropzone.Instance._IsTakingAChance)
             {
-                Dropzone.Instance.CheckIfNeedChangeDrawText();
+                Dropzone.Instance.CheckIfNeedChangeDrawText();               
             }
 
             _WhichTurnText.color = Color.red;

@@ -153,14 +153,13 @@ public class CardInstance : MonoBehaviour
     
     public void Shake()
     {
+        //Creates a sequence
         Sequence mySequence = DOTween.Sequence();
 
-        // Reduce the shake intensity by using smaller values
-        mySequence.Append(Card.transform.DOShakePosition(0.3f, new Vector3(0.3f, 0, 0), 10, 0, false, true));  
-        // Less intense shake
-
-        // Adjust rotation shake: reduce intensity and frequency for better control
-        mySequence.Join(Card.transform.DOShakeRotation(0.3f, new Vector3(0, 0, 1f), 5, 0, true)); 
-        // Slightly smaller rotation
+        //add this to sequence and then it starts the sequence
+        mySequence.Append(Card.transform.DOShakePosition(0.3f, new Vector3(0.3f, 0, 0), 50, 0, false, true));  
+        //this joins so they are doing their thing at the same time.
+        mySequence.Join(Card.transform.DOShakeRotation(0.3f, new Vector3(0, 0, 1f), 10, 0, true)); 
+       
     }
 }

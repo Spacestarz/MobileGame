@@ -260,8 +260,8 @@ public class Dropzone : CardPile
                     //play sound to indicate player cant play this card
                     //when the sound plays i want the card to shake
                     SoundFXManager.instance.PlaySoundEffectClip(_failSound, transform, 20);
-                    Debug.Log("fixing things here with sound not done here yet");
-
+                    cardInstanceScript.Shake();
+                    Debug.Log("shaking and playing fail sound");
                     //_IsTakingAChance = true;
                     cardInstanceScript.GoBackOrgPos();
                     break;
@@ -380,29 +380,37 @@ public class Dropzone : CardPile
     //will need the reference of the cardresults here so i can make sound depending if fail on not
     private IEnumerator animateToDropZone(Card NewCard, CardResults cardresult) //working to make this wurk
     {
-        Debug.Log("ienumator to dropzone will use dotween");
-        Debug.Log($"the cardresult is {cardresult}");
+
+        NewCard.ChangeSortingOrder();
+        Vector3 targetPosition = SpawnLocations.instance.dropzoneLocationForCards.transform.position;
+        float moveDuration = 0.3f;
+        float hideThreshold = 0.05f;
+
+        yield return NewCard.transform.DOMove(targetPosition, moveDuration).WaitForCompletion();
+
+        if (cards.Count > 0)
+        {
+            _FirstInStackCard = cards[cards.Count - 1];
+            _FirstInStackCard.ChangeSortingOrder();
+
+            if (Vector3.Distance(NewCard.transform.position, _FirstInStackCard.transform.position) <= hideThreshold)
+            {
+                var cardInstance = _FirstInStackCard.GetComponent<CardInstance>();
+                if (cardInstance != null)
+                {
+                    cardInstance.SetTextVisability(false);
+                }
+            }
+        }
+
+        yield return new WaitForSeconds(1); // Delay for effects
+
         var cardInstanceScript = NewCard.GetComponent<CardInstance>();
-        //this will happened when you "guess" a card
 
-        yield return NewCard.transform.DOMove(SpawnLocations.instance.dropzoneLocationForCards.transform.position, 2f)
-            .WaitForCompletion();
-
-        yield return new WaitForSeconds(1);
-
-
-        //insert flip the card
-        //make so the card gets added to dropzone
-        //so it gets the correct thing so it doesent get under
-        //the card that already there
-
-        //play audio if fail or not
         if (cardresult == CardResults.Illegal)
         {
-            Debug.Log("PLay sound illegal");
-            //flip the card 
-            cardInstanceScript.DOFlip(); 
-            //play sound
+            Debug.Log("Play sound: Illegal move");
+            cardInstanceScript.DOFlip();
             SoundFXManager.instance.PlaySoundEffectClip(_failSound, transform, 20);
 
             if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.Playerturn)
@@ -412,15 +420,59 @@ public class Dropzone : CardPile
             else
             {
                 OpponentHand.instance.AddCard(NewCard);
+                //if this happens make sure the opponent turn ends!
             }
         }
-        else
+        else if (cardresult != CardResults.Illegal)  
         {
-            Debug.Log("Play sound YAY");
+            Debug.Log("Play sound: Success");
             SoundFXManager.instance.PlaySoundEffectClip(_successSound, transform, 20);
             AddCard(NewCard);
-
         }
+
+        #region mycode
+        //Debug.Log("ienumator to dropzone will use dotween");
+        //Debug.Log($"the cardresult is {cardresult}");
+        //var cardInstanceScript = NewCard.GetComponent<CardInstance>();
+        //this will happened when you "guess" a card
+
+        //yield return NewCard.transform.DOMove(SpawnLocations.instance.dropzoneLocationForCards.transform.position, 2f)
+        //    .WaitForCompletion();
+
+        //yield return new WaitForSeconds(1);
+
+
+        //insert flip the card
+        //make so the card gets added to dropzone
+        //so it gets the correct thing so it doesent get under
+        //the card that already there
+
+        //play audio if fail or not
+        //if (cardresult == CardResults.Illegal)
+        //{
+        //    Debug.Log("PLay sound illegal");
+        //    flip the card
+        //    cardInstanceScript.DOFlip();
+        //    play sound
+        //    SoundFXManager.instance.PlaySoundEffectClip(_failSound, transform, 20);
+
+        //    if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.Playerturn)
+        //    {
+        //        PlayerHand.instance.AddCard(NewCard);
+        //    }
+        //    else
+        //    {
+        //        OpponentHand.instance.AddCard(NewCard);
+        //    }
+        //}
+        //else
+        //{
+        //    Debug.Log("Play sound YAY");
+        //    SoundFXManager.instance.PlaySoundEffectClip(_successSound, transform, 20);
+        //    AddCard(NewCard);
+
+        //}
+        #endregion
     }
 
     public void DropzoneToDiscardPile()

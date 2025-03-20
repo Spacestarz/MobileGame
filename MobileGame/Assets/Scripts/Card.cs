@@ -84,6 +84,8 @@ public class Card : MonoBehaviour
         
         Debug.Log("textcomponent lenghts is " + " " + textComponents.Length);
 
+        Debug.Log($"{this._suit} with rank {this._rank} visual is (down) {this._renderDown} or (up){this._renderUp}");
+
         if (!shouldFlip)
         {
             shouldFlip = true; //reset the bool for future flips
@@ -154,7 +156,7 @@ public class Card : MonoBehaviour
     public void ChangeSortingOrder()
     {
         //make so faceup is above the renderdown the sorting order.
-        //
+        
 
         if (Dropzone.Instance._IsTakingAChance == true)
         {

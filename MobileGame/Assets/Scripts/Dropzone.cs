@@ -391,6 +391,7 @@ public class Dropzone : CardPile
         if (cards.Count > 0)
         {
             _FirstInStackCard = cards[cards.Count - 1];
+            Debug.Log("changing sorrting order of _firstcardinstack");
             _FirstInStackCard.ChangeSortingOrder();
 
             if (Vector3.Distance(NewCard.transform.position, _FirstInStackCard.transform.position) <= hideThreshold)
@@ -410,12 +411,16 @@ public class Dropzone : CardPile
         if (cardresult == CardResults.Illegal)
         {
             Debug.Log("Play sound: Illegal move");
-            cardInstanceScript.DOFlip();
+            Debug.Log($"flipping this card {NewCard._suit} with rank {NewCard._rank} ");
+            NewCard.FlipCard();
+            //Debug.Log("also changing the sortingorder so this card should be above");
+
             SoundFXManager.instance.PlaySoundEffectClip(_failSound, transform, 20);
 
             if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.Playerturn)
             {
                 PlayerHand.instance.AddCard(NewCard);
+                GetDropZonePile(); //make player get the dropzone cards
             }
             else
             {

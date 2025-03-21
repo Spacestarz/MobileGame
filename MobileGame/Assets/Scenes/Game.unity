@@ -1991,6 +1991,37 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1 &1234948860
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1234948861}
+  m_Layer: 0
+  m_Name: AllPlayerHandCards
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1234948861
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1234948860}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.04875432, y: -0.2589774, z: 0.05047279}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1241397475
 GameObject:
   m_ObjectHideFlags: 0
@@ -2367,9 +2398,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4db24eff717bdd43ba1a950a48e1aa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundFXObject: {fileID: 3151264128757007333, guid: ac15a90da6c78984e8010ae2587efffe, type: 3}
-  _failSound: {fileID: 8300000, guid: bb3511115a48ed5469ac710e629fdec3, type: 3}
-  _successSound: {fileID: 8300000, guid: 2d5de123e108509448a906a2871d07b5, type: 3}
 --- !u!1 &1396152551
 GameObject:
   m_ObjectHideFlags: 0
@@ -3343,6 +3371,7 @@ SceneRoots:
   - {fileID: 1856017075}
   - {fileID: 468975523}
   - {fileID: 1037293114}
+  - {fileID: 1234948861}
   - {fileID: 927060420}
   - {fileID: 1396152553}
   - {fileID: 1254637282}

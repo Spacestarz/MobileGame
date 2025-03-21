@@ -515,7 +515,6 @@ public class Dropzone : CardPile
 
             if (cards.Contains(card))
             {
-                card.shouldFlip = false;
                 RemoveCard(card);
             }
             else

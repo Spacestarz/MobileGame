@@ -16,12 +16,7 @@ public class Card : MonoBehaviour
     private SpriteRenderer _renderUp;
     private SpriteRenderer _renderDown;
 
-    public bool shouldFlip = true;
-
-
     private bool _isUp = false;
-
-
 
     public enum SuitEnum //Here is the suits
     {
@@ -78,61 +73,27 @@ public class Card : MonoBehaviour
 
     }
 
-    public void FlipCard() 
+    public void FlipCard(bool faceup) 
     {
         TextMeshPro[] textComponents = GetComponentsInChildren<TextMeshPro>(true);
-        
+        var instanceRef = this.GetComponent<CardInstance>();
+        Debug.Log("flipcard method card row 84");
         Debug.Log("textcomponent lenghts is " + " " + textComponents.Length);
 
         Debug.Log($"{this._suit} with rank {this._rank} visual is (down) {this._renderDown} or (up){this._renderUp}");
 
-        if (!shouldFlip)
-        {
-            shouldFlip = true; //reset the bool for future flips
-            foreach (var textMeshPro in textComponents)
-            {
-               var instanceRef = this.GetComponent<CardInstance>();
-               instanceRef.SetTextVisability(true);
+        _isUp = faceup;
 
-                textMeshPro.gameObject.SetActive(_isUp);
-                textMeshPro.sortingOrder = 2;
-            }
-            return;
+        if (_visualsUp != null && _visualsDown != null )
+        {
+            _visualsUp.SetActive(faceup);
+            _visualsDown.SetActive(!faceup);
         }
 
-        if (_visualsUp != null && _visualsDown != null)
-        {
-            _isUp = !_isUp;
+        instanceRef.SetTextVisability(faceup);
 
-            bool seIfActive = !_visualsUp.activeSelf;
-
-            _visualsUp.SetActive(seIfActive);
-            _visualsDown.SetActive(!seIfActive);
-
-            //_isUp = seIfActive;
-
-
-            //if (_isUp)
-            //{
-            //    _visualsDown.SetActive(false);
-            //    _visualsUp.SetActive(true);
-            //}
-
-            //if (!_isUp)
-            //{
-            //    _visualsUp.SetActive(false) ;
-            //    _visualsDown.SetActive(true);
-            //}
-
-
-            foreach (var textMeshPro in textComponents)
-            {
-                textMeshPro.gameObject.SetActive(_isUp);
-                textMeshPro.sortingOrder = 2;
-            }
-
-            ChangeSortingOrder();
-        }
+        ChangeSortingOrder();
+        
     }
 
     public bool IsUp()

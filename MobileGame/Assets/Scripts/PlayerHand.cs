@@ -26,6 +26,11 @@ public class PlayerHand : CardPile
     public override void AddCard(Card cardToAdd)
     {
         base.AddCard(cardToAdd);
+
+        cardToAdd.gameObject.name = "PlayerHandCards";
+        GameObject parentObject = GameObject.Find("AllPlayerHandCards");
+        cardToAdd.gameObject.transform.SetParent(parentObject.transform, false);
+
         cardToAdd.FlipCard();
         UpdateHand();
         //Debug.Log($"Removing {cardToAdd._suit} with rank {cardToAdd._rank} from PlayerhandCardsList");
@@ -34,6 +39,8 @@ public class PlayerHand : CardPile
 
     public override void RemoveCard(Card cardToRemove)
     {
+        cardToRemove.transform.SetParent(null);//removing the parent
+        cardToRemove.gameObject.name = $"{cardToRemove._suit} rank {cardToRemove._rank}"; 
         base.RemoveCard(cardToRemove);
         // Debug.Log($"Removing {cardToRemove._suit} with rank {cardToRemove._rank} from PlayerhandList");
     }

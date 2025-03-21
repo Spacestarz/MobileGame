@@ -67,7 +67,7 @@ public class Dropzone : CardPile
         }
         else
         {
-            cardToAdd.FlipCard();
+            cardToAdd.FlipCard(false);
         }
 
         Debug.Log($"Adding {cardToAdd._suit} with rank {cardToAdd._rank} to Dropzone");
@@ -411,8 +411,8 @@ public class Dropzone : CardPile
         if (cardresult == CardResults.Illegal)
         {
             Debug.Log("Play sound: Illegal move");
-            Debug.Log($"flipping this card {NewCard._suit} with rank {NewCard._rank} ");
-            NewCard.FlipCard();
+            Debug.Log($"flipping this card {NewCard._suit} with rank {NewCard._rank} Makeing it face up ");
+            NewCard.FlipCard(true);
             //Debug.Log("also changing the sortingorder so this card should be above");
 
             SoundFXManager.instance.PlaySoundEffectClip(_failSound, transform, 20);

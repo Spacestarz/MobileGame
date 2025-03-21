@@ -18,7 +18,7 @@ public abstract class CardPile: MonoBehaviour
 
         if (removed)
         {
-            Debug.Log($"Card {cardToRemove._suit} with rank {cardToRemove._rank} successfully removed.");
+           // Debug.Log($"Card {cardToRemove._suit} with rank {cardToRemove._rank} successfully removed.");
         }
         else
         {

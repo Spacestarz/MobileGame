@@ -315,6 +315,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _visualsUp: {fileID: 7211045268077778184}
   _visualsDown: {fileID: 907267368266837383}
+  _number: {fileID: 1231384290472126530}
+  _numberDown: {fileID: 6121342434075242835}
 --- !u!114 &9091706153325681339
 MonoBehaviour:
   m_ObjectHideFlags: 0

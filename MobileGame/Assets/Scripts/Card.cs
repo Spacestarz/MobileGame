@@ -16,6 +16,9 @@ public class Card : MonoBehaviour
     private SpriteRenderer _renderUp;
     private SpriteRenderer _renderDown;
 
+    [SerializeField] private GameObject _number;
+    [SerializeField] private GameObject _numberDown;
+
     private bool _isUp = false;
 
     public enum SuitEnum //Here is the suits
@@ -64,13 +67,17 @@ public class Card : MonoBehaviour
         _visualsUp.SetActive(false);
         _visualsDown.SetActive(true);
 
-        TextMeshPro[] textComponents = GetComponentsInChildren<TextMeshPro>();
+    }
 
-        foreach (var textMeshPro in textComponents)
+    private void Start()
+    {
+        //makes those that have textmeshgameobject active
+        if (!_number.activeSelf)
         {
-           textMeshPro.gameObject.SetActive(false); //no textmesh
+            _number.SetActive(true);
+            _numberDown.SetActive(true);
         }
-
+     
     }
 
     public void FlipCard(bool faceup) 
@@ -83,6 +90,7 @@ public class Card : MonoBehaviour
         Debug.Log($"{this._suit} with rank {this._rank} visual is (down) {this._renderDown} or (up){this._renderUp}");
 
         _isUp = faceup;
+
 
         if (_visualsUp != null && _visualsDown != null )
         {
@@ -117,7 +125,6 @@ public class Card : MonoBehaviour
     public void ChangeSortingOrder()
     {
         //make so faceup is above the renderdown the sorting order.
-        
 
         if (Dropzone.Instance._IsTakingAChance == true)
         {

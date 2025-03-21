@@ -28,51 +28,6 @@ public class MakeCards : MonoBehaviour
     }
 
 
-    //wont use this anymore sr byee
-    //public Card CreateCardObject(SuitEnum suit, RankEnum rank)
-    //{
-    //    Debug.Log("creating visual cards");
-    //    GameObject prefabToInstantiate = null;
-
-    //    switch (suit)
-    //    {
-    //        case SuitEnum.Hearts:
-    //            prefabToInstantiate = _HeartsPreFab;
-    //            break;
-
-    //        case SuitEnum.Diamonds:
-    //            prefabToInstantiate = _DiamondPrefab;
-    //            break;
-
-    //        case SuitEnum.Spades:
-    //            prefabToInstantiate = _SpadePreFab;
-    //            break;
-
-    //        case SuitEnum.Clubs:
-    //            prefabToInstantiate = _CloverPreFab;
-    //            break;
-
-    //        default:
-    //            {
-    //                return null;
-    //            }
-    //    }
-
-    //    GameObject cardobject = Instantiate(prefabToInstantiate);
-
-    //    Card cardComponent  = cardobject.GetComponent<Card>();
-
-    //    if (cardComponent != null)
-    //    {
-    //        cardComponent.Initialize(suit, rank);
-    //    }
-    //    else
-    //    {
-    //        Debug.LogError("Card component not here wut");
-    //    }
-    //    return cardComponent;
-    //}
-
     public Card MakeCard(SuitEnum suit, RankEnum rank)
     {
        // Debug.Log("MakeUpsidedown card method");

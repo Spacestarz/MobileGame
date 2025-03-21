@@ -10,6 +10,8 @@ public class OpponentTableCard : CardPile
     public override void AddCard(Card cardToAdd)
     {
         base.AddCard(cardToAdd);
+        var cardinstancescript = cardToAdd.GetComponent<CardInstance>();
+        cardinstancescript.SetTextVisability(false);
         UpdateTable();
        // Debug.Log($"Adding {cardToAdd._suit} with rank {cardToAdd._rank} to TableOpponentCards");
     }

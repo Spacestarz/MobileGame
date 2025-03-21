@@ -26,11 +26,13 @@ public class OpponentHand : CardPile
     {
         Debug.Log("OpponentHand is getting a card to their hand");
         base.AddCard(cardToAdd);
+        var cardinstancescript = cardToAdd.GetComponent<CardInstance>();
+
+        cardinstancescript.SetTextVisability(false);
 
         if (Dropzone.Instance._IsTakingAChance == false)
         {
             UpdateHandOpponent();
-
         }
         //Debug.Log($"Removing {cardToAdd._suit} with rank {cardToAdd._rank} from PlayerhandCardsList");
         //GetCardInstance(cardToAdd);

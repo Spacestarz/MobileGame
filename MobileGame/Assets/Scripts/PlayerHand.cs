@@ -31,7 +31,7 @@ public class PlayerHand : CardPile
         GameObject parentObject = GameObject.Find("AllPlayerHandCards");
         cardToAdd.gameObject.transform.SetParent(parentObject.transform, false);
 
-        cardToAdd.FlipCard(true);
+        cardToAdd.SetCardFaceUp(true);
         UpdateHand();
         //Debug.Log($"Removing {cardToAdd._suit} with rank {cardToAdd._rank} from PlayerhandCardsList");
         //GetCardInstance(cardToAdd);

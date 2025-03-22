@@ -21,6 +21,9 @@ public class Dropzone : CardPile
 {
     [SerializeField] private AudioClip _failSound;
     [SerializeField] private AudioClip _successSound;
+    [SerializeField] private AudioClip _FlipOneCardSound;
+    [SerializeField] private AudioClip _FlippingManyCardsSound;
+
 
 
     public static Dropzone Instance;
@@ -53,22 +56,29 @@ public class Dropzone : CardPile
             Debug.LogWarning($"{_FirstInStackCard._suit} and rank {_FirstInStackCard._rank} is _firstinstackcard will DISABLE textmesh (dropzone row 46)");
 
             var UnderMe = _FirstInStackCard.GetComponent<CardInstance>();
+
             if ( UnderMe == null )
             {
                 Debug.Log("i dont have cardinstance from _firststackincard");
             }
 
             UnderMe.SetTextVisability(false); //disables the textmesh
+
+            //changing the sorting order directly here for this special case
+            Debug.Log("sorting order for firstcardinstack is 0.");
+            _FirstInStackCard._renderUp.sortingOrder = 0;
+            _FirstInStackCard._renderDown.sortingOrder = 0;
         }
 
-        if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.Playerturn)
-        {
-            TrackingTurns.Instance._OnCardDropZone?.Invoke();
-        }
-        else
-        {
-            cardToAdd.FlipCard(false);
-        }
+       if ( TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.OpponentTurn)
+       {
+            Debug.Log($"flippin {cardToAdd._suit} with rank {cardToAdd._rank} for opponent");
+            cardToAdd.SetCardFaceUp(true);
+            cardToAdd.ChangeSortingOrder();
+            Debug.Log("changing sorrting please be above");
+       }
+        
+        TrackingTurns.Instance._OnCardDropZone?.Invoke();
 
         Debug.Log($"Adding {cardToAdd._suit} with rank {cardToAdd._rank} to Dropzone");
         cardInstanceScript.GoToDropZonePosition();
@@ -198,7 +208,7 @@ public class Dropzone : CardPile
     }
 
 
-    public void PutCardInDropzone(Card Newcard) //make take achange bool chagne some stuff? 
+    public void PutCardInDropzone(Card Newcard) 
     {
         _FirstInStackCard = null;
         var result = CanIGoInDropzone(Newcard);
@@ -287,86 +297,7 @@ public class Dropzone : CardPile
             Debug.Log("taking a chance bool is on");
             return;
         }
-        #region shit
-        //if (Newcard._rank == Card.RankEnum.Ten)
-        //{
-        //    Debug.Log("Player put down a 10 card. Taking the dropzone to discard pile");
-        //    AddCard(Newcard);
-        //    DropzoneToDiscardPile();
-        //    return;
-        //}
-
-        //if (cards.Count > 0)
-        //{
-        //    Debug.Log("dropzone list is above 0. Checking if card is above dropzone rank");
-        //    _FirstInStackCard = cards[cards.Count - 1];
-
-        //    if (Newcard._rank > _FirstInStackCard._rank || Newcard._rank == _FirstInStackCard._rank)
-        //    {
-        //        Debug.Log("adding card to dropzone. Rank is higher than the one in dropzone");
-
-        //        if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.Playerturn)
-        //        {
-        //            PlayerHand.instance.RemoveCard(Newcard);
-        //            Debug.Log("playerhand card adding");
-        //        }
-        //        else
-        //        {
-        //            OpponentHand.instance.RemoveCard(Newcard);
-        //            Debug.Log("opponent hand card adding");
-        //        }
-
-        //        AddCard(Newcard);
-        //        InputManager.Instance._CardHeld = null;
-        //        cardInstanceScript.GoToDropZonePosition();
-        //    }
-        //    else
-        //    {
-        //        Debug.Log("You cant add this card");
-        //        cardInstanceScript.GoBackOrgPos();
-        //        return;
-        //    }
-        //}
-        //else
-        //{
-        //    AddCard(Newcard);
-
-        //    if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.Playerturn)
-        //    {
-        //        PlayerHand.instance.RemoveCard(Newcard); //removing card from playerhand
-
-        //    }
-        //    else
-        //    {
-        //        OpponentHand.instance.RemoveCard(Newcard);
-        //        Debug.Log("removing card from opponenthand");
-        //    }
-
-        //    //insert card go to dropzone
-        //    cardInstanceScript.GoToDropZonePosition();
-        //    Debug.Log($"adding a new card to dropzone (dropzone script here... {Newcard._suit} with rank {Newcard._rank})");
-        //}
-
-        //    if (cards.Count >= 4) //here i will check if the all have the same rank so 4 in a row
-        //    {
-        //        Card SecondInStackCard;
-        //        Card ThirdCard;
-        //        Card FourthCard;
-
-        //       // getting the cards top 4 including the players last added card
-        //        _FirstInStackCard = cards[cards.Count - 1];
-        //        SecondInStackCard = cards[cards.Count - 2];
-        //        ThirdCard = cards[cards.Count - 3];
-        //        FourthCard = cards[cards.Count - 4];
-
-        //        if (_FirstInStackCard._rank == SecondInStackCard._rank && SecondInStackCard._rank == ThirdCard._rank &&
-        //           ThirdCard._rank == FourthCard._rank)
-        //        {
-        //            Debug.Log("This is four in a row. Pile will go to discard");
-        //            DropzoneToDiscardPile();
-        //        }
-        //    }
-        #endregion
+       
     }
 
     public void ChangeDrawCardText()
@@ -378,7 +309,7 @@ public class Dropzone : CardPile
     }
 
     //will need the reference of the cardresults here so i can make sound depending if fail on not
-    private IEnumerator animateToDropZone(Card NewCard, CardResults cardresult) //working to make this wurk
+    private IEnumerator animateToDropZone(Card NewCard, CardResults cardresult) 
     {
 
         NewCard.ChangeSortingOrder();
@@ -404,16 +335,25 @@ public class Dropzone : CardPile
             }
         }
 
-        yield return new WaitForSeconds(1); // Delay for effects
+        yield return new WaitForSeconds(3); // Delay for effects //maybe add a cam zoom?
+        //playing flip card sound
+        SoundFXManager.instance.PlaySoundEffectClip(_FlipOneCardSound, transform, 20);
+
+        //getting orgpos
+        var originalPositionY = NewCard.transform.position.y;
+
+        //moving the card up a bit for a fake effect of "flipping" the card
+        NewCard.transform.DOLocalMoveY(originalPositionY + 0.5f, 0.3f)
+          .OnComplete(() => NewCard.transform.DOLocalMoveY(originalPositionY, 0.2f));
+
+        NewCard.SetCardFaceUp(true);
+        yield return new WaitForSeconds(2);
 
         var cardInstanceScript = NewCard.GetComponent<CardInstance>();
 
         if (cardresult == CardResults.Illegal)
         {
             Debug.Log("Play sound: Illegal move");
-            Debug.Log($"flipping this card {NewCard._suit} with rank {NewCard._rank} Makeing it face up ");
-            NewCard.FlipCard(true);
-            //Debug.Log("also changing the sortingorder so this card should be above");
 
             SoundFXManager.instance.PlaySoundEffectClip(_failSound, transform, 20);
 
@@ -425,6 +365,7 @@ public class Dropzone : CardPile
             else
             {
                 OpponentHand.instance.AddCard(NewCard);
+                GetDropZonePile();
                 //if this happens make sure the opponent turn ends!
             }
         }
@@ -434,50 +375,6 @@ public class Dropzone : CardPile
             SoundFXManager.instance.PlaySoundEffectClip(_successSound, transform, 20);
             AddCard(NewCard);
         }
-
-        #region mycode
-        //Debug.Log("ienumator to dropzone will use dotween");
-        //Debug.Log($"the cardresult is {cardresult}");
-        //var cardInstanceScript = NewCard.GetComponent<CardInstance>();
-        //this will happened when you "guess" a card
-
-        //yield return NewCard.transform.DOMove(SpawnLocations.instance.dropzoneLocationForCards.transform.position, 2f)
-        //    .WaitForCompletion();
-
-        //yield return new WaitForSeconds(1);
-
-
-        //insert flip the card
-        //make so the card gets added to dropzone
-        //so it gets the correct thing so it doesent get under
-        //the card that already there
-
-        //play audio if fail or not
-        //if (cardresult == CardResults.Illegal)
-        //{
-        //    Debug.Log("PLay sound illegal");
-        //    flip the card
-        //    cardInstanceScript.DOFlip();
-        //    play sound
-        //    SoundFXManager.instance.PlaySoundEffectClip(_failSound, transform, 20);
-
-        //    if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.Playerturn)
-        //    {
-        //        PlayerHand.instance.AddCard(NewCard);
-        //    }
-        //    else
-        //    {
-        //        OpponentHand.instance.AddCard(NewCard);
-        //    }
-        //}
-        //else
-        //{
-        //    Debug.Log("Play sound YAY");
-        //    SoundFXManager.instance.PlaySoundEffectClip(_successSound, transform, 20);
-        //    AddCard(NewCard);
-
-        //}
-        #endregion
     }
 
     public void DropzoneToDiscardPile()
@@ -499,9 +396,10 @@ public class Dropzone : CardPile
 
 
     [Button]
-    public void GetDropZonePile() //this only works for player rn. //add observer to see if player cant make any more actions? same with opponent.
+    public void GetDropZonePile() 
     {
         Debug.Log("getdropzonepile method");
+
         //removing all dropzone cards to player/opponent hand.
 
         List<Card> tempcard = new List<Card>(cards); //copy of cards list
@@ -511,7 +409,6 @@ public class Dropzone : CardPile
         foreach (var card in tempcard)
         {
             Debug.Log($"Attempting to remove card: {card} from dropzone (cards count: {cards.Count})");
-
 
             if (cards.Contains(card))
             {
@@ -535,6 +432,7 @@ public class Dropzone : CardPile
             }
 
         }
+
 
         Debug.Log($"Cards left in dropzone: {cards.Count}");
         Debug.Log($" disable input is: {TrackingTurns.Instance.DisableInput}");

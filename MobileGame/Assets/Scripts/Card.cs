@@ -13,8 +13,8 @@ public class Card : MonoBehaviour
     [SerializeField] private GameObject _visualsUp;
     [SerializeField] private GameObject _visualsDown;
 
-    private SpriteRenderer _renderUp;
-    private SpriteRenderer _renderDown;
+    public SpriteRenderer _renderUp;
+    public SpriteRenderer _renderDown;
 
     [SerializeField] private GameObject _number;
     [SerializeField] private GameObject _numberDown;
@@ -80,14 +80,12 @@ public class Card : MonoBehaviour
      
     }
 
-    public void FlipCard(bool faceup) 
+    public void SetCardFaceUp(bool faceup) 
     {
         TextMeshPro[] textComponents = GetComponentsInChildren<TextMeshPro>(true);
         var instanceRef = this.GetComponent<CardInstance>();
         Debug.Log("flipcard method card row 84");
-        Debug.Log("textcomponent lenghts is " + " " + textComponents.Length);
-
-        Debug.Log($"{this._suit} with rank {this._rank} visual is (down) {this._renderDown} or (up){this._renderUp}");
+        //Debug.Log("textcomponent lenghts is " + " " + textComponents.Length);
 
         _isUp = faceup;
 
@@ -200,45 +198,6 @@ public class Card : MonoBehaviour
                 }
         }
     }
-
-    #region laterVisuals
-
-    //not needed right now work in behind the scenes
-    //make so behind the scenes work then add visuals!
-
-
-    //public GameObject CreateCardObject(SuitEnum _Suit, RankEnum _Rank)
-    //{
-    //    UnityEngine.Debug.Log("Make a card thing");
-
-    //    switch (_Suit)
-    //    {
-    //        case SuitEnum.Hearts:
-    //            return Instantiate(HeartsPreFab);
-    //            break;
-
-    //        case SuitEnum.Diamonds:
-    //            return Instantiate(DiamondPrefab);
-    //            break;
-
-    //        case SuitEnum.Spades:
-    //            return Instantiate(SpadePreFab);
-    //            break;
-
-    //        case SuitEnum.Clubs:
-    //            return Instantiate(CloverPreFab);
-    //            break;
-
-
-    //        default:
-    //            {
-
-    //                return null;
-    //            }
-    //    }
-
-    //}
-    #endregion
 }
 
 

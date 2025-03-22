@@ -35,7 +35,7 @@ public class PlayerTableCards : CardPile
           
 
             GetCardInstance(cardToAdd);
-            cardToAdd.FlipCard(true); //3 should now be up
+            cardToAdd.SetCardFaceUp(true); //3 should now be up
             Debug.Log("3 should be able to be visible");
            // Debug.Log("getting NORMAL card");
         }

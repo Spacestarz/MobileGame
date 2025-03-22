@@ -40,9 +40,9 @@ public class OpponentAi : CardPile
         EveryCard.instance.GetCard();
     }
 
-    private void EndMyTurn()
+    public void EndAiTurn()
     {
-
+        TrackingTurns.Instance.EndTurn();
     }
 
 

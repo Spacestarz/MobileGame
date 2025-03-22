@@ -95,9 +95,16 @@ public class TrackingTurns : MonoBehaviour
     public void OnAddedToDropZone()
     {
         Debug.Log("a card was added to the dropzone... making so that input will be disabled");
-
-        OnHighlightEndTurn();
         DisableInput = true;
+
+        if (_CurrentTurn == TurnState.OpponentTurn)
+        {
+            OpponentAi.instance.EndAiTurn();
+        }
+        else
+        {
+            OnHighlightEndTurn();
+        }
     }
 
     public void OnHighlightEndTurn()

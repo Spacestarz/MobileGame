@@ -30,6 +30,17 @@ public class OpponentHand : CardPile
 
         cardinstancescript.SetTextVisability(false);
 
+        UpdateHandOpponent();
+
+       if (cardToAdd.IsUp())
+        {
+            //this card is face up, changing it to face down
+            Debug.Log("facing up opponent change to DOWN");
+            cardToAdd.SetCardFaceUp(false);
+        }
+        
+        
+
         if (Dropzone.Instance._IsTakingAChance == false)
         {
             UpdateHandOpponent();
@@ -66,8 +77,10 @@ public class OpponentHand : CardPile
             // card.gameObject.transform.position = position;
         }
 
-        //testing 
-        TrackingTurns.Instance.CheckCardsVSDropZone();
+        if (Dropzone.Instance._IsTakingAChance == false)
+        {
+            TrackingTurns.Instance.CheckCardsVSDropZone();
+        }
     }
 }
 

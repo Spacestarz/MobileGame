@@ -56,22 +56,22 @@ public class CardInstance : MonoBehaviour
         //Debug.Log($"suit {_Suit} with rank {_Rank} in the CARDINSTANCE CLASS");
     }
   
-    public void SetTextVisability (bool enable)
+    public void SetTextVisability (bool IsVisible)
     {
-        Debug.Log($"settextvisability enable is {enable}");
+        Debug.Log($"settextvisability enable is {IsVisible}");
 
         TextMeshPro[] textComponents = GetComponentsInChildren<TextMeshPro>(true); //checking inactivated things
 
         foreach (var textMeshPro in textComponents)
         {
-            textMeshPro.enabled = enable;
-            Debug.Log($"textmesho shall be {enable}");
+            textMeshPro.enabled = IsVisible;
+            Debug.Log($"textmesho shall be {IsVisible} this should show 2 times for 2 textmesh up and down.");
             textMeshPro.sortingOrder = 2;
         }
     }
 
 
-    public void OntextVisibilityChanges(bool enable)
+    public void OntextVisibilityChanges(bool IsVisible)
     {
         Debug.Log("HJNAEHGOL");
 
@@ -80,7 +80,7 @@ public class CardInstance : MonoBehaviour
 
         foreach (var textmeshpro in textMesh)
         {
-            textmeshpro.enabled = enable;
+            textmeshpro.enabled = IsVisible;
             textmeshpro.sortingOrder = 2;
         }
     }

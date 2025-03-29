@@ -52,7 +52,7 @@ public class OpponentHand : CardPile
     public override void RemoveCard(Card cardToRemove)
     {
         base.RemoveCard(cardToRemove);
-        // Debug.Log($"Removing {cardToRemove._suit} with rank {cardToRemove._rank} from PlayerhandList");
+         Debug.Log($"Removing {cardToRemove._suit} with rank {cardToRemove._rank} from OpponentHand");
     }
 
 

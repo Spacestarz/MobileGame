@@ -287,7 +287,7 @@ public class Dropzone : CardPile
         if (_IsTakingAChance) 
         {
             StartCoroutine(animateToDropZone( Newcard, result));
-            Debug.Log("takinga chance method moving with dotween");
+            Debug.LogWarning("takinga chance method moving with dotween");
             // start coroutine animation
             //wait coroutine stuff
         }
@@ -305,6 +305,7 @@ public class Dropzone : CardPile
         _IsTakingAChance = true;
         _textOnDrawButton.text = "Take a chance"; //take a leap
         _textOnDrawButton.fontSize = 19;
+        Debug.Log($"taking a chance bool is {_IsTakingAChance} ");
 
     }
 
@@ -374,6 +375,8 @@ public class Dropzone : CardPile
             Debug.Log("Play sound: Success");
             SoundFXManager.instance.PlaySoundEffectClip(_successSound, transform, 20);
             AddCard(NewCard);
+            TrackingTurns.Instance.DisableInput = true;
+            Debug.Log("disables input");
         }
     }
 
@@ -429,6 +432,8 @@ public class Dropzone : CardPile
             {
                 OpponentHand.instance.AddCard(card);
                 Debug.Log("adding all cards from dropzonepile to opponenthand");
+                Debug.Log("ending turn for opponent");
+                OpponentAi.instance.EndAiTurn();
             }
 
         }

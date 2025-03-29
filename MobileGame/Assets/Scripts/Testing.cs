@@ -25,6 +25,7 @@ public class Testing : MonoBehaviour
     {
         Dropzone.Instance._IsTakingAChance = true;
         Dropzone.Instance._OnChangedChanceBool?.Invoke();
+        TrackingTurns.Instance._OnCanInteractWithButton?.Invoke();
     }
 
 

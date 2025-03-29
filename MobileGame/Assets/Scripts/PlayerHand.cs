@@ -41,6 +41,7 @@ public class PlayerHand : CardPile
     {
         cardToRemove.transform.SetParent(null);//removing the parent
         cardToRemove.gameObject.name = $"{cardToRemove._suit} rank {cardToRemove._rank}"; 
+        Debug.Log("removing card fom playerhand");
         base.RemoveCard(cardToRemove);
         // Debug.Log($"Removing {cardToRemove._suit} with rank {cardToRemove._rank} from PlayerhandList");
     }

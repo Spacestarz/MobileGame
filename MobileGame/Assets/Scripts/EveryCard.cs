@@ -130,13 +130,16 @@ public class EveryCard : CardPile
     [Button]
     public void GetCard() //get card from the draw button
     {
-        Debug.Log("getcard from everycard script 129");
+        Debug.Log("getcard from everycard script 129");     
 
         card = cards[0];
         RemoveCard(card); //remove card from allcardslist
 
-        if (Dropzone.Instance._IsTakingAChance)
+        Debug.Log(Dropzone.Instance._IsTakingAChance);
+
+        if (Dropzone.Instance._IsTakingAChance == true)
         {
+            Debug.Log("taking a chance is true");
             //here i check if takingaturn is true
             //will see if the card can go in the dropzone when player or
             //opponent cant play any card they have in hand

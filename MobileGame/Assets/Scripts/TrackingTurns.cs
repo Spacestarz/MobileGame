@@ -163,14 +163,14 @@ public class TrackingTurns : MonoBehaviour
                 {
                     Debug.LogWarning("player cant put any card in dropzone");
                     Dropzone.Instance._IsTakingAChance = true;
-                    _OnCanInteractWithButton?.Invoke(); //player can interact with button
                     Dropzone.Instance._OnChangedChanceBool?.Invoke();
+                    TrackingTurns.Instance._OnCanInteractWithButton?.Invoke();
 
 
                     // Debug.LogWarning("sending an observer to change draw card text");
                     //player can now end turn (and pick up the whole cardpile or do a guess draw)
 
-                    DisableInput = true;
+                    //DisableInput = true;
                 }
             }
             else if (_CurrentTurn == TurnState.OpponentTurn) 
@@ -259,9 +259,10 @@ public class TrackingTurns : MonoBehaviour
             {
                 EveryCard.instance.GetCard();
             }
-
+            
             _WhichTurnText.color = Color.green;
             DisableInput = false;
+            Dropzone.Instance._IsTakingAChance = false;
         }
     }
 }

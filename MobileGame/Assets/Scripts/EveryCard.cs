@@ -135,7 +135,7 @@ public class EveryCard : CardPile
         card = cards[0];
         RemoveCard(card); //remove card from allcardslist
 
-        Debug.Log(Dropzone.Instance._IsTakingAChance);
+        //Debug.Log(Dropzone.Instance._IsTakingAChance);
 
         if (Dropzone.Instance._IsTakingAChance == true)
         {
@@ -144,7 +144,7 @@ public class EveryCard : CardPile
             //will see if the card can go in the dropzone when player or
             //opponent cant play any card they have in hand
             Dropzone.Instance.PutCardInDropzone(card);
-            Debug.Log(" moving on to putcardindropzone method (getcard method everycard script 140");
+            Debug.Log("  putcardindropzone method is DONE moving to animating to dropzone(getcard method everycard script 140");
 
             return; //make so if takingachance is true to not continue with script if its true
 
@@ -162,6 +162,8 @@ public class EveryCard : CardPile
         {
             OpponentHand.instance.AddCard(card);
             Debug.Log($"OpponentHand got {card._suit} with rank {card._rank}");
+            Debug.Log("getcard method row 159");
+
         }
     }
 

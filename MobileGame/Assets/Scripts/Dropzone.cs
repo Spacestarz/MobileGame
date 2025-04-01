@@ -23,6 +23,7 @@ public class Dropzone : CardPile
     [SerializeField] private AudioClip _successSound;
     [SerializeField] private AudioClip _FlipOneCardSound;
     [SerializeField] private AudioClip _FlippingManyCardsSound;
+    [SerializeField] private AudioClip _NumberTenSound;
 
 
 
@@ -65,7 +66,7 @@ public class Dropzone : CardPile
             UnderMe.SetTextVisability(false); //disables the textmesh
 
             //changing the sorting order directly here for this special case
-            Debug.Log("sorting order for firstcardinstack is 0.");
+            Debug.Log("sorting order for firstcardinstack is 0 it will be in back.");
             _FirstInStackCard._renderUp.sortingOrder = 0;
             _FirstInStackCard._renderDown.sortingOrder = 0;
         }
@@ -75,7 +76,7 @@ public class Dropzone : CardPile
             Debug.Log($"flippin {cardToAdd._suit} with rank {cardToAdd._rank} for opponent");
             cardToAdd.SetCardFaceUp(true);
             cardToAdd.ChangeSortingOrder();
-            Debug.Log("changing sorrting please be above");
+            //Debug.Log("changing sorrting please be above");
        }
         
         TrackingTurns.Instance._OnCardDropZone?.Invoke();
@@ -159,6 +160,10 @@ public class Dropzone : CardPile
 
         if (Newcard._rank == Card.RankEnum.Ten)
         {
+            if (cards.Count <= 0)
+            {
+                return CardResults.Ten;
+            }
             _FirstInStackCard = cards[cards.Count - 1];
             return CardResults.Ten;
         }
@@ -198,7 +203,8 @@ public class Dropzone : CardPile
 
             if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.OpponentTurn)
             {
-                OpponentAi.instance.GuessCard();
+                OpponentAi.Instance.GuessCard();
+                Debug.LogWarning("This should only show when current turn is opponent");
             }
         }
         else
@@ -222,6 +228,7 @@ public class Dropzone : CardPile
                 case CardResults.Ten:
 
                     Debug.Log("ten card");
+                    SoundFXManager.instance.PlaySoundEffectClip(_successSound, transform, 20);
                     Debug.Log("Player put down a 10 card. Taking the dropzone to discard pile");
                     AddCard(Newcard);
                     if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.Playerturn)
@@ -365,6 +372,7 @@ public class Dropzone : CardPile
             }
             else
             {
+                //something GOES WRONG HERE? 
                 OpponentHand.instance.AddCard(NewCard);
                 GetDropZonePile();
                 //if this happens make sure the opponent turn ends!
@@ -376,7 +384,15 @@ public class Dropzone : CardPile
             SoundFXManager.instance.PlaySoundEffectClip(_successSound, transform, 20);
             AddCard(NewCard);
             TrackingTurns.Instance.DisableInput = true;
+            TrackingTurns.Instance._OnCanInteractWithButton?.Invoke();
             Debug.Log("disables input");
+
+            if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.OpponentTurn)
+            {
+                OpponentAi.Instance.EndAiTurn();
+                Debug.Log("ending turn for opponent");
+            }
+        
         }
     }
 
@@ -393,7 +409,7 @@ public class Dropzone : CardPile
                 DiscardCards.Instance.AddCard(card);
             }
         }
-        Debug.Log("adding all cards from dropzonepile to PlayerHand. (dropzone row 341, method dropzonetodiscardpile)");
+        Debug.Log("adding all cards from dropzonepile to DiscardPILE. (dropzone row 341, method dropzonetodiscardpile)");
         Debug.Log($"Cards left in dropzone: {cards.Count}");
     }
 
@@ -432,8 +448,6 @@ public class Dropzone : CardPile
             {
                 OpponentHand.instance.AddCard(card);
                 Debug.Log("adding all cards from dropzonepile to opponenthand");
-                Debug.Log("ending turn for opponent");
-                OpponentAi.instance.EndAiTurn();
             }
 
         }
@@ -441,6 +455,8 @@ public class Dropzone : CardPile
 
         Debug.Log($"Cards left in dropzone: {cards.Count}");
         Debug.Log($" disable input is: {TrackingTurns.Instance.DisableInput}");
+        Debug.LogWarning("Opponent ending turn after he got all dropzone cards is updating");
+        OpponentAi.Instance.EndAiTurn();
     }
 }
     

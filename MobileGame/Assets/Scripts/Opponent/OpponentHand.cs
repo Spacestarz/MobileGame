@@ -30,8 +30,6 @@ public class OpponentHand : CardPile
 
         cardinstancescript.SetTextVisability(false);
 
-        UpdateHandOpponent();
-
        if (cardToAdd.IsUp())
         {
             //this card is face up, changing it to face down
@@ -39,12 +37,8 @@ public class OpponentHand : CardPile
             cardToAdd.SetCardFaceUp(false);
         }
         
-        
+        UpdateHandOpponent();
 
-        if (Dropzone.Instance._IsTakingAChance == false)
-        {
-            UpdateHandOpponent();
-        }
         //Debug.Log($"Removing {cardToAdd._suit} with rank {cardToAdd._rank} from PlayerhandCardsList");
         //GetCardInstance(cardToAdd);
     }
@@ -52,7 +46,9 @@ public class OpponentHand : CardPile
     public override void RemoveCard(Card cardToRemove)
     {
         base.RemoveCard(cardToRemove);
-         Debug.Log($"Removing {cardToRemove._suit} with rank {cardToRemove._rank} from OpponentHand");
+         Debug.LogWarning($"Removing {cardToRemove._suit} with rank {cardToRemove._rank} from OpponentHand");
+        Debug.Log("Ending opponent turn");
+        OpponentAi.Instance.EndAiTurn();
     }
 
 
@@ -80,6 +76,7 @@ public class OpponentHand : CardPile
         if (Dropzone.Instance._IsTakingAChance == false)
         {
             TrackingTurns.Instance.CheckCardsVSDropZone();
+            Debug.LogWarning("OpponentHand UpdateHandOpponent");
         }
     }
 }

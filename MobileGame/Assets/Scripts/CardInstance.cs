@@ -58,14 +58,14 @@ public class CardInstance : MonoBehaviour
   
     public void SetTextVisability (bool IsVisible)
     {
-        Debug.Log($"settextvisability enable is {IsVisible}");
+        //Debug.Log($"settextvisability enable is {IsVisible}");
 
         TextMeshPro[] textComponents = GetComponentsInChildren<TextMeshPro>(true); //checking inactivated things
 
         foreach (var textMeshPro in textComponents)
         {
             textMeshPro.enabled = IsVisible;
-            Debug.Log($"textmesho shall be {IsVisible} this should show 2 times for 2 textmesh up and down.");
+            //Debug.Log($"textmesho shall be {IsVisible} this should show 2 times for 2 textmesh up and down.");
             textMeshPro.sortingOrder = 2;
         }
     }
@@ -99,7 +99,7 @@ public class CardInstance : MonoBehaviour
     public void GoToDropZonePosition()
     {
         transform.position = SpawnLocations.instance.dropzoneLocationForCards.transform.position;
-        Debug.Log("Card should now be in dropzone");
+        Debug.Log("Card should now be in dropzonePOS");
     }
 
     public void GoToDiscardLocation()

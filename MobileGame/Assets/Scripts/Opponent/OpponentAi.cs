@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class OpponentAi : CardPile
 {
-    public static OpponentAi instance;
+    public static OpponentAi Instance;
 
    
     private void Awake()
     {
-        if (instance != null && instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
 
-        instance = this;
+        Instance = this;
         DontDestroyOnLoad(gameObject);
         cards = new List<Card>();
     }

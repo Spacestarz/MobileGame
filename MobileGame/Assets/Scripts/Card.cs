@@ -139,7 +139,7 @@ public class Card : MonoBehaviour
                 {
                     _renderUp.sortingOrder = 1;
                 }
-                Debug.Log("Toggled sorting order for _renderUp to " + _renderUp.sortingOrder);
+               // Debug.Log("Toggled sorting order for _renderUp to " + _renderUp.sortingOrder);
             }
             else
             {
@@ -152,7 +152,7 @@ public class Card : MonoBehaviour
                 {
                     _renderDown.sortingOrder = 0;
                 }
-                Debug.Log("Toggled sorting order for _renderDown to " + _renderDown.sortingOrder);
+               // Debug.Log("Toggled sorting order for _renderDown to " + _renderDown.sortingOrder);
             }
             return;
         }
@@ -162,7 +162,7 @@ public class Card : MonoBehaviour
         if (_isUp == true)
         {
             _renderUp.sortingOrder = 1;
-            Debug.Log("sortingorder of this card is now 1");
+            Debug.Log("sortingorder of this card is now 1 it should be above other cards");
         }
         else
         {

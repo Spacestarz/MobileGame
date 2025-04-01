@@ -1593,6 +1593,7 @@ MonoBehaviour:
   _successSound: {fileID: 8300000, guid: 2d5de123e108509448a906a2871d07b5, type: 3}
   _FlipOneCardSound: {fileID: 8300000, guid: 281b053baa1da714284ff9e42889ae98, type: 3}
   _FlippingManyCardsSound: {fileID: 8300000, guid: 114fc55a80b778d418bb15e974ea9c41, type: 3}
+  _NumberTenSound: {fileID: 8300000, guid: e367972d8418ef348b714cf16cd76b24, type: 3}
   _IsTakingAChance: 0
   _textOnDrawButton: {fileID: 642257531}
   DrawButton: {fileID: 827815383}

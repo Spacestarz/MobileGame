@@ -94,12 +94,14 @@ public class TrackingTurns : MonoBehaviour
 
     public void OnAddedToDropZone()
     {
-        Debug.Log("a card was added to the dropzone... making so that input will be disabled");
-        DisableInput = true;
+        Debug.Log("added on dropzone method in trackingturn row 97");
+        //Debug.Log("a card was added to the dropzone... making so that input will be disabled");
+        //DisableInput = true;
 
-        if (_CurrentTurn == TurnState.OpponentTurn)
+        if (_CurrentTurn == TurnState.OpponentTurn && Dropzone.Instance._IsTakingAChance == false )
         {
-            OpponentAi.instance.EndAiTurn();
+            Debug.Log("its ai turn and taking a chance is FALSE");
+           // OpponentAi.instance.EndAiTurn();
         }
         else
         {
@@ -111,13 +113,13 @@ public class TrackingTurns : MonoBehaviour
     {
         //will want to highlight end turn
         HighLight.Instance.HighLightMe();
-        Debug.Log("highlighting end turn button");
+       // Debug.Log("highlighting end turn button");
     }
 
     public void OnDisableHighLight()
     {
         HighLight.Instance.DisableHighLight();
-        Debug.Log("diables highlight end tunr");
+       // Debug.Log("diables highlight end tunr");
     }
 
     public void OnCanInteractWithButton()
@@ -166,6 +168,7 @@ public class TrackingTurns : MonoBehaviour
                     Dropzone.Instance._OnChangedChanceBool?.Invoke();
                     TrackingTurns.Instance._OnCanInteractWithButton?.Invoke();
 
+                   
 
                     // Debug.LogWarning("sending an observer to change draw card text");
                     //player can now end turn (and pick up the whole cardpile or do a guess draw)
@@ -203,6 +206,7 @@ public class TrackingTurns : MonoBehaviour
                 {
                     Debug.Log($"Opponent plays the lowest valid card: {lowestValidCard._suit} with rank {lowestValidCard._rank}");
                     Dropzone.Instance.PutCardInDropzone(lowestValidCard);
+                    lowestValidCard = null;
                 }
                 else
                 {
@@ -245,11 +249,13 @@ public class TrackingTurns : MonoBehaviour
 
             OnDisableHighLight(); 
 
-            OpponentAi.instance.OpponentTurn();
+            OpponentAi.Instance.OpponentTurn();
         }
         else
         {
             Debug.LogWarning("Opponent turn ended....switching to player turn");
+            Dropzone.Instance.CheckIfNeedChangeDrawText();
+
             _CurrentTurn = TurnState.Playerturn;
             _WhichTurnText.text = ("Your Turn");
 
@@ -262,7 +268,6 @@ public class TrackingTurns : MonoBehaviour
             
             _WhichTurnText.color = Color.green;
             DisableInput = false;
-            Dropzone.Instance._IsTakingAChance = false;
         }
     }
 }

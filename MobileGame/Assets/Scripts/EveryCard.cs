@@ -4,9 +4,12 @@ using UnityEngine;
 using static Card;
 using Listsextensions;
 using NaughtyAttributes;
+using TMPro;
 
 public class EveryCard : CardPile
 {
+   [SerializeField] private TextMeshProUGUI _HowmanyCardsLeft;
+
     private Card card;
     public GameObject allLocation;
 
@@ -39,6 +42,8 @@ public class EveryCard : CardPile
 
     void Start()
     {
+        
+
         //makes the card
         //1-4 for the suit and then the rank 1-13 for each of the suits 
 
@@ -125,6 +130,8 @@ public class EveryCard : CardPile
             RemoveCard(card); //removing from allcardslist
             OpponentHand.instance.AddCard(card);
         }
+
+        _HowmanyCardsLeft.text = cards.Count.ToString() + "" + "cards left in pile";
     }
 
     [Button]
@@ -165,6 +172,8 @@ public class EveryCard : CardPile
             Debug.Log("getcard method row 159");
 
         }
+
+        _HowmanyCardsLeft.text = cards.Count.ToString() + "" + "cards left in pile";
     }
 
     private void MoveToallCardsLocation()

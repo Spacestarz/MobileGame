@@ -87,10 +87,45 @@ public class InputManager : MonoBehaviour
         {
             Vector2 mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
+            //check if we are over a dropzone
             RaycastHit2D CheckIfDropZoneCollider = Physics2D.Raycast(mousepos, Vector2.zero, 100f, LayerMask.GetMask("dropZoneLayer"));
 
-            //if releasing over dropzone and holding a card
-            if (CheckIfDropZoneCollider.collider != null && _CardHeld)
+            //hit is to check if we are over a card
+            RaycastHit2D hit = Physics2D.Raycast(mousepos, Vector2.zero);
+
+            if (hit.collider != null && hit.collider.CompareTag("Card") && _CardHeld != null && StartSwappingBeforeStart.instance._SwappingPhase == true)
+            {
+                Debug.Log("hit a card trying to swap");
+                var cardscript1 =  _CardHeld.GetComponent<CardInstance>();
+                var cardscript2 = hit.collider.gameObject.GetComponent<CardInstance>();
+
+                var card1 = cardscript1.GetCardData();
+                var card2 = cardscript2.GetCardData();
+
+                if (cardscript1 != cardscript2)
+                {
+                    StartSwappingBeforeStart.instance.SwapCards(card1, card2);
+                }
+                else
+                {
+                    Debug.LogWarning("same card cant swap");
+                    cardscript1.GoBackOrgPos();
+                    cardscript2.GoBackOrgPos();
+                }
+
+
+
+            }
+            else
+            {
+                Debug.Log("Nope cardswap logic. Inputmanager row 111");
+                
+            }
+
+
+
+            //if releasing over dropzone and holding a card and NOT in swapping phase
+            if (CheckIfDropZoneCollider.collider != null && _CardHeld && StartSwappingBeforeStart.instance._SwappingPhase == false)
             {
                 var CardinstanceScript =  _CardHeld.GetComponent<CardInstance>();
                 // var cardHeldCard = CardinstanceScript.GetCardData();
@@ -104,7 +139,8 @@ public class InputManager : MonoBehaviour
 
             _followMouse = false;
 
-            if (_CardHeld && CheckIfDropZoneCollider.collider == null)
+
+            if (_CardHeld && CheckIfDropZoneCollider.collider == null && StartSwappingBeforeStart.instance._SwappingPhase == false)
             {
                 var cardscript = _CardHeld.GetComponent<CardInstance>();
                 cardscript.GoBackOrgPos();

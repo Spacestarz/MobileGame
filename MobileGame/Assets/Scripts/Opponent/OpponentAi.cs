@@ -20,7 +20,6 @@ public class OpponentAi : CardPile
         cards = new List<Card>();
     }
 
-
    public void OpponentTurn()
    {
         CanIPlayAnyCard();

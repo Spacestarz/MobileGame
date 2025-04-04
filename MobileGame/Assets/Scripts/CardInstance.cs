@@ -22,8 +22,6 @@ public class CardInstance : MonoBehaviour
 
     private Action<bool> _OnTextVisibilityChanged;
 
-
-
     public void Init(Card card)
     {
        var cardscript = GetComponent<Card>();

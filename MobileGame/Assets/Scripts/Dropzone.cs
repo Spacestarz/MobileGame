@@ -319,6 +319,7 @@ public class Dropzone : CardPile
     //will need the reference of the cardresults here so i can make sound depending if fail on not
     private IEnumerator animateToDropZone(Card NewCard, CardResults cardresult) 
     {
+        Debug.LogWarning("animate to dropzone method");
 
         NewCard.ChangeSortingOrder();
         Vector3 targetPosition = SpawnLocations.instance.dropzoneLocationForCards.transform.position;
@@ -355,7 +356,8 @@ public class Dropzone : CardPile
           .OnComplete(() => NewCard.transform.DOLocalMoveY(originalPositionY, 0.2f));
 
         NewCard.SetCardFaceUp(true);
-        yield return new WaitForSeconds(2);
+        //After when the card flips we wait a bit. 
+        yield return new WaitForSeconds(3); 
 
         var cardInstanceScript = NewCard.GetComponent<CardInstance>();
 
@@ -386,6 +388,9 @@ public class Dropzone : CardPile
             TrackingTurns.Instance.DisableInput = true;
             TrackingTurns.Instance._OnCanInteractWithButton?.Invoke();
             Debug.Log("disables input");
+
+            //waiting a bit so ai wont end turn to early
+            yield return new WaitForSeconds(3f);
 
             if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.OpponentTurn)
             {

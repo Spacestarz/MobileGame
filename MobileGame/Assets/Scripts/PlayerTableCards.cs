@@ -68,7 +68,7 @@ public class PlayerTableCards : CardPile
         UpdateTable();
     }
 
-    private void UpdateTable() // need to fix this
+    private void UpdateTable() 
     {
         int i = 0;
 
@@ -86,6 +86,11 @@ public class PlayerTableCards : CardPile
             {
                 spawnpoint = _TablePlayerLocations[i];
                 card.transform.position = spawnpoint.transform.position;
+
+                var cardscript = card.GetComponent<CardInstance>();
+
+                cardscript.UpdateOrgPos(spawnpoint.transform.position);
+
             }
             else if (i < 6) 
             {
@@ -100,16 +105,13 @@ public class PlayerTableCards : CardPile
 
                 card.transform.position = newPos;
 
-               // Debug.Log($"Placing {currentCardInstance.name} at spawn point {spawnpoint.transform.position}");
+               var cardscript = card.GetComponent<CardInstance>();
+
+                cardscript.UpdateOrgPos(newPos); 
+
+                // Debug.Log($"Placing {currentCardInstance.name} at spawn point {spawnpoint.transform.position}");
             }
             i++;
         }
     }
-
-    //public void GetCardInstanceUpsideDown(Card card)
-    //{
-    //    var CardInstanceThing = MakeCards.Instance.MakeUpsideDownCard(card);
-    //    UpdateTable();
-    //}
-
 }

@@ -94,6 +94,11 @@ public class TrackingTurns : MonoBehaviour
             _WhichTurnText.text = ("Swapping Phase");
         }
     }
+
+    public void SwappPhaseOver()
+    {
+        _WhichTurnText.text = ("Your Turn");
+    }
         
 
     public void OnAddedToDropZone()

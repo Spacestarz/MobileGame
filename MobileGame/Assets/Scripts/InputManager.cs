@@ -93,7 +93,7 @@ public class InputManager : MonoBehaviour
             //hit is to check if we are over a card
             RaycastHit2D hit = Physics2D.Raycast(mousepos, Vector2.zero);
 
-            if (hit.collider != null && hit.collider.CompareTag("Card") && _CardHeld != null && StartSwappingBeforeStart.instance._SwappingPhase == true)
+            if (hit.collider != null && hit.collider.CompareTag("Swap") && _CardHeld != null && StartSwappingBeforeStart.instance._SwappingPhase == true)
             {
                 Debug.Log("hit a card trying to swap");
                 var cardscript1 =  _CardHeld.GetComponent<CardInstance>();
@@ -112,8 +112,6 @@ public class InputManager : MonoBehaviour
                     cardscript1.GoBackOrgPos();
                     cardscript2.GoBackOrgPos();
                 }
-
-
 
             }
             else

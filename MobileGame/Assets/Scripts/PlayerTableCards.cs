@@ -11,21 +11,25 @@ public class PlayerTableCards : CardPile
     public override void AddCard(Card cardToAdd)
     {
         base.AddCard(cardToAdd);
-       
-       // Debug.Log($"Adding {cardToAdd._suit} with rank {cardToAdd._rank} to PlayerTABLEcards");
+        var cardInstanceScript = cardToAdd.GetComponent<CardInstance>();
 
-        if (cards.Count <=3)
+        if (cards.Count <=3) 
+            
+            //Need to change this because when later when you add cards it will get the tag noninteractable
         {
+            cardToAdd.TagNonInteractable();
             //changing parent and name for better visability in inspector 
             cardToAdd.gameObject.name = "TableCardPlayerUpsideDown";
             GameObject parentObject = GameObject.Find("PlayersCardTableFolder");
             cardToAdd.gameObject.transform.SetParent(parentObject.transform, false);
             // GetCardInstanceUpsideDown(cardToAdd);
+            cardInstanceScript.SetTextVisability(false);
             Debug.Log("getting upside down card");
         }
         else
         {
             // change the card layeroption so it gets aboeve the upside down cards
+            cardToAdd.TagForCanBePickedUp(false);
 
             //changing parent and name for better visability in inspector 
             cardToAdd.gameObject.name = "TableCardPlayerVisible";
@@ -34,17 +38,19 @@ public class PlayerTableCards : CardPile
 
           
 
-            GetCardInstance(cardToAdd);
+            GetCardInstance(cardToAdd);//updating table here
             cardToAdd.SetCardFaceUp(true); //3 should now be up
             Debug.Log("3 should be able to be visible");
            // Debug.Log("getting NORMAL card");
         }
+
     }
 
     public override void RemoveCard(Card cardToRemove)
     {
-        base.RemoveCard(cardToRemove);
         Debug.Log($"Removing {cardToRemove._suit}  with rank  {cardToRemove._rank}  from PlayerTableCard");
+
+        base.RemoveCard(cardToRemove);
     }
 
     private void Awake()
@@ -68,7 +74,7 @@ public class PlayerTableCards : CardPile
         UpdateTable();
     }
 
-    private void UpdateTable() 
+    public void UpdateTable() 
     {
         int i = 0;
 

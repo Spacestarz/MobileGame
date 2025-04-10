@@ -394,7 +394,7 @@ public class Dropzone : CardPile
 
             if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.OpponentTurn)
             {
-                OpponentAi.Instance.EndAiTurn();
+                OpponentAi.Instance.EndAITurnDelay();
                 Debug.Log("ending turn for opponent");
             }
         
@@ -461,7 +461,7 @@ public class Dropzone : CardPile
         Debug.Log($"Cards left in dropzone: {cards.Count}");
         Debug.Log($" disable input is: {TrackingTurns.Instance.DisableInput}");
         Debug.LogWarning("Opponent ending turn after he got all dropzone cards is updating");
-        OpponentAi.Instance.EndAiTurn();
+        OpponentAi.Instance.EndAITurnDelay();
     }
 }
     

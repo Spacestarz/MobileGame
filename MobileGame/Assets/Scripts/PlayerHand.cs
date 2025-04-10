@@ -26,6 +26,7 @@ public class PlayerHand : CardPile
     public override void AddCard(Card cardToAdd)
     {
         base.AddCard(cardToAdd);
+        cardToAdd.TagForCanBePickedUp(true);
 
         cardToAdd.gameObject.name = "PlayerHandCards";
         GameObject parentObject = GameObject.Find("AllPlayerHandCards");
@@ -52,6 +53,7 @@ public class PlayerHand : CardPile
         //UpdateHand(card);
     }
 
+
     public void UpdateHand()
     {
         //make so it will update its position etc
@@ -75,8 +77,11 @@ public class PlayerHand : CardPile
 
             // card.gameObject.transform.position = position;
         }
+        if (StartSwappingBeforeStart.instance._SwappingPhase == false )
+        {
+            TrackingTurns.Instance.CheckCardsVSDropZone();
 
-        //testing 
-        TrackingTurns.Instance.CheckCardsVSDropZone();
+        }
+
     }
 }

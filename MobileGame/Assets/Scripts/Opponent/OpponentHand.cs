@@ -48,7 +48,7 @@ public class OpponentHand : CardPile
         base.RemoveCard(cardToRemove);
          Debug.LogWarning($"Removing {cardToRemove._suit} with rank {cardToRemove._rank} from OpponentHand");
         Debug.Log("Ending opponent turn");
-        OpponentAi.Instance.EndAiTurn();
+        OpponentAi.Instance.EndAITurnDelay();
     }
 
 

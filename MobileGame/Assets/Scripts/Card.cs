@@ -171,6 +171,28 @@ public class Card : MonoBehaviour
         }
     }
 
+    public void TagForCanBePickedUp(bool cardOrSwapTag)
+    {
+        //note for me also got a tag called nonInteractable
+        GetComponent<Collider2D>().enabled = true;
+
+        if (cardOrSwapTag)
+        {
+            gameObject.tag = "Card";
+            
+        }
+        else
+        {
+            gameObject.tag = "Swap";
+        }
+    }
+
+    public void TagNonInteractable()
+    {
+        gameObject.tag = "NonInteractable";
+        GetComponent<Collider2D>().enabled = false;
+    }
+
 
     public Sprite GetSprite(Card card)
     {

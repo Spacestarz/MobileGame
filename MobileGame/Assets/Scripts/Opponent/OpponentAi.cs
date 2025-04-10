@@ -39,6 +39,11 @@ public class OpponentAi : CardPile
         EveryCard.instance.GetCard();
     }
 
+    public void EndAITurnDelay()
+    {
+        Invoke("EndAiTurn", 2f);
+    }
+
     public void EndAiTurn()
     {
         TrackingTurns.Instance.EndTurn();

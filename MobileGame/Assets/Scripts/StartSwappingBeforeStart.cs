@@ -31,12 +31,14 @@ public class StartSwappingBeforeStart : MonoBehaviour
     public void TurnOnSwapStage()
     {
         ActivateChildren(_SwappingStage, true);
+        _SwappingPhase = true;
     }
 
     [Button]
     public void TurnOffSwapStage()
     {
         ActivateChildren(_SwappingStage, false);
+        _SwappingPhase = false;
     }
 
     [Button]
@@ -73,14 +75,12 @@ public class StartSwappingBeforeStart : MonoBehaviour
         var cardscript1 = HandCard.GetComponent<CardInstance>();
         var cardscript2 = TableCard.GetComponent<CardInstance>();
 
-
-
-
     }
 
     public void EndSwapping ()
     {
         TurnOffSwapStage();
         TurnOnGameStage();
+        Debug.Log($"swappingphase is; {_SwappingPhase}");
     }
 }

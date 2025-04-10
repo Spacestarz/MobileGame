@@ -89,8 +89,12 @@ public class TrackingTurns : MonoBehaviour
 
     private void Start()
     {
-        
+        if (StartSwappingBeforeStart.instance._SwappingPhase == true)
+        {
+            _WhichTurnText.text = ("Swapping Phase");
+        }
     }
+        
 
     public void OnAddedToDropZone()
     {

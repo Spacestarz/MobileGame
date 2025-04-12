@@ -65,7 +65,7 @@ public class StartSwappingBeforeStart : MonoBehaviour
     }
 
 
-    public void SwapCards (Card HandCard, Card TableCard)
+    public void SwapCards(Card HandCard, Card TableCard)
     {
 
         //gets the orgpositions of the cards
@@ -83,47 +83,59 @@ public class StartSwappingBeforeStart : MonoBehaviour
             return;
         }
 
-        //removing card from their original lists
+        Debug.Log($"HandCardIndex: {handCardIndex}, TableCardIndex: {tableCardIndex}");
+
+        //remove the cards from their original lists
         PlayerHand.instance.RemoveCard(HandCard);
         PlayerTableCards.instance.RemoveCard(TableCard);
 
-        Debug.Log($"HandCardIndex is {handCardIndex}");
-        Debug.Log($"TableCardIndex is {tableCardIndex}");
+        //add the cards to the other list
+        PlayerTableCards.instance.AddCard(HandCard);
+        PlayerHand.instance.AddCard(TableCard);
 
-        if (tableCardIndex < 0 || tableCardIndex > PlayerHand.instance.cards.Count)
+        // Handcard to Playertabl
+        if (PlayerTableCards.instance.cards.Contains(HandCard))
         {
-            Debug.LogError($"Invalid tableCardIndex: {tableCardIndex}");
-            return;
+            //LOOK INTO THIS LOGIC MORE SAM DO IT NEXT TIME
+
+            
+            PlayerTableCards.instance.cards.Remove(HandCard);
+            // Insert at the correct index
+            PlayerTableCards.instance.cards.Insert(tableCardIndex, HandCard); 
         }
 
-        if (handCardIndex < 0 || handCardIndex > PlayerTableCards.instance.cards.Count)
+        // Tablecard to Playerhand
+        if (PlayerHand.instance.cards.Contains(TableCard))
         {
-            Debug.LogError($"Invalid handCardIndex: {handCardIndex}");
-            return;
+            PlayerHand.instance.cards.Remove(TableCard);  
+            // Insert at the correct index
+            PlayerHand.instance.cards.Insert(handCardIndex, TableCard);  
         }
-
-
-
-        //adding the cards to their swap lists with their correct new index in list
-        PlayerHand.instance.cards.Insert(tableCardIndex, HandCard);
-        PlayerTableCards.instance.cards.Insert(handCardIndex, TableCard);
 
         PlayerHand.instance.UpdateHand();
+        Debug.Log("update hand");
+
         PlayerTableCards.instance.UpdateTable();
 
+        //checking if they are in the right list
 
-        // Validation (optional)
-        Debug.Log(PlayerTableCards.instance.cards.Contains(HandCard)
-            ? "HandCard successfully swapped to TableCards list."
-            : "HandCard not in TableCards list.");
+        if (PlayerTableCards.instance.cards.Contains(HandCard))
+        {
+            Debug.Log("HandCard is in TableCards list");
+        }
+        else
+        {
+            Debug.Log("HandCard is NOT in TableCards list");
+        }
 
-        Debug.Log(PlayerHand.instance.cards.Contains(TableCard)
-            ? "TableCard successfully swapped to HandCards list."
-            : "TableCard not in HandCards list.");
-
-
-        tableCardScript.GoBackOrgPos();
-        handCardScript.GoBackOrgPos();
+        if (PlayerHand.instance.cards.Contains(TableCard))
+        {
+            Debug.Log("TableCard is in HandCards list");
+        }
+        else
+        {
+            Debug.Log("TableCard is NOT in HandCards list");
+        }
 
     }
 

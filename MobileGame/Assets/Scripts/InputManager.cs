@@ -117,7 +117,7 @@ public class InputManager : MonoBehaviour
             else
             {
                 Debug.Log("Nope cardswap logic. Inputmanager row 111");
-                
+
             }
 
 

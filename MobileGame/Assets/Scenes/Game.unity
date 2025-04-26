@@ -731,6 +731,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 512a28db360c13748b1831cfe2930f77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  takeAChanceButton: {fileID: 827815386}
   _WhichTurnText: {fileID: 954461045}
   _DrawButtonInteractScript: {fileID: 827815386}
   DisableInput: 0

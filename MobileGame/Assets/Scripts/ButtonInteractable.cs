@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.GPUSort;
 
 public class ButtonInteractable : MonoBehaviour
 {
@@ -11,15 +13,10 @@ public class ButtonInteractable : MonoBehaviour
         _Button.interactable = false;
     }
 
-    private void Start()
+    public void SetInteractable(bool canInteract)
     {
-        TrackingTurns.Instance._OnCanInteractWithButton -= OnEnableAndDisableInteract;
-        TrackingTurns.Instance._OnCanInteractWithButton += OnEnableAndDisableInteract;
-    }
-
-    public void OnEnableAndDisableInteract()
-    {
-        _Button = GetComponent<Button>();
-        _Button.interactable = !_Button.interactable;
+        _Button.interactable = canInteract;
+        Debug.LogWarning($"Button interact set to {canInteract}");
     }
 }
+

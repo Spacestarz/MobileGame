@@ -19,6 +19,9 @@ public class TrackingTurns : MonoBehaviour
 
     public Action _OnCanInteractWithButton;
 
+
+    [SerializeField] private ButtonInteractable takeAChanceButton;
+
     [SerializeField] private TextMeshProUGUI _WhichTurnText;
 
     [SerializeField] private ButtonInteractable _DrawButtonInteractScript;
@@ -30,6 +33,8 @@ public class TrackingTurns : MonoBehaviour
 
     //public Button _EndButton;
     //public Button _DrawButton;
+
+    private bool _InteractableButton = false;
 
 
     //bools
@@ -65,9 +70,6 @@ public class TrackingTurns : MonoBehaviour
 
         _OnDisableHighLight -= OnDisableHighLight;
         _OnDisableHighLight += OnDisableHighLight;
-
-        _OnCanInteractWithButton += OnCanInteractWithButton;
-        _OnCanInteractWithButton -= OnCanInteractWithButton;
 
 
         _WhichTurnText.text = ("Your Turn");
@@ -131,12 +133,6 @@ public class TrackingTurns : MonoBehaviour
        // Debug.Log("diables highlight end tunr");
     }
 
-    public void OnCanInteractWithButton()
-    {
-        Debug.Log("interact act+ion here should also launch the buttoninteratable script");
-    }
-
-
     public void PlayerCheck()
     {
         if (DisableInput) ;
@@ -163,7 +159,7 @@ public class TrackingTurns : MonoBehaviour
             {
                 foreach (var card in PlayerHand.instance.cards) //this is for playerhand
                 {
-                    if (card._rank >= latestCard._rank)
+                    if (card._rank >= latestCard._rank || card._rank == Card.RankEnum.Ten) 
                     {
                          Debug.Log($"{card._suit} with rank {card._rank} can be put in cardzone PLAYER");
                          canPLaceCard = true;
@@ -175,10 +171,7 @@ public class TrackingTurns : MonoBehaviour
                     Debug.LogWarning("player cant put any card in dropzone");
                     Dropzone.Instance._IsTakingAChance = true;
                     Dropzone.Instance._OnChangedChanceBool?.Invoke();
-                    TrackingTurns.Instance._OnCanInteractWithButton?.Invoke();
-
-                   
-
+                    takeAChanceButton.SetInteractable(true);
                     // Debug.LogWarning("sending an observer to change draw card text");
                     //player can now end turn (and pick up the whole cardpile or do a guess draw)
 
@@ -239,6 +232,7 @@ public class TrackingTurns : MonoBehaviour
 
     public void EndTurn()
     {
+        takeAChanceButton.SetInteractable(false);
         //end logic here 
 
         if (_CurrentTurn == TurnState.Playerturn)
@@ -265,6 +259,8 @@ public class TrackingTurns : MonoBehaviour
             Debug.LogWarning("Opponent turn ended....switching to player turn");
             Dropzone.Instance.CheckIfNeedChangeDrawText();
 
+            OnDisableHighLight();
+
             _CurrentTurn = TurnState.Playerturn;
             _WhichTurnText.text = ("Your Turn");
 
@@ -274,7 +270,12 @@ public class TrackingTurns : MonoBehaviour
             {
                 EveryCard.instance.GetCard();
             }
-            
+
+           if (PlayerHand.instance.cards.Count > 3)
+            {
+                PlayerHand.instance.UpdateHand();
+            }
+
             _WhichTurnText.color = Color.green;
             DisableInput = false;
         }

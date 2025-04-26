@@ -228,7 +228,7 @@ public class Dropzone : CardPile
                 case CardResults.Ten:
 
                     Debug.Log("ten card");
-                    SoundFXManager.instance.PlaySoundEffectClip(_successSound, transform, 20);
+                    SoundFXManager.instance.PlaySoundEffectClip(_NumberTenSound, transform, 20);
                     Debug.Log("Player put down a 10 card. Taking the dropzone to discard pile");
                     AddCard(Newcard);
                     if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.Playerturn)

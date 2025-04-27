@@ -374,7 +374,7 @@ public class Dropzone : CardPile
             }
             else
             {
-                //something GOES WRONG HERE? 
+                
                 OpponentHand.instance.AddCard(NewCard);
                 GetDropZonePile();
                 //if this happens make sure the opponent turn ends!

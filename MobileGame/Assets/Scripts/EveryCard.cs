@@ -190,17 +190,7 @@ public class EveryCard : CardPile
         Debug.Log("guessing card method");
         card = cards[0];
         RemoveCard(card);
-
-        if ((TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.Playerturn))
-        {
-            //check if card can go in dropzone
-            //when it comes to the visual make the card look like it goes to dropzone and
-            //have a sound cue if it can go or not
-        }
-        else
-        {
-
-        }
+        
         _HowmanyCardsLeft.text = cards.Count.ToString() + "" + "cards left in pile";
     }
 }

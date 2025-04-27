@@ -6,7 +6,10 @@ public class OpponentAi : CardPile
 {
     public static OpponentAi Instance;
 
-   
+    [SerializeField] private ButtonInteractable _EndButtonInteractScript;
+
+
+
     private void Awake()
     {
         if (Instance != null && Instance != this)

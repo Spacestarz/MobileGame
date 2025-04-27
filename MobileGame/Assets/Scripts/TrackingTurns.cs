@@ -26,6 +26,10 @@ public class TrackingTurns : MonoBehaviour
 
     [SerializeField] private ButtonInteractable _DrawButtonInteractScript;
 
+    [SerializeField] private ButtonInteractable _EndButtonInteractScript;
+
+
+
     //[SerializeField] private TextMeshProUGUI _textOnDrawButton;
 
     //private string _DefaultTextDrawButton = "Draw";

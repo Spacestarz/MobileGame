@@ -6,7 +6,6 @@ public class OpponentAi : CardPile
 {
     public static OpponentAi Instance;
 
-    [SerializeField] private ButtonInteractable _EndButtonInteractScript;
 
 
 

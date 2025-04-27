@@ -734,7 +734,7 @@ MonoBehaviour:
   takeAChanceButton: {fileID: 827815386}
   _WhichTurnText: {fileID: 954461045}
   _DrawButtonInteractScript: {fileID: 827815386}
-  _EndButtonInteractScript: {fileID: 0}
+  _EndButtonInteractScript: {fileID: 545268784}
   DisableInput: 0
   HasDrawnCard: 0
   _CurrentTurn: 0
@@ -751,7 +751,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cards: []
-  _EndButtonInteractScript: {fileID: 0}
 --- !u!114 &468975534
 MonoBehaviour:
   m_ObjectHideFlags: 0

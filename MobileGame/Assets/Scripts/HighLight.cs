@@ -31,7 +31,11 @@ public class HighLight : MonoBehaviour
 
     public void HighLightMe()
     {
-        _HighLightTween = _spriteRenderer.DOFade(1, 3).SetLoops(-1, LoopType.Yoyo);
+        //Only highlight if its the player turn
+        if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.Playerturn)
+        {
+            _HighLightTween = _spriteRenderer.DOFade(1, 3).SetLoops(-1, LoopType.Yoyo);
+        }
     }
 
     public void DisableHighLight()

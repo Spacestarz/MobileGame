@@ -80,7 +80,6 @@ public class PlayerHand : CardPile
         if (StartSwappingBeforeStart.instance._SwappingPhase == false )
         {
             TrackingTurns.Instance.CheckCardsVSDropZone();
-
         }
 
     }

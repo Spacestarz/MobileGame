@@ -4,6 +4,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static TrackingTurns;
 
 public class TrackingTurns : MonoBehaviour
 {
@@ -156,9 +157,87 @@ public class TrackingTurns : MonoBehaviour
     {
         Debug.Log("CheckCardsVSdropzone method");
 
-
-        if (Dropzone.Instance.cards.Count == 0)
+        if (Dropzone.Instance.cards.Count > 0)
         {
+            Debug.Log("dropzone cards is above 0");
+            var latestCard = Dropzone.Instance.cards[Dropzone.Instance.cards.Count - 1];
+            bool canPLaceCard = false;
+
+            if (_CurrentTurn == TurnState.Playerturn)
+            {
+                foreach (var card in PlayerHand.instance.cards) //this is for playerhand
+                {
+                    if (card._rank >= latestCard._rank || card._rank == Card.RankEnum.Ten)
+                    {
+                        Debug.Log($"{card._suit} with rank {card._rank} can be put in cardzone PLAYER");
+                        canPLaceCard = true;
+                    }
+                }
+
+                if (!canPLaceCard)
+                {
+                    Debug.LogWarning("player cant put any card in dropzone");
+                    Dropzone.Instance._IsTakingAChance = true;
+                    Dropzone.Instance._OnChangedChanceBool?.Invoke();
+                    takeAChanceButton.SetInteractable(true);
+                    // Debug.LogWarning("sending an observer to change draw card text");
+                    //player can now end turn (and pick up the whole cardpile or do a guess draw)
+
+                    //DisableInput = true;
+                }
+            }
+            else if (_CurrentTurn == TurnState.OpponentTurn)
+            {
+                Debug.Log("checkthing opponenthand");
+
+                Card lowestValidCard = null;
+
+                foreach (var card in OpponentHand.instance.cards) //this is for opponent hand
+                {
+                    if (card._rank >= latestCard._rank)
+                    {
+                        Debug.Log($"{card._suit} with rank {card._rank} can be put in cardzone");
+
+                        if (lowestValidCard == null || card._rank < lowestValidCard._rank)
+                        {
+                            lowestValidCard = card;
+
+                            Debug.Log($"the lowest valid card in the opponenthand is {card._suit} with rank {card._rank}");
+                        }
+
+                    }
+                    else
+                    {
+                        // Debug.LogWarning("sending an observer to change draw card text");
+                    }
+                }
+
+                if (lowestValidCard != null)
+                {
+                    Debug.Log($"Opponent plays the lowest valid card: {lowestValidCard._suit} with rank {lowestValidCard._rank}");
+                    Dropzone.Instance.PutCardInDropzone(lowestValidCard);
+                    lowestValidCard = null;
+                }
+                else
+                {
+                    Debug.Log("opponent cant play any cards in TRACKINGTURN script");
+                    Dropzone.Instance._IsTakingAChance = true;
+                    Dropzone.Instance._OnChangedChanceBool?.Invoke(); //invoke the action _onchangedchancebool in dropzone
+                                                                      //also got a animatetodropzone in drozone row 316
+                }
+
+            }
+        }
+        else
+        {
+            NOCardsInDropZone();
+        }
+    }
+
+
+
+    public void NOCardsInDropZone()
+    {
             if (_CurrentTurn == TurnState.OpponentTurn)
             {
                 Card lowestValidCard = null;
@@ -179,91 +258,14 @@ public class TrackingTurns : MonoBehaviour
                 {
                     Debug.Log($"Opponent plays the lowest valid card: {lowestValidCard._suit} with rank {lowestValidCard._rank}");
                     Dropzone.Instance.PutCardInDropzone(lowestValidCard);
-                  
+
                 }
                 else
                 {
                     Debug.Log("opponent has no cards?");
                 }
 
-                return;
             }
-
-
-                if (Dropzone.Instance.cards.Count > 0)
-                {
-                    Debug.Log("dropzone cards is above 0");
-                    var latestCard = Dropzone.Instance.cards[Dropzone.Instance.cards.Count - 1];
-                    bool canPLaceCard = false;
-
-                    if (_CurrentTurn == TurnState.Playerturn)
-                    {
-                        foreach (var card in PlayerHand.instance.cards) //this is for playerhand
-                        {
-                            if (card._rank >= latestCard._rank || card._rank == Card.RankEnum.Ten)
-                            {
-                                Debug.Log($"{card._suit} with rank {card._rank} can be put in cardzone PLAYER");
-                                canPLaceCard = true;
-                            }
-                        }
-
-                        if (!canPLaceCard)
-                        {
-                            Debug.LogWarning("player cant put any card in dropzone");
-                            Dropzone.Instance._IsTakingAChance = true;
-                            Dropzone.Instance._OnChangedChanceBool?.Invoke();
-                            takeAChanceButton.SetInteractable(true);
-                            // Debug.LogWarning("sending an observer to change draw card text");
-                            //player can now end turn (and pick up the whole cardpile or do a guess draw)
-
-                            //DisableInput = true;
-                        }
-                    }
-                    else if (_CurrentTurn == TurnState.OpponentTurn)
-                    {
-                        Debug.Log("checkthing opponenthand");
-
-                        Card lowestValidCard = null;
-
-                        foreach (var card in OpponentHand.instance.cards) //this is for opponent hand
-                        {
-                            if (card._rank >= latestCard._rank)
-                            {
-                                Debug.Log($"{card._suit} with rank {card._rank} can be put in cardzone");
-
-                                if (lowestValidCard == null || card._rank < lowestValidCard._rank)
-                                {
-                                    lowestValidCard = card;
-
-                                    Debug.Log($"the lowest valid card in the opponenthand is {card._suit} with rank {card._rank}");
-                                }
-
-                            }
-                            else
-                            {
-                                // Debug.LogWarning("sending an observer to change draw card text");
-                            }
-                        }
-
-                        if (lowestValidCard != null)
-                        {
-                            Debug.Log($"Opponent plays the lowest valid card: {lowestValidCard._suit} with rank {lowestValidCard._rank}");
-                            Dropzone.Instance.PutCardInDropzone(lowestValidCard);
-                            lowestValidCard = null;
-                        }
-                        else
-                        {
-                            Debug.Log("opponent cant play any cards in TRACKINGTURN script");
-                            Dropzone.Instance._IsTakingAChance = true;
-                            Dropzone.Instance._OnChangedChanceBool?.Invoke(); //invoke the action _onchangedchancebool in dropzone
-                                                                              //insert guess card logic
-                                                                              //its in dropzone script row 
-                                                                              //also got a animatetodropzone in drozone row 316
-                        }
-
-                    }
-                }
-        }
     }
 
 

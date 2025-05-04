@@ -25,6 +25,12 @@ public class OpponentAi : CardPile
    public void OpponentTurn()
    {
         CanIPlayAnyCard();
+        if (OpponentHand.instance.cards.Count == 0)
+        {
+            Debug.LogWarning("opponent have no cards in hand!");
+
+           
+        }
    }
 
     private void CanIPlayAnyCard()

@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -119,5 +120,40 @@ public class PlayerTableCards : CardPile
             }
             i++;
         }
+    }
+
+    [Button]
+    public void MakeVisibleCardsInteractable()
+    {
+        foreach (var card in cards)
+        {
+            //make the cards with the tag swap be interactable
+            if (card.CompareTag("Swap"))
+            {
+                card.TagForCanBePickedUp(true);
+                Debug.Log("all cards with tag swap can nog be interacted with");
+            }
+        }
+    }
+
+    [Button]
+    public void MakeInvisibleCardsInteractable()
+    {
+        foreach(var card in cards)
+        {
+            if (card.CompareTag("NonInteractable"))
+            {
+                card.TagForCanBePickedUp(true);
+                Debug.Log("all cards with tag NonInteractable can nog be interacted with");
+            }
+        }
+    }
+
+    [Button]
+   public void NoMoreCardInHand()
+    {
+        EveryCard.instance.cards.Clear();
+        PlayerHand.instance.cards.Clear();
+        EveryCard.instance.HowManyCardsLeft();
     }
 }

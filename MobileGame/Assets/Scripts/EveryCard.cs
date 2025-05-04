@@ -138,7 +138,12 @@ public class EveryCard : CardPile
     public void GetCard() //get card from the draw button
     {
         Debug.Log("getcard from everycard script 129");     
+        if (cards.Count == 0)
+        {
+            Debug.Log("no cards left bye");
 
+            return;
+        }
         card = cards[0];
         RemoveCard(card); //remove card from allcardslist
 
@@ -191,6 +196,11 @@ public class EveryCard : CardPile
         card = cards[0];
         RemoveCard(card);
         
+        _HowmanyCardsLeft.text = cards.Count.ToString() + "" + "cards left in pile";
+    }
+
+    public void HowManyCardsLeft()
+    {
         _HowmanyCardsLeft.text = cards.Count.ToString() + "" + "cards left in pile";
     }
 }

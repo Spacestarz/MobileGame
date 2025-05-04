@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 
 public class OpponentTableCard : CardPile
 {
@@ -73,6 +74,10 @@ public class OpponentTableCard : CardPile
             }
             i++;
         }
+    }
+
+    public void MakeTableCardInteractable()
+    {
 
     }
 }

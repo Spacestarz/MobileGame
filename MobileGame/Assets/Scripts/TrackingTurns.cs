@@ -192,6 +192,35 @@ public class TrackingTurns : MonoBehaviour
 
                 Card lowestValidCard = null;
 
+                //if opponent have no cards left in hand
+                if (OpponentHand.instance.cards.Count == 0)
+                {
+                    foreach (var card in OpponentTableCard.Instance.cards)
+                    {
+                        //need to fix so it can only take those that are "visible" not those under
+                        if (card._rank >= latestCard._rank)
+                        {
+                            Debug.Log($"{card._suit} with rank {card._rank} can be put in cardzone");
+
+                            if (lowestValidCard == null || card._rank < lowestValidCard._rank)
+                            {
+                                lowestValidCard = card;
+
+                                Debug.Log($"the lowest valid card in the opponenthand is {card._suit} with rank {card._rank}");
+                            }
+
+                        }
+                        else
+                        {
+                           
+                        }
+                    }
+
+                    return;
+                }
+
+                
+
                 foreach (var card in OpponentHand.instance.cards) //this is for opponent hand
                 {
                     if (card._rank >= latestCard._rank)

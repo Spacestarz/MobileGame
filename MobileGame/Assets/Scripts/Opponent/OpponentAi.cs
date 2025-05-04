@@ -24,14 +24,22 @@ public class OpponentAi : CardPile
 
    public void OpponentTurn()
    {
+        HaveAtLeast3Cards();
         CanIPlayAnyCard();
         if (OpponentHand.instance.cards.Count == 0)
         {
             Debug.LogWarning("opponent have no cards in hand!");
-
            
         }
    }
+
+    private void HaveAtLeast3Cards()
+    {
+        while (OpponentHand.instance.cards.Count < 3)
+        {
+            EveryCard.instance.GetCard();
+        }
+    }
 
     private void CanIPlayAnyCard()
     {

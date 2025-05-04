@@ -13,6 +13,7 @@ public class DiscardCards : CardPile
     public override void AddCard(Card cardToAdd)
     {
         base.AddCard(cardToAdd);
+        cardToAdd._CardOrigin = Card.CardOriginEnum.DiscardPile;
         var cardinstanceRef = cardToAdd.GetComponent<CardInstance>();
         cardinstanceRef.GoToDiscardLocation();
            

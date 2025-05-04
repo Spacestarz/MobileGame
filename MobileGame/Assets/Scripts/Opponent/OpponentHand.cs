@@ -26,6 +26,7 @@ public class OpponentHand : CardPile
     {
         Debug.Log("OpponentHand is getting a card to their hand");
         base.AddCard(cardToAdd);
+        cardToAdd._CardOrigin = Card.CardOriginEnum.OpponentHand;
         var cardinstancescript = cardToAdd.GetComponent<CardInstance>();
 
         cardinstancescript.SetTextVisability(false);

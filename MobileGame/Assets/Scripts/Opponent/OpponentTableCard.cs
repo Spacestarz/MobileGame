@@ -11,6 +11,7 @@ public class OpponentTableCard : CardPile
     public override void AddCard(Card cardToAdd)
     {
         base.AddCard(cardToAdd);
+        cardToAdd._CardOrigin = Card.CardOriginEnum.OpponentTable;
         var cardinstancescript = cardToAdd.GetComponent<CardInstance>();
         cardinstancescript.SetTextVisability(false);
         UpdateTable();

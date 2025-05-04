@@ -49,6 +49,7 @@ public class Dropzone : CardPile
     {
         base.AddCard(cardToAdd);
         var cardInstanceScript = cardToAdd.GetComponent<CardInstance>();
+        cardToAdd._CardOrigin = Card.CardOriginEnum.Dropzone;
 
         Debug.Log("addcard for dropzone");
 
@@ -221,6 +222,9 @@ public class Dropzone : CardPile
 
         var cardInstanceScript = Newcard.GetComponent<CardInstance>();
 
+        var CardOrigin = WhereIsCardFrom(Newcard);
+
+
         if (!_IsTakingAChance)
         {
             switch (result)
@@ -231,14 +235,7 @@ public class Dropzone : CardPile
                     SoundFXManager.instance.PlaySoundEffectClip(_NumberTenSound, transform, 20);
                     Debug.Log("Player put down a 10 card. Taking the dropzone to discard pile");
                     AddCard(Newcard);
-                    if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.Playerturn)
-                    {
-                        PlayerHand.instance.RemoveCard(Newcard);
-                    }
-                    else
-                    {
-                        OpponentHand.instance.RemoveCard(Newcard);
-                    }
+                    RemoveCardFromOriginList(CardOrigin, Newcard);
                     DropzoneToDiscardPile();
                     break;
 
@@ -246,14 +243,7 @@ public class Dropzone : CardPile
                 case CardResults.FourInARow:
                     Debug.Log("4 in a row");
                     AddCard(Newcard);
-                    if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.Playerturn)
-                    {
-                        PlayerHand.instance.RemoveCard(Newcard);
-                    }
-                    else
-                    {
-                        OpponentHand.instance.RemoveCard(Newcard);
-                    }
+                   RemoveCardFromOriginList(CardOrigin, Newcard);
 
                     DropzoneToDiscardPile();
                     break;
@@ -261,14 +251,9 @@ public class Dropzone : CardPile
                 case CardResults.NormalHigher:
                     Debug.Log("normal higher");
                     AddCard(Newcard);
-                    if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.Playerturn)
-                    {
-                        PlayerHand.instance.RemoveCard(Newcard);
-                    }
-                    else
-                    {
-                        OpponentHand.instance.RemoveCard(Newcard);
-                    }
+
+                  RemoveCardFromOriginList(CardOrigin, Newcard);
+                    
                     break;
 
 
@@ -305,6 +290,64 @@ public class Dropzone : CardPile
             return;
         }
        
+    }
+
+    public void RemoveCardFromOriginList(Card.CardOriginEnum origin , Card card)
+    {
+        switch (origin)
+        {
+            case Card.CardOriginEnum.PlayerHand:
+                Debug.LogWarning(" Calling to Remove Card from PlayerHand");
+                PlayerHand.instance.RemoveCard(card);
+                break;
+
+            case Card.CardOriginEnum.PlayerTable:
+                Debug.LogWarning(" Calling to Remove Card from Playertable");
+                PlayerTableCards.instance.RemoveCard(card);
+                break ;
+
+            case Card.CardOriginEnum.OpponentHand:
+                Debug.LogWarning("Calling to Remove Card from Opponenthand");
+                OpponentHand.instance.RemoveCard(card);
+                break;
+
+            case Card.CardOriginEnum.OpponentTable:
+                Debug.LogWarning("Calling to Remove Card from OpponentTable");
+                OpponentTableCard.Instance.RemoveCard(card);
+                break;
+
+            default:
+                Debug.LogWarning("unknown origin");
+                break;
+        }
+    }
+
+    public Card.CardOriginEnum WhereIsCardFrom(Card card)
+    {
+        Card.CardOriginEnum Origin = card._CardOrigin;
+
+        switch (Origin)
+        {
+            case Card.CardOriginEnum.PlayerHand:
+                Debug.LogWarning("Card from PlayerHand");
+                return Card.CardOriginEnum.PlayerHand;
+
+            case Card.CardOriginEnum.PlayerTable:
+                Debug.LogWarning("Card from Playertable");
+                return Card.CardOriginEnum.PlayerTable;
+
+            case Card.CardOriginEnum.OpponentHand:
+                Debug.LogWarning("Card from Opponenthand");
+                return Card.CardOriginEnum.OpponentHand;
+
+            case Card.CardOriginEnum.OpponentTable:
+                Debug.LogWarning("Card from OpponentTable");
+                return Card.CardOriginEnum.OpponentTable;
+
+            default:
+                Debug.LogWarning("unknown origin");
+                return Card.CardOriginEnum.unknown;
+        }
     }
 
     public void ChangeDrawCardText()

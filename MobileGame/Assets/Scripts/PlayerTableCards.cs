@@ -13,6 +13,7 @@ public class PlayerTableCards : CardPile
     {
         base.AddCard(cardToAdd);
         var cardInstanceScript = cardToAdd.GetComponent<CardInstance>();
+        cardToAdd._CardOrigin = Card.CardOriginEnum.PlayerTable;
 
         if (cards.Count <=3) 
             

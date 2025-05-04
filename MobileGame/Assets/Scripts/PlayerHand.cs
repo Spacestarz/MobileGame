@@ -27,6 +27,7 @@ public class PlayerHand : CardPile
     {
         base.AddCard(cardToAdd);
         cardToAdd.TagForCanBePickedUp(true);
+        cardToAdd._CardOrigin = Card.CardOriginEnum.PlayerHand;
 
         cardToAdd.gameObject.name = "PlayerHandCards";
         GameObject parentObject = GameObject.Find("AllPlayerHandCards");

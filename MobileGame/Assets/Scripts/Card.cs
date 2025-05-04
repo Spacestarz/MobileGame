@@ -10,6 +10,8 @@ public class Card : MonoBehaviour
     public SuitEnum _suit { get; private set; }
     public RankEnum _rank { get; private set; }
 
+    public CardOriginEnum _CardOrigin { get; set; }
+
     [SerializeField] private GameObject _visualsUp;
     [SerializeField] private GameObject _visualsDown;
 
@@ -46,6 +48,18 @@ public class Card : MonoBehaviour
         King = 13,
     }
 
+    public enum CardOriginEnum //where card is from
+    {
+        PlayerHand,
+        PlayerTable,
+        OpponentHand,
+        OpponentTable,
+        Dropzone,
+        DiscardPile, 
+        unknown
+
+    }
+
 
     private void Awake()
     {
@@ -79,6 +93,8 @@ public class Card : MonoBehaviour
         }
      
     }
+
+    
 
     public void SetCardFaceUp(bool faceup) 
     {

@@ -188,7 +188,7 @@ public class TrackingTurns : MonoBehaviour
             }
             else if (_CurrentTurn == TurnState.OpponentTurn)
             {
-                Debug.Log("checkthing opponenthand");
+                Debug.Log("checkcardVSdropzone  opponenthand");
 
                 Card lowestValidCard = null;
 
@@ -197,6 +197,7 @@ public class TrackingTurns : MonoBehaviour
                 {
                     foreach (var card in OpponentTableCard.Instance.cards)
                     {
+                        Debug.LogWarning("AI IS TAKING FROM ITS TABLECARDS");
                         //need to fix so it can only take those that are "visible" not those under
                         if (card._rank >= latestCard._rank)
                         {

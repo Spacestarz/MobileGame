@@ -20,7 +20,7 @@ namespace Listsextensions
                 list[k] = list[n];
                 list[n] = card;
             }
-            Debug.Log("done shuffling");
+            //Debug.Log("done shuffling");
         }
     }
 }

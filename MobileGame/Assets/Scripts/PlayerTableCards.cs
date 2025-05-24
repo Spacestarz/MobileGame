@@ -26,7 +26,8 @@ public class PlayerTableCards : CardPile
             cardToAdd.gameObject.transform.SetParent(parentObject.transform, false);
             // GetCardInstanceUpsideDown(cardToAdd);
             cardInstanceScript.SetTextVisability(false);
-            Debug.Log("getting upside down card");
+
+           // Debug.Log("getting upside down card");
         }
         else
         {
@@ -42,7 +43,8 @@ public class PlayerTableCards : CardPile
 
             GetCardInstance(cardToAdd);//updating table here
             cardToAdd.SetCardFaceUp(true); //3 should now be up
-            Debug.Log("3 should be able to be visible");
+
+          //  Debug.Log("3 should be able to be visible");
            // Debug.Log("getting NORMAL card");
         }
 
@@ -126,6 +128,11 @@ public class PlayerTableCards : CardPile
     [Button]
     public void MakeVisibleCardsInteractable()
     {
+        if (LastPhase.Instance.LastPhaseActive == false)
+        {
+            return;
+        }
+
         foreach (var card in cards)
         {
             //make the cards with the tag swap be interactable
@@ -140,6 +147,11 @@ public class PlayerTableCards : CardPile
     [Button]
     public void MakeInvisibleCardsInteractable()
     {
+        if (LastPhase.Instance.LastPhaseActive == false)
+        {
+            return;
+        }
+
         foreach(var card in cards)
         {
             if (card.CompareTag("NonInteractable"))

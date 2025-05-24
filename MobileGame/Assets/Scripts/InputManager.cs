@@ -50,19 +50,19 @@ public class InputManager : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("click");
+            //Debug.Log("click");
             Vector2 mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             RaycastHit2D hit = Physics2D.Raycast(mousepos, Vector2.zero);
 
             if (hit.collider != null && hit.collider.CompareTag("Card") && _CardHeld == null)
             {
-                Debug.Log("hit a card");
+                //Debug.Log("hit a card");
                 _CardHeld = hit.collider.gameObject;
             }
             else
             {
-                Debug.Log("no card here");
+                //Debug.Log("no card here");
             }
         }
 
@@ -116,7 +116,7 @@ public class InputManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Nope cardswap logic. Inputmanager row 111");
+               // Debug.Log("Nope cardswap logic. Inputmanager row 111");
 
             }
 
@@ -132,7 +132,7 @@ public class InputManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("dropzone not here");
+               // Debug.Log("dropzone not here");
             }
 
             _followMouse = false;

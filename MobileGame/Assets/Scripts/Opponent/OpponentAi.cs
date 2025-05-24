@@ -6,9 +6,6 @@ public class OpponentAi : CardPile
 {
     public static OpponentAi Instance;
 
-
-
-
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -24,14 +21,25 @@ public class OpponentAi : CardPile
 
    public void OpponentTurn()
    {
+
+        WinCheck(); 
+
         HaveAtLeast3Cards();
         CanIPlayAnyCard();
-        if (OpponentHand.instance.cards.Count == 0)
+        if (OpponentHand.instance.cards.Count == 0 )
         {
-            Debug.LogWarning("opponent have no cards in hand!");
-           
+            Debug.LogWarning("opponent have no cards in hand! It will now take from its tablecards");
         }
+
    }
+
+    public void WinCheck()
+    {
+      if (OpponentHand.instance.cards.Count ==0 && OpponentTableCard.Instance.cards.Count == 0)
+      {
+            Debug.LogWarning("AI HAS WON");
+      }
+    }
 
     private void HaveAtLeast3Cards()
     {

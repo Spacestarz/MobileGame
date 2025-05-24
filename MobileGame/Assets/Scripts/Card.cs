@@ -100,7 +100,9 @@ public class Card : MonoBehaviour
     {
         TextMeshPro[] textComponents = GetComponentsInChildren<TextMeshPro>(true);
         var instanceRef = this.GetComponent<CardInstance>();
-        Debug.Log("flipcard method card row 84");
+
+        //Debug.Log("flipcard method card row 84");
+
         //Debug.Log("textcomponent lenghts is " + " " + textComponents.Length);
 
         _isUp = faceup;
@@ -178,12 +180,12 @@ public class Card : MonoBehaviour
         if (_isUp == true)
         {
             _renderUp.sortingOrder = 1;
-            Debug.Log("sortingorder of this card is now 1 it should be above other cards");
+            //Debug.Log("sortingorder of this card is now 1 it should be above other cards");
         }
         else
         {
             _renderDown.sortingOrder = 0;
-            Debug.Log("sortingorder of this card is now 0");
+           // Debug.Log("sortingorder of this card is now 0");
         }
     }
 

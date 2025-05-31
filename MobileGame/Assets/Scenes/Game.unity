@@ -2598,6 +2598,7 @@ MonoBehaviour:
   cards: []
   startAOpponent: {x: -2.68, y: 4.08, z: -0.02362273}
   StartBOpponent: {x: 2.5, y: 4.05, z: -0.02362273}
+  endingturnON: 0
 --- !u!4 &1396152553
 Transform:
   m_ObjectHideFlags: 0

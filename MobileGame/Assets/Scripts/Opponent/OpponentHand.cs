@@ -8,7 +8,7 @@ public class OpponentHand : CardPile
     public Vector3 startAOpponent;
     public Vector3 StartBOpponent;
 
-    private bool endingturnON = false;
+    public bool endingturnON = false;
 
 
     private void Awake()
@@ -74,13 +74,6 @@ public class OpponentHand : CardPile
 
             cards[i].transform.position = position;
             // card.gameObject.transform.position = position;
-        }
-
-        if (Dropzone.Instance._IsTakingAChance == false)
-        {
-            Debug.LogWarning("takingachance is false checking if opponent can play card");
-            TrackingTurns.Instance.CheckCardsVSDropZone();
-            Debug.LogWarning("OpponentHand UpdateHandOpponent");
         }
     }
 }

@@ -33,6 +33,11 @@ public class OpponentAi : CardPile
 
    }
 
+    public void CardsandDropZoneCheckAI()
+    {
+
+    }
+
     public void WinCheck()
     {
       if (OpponentHand.instance.cards.Count ==0 && OpponentTableCard.Instance.cards.Count == 0)
@@ -66,11 +71,13 @@ public class OpponentAi : CardPile
     public void EndAITurnDelay()
     {
         Invoke("EndAiTurn", 2f);
+        OpponentHand.instance.endingturnON = true;
     }
 
     public void EndAiTurn()
     {
         TrackingTurns.Instance.EndTurn();
+        OpponentHand.instance.endingturnON = false;
     }
 
 

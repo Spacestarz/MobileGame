@@ -22,6 +22,7 @@ public class Card : MonoBehaviour
     [SerializeField] private GameObject _numberDown;
 
     private bool _isUp = false;
+    private bool _wasFaceUpBeforeHidden = false;
 
     public enum SuitEnum //Here is the suits
     {
@@ -237,6 +238,23 @@ public class Card : MonoBehaviour
                     return null;
                 }
         }
+    }
+
+    public void HideAllVisuals()
+    {
+        var instanceRef = this.GetComponent<CardInstance>();
+        _wasFaceUpBeforeHidden = _isUp;
+
+        _visualsDown.SetActive(false);
+        _visualsUp.SetActive(false);
+
+        instanceRef.SetTextVisability(false);
+        
+    }
+
+    public void ShowAllVisuals()
+    {
+        SetCardFaceUp(_wasFaceUpBeforeHidden);
     }
 }
 

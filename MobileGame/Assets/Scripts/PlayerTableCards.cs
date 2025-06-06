@@ -169,4 +169,22 @@ public class PlayerTableCards : CardPile
         PlayerHand.instance.cards.Clear();
         EveryCard.instance.HowManyCardsLeft();
     }
+
+    
+   public void HideTableCards()
+    {
+        foreach (var card in cards)
+        {
+            card.HideAllVisuals();
+        }
+    }
+
+    
+    public void ShowTableCards()
+    {
+        foreach(var card in cards)
+        {
+            card.ShowAllVisuals();
+        }
+    }
 }

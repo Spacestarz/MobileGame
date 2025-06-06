@@ -46,6 +46,7 @@ public class StartSwappingBeforeStart : MonoBehaviour
     public void TurnOnGameStage()
     {
         ActivateChildren(_GameStage, true);
+        PlayerTableCards.instance.HideTableCards();
     }
 
 

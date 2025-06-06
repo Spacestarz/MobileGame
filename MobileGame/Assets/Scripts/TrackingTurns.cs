@@ -346,7 +346,7 @@ public class TrackingTurns : MonoBehaviour
                 EveryCard.instance.GetCard();
             }
 
-           if (PlayerHand.instance.cards.Count > 3)
+           if (PlayerHand.instance.cards.Count >= 3)
             {
                 PlayerHand.instance.UpdateHand();
             }

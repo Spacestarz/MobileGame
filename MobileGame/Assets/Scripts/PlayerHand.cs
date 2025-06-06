@@ -10,6 +10,9 @@ public class PlayerHand : CardPile
     public Vector3 startAPlayer;
     public Vector3 StartBPlayer;
 
+    public Vector3 StartCPlayer;
+    public Vector3 StartDPlayer;
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -60,6 +63,13 @@ public class PlayerHand : CardPile
         //make so it will update its position etc
         var objectcount = cards.Count;
 
+        if (objectcount >= 7)
+        {
+            updateHandNextLocation();
+            return;
+        }
+        
+
         var A = startAPlayer;
         var B = StartBPlayer;
 
@@ -83,5 +93,34 @@ public class PlayerHand : CardPile
             TrackingTurns.Instance.CheckCardsVSDropZone();
         }
 
+    }
+
+    public void updateHandNextLocation()
+    {
+        Debug.Log("New locations for player caards");
+
+        var C = StartCPlayer; 
+        var D = StartDPlayer; 
+
+        Vector3 direction = (D - C).normalized;
+        float totalDistance = Vector3.Distance(C, D);
+        float step = totalDistance / (cards.Count + 1);
+
+        for (int i = 0; i < cards.Count; i++)
+        {
+            Vector3 position = C + direction * step * (i + 1);
+
+            cards[i].transform.position = position;
+
+            var cardinstance = cards[i].GetComponent<CardInstance>();
+            cardinstance.UpdateOrgPos(position);
+
+            // card.gameObject.transform.position = position;
+        }
+
+        if (StartSwappingBeforeStart.instance._SwappingPhase == false)
+        {
+            TrackingTurns.Instance.CheckCardsVSDropZone();
+        }
     }
 }

@@ -32,12 +32,25 @@ public class LastPhase : MonoBehaviour
         LastPhaseActive = true;
         Dropzone.Instance._IsTakingAChance = true;
 
-        PlayerTableCards.instance.MakeVisibleCardsInteractable();
         
+        if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.OpponentTurn)
+        {
+            //Opponent logic here: 
+        }
+        else
+        {
+            //playerturn logic
+            PlayerTableCards.instance.MakeVisibleCardsInteractable();
+
+        }
+
+
         Debug.LogWarning("lastphase active player");
         //this i will activate when the player have no cards in their hand.
         //and want to activate the cards on the table
     }
+
+    
 
     public void endlastphase()
     {

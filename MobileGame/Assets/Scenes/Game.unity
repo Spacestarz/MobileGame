@@ -1836,7 +1836,7 @@ Transform:
   m_GameObject: {fileID: 986410278}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.19, y: -1.44, z: 0.02611149}
+  m_LocalPosition: {x: -2.68, y: -2.48, z: 0.02611149}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2053,8 +2053,8 @@ MonoBehaviour:
   cards: []
   startAPlayer: {x: -2.68, y: -4.17, z: -0.02362273}
   StartBPlayer: {x: 2.5, y: -4.17, z: -0.02362273}
-  StartCPlayer: {x: -2.19, y: -1.44, z: 0.02611149}
-  StartDPlayer: {x: 2.07, y: -1.52, z: 0.02611149}
+  StartCPlayer: {x: -2.68, y: -2.48, z: 0.02611149}
+  StartDPlayer: {x: 2.53, y: -2.51, z: 0.02611149}
 --- !u!1 &1073244546
 GameObject:
   m_ObjectHideFlags: 0
@@ -3177,7 +3177,7 @@ Transform:
   m_GameObject: {fileID: 1785151840}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.07, y: -1.52, z: 0.02611149}
+  m_LocalPosition: {x: 2.53, y: -2.51, z: 0.02611149}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

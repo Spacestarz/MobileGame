@@ -63,23 +63,72 @@ public class PlayerHand : CardPile
         //make so it will update its position etc
         var objectcount = cards.Count;
 
-        if (objectcount >= 7)
+        if (objectcount >= 5)
         {
-            updateHandNextLocation();
+            //splitting cards first 6 cards are here and rest go to the second location.
+            UpdateHandWithOverflow();
             return;
         }
         
+        UpdateHandOriginalLocation(0,cards.Count);
+
+        if (StartSwappingBeforeStart.instance._SwappingPhase == false)
+        {
+            TrackingTurns.Instance.CheckCardsVSDropZone();
+        }
+    }
+
+    private void UpdateHandWithOverflow()
+    {
+        //placing first  6 cards in the orgin location
+        UpdateHandOriginalLocation(0, 6);
+
+        //placing remaining cards in the second location
+        UpdateHandSecondLocation(6, cards.Count);
+
+        if (StartSwappingBeforeStart.instance._SwappingPhase == false)
+        {
+            TrackingTurns.Instance.CheckCardsVSDropZone();
+        }
+    }
+
+    private void UpdateHandOriginalLocation (int startIndex, int EndIndex)
+    {
+
+        if (EndIndex > cards.Count)
+        {
+            Debug.LogError($"EndIndex {EndIndex} is greater than cards.count {cards.Count}");
+            EndIndex = cards.Count;
+        }
+
+        Debug.Log($"A position: {startAPlayer}");
+        Debug.Log($"B position: {StartBPlayer}");
+        Debug.Log($"Cards to place: {EndIndex - startIndex}");
+
+
+        Debug.Log($"UpdateHandOriginalLocation: startIndex={startIndex}, endIndex={EndIndex}, cards.Count={cards.Count}");
 
         var A = startAPlayer;
         var B = StartBPlayer;
 
         Vector3 direction = (B - A).normalized;
         float totalDistance = Vector3.Distance(A, B);
-        float step = totalDistance / (cards.Count + 1);
 
-        for (int i = 0; i < cards.Count; i++)
+        Debug.Log($"Total distance A to B: {totalDistance}");
+
+        int cardCount = EndIndex - startIndex;
+        float step = totalDistance / (cardCount + 1);
+
+        Debug.Log($"Step size: {step}");
+
+        for (int i = startIndex; i < EndIndex; i++)
         {
-            Vector3 position = A + direction * step * (i + 1);
+            Debug.Log($"Positioning card at index {i}");
+
+            Vector3 position = A + direction * step * (i - startIndex + 1);
+
+            Debug.Log($"Card {i} position: {position}");
+
 
             cards[i].transform.position = position;
 
@@ -88,27 +137,35 @@ public class PlayerHand : CardPile
 
             // card.gameObject.transform.position = position;
         }
-        if (StartSwappingBeforeStart.instance._SwappingPhase == false )
-        {
-            TrackingTurns.Instance.CheckCardsVSDropZone();
-        }
-
     }
 
-    public void updateHandNextLocation()
+    public void UpdateHandSecondLocation(int startIndex, int endIndex)
     {
-        Debug.Log("New locations for player caards");
+
+        if (endIndex > cards.Count)
+        {
+            Debug.LogError($"EndIndex {endIndex} is greater than cards.count {cards.Count}");
+            endIndex = cards.Count;
+        }
+
+        Debug.LogWarning("New locations for player caards");
 
         var C = StartCPlayer; 
         var D = StartDPlayer; 
 
         Vector3 direction = (D - C).normalized;
         float totalDistance = Vector3.Distance(C, D);
-        float step = totalDistance / (cards.Count + 1);
 
-        for (int i = 0; i < cards.Count; i++)
+
+        int cardCount = endIndex - startIndex;
+        float step = totalDistance / (cardCount + 1);
+
+
+        for (int i = startIndex; i < endIndex; i++)
         {
-            Vector3 position = C + direction * step * (i + 1);
+            Debug.Log($"UpdateHandSecondLocation: startIndex={startIndex}, endIndex={endIndex}, cards.Count={cards.Count}");
+
+            Vector3 position = C + direction * step * (i - startIndex + 1);
 
             cards[i].transform.position = position;
 
@@ -117,10 +174,6 @@ public class PlayerHand : CardPile
 
             // card.gameObject.transform.position = position;
         }
-
-        if (StartSwappingBeforeStart.instance._SwappingPhase == false)
-        {
-            TrackingTurns.Instance.CheckCardsVSDropZone();
-        }
+       
     }
 }

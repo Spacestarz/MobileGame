@@ -6,6 +6,7 @@ public class LastPhase : MonoBehaviour
     public static LastPhase Instance;
 
     public bool LastPhaseActive = false;
+    public bool LastPhaseAIActive = false;
     //here i will put logic with the last phase
     //when player have no cards in their hand and want to now activate tablecards cards
 
@@ -29,23 +30,24 @@ public class LastPhase : MonoBehaviour
     [Button]
     public void StartEndPhase() //this should work for both opponent and player
     {
-        LastPhaseActive = true;
         Dropzone.Instance._IsTakingAChance = true;
 
         
         if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.OpponentTurn)
         {
-            //Opponent logic here: 
+            LastPhaseAIActive = true;
         }
         else
         {
             //playerturn logic
+            LastPhaseActive = true;
+
             PlayerTableCards.instance.MakeVisibleCardsInteractable();
+            Debug.LogWarning("lastphase active player");
 
         }
 
 
-        Debug.LogWarning("lastphase active player");
         //this i will activate when the player have no cards in their hand.
         //and want to activate the cards on the table
     }
@@ -56,10 +58,17 @@ public class LastPhase : MonoBehaviour
     {
         Debug.Log("ending lastphase player");
         LastPhaseActive = false;
-        Dropzone.Instance._IsTakingAChance = true;
+        Dropzone.Instance._IsTakingAChance = false;
     }
 
-    public void CheckIfLastPhaseStillNeeded()
+    public void endLastPhaseAi()
+    {
+        Debug.Log("ending lastphase AI");
+        LastPhaseAIActive = false;
+        Dropzone.Instance._IsTakingAChance = false;
+    }
+
+    public void CheckIfLastPhaseStillNeededForPlayer()
     {
         int cardcount = 0;
 
@@ -70,7 +79,8 @@ public class LastPhase : MonoBehaviour
         }
         else
         {
-             LastPhaseActive = false;
+             endlastphase();
+            return;
         }
 
        //checking if any cards are in playertablecard if not then activate the invisible cards
@@ -89,5 +99,19 @@ public class LastPhase : MonoBehaviour
           
         }
     }
+
+    public void CheckIfLastPhaseStillNeededAI()
+    {
+        if (OpponentHand.instance.cards.Count == 0)
+        {
+
+        }
+        else
+        {
+            endLastPhaseAi();
+            return;
+        }
+    }
+
 
 }

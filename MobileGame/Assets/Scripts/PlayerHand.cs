@@ -51,10 +51,13 @@ public class PlayerHand : CardPile
         // Debug.Log($"Removing {cardToRemove._suit} with rank {cardToRemove._rank} from PlayerhandList");
     }
 
-    public void GetCardInstance(Card card)
+    public void CheckIfLastPhase()
     {
-        //var CardInstanceThing = MakeCards.Instance.CreateCardObject(card);
-        //UpdateHand(card);
+       if (cards.Count == 0 && PlayerTableCards.instance.cards.Count == 0)
+        {
+            Debug.LogWarning("activating last phase playerhand script row 58");
+            LastPhase.Instance.StartEndPhase();
+        }
     }
 
 

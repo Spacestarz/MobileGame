@@ -23,11 +23,16 @@ public class OpponentAi : CardPile
    {
 
         WinCheck(); 
+        if (LastPhase.Instance.LastPhaseAIActive == true)
+        {
+            LastPhase.Instance.CheckIfLastPhaseStillNeededAI();
+        }
 
         HaveAtLeast3Cards();
         CanIPlayAnyCard();
         if (OpponentHand.instance.cards.Count == 0 )
         {
+            LastPhase.Instance.StartEndPhase();
             Debug.LogWarning("opponent have no cards in hand! It will now take from its tablecards");
         }
 

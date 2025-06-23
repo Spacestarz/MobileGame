@@ -341,8 +341,20 @@ public class TrackingTurns : MonoBehaviour
 
             Debug.Log($"playerHAND cards count is: {PlayerHand.instance.cards.Count}");
 
+            if (LastPhase.Instance.LastPhaseActive)
+            {
+                LastPhase.Instance.CheckIfLastPhaseStillNeededForPlayer();
+                Debug.Log("checkingiflastphase is still needed for player. trackingturn script row 347");
+            }
+
+            PlayerHand.instance.CheckIfLastPhase();
+
             while (PlayerHand.instance.cards.Count < 3)
             {
+                if (EveryCard.instance.cards.Count == 0)
+                {
+                    break;
+                }
                 EveryCard.instance.GetCard();
             }
 
@@ -351,8 +363,10 @@ public class TrackingTurns : MonoBehaviour
                 PlayerHand.instance.UpdateHand();
             }
 
+
             _WhichTurnText.color = Color.green;
             DisableInput = false;
+
         }
     }
 }

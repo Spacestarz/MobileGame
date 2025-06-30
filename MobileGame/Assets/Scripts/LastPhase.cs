@@ -43,6 +43,7 @@ public class LastPhase : MonoBehaviour
             LastPhaseActive = true;
 
             PlayerTableCards.instance.MakeVisibleCardsInteractable();
+            PlayerTableCards.instance.ShowTableCards();
             Debug.LogWarning("lastphase active player");
 
         }
@@ -59,6 +60,8 @@ public class LastPhase : MonoBehaviour
         Debug.Log("ending lastphase player");
         LastPhaseActive = false;
         Dropzone.Instance._IsTakingAChance = false;
+        PlayerTableCards.instance.HideTableCards();
+        PlayerTableCards.instance.MakeCardsNonInteractable();
     }
 
     public void endLastPhaseAi()

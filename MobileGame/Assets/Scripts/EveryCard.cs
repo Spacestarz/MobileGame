@@ -42,8 +42,6 @@ public class EveryCard : CardPile
 
     void Start()
     {
-        
-
         //makes the card
         //1-4 for the suit and then the rank 1-13 for each of the suits 
 
@@ -147,6 +145,9 @@ public class EveryCard : CardPile
         card = cards[0];
         RemoveCard(card); //remove card from allcardslist
 
+        _HowmanyCardsLeft.text = cards.Count.ToString() + "" + "cards left in pile";
+
+
         //Debug.Log(Dropzone.Instance._IsTakingAChance);
 
         if (Dropzone.Instance._IsTakingAChance == true)
@@ -178,7 +179,6 @@ public class EveryCard : CardPile
 
         }
 
-        _HowmanyCardsLeft.text = cards.Count.ToString() + "" + "cards left in pile";
     }
 
     private void MoveToallCardsLocation()

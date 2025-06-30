@@ -19,24 +19,29 @@ public class OpponentAi : CardPile
         cards = new List<Card>();
     }
 
+    //this gets called everytime it is the AI's turn!
    public void OpponentTurn()
    {
 
         WinCheck(); 
+
         if (LastPhase.Instance.LastPhaseAIActive == true)
         {
             LastPhase.Instance.CheckIfLastPhaseStillNeededAI();
         }
 
         HaveAtLeast3Cards();
-        CanIPlayAnyCard();
+
+
         if (OpponentHand.instance.cards.Count == 0 )
         {
             LastPhase.Instance.StartEndPhase();
             Debug.LogWarning("opponent have no cards in hand! It will now take from its tablecards");
         }
 
-   }
+        CanIPlayAnyCard();
+
+    }
 
     public void CardsandDropZoneCheckAI()
     {
@@ -53,6 +58,13 @@ public class OpponentAi : CardPile
 
     private void HaveAtLeast3Cards()
     {
+        if (EveryCard.instance.cards.Count == 0)
+        {
+            Debug.Log("everycard have no cards return (opponentAI script row 63)");
+
+            return;
+        }
+
         while (OpponentHand.instance.cards.Count < 3)
         {
             EveryCard.instance.GetCard();

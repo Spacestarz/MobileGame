@@ -145,7 +145,7 @@ public class PlayerTableCards : CardPile
     }
 
     [Button]
-    public void MakeInvisibleCardsInteractable()
+    public void MakeInvisibleCardsInteractable() //these are the upside down cards!
     {
         if (LastPhase.Instance.LastPhaseActive == false)
         {
@@ -163,15 +163,32 @@ public class PlayerTableCards : CardPile
     }
 
     [Button]
-   public void NoMoreCardInHand()
+    public void MakeCardsNonInteractable()
+        //probarly neeed to change this.
+        //The problem is now all cards are called noninteractable so now idk
+        //the difference between the upside down and visible.
+    {
+        foreach (var card in cards)
+        {
+            if (card.CompareTag("Card"))
+            {
+                card.TagForCanBePickedUp(false);
+            }
+        }
+
+        Debug.Log("card in playertablecard is not interactable");
+        Debug.Log("playertablecards script row 180 method makecardsnoninteractable");
+    }
+
+    [Button]
+   public void NoMoreCardInPile()
     {
         EveryCard.instance.cards.Clear();
-        PlayerHand.instance.cards.Clear();
         EveryCard.instance.HowManyCardsLeft();
     }
 
-    
-   public void HideTableCards()
+
+    public void HideTableCards()
     {
         foreach (var card in cards)
         {
@@ -179,7 +196,7 @@ public class PlayerTableCards : CardPile
         }
     }
 
-    
+    [Button]
     public void ShowTableCards()
     {
         foreach(var card in cards)

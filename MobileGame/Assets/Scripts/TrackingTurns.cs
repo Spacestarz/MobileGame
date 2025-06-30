@@ -195,10 +195,10 @@ public class TrackingTurns : MonoBehaviour
                 //if opponent have no cards left in hand
                 if (OpponentHand.instance.cards.Count == 0)
                 {
+                    Debug.LogWarning("AI IS TAKING FROM ITS TABLECARDS");
+
                     foreach (var card in OpponentTableCard.Instance.cards)
                     {
-                        Debug.LogWarning("AI IS TAKING FROM ITS TABLECARDS");
-                        //need to fix so it can only take those that are "visible" not those under
                         if (card._rank >= latestCard._rank)
                         {
                             Debug.Log($"{card._suit} with rank {card._rank} can be put in cardzone");
@@ -213,11 +213,12 @@ public class TrackingTurns : MonoBehaviour
                         }
                         else
                         {
-                           
+                            Debug.LogWarning("else trackingturnscript row 216");
                         }
                     }
 
-                    return;
+                    Debug.LogWarning("a return was here trackingturnscript row 220");
+                    //return;
                 }
 
                 
@@ -250,7 +251,13 @@ public class TrackingTurns : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("opponent cant play any cards in TRACKINGTURN script");
+                    if (EveryCard.instance.cards.Count == 0)
+                    {
+                        Debug.Log("no cards in everycards ai will pick up all in dropzone");
+                        Dropzone.Instance.GetDropZonePile();
+                    }
+
+                    Debug.LogWarning("opponent cant play any cards in TRACKINGTURN script");
                     Dropzone.Instance._IsTakingAChance = true;
                     Dropzone.Instance._OnChangedChanceBool?.Invoke(); //invoke the action _onchangedchancebool in dropzone
                                                                       //also got a animatetodropzone in drozone row 316

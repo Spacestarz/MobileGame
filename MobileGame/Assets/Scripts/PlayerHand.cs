@@ -53,7 +53,9 @@ public class PlayerHand : CardPile
 
     public void CheckIfLastPhase()
     {
-       if (cards.Count == 0 && PlayerTableCards.instance.cards.Count == 0)
+        Debug.LogWarning("checkiflastphase method playerhand");
+
+       if (cards.Count == 0)
         {
             Debug.LogWarning("activating last phase playerhand script row 58");
             LastPhase.Instance.StartEndPhase();

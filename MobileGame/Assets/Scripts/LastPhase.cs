@@ -30,9 +30,7 @@ public class LastPhase : MonoBehaviour
     [Button]
     public void StartEndPhase() //this should work for both opponent and player
     {
-        Dropzone.Instance._IsTakingAChance = true;
 
-        
         if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.OpponentTurn)
         {
             LastPhaseAIActive = true;
@@ -42,17 +40,16 @@ public class LastPhase : MonoBehaviour
             //playerturn logic
             LastPhaseActive = true;
 
-            PlayerTableCards.instance.MakeVisibleCardsInteractable();
             PlayerTableCards.instance.ShowTableCards();
-            Debug.LogWarning("lastphase active player");
+            PlayerTableCards.instance.MakeVisibleCardsInteractable();
 
+            Debug.LogWarning("lastphase active player");
         }
 
 
         //this i will activate when the player have no cards in their hand.
         //and want to activate the cards on the table
     }
-
     
 
     public void endlastphase()
@@ -93,13 +90,14 @@ public class LastPhase : MonoBehaviour
             {
                 cardcount++;
             }
-            
         }
 
         if (cardcount == 0)
         {
             PlayerTableCards.instance.MakeInvisibleCardsInteractable();
-          
+            Dropzone.Instance._IsTakingAChance = true;
+
+            Debug.LogWarning("activating down card taking a chance is on! lastphase script row 104");
         }
     }
 
@@ -115,6 +113,4 @@ public class LastPhase : MonoBehaviour
             return;
         }
     }
-
-
 }

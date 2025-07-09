@@ -18,5 +18,24 @@ public class ButtonInteractable : MonoBehaviour
         _Button.interactable = canInteract;
         Debug.LogWarning($"Button interact set to {canInteract}");
     }
+
+    public void ChangeClickActionToGetDropzonePile()
+    {
+        // Remove all existing click listeners
+        _Button.onClick.RemoveAllListeners();
+
+        // Add the new one
+        _Button.onClick.AddListener(Dropzone.Instance.GetDropZonePile);
+
+    }
+
+    public void ChangeClickActionToGetCard()
+    {
+        // Remove all existing click listeners
+        _Button.onClick.RemoveAllListeners();
+
+        // Add the new one
+        _Button.onClick.AddListener(EveryCard.instance.GetCard);
+    }
 }
 

@@ -131,7 +131,7 @@ public class TrackingTurns : MonoBehaviour
     {
         //will want to highlight end turn
         HighLight.Instance.HighLightMe();
-       // Debug.Log("highlighting end turn button");
+        Debug.Log("highlighting end turn button");
     }
 
     public void OnDisableHighLight()
@@ -165,14 +165,36 @@ public class TrackingTurns : MonoBehaviour
 
             if (_CurrentTurn == TurnState.Playerturn)
             {
-                foreach (var card in PlayerHand.instance.cards) //this is for playerhand
+                if (PlayerHand.instance.cards.Count == 0 )
                 {
-                    if (card._rank >= latestCard._rank || card._rank == Card.RankEnum.Ten)
+                    Debug.Log("comparing dropzonevscard with player tablecards with tag Card");
+                    foreach (var card in PlayerTableCards.instance.cards)
                     {
-                        Debug.Log($"{card._suit} with rank {card._rank} can be put in cardzone PLAYER");
-                        canPLaceCard = true;
+                        //comparing the cards with only the tag Card so it dont compare those that are not interactable
+                        if (card.CompareTag("Card"))
+                        {
+                            if (card._rank >= latestCard._rank || card._rank == Card.RankEnum.Ten)
+                            {
+                                Debug.Log($"{card._suit} with rank {card._rank} can be put in cardzone PLAYER");
+                                canPLaceCard = true;
+                            }
+                        }
+                        
                     }
                 }
+                else
+                {
+                    foreach (var card in PlayerHand.instance.cards) //this is for playerhand
+                    {
+                        if (card._rank >= latestCard._rank || card._rank == Card.RankEnum.Ten)
+                        {
+                            Debug.Log($"{card._suit} with rank {card._rank} can be put in cardzone PLAYER");
+                            canPLaceCard = true;
+                        }
+                    }
+                }
+
+                   
 
                 if (!canPLaceCard)
                 {
@@ -192,88 +214,28 @@ public class TrackingTurns : MonoBehaviour
 
                 Card lowestValidCard = null;
 
-                //if opponent have no cards left in hand
-                if (OpponentHand.instance.cards.Count == 0)
+                //if opponent have no cards left in hand or the lastphaseai is active
+                if (OpponentHand.instance.cards.Count == 0 || LastPhase.Instance.LastPhaseAIActive)
                 {
-                    Debug.LogWarning("AI IS TAKING FROM ITS TABLECARDS");
-
-                    foreach (var card in OpponentTableCard.Instance.cards)
-                    {
-                        if (card._rank >= latestCard._rank)
-                        {
-                            Debug.Log($"{card._suit} with rank {card._rank} can be put in cardzone");
-
-                            if (lowestValidCard == null || card._rank < lowestValidCard._rank)
-                            {
-                                lowestValidCard = card;
-
-                                Debug.Log($"the lowest valid card in the opponenthand is {card._suit} with rank {card._rank}");
-                            }
-
-                        }
-                        else
-                        {
-                            Debug.LogWarning("else trackingturnscript row 216");
-                        }
-                    }
-
-                    Debug.LogWarning("a return was here trackingturnscript row 220");
-                    //return;
+                    OpponentAi.Instance.AItablecardsVsDropzone();
+                    return;
                 }
 
-                
-
-                foreach (var card in OpponentHand.instance.cards) //this is for opponent hand
-                {
-                    if (card._rank >= latestCard._rank)
-                    {
-                        Debug.Log($"{card._suit} with rank {card._rank} can be put in cardzone");
-
-                        if (lowestValidCard == null || card._rank < lowestValidCard._rank)
-                        {
-                            lowestValidCard = card;
-
-                            Debug.Log($"the lowest valid card in the opponenthand is {card._suit} with rank {card._rank}");
-                        }
-
-                    }
-                    else
-                    {
-                        // Debug.LogWarning("sending an observer to change draw card text");
-                    }
-                }
-
-                if (lowestValidCard != null)
-                {
-                    Debug.Log($"Opponent plays the lowest valid card: {lowestValidCard._suit} with rank {lowestValidCard._rank}");
-                    Dropzone.Instance.PutCardInDropzone(lowestValidCard);
-                    lowestValidCard = null;
-                }
-                else
-                {
-                    if (EveryCard.instance.cards.Count == 0)
-                    {
-                        Debug.Log("no cards in everycards ai will pick up all in dropzone");
-                        Dropzone.Instance.GetDropZonePile();
-                    }
-
-                    Debug.LogWarning("opponent cant play any cards in TRACKINGTURN script");
-                    Dropzone.Instance._IsTakingAChance = true;
-                    Dropzone.Instance._OnChangedChanceBool?.Invoke(); //invoke the action _onchangedchancebool in dropzone
-                                                                      //also got a animatetodropzone in drozone row 316
-                }
+                OpponentAi.Instance.AiHandCardsVsDropzone();
 
             }
         }
         else
         {
             NOCardsInDropZone();
+            Debug.Log("nocards in dropzone");
         }
+
     }
 
 
-
-    public void NOCardsInDropZone()
+    //this  should be in opponentAI script only works for AI anyway
+    public void NOCardsInDropZone() 
     {
             if (_CurrentTurn == TurnState.OpponentTurn)
             {
@@ -305,17 +267,17 @@ public class TrackingTurns : MonoBehaviour
             }
     }
 
-
-
-    public void OpponentCheck()
-    {
-        //same as above but with opponent
-    }
-
     public void EndTurn()
     {
         takeAChanceButton.SetInteractable(false);
-        //end logic here 
+
+        if (EveryCard.instance.cards.Count == 0 )
+        {
+            if (Dropzone.Instance._ChangedDefaultText == false)
+            {
+                Dropzone.Instance.LastPhaseButtonTextChangeDefault();
+            }
+        }
 
         if (_CurrentTurn == TurnState.Playerturn)
         {
@@ -369,10 +331,14 @@ public class TrackingTurns : MonoBehaviour
             {
                 PlayerHand.instance.UpdateHand();
             }
+           else
+            {
+                CheckCardsVSDropZone();
+                Debug.Log("playerhand cards less than 3 trackingturn script row 314. Moving on to checkcardvsdropzone");
+            }
 
-
-            _WhichTurnText.color = Color.green;
-            DisableInput = false;
+           _WhichTurnText.color = Color.green;
+           DisableInput = false;
 
         }
     }

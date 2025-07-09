@@ -149,6 +149,7 @@ public class PlayerTableCards : CardPile
     {
         if (LastPhase.Instance.LastPhaseActive == false)
         {
+            Debug.Log("lastphase is not active returning");
             return;
         }
 

@@ -249,12 +249,17 @@ public class Card : MonoBehaviour
         _visualsUp.SetActive(false);
 
         instanceRef.SetTextVisability(false);
+
+        Debug.Log($"[HIDE] Card: {gameObject.name} | Frame: {Time.frameCount} | isUp: {_isUp} | wasFaceUpBeforeHidden: {_wasFaceUpBeforeHidden}");
+
+       // Debug.LogWarning($"hiding visual it is {_wasFaceUpBeforeHidden} ");
         
     }
 
     public void ShowAllVisuals()
     {
         SetCardFaceUp(_wasFaceUpBeforeHidden);
+        Debug.LogWarning($"showallvisual the wasupbefore hidden is: {_wasFaceUpBeforeHidden}");
     }
 }
 

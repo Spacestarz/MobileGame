@@ -37,11 +37,13 @@ public class Dropzone : CardPile
 
     [SerializeField] private TextMeshProUGUI _textOnDrawButton;
 
+    public bool _ChangedDefaultText = false;
+    private ButtonInteractable _drawbuttonScript;
     private string _DefaultTextDrawButton = "Draw";
 
     private float _DefaultFontSizeDrawButton = 24;
 
-    public Button DrawButton;
+    public Button _DrawButton;
 
     public Action _OnChangedChanceBool;
 
@@ -127,7 +129,17 @@ public class Dropzone : CardPile
         }
         _IsTakingAChance = false;
         Debug.Log("taking a chance bool is now false");
+    }
 
+    public void LastPhaseButtonTextChangeDefault()
+    {
+        _DefaultTextDrawButton = "Get card pile"; //take a leap
+        _DefaultFontSizeDrawButton = 19;
+        Debug.Log("make button text to get pile");
+        _ChangedDefaultText = true;
+
+        _drawbuttonScript = _DrawButton.GetComponent<ButtonInteractable>();
+        _drawbuttonScript.ChangeClickActionToGetDropzonePile();
     }
 
 
@@ -217,6 +229,7 @@ public class Dropzone : CardPile
 
     public void PutCardInDropzone(Card Newcard) 
     {
+
         _FirstInStackCard = null;
         var result = CanIGoInDropzone(Newcard);
 

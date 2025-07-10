@@ -7,6 +7,8 @@ public class LastPhase : MonoBehaviour
 
     public bool LastPhaseActive = false;
     public bool LastPhaseAIActive = false;
+
+    public bool TableCardsVisible = false;
     //here i will put logic with the last phase
     //when player have no cards in their hand and want to now activate tablecards cards
 
@@ -43,9 +45,19 @@ public class LastPhase : MonoBehaviour
             PlayerTableCards.instance.ShowTableCards();
             PlayerTableCards.instance.MakeVisibleCardsInteractable();
 
+            if (PlayerTableCards.instance.cards.Count <= 3)
+            {
+                Dropzone.Instance._IsTakingAChance = true;
+                Debug.Log("dropzone taking a chance going to true. Lastphase script startendphase method");
+
+                if (!TableCardsVisible)
+                {
+                    PlayerTableCards.instance.ShowTableCards();
+                }
+            }
+
             Debug.LogWarning("lastphase active player");
         }
-
 
         //this i will activate when the player have no cards in their hand.
         //and want to activate the cards on the table
@@ -74,9 +86,9 @@ public class LastPhase : MonoBehaviour
 
         //checking if any card is in playerhand
        if  (PlayerHand.instance.cards.Count == 0)
-        {
+       {
             
-        }
+       }
         else
         {
              endlastphase();
@@ -87,9 +99,9 @@ public class LastPhase : MonoBehaviour
         foreach (var card in PlayerTableCards.instance.cards)
         {
            if ( card.CompareTag("Card"))
-            {
+           {
                 cardcount++;
-            }
+           }
         }
 
         if (cardcount == 0)

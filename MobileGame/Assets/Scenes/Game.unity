@@ -780,6 +780,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LastPhaseActive: 0
+  LastPhaseAIActive: 0
 --- !u!1 &545268779
 GameObject:
   m_ObjectHideFlags: 0
@@ -1642,7 +1643,9 @@ MonoBehaviour:
   _NumberTenSound: {fileID: 8300000, guid: e367972d8418ef348b714cf16cd76b24, type: 3}
   _IsTakingAChance: 0
   _textOnDrawButton: {fileID: 642257531}
-  DrawButton: {fileID: 827815383}
+  _ChangedDefaultText: 0
+  _drawbuttonScript: {fileID: 827815386}
+  _DrawButton: {fileID: 827815383}
 --- !u!4 &932022879
 Transform:
   m_ObjectHideFlags: 0

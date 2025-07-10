@@ -62,6 +62,14 @@ public class PlayerHand : CardPile
         }
     }
 
+    public void WinCheckPlayer()
+    {
+        if (PlayerHand.instance.cards.Count == 0 && PlayerTableCards.instance.cards.Count == 0)
+        {
+            Debug.LogWarning("PLAYER WON CONGRATZ");
+        }
+    }
+
 
     public void UpdateHand()
     {

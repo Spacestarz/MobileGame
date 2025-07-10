@@ -139,7 +139,7 @@ public class PlayerTableCards : CardPile
             if (card.CompareTag("Swap"))
             {
                 card.TagForCanBePickedUp(true);
-                Debug.Log("all cards with tag swap can nog be interacted with");
+               // Debug.Log("all cards with tag swap can nog be interacted with");
             }
         }
     }
@@ -191,6 +191,8 @@ public class PlayerTableCards : CardPile
 
     public void HideTableCards()
     {
+        LastPhase.Instance.TableCardsVisible = false;
+
         foreach (var card in cards)
         {
             card.HideAllVisuals();
@@ -200,6 +202,8 @@ public class PlayerTableCards : CardPile
     [Button]
     public void ShowTableCards()
     {
+        LastPhase.Instance.TableCardsVisible = true;
+
         foreach(var card in cards)
         {
             card.ShowAllVisuals();

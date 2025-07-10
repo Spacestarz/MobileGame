@@ -38,7 +38,7 @@ public class Dropzone : CardPile
     [SerializeField] private TextMeshProUGUI _textOnDrawButton;
 
     public bool _ChangedDefaultText = false;
-    private ButtonInteractable _drawbuttonScript;
+    [SerializeField] private ButtonInteractable _drawbuttonScript;
     private string _DefaultTextDrawButton = "Draw";
 
     private float _DefaultFontSizeDrawButton = 24;
@@ -138,8 +138,22 @@ public class Dropzone : CardPile
         Debug.Log("make button text to get pile");
         _ChangedDefaultText = true;
 
-        _drawbuttonScript = _DrawButton.GetComponent<ButtonInteractable>();
-        _drawbuttonScript.ChangeClickActionToGetDropzonePile();
+        if (_DrawButton != null)
+        {
+            _drawbuttonScript = _DrawButton.GetComponent<ButtonInteractable>();
+            if (_drawbuttonScript != null)
+            {
+                _drawbuttonScript.ChangeClickActionToGetDropzonePile();
+            }
+            else
+            {
+                Debug.LogWarning("drawbutton script is null!");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("drawbutton is null!");
+        }
     }
 
 
@@ -448,6 +462,15 @@ public class Dropzone : CardPile
             //waiting a bit so ai wont end turn to early
             yield return new WaitForSeconds(3f);
 
+            if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.Playerturn)
+            {
+                if (LastPhase.Instance.LastPhaseActive == true)
+                {
+                    PlayerHand.instance.WinCheckPlayer();
+                    Debug.Log("done a wincheck for player");
+                }
+            }
+
             if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.OpponentTurn)
             {
                 OpponentAi.Instance.EndAITurnDelay();
@@ -473,7 +496,6 @@ public class Dropzone : CardPile
         Debug.Log("adding all cards from dropzonepile to DiscardPILE. (dropzone row 341, method dropzonetodiscardpile)");
         Debug.Log($"Cards left in dropzone: {cards.Count}");
     }
-
 
     [Button]
     public void GetDropZonePile() 
@@ -512,7 +534,6 @@ public class Dropzone : CardPile
             }
 
         }
-
 
         Debug.Log($"Cards left in dropzone: {cards.Count}");
         Debug.Log($" disable input is: {TrackingTurns.Instance.DisableInput}");

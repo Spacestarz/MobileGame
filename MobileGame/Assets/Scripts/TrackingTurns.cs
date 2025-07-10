@@ -165,6 +165,12 @@ public class TrackingTurns : MonoBehaviour
 
             if (_CurrentTurn == TurnState.Playerturn)
             {
+                if(LastPhase.Instance.LastPhaseActive && PlayerTableCards.instance.cards.Count <= 3)
+                {
+                    Debug.Log("return trackingturn scriopt CheckCardsVSDropZone method row 170");
+                    return;
+                }
+
                 if (PlayerHand.instance.cards.Count == 0 )
                 {
                     Debug.Log("comparing dropzonevscard with player tablecards with tag Card");
@@ -194,8 +200,6 @@ public class TrackingTurns : MonoBehaviour
                     }
                 }
 
-                   
-
                 if (!canPLaceCard)
                 {
                     Debug.LogWarning("player cant put any card in dropzone");
@@ -222,7 +226,6 @@ public class TrackingTurns : MonoBehaviour
                 }
 
                 OpponentAi.Instance.AiHandCardsVsDropzone();
-
             }
         }
         else
@@ -270,14 +273,6 @@ public class TrackingTurns : MonoBehaviour
     public void EndTurn()
     {
         takeAChanceButton.SetInteractable(false);
-
-        if (EveryCard.instance.cards.Count == 0 )
-        {
-            if (Dropzone.Instance._ChangedDefaultText == false)
-            {
-                Dropzone.Instance.LastPhaseButtonTextChangeDefault();
-            }
-        }
 
         if (_CurrentTurn == TurnState.Playerturn)
         {
@@ -339,7 +334,15 @@ public class TrackingTurns : MonoBehaviour
 
            _WhichTurnText.color = Color.green;
            DisableInput = false;
+        }
 
+        if (EveryCard.instance.cards.Count == 0)
+        {
+            if (Dropzone.Instance._ChangedDefaultText == false)
+            {
+                Dropzone.Instance.LastPhaseButtonTextChangeDefault();
+                Debug.Log("change draw text trackingturn row 279");
+            }
         }
     }
 }

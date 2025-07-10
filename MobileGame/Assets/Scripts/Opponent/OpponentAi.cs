@@ -79,7 +79,6 @@ public class OpponentAi : CardPile
         Card LatestCard = Dropzone.Instance.cards[Dropzone.Instance.cards.Count - 1];
         Card lowestValidCard = null;
 
-
         Debug.Log("Aihandcardsvsdropzone opponentai script row 81");
 
         foreach (var card in OpponentHand.instance.cards) //this is for opponent hand

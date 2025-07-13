@@ -6,6 +6,9 @@ public class OpponentAi : CardPile
 {
     public static OpponentAi Instance;
 
+    public string _DialogText = "";
+    [SerializeField] private GameObject _DialogObject;
+
 
     private void Awake()
     {
@@ -97,6 +100,7 @@ public class OpponentAi : CardPile
             }
             else
             {
+
                 // Debug.LogWarning("sending an observer to change draw card text");
             }
         }
@@ -157,6 +161,11 @@ public class OpponentAi : CardPile
             Dropzone.Instance._OnChangedChanceBool?.Invoke(); //invoke the action _onchangedchancebool in dropzone
                                                               //also got a animatetodropzone in dropzone row 316
         }
+    }
+
+    public void ActivateDialog(string Dialog)
+    {
+
     }
 
 

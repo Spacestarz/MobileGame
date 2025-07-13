@@ -214,7 +214,7 @@ public class TrackingTurns : MonoBehaviour
             }
             else if (_CurrentTurn == TurnState.OpponentTurn)
             {
-                Debug.Log("checkcardVSdropzone  opponenthand");
+                Debug.Log("trackingturns script opponentturn row 217");
 
                 Card lowestValidCard = null;
 

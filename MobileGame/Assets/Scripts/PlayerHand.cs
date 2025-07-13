@@ -13,6 +13,9 @@ public class PlayerHand : CardPile
     public Vector3 StartCPlayer;
     public Vector3 StartDPlayer;
 
+    [SerializeField] private GameObject _PlayerWinStage;
+    public GameObject _PlayerLostStage;
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -24,6 +27,8 @@ public class PlayerHand : CardPile
         instance = this;
         DontDestroyOnLoad(gameObject);
         cards = new List<Card>();
+
+        turnOffWinAndLostStages();
     }
 
     public override void AddCard(Card cardToAdd)
@@ -66,7 +71,22 @@ public class PlayerHand : CardPile
     {
         if (PlayerHand.instance.cards.Count == 0 && PlayerTableCards.instance.cards.Count == 0)
         {
-            Debug.LogWarning("PLAYER WON CONGRATZ");
+            Debug.Log("activating player won stage");
+            ActivateChildren(_PlayerWinStage, true);
+        }
+    }
+
+    private void turnOffWinAndLostStages()
+    {
+        ActivateChildren(_PlayerWinStage, false);
+        ActivateChildren(_PlayerLostStage, false);
+    }
+
+    public void ActivateChildren(GameObject parent, bool activate)
+    {
+        foreach (Transform child in parent.transform)
+        {
+            child.gameObject.SetActive(activate);
         }
     }
 

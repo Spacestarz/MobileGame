@@ -49,7 +49,8 @@ public class OpponentAi : CardPile
     {
       if (OpponentHand.instance.cards.Count ==0 && OpponentTableCard.Instance.cards.Count == 0)
       {
-            Debug.LogWarning("AI HAS WON");
+            Debug.Log("activating player lost stage");
+            PlayerHand.instance.ActivateChildren(PlayerHand.instance._PlayerLostStage, true);
       }
     }
 
@@ -127,7 +128,8 @@ public class OpponentAi : CardPile
                 }
                 else
                 {
-                    Debug.LogWarning("else opponentai row 125");
+                    Debug.LogWarning("else opponentai row 125. Getting the dropzone");
+                Dropzone.Instance.GetDropZonePile();
                 }
             }
 
@@ -147,6 +149,7 @@ public class OpponentAi : CardPile
             {
                 Debug.Log("no cards in everycards ai will pick up all in dropzone");
                 Dropzone.Instance.GetDropZonePile();
+                return;
             }
 
             Debug.LogWarning("opponent cant play any cards in TRACKINGTURN script");

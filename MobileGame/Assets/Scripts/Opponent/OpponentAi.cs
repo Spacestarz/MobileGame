@@ -1,14 +1,12 @@
 using NaughtyAttributes;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using System.Collections;
 
 public class OpponentAi : CardPile
 {
     public static OpponentAi Instance;
-
-    public string _DialogText = "";
-    [SerializeField] private GameObject _DialogObject;
-
 
     private void Awake()
     {
@@ -68,6 +66,7 @@ public class OpponentAi : CardPile
 
         while (OpponentHand.instance.cards.Count < 3)
         {
+            Debug.Log("Ai have at least 3 card method getting cards");
             EveryCard.instance.GetCard();
         }
     }
@@ -124,19 +123,11 @@ public class OpponentAi : CardPile
                     if (lowestValidCard == null || card._rank < lowestValidCard._rank)
                     {
                         lowestValidCard = card;
-
-                        Debug.Log($"the lowest valid card in the opponenthand is {card._suit} with rank {card._rank}");
-                        GetLowerstValidCard( lowestValidCard );
                     }
-                    
-                }
-                else
-                {
-                    Debug.LogWarning("else opponentai row 125. Getting the dropzone");
-                Dropzone.Instance.GetDropZonePile();
                 }
             }
 
+        GetLowerstValidCard(lowestValidCard);
     }
 
     public void GetLowerstValidCard(Card lowestValidCard)
@@ -163,13 +154,8 @@ public class OpponentAi : CardPile
         }
     }
 
-    public void ActivateDialog(string Dialog)
-    {
-
-    }
-
-
-
+   
+    
     [Button]
     public void GuessCard()
     {
@@ -186,8 +172,8 @@ public class OpponentAi : CardPile
 
     public void EndAiTurn()
     {
-        TrackingTurns.Instance.EndTurn();
         OpponentHand.instance.endingturnON = false;
+        TrackingTurns.Instance.EndTurn();
     }
 
 

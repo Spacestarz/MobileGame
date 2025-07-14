@@ -306,6 +306,12 @@ public class Dropzone : CardPile
         if (_IsTakingAChance) 
         {
             StartCoroutine(animateToDropZone( Newcard, result));
+            if (result != CardResults.Illegal)
+            {
+                //removing card here to make it eassier because i have cardorigin and newcard here. 
+                RemoveCardFromOriginList(CardOrigin, Newcard);
+                Debug.Log("removing card from ORIGIN the result is not illegal");
+            }
             Debug.LogWarning("takinga chance method moving with dotween");
             // start coroutine animation
             //wait coroutine stuff
@@ -454,7 +460,12 @@ public class Dropzone : CardPile
         {
             Debug.Log("Play sound: Success");
             SoundFXManager.instance.PlaySoundEffectClip(_successSound, transform, 20);
-            AddCard(NewCard);
+            AddCard(NewCard); //removing card from origin in before method (putcardindropzone)
+            if (cardresult == CardResults.Ten)
+            {
+                DropzoneToDiscardPile();
+                Debug.Log("cardresult is ten moving cards to discardpile");
+            }
             TrackingTurns.Instance.DisableInput = true;
             TrackingTurns.Instance._OnCanInteractWithButton?.Invoke();
             Debug.Log("disables input");
@@ -529,6 +540,8 @@ public class Dropzone : CardPile
             }
             else
             {
+                OpponentDialog.Instance.ActivateDialog(" Great more cards for me.... Of course i diden't have a higher card");
+
                 OpponentHand.instance.AddCard(card);
                 Debug.Log("adding all cards from dropzonepile to opponenthand");
             }

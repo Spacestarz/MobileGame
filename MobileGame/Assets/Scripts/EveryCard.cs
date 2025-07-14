@@ -135,6 +135,7 @@ public class EveryCard : CardPile
     [Button]
     public void GetCard() //get card from the draw button
     {
+
         Debug.Log("getcard from everycard script 129");     
         if (cards.Count == 0)
         {
@@ -203,7 +204,5 @@ public class EveryCard : CardPile
     {
         _HowmanyCardsLeft.text = cards.Count.ToString() + "" + "cards left in pile";
     }
-
-
     
 }

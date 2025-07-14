@@ -1,6 +1,7 @@
 using NaughtyAttributes;
 using NUnit.Framework.Constraints;
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -300,6 +301,11 @@ public class TrackingTurns : MonoBehaviour
 
             OnDisableHighLight();
 
+            if (OpponentHand.instance.endingturnON)
+            {
+                return;
+            }
+
             _CurrentTurn = TurnState.Playerturn;
             _WhichTurnText.text = ("Your Turn");
 
@@ -345,4 +351,6 @@ public class TrackingTurns : MonoBehaviour
             }
         }
     }
+
+   
 }

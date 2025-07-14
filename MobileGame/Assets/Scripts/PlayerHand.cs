@@ -1,4 +1,5 @@
 using Mono.Cecil;
+using NaughtyAttributes;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -67,6 +68,7 @@ public class PlayerHand : CardPile
         }
     }
 
+    [Button]
     public void WinCheckPlayer()
     {
         if (PlayerHand.instance.cards.Count == 0 && PlayerTableCards.instance.cards.Count == 0)
@@ -134,12 +136,12 @@ public class PlayerHand : CardPile
             EndIndex = cards.Count;
         }
 
-        Debug.Log($"A position: {startAPlayer}");
-        Debug.Log($"B position: {StartBPlayer}");
-        Debug.Log($"Cards to place: {EndIndex - startIndex}");
+       // Debug.Log($"A position: {startAPlayer}");
+        //Debug.Log($"B position: {StartBPlayer}");
+       // Debug.Log($"Cards to place: {EndIndex - startIndex}");
 
 
-        Debug.Log($"UpdateHandOriginalLocation: startIndex={startIndex}, endIndex={EndIndex}, cards.Count={cards.Count}");
+        //Debug.Log($"UpdateHandOriginalLocation: startIndex={startIndex}, endIndex={EndIndex}, cards.Count={cards.Count}");
 
         var A = startAPlayer;
         var B = StartBPlayer;
@@ -147,20 +149,20 @@ public class PlayerHand : CardPile
         Vector3 direction = (B - A).normalized;
         float totalDistance = Vector3.Distance(A, B);
 
-        Debug.Log($"Total distance A to B: {totalDistance}");
+       // Debug.Log($"Total distance A to B: {totalDistance}");
 
         int cardCount = EndIndex - startIndex;
         float step = totalDistance / (cardCount + 1);
 
-        Debug.Log($"Step size: {step}");
+        //Debug.Log($"Step size: {step}");
 
         for (int i = startIndex; i < EndIndex; i++)
         {
-            Debug.Log($"Positioning card at index {i}");
+            //Debug.Log($"Positioning card at index {i}");
 
             Vector3 position = A + direction * step * (i - startIndex + 1);
 
-            Debug.Log($"Card {i} position: {position}");
+            //Debug.Log($"Card {i} position: {position}");
 
 
             cards[i].transform.position = position;
@@ -181,7 +183,7 @@ public class PlayerHand : CardPile
             endIndex = cards.Count;
         }
 
-        Debug.LogWarning("New locations for player caards");
+        //Debug.LogWarning("New locations for player caards");
 
         var C = StartCPlayer; 
         var D = StartDPlayer; 
@@ -196,7 +198,7 @@ public class PlayerHand : CardPile
 
         for (int i = startIndex; i < endIndex; i++)
         {
-            Debug.Log($"UpdateHandSecondLocation: startIndex={startIndex}, endIndex={endIndex}, cards.Count={cards.Count}");
+            //Debug.Log($"UpdateHandSecondLocation: startIndex={startIndex}, endIndex={endIndex}, cards.Count={cards.Count}");
 
             Vector3 position = C + direction * step * (i - startIndex + 1);
 

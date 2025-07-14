@@ -23,10 +23,6 @@ public class StartSwappingBeforeStart : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    void Start()
-    {
-
-    }
 
     public void TurnOnSwapStage()
     {

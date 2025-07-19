@@ -264,6 +264,12 @@ public class Dropzone : CardPile
                     AddCard(Newcard);
                     RemoveCardFromOriginList(CardOrigin, Newcard);
                     DropzoneToDiscardPile();
+
+                    if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.Playerturn)
+                    {
+                        SavePlayerPrefs.instance.IncreaseTenCardUsedPlayer();
+                    }
+
                     break;
 
 

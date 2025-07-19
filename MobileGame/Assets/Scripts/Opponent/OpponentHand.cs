@@ -42,8 +42,6 @@ public class OpponentHand : CardPile
         
         UpdateHandOpponent();
 
-        //Debug.Log($"Removing {cardToAdd._suit} with rank {cardToAdd._rank} from PlayerhandCardsList");
-        //GetCardInstance(cardToAdd);
     }
 
     public override void RemoveCard(Card cardToRemove)
@@ -73,7 +71,6 @@ public class OpponentHand : CardPile
             Vector3 position = A + direction * step * (i + 1);
 
             cards[i].transform.position = position;
-            // card.gameObject.transform.position = position;
         }
     }
 }

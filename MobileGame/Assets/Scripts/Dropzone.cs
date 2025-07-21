@@ -259,8 +259,8 @@ public class Dropzone : CardPile
                 case CardResults.Ten:
 
                     Debug.Log("ten card");
-                    SoundFXManager.instance.PlaySoundEffectClip(_NumberTenSound, transform, 20);
                     Debug.Log("Player put down a 10 card. Taking the dropzone to discard pile");
+                    OpponentDialog.Instance.ActivateDialog("No more cards! Here is my magic 10 card!");
                     AddCard(Newcard);
                     RemoveCardFromOriginList(CardOrigin, Newcard);
                     DropzoneToDiscardPile();

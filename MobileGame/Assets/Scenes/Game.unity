@@ -4649,6 +4649,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0500dc8439cbfe74d9228efeb1b1ba2b, type: 3}
   - {fileID: 8300000, guid: f2bf87836001d4c4fa29d12806234dfd, type: 3}
   currentClip: {fileID: 0}
+  FirstClip: {fileID: 8300000, guid: dc9b9f8bacc18094282fab7a6f8607b0, type: 3}
   GoalTime: 0
   musicDuration: 0
   audioToggle: 0

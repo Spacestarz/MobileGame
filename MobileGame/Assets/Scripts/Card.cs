@@ -102,9 +102,6 @@ public class Card : MonoBehaviour
         TextMeshPro[] textComponents = GetComponentsInChildren<TextMeshPro>(true);
         var instanceRef = this.GetComponent<CardInstance>();
 
-        //Debug.Log("flipcard method card row 84");
-
-        //Debug.Log("textcomponent lenghts is " + " " + textComponents.Length);
 
         _isUp = faceup;
 
@@ -124,7 +121,6 @@ public class Card : MonoBehaviour
     public bool IsUp()
     {
         _isUp = _visualsUp.activeSelf;
-       // Debug.Log("is up bool is " + " " + _isUp);
         return _isUp;
        
     }
@@ -250,16 +246,12 @@ public class Card : MonoBehaviour
 
         instanceRef.SetTextVisability(false);
 
-        //Debug.Log($"[HIDE] Card: {gameObject.name} | Frame: {Time.frameCount} | isUp: {_isUp} | wasFaceUpBeforeHidden: {_wasFaceUpBeforeHidden}");
-
-       // Debug.LogWarning($"hiding visual it is {_wasFaceUpBeforeHidden} ");
         
     }
 
     public void ShowAllVisuals()
     {
         SetCardFaceUp(_wasFaceUpBeforeHidden);
-       // Debug.LogWarning($"showallvisual the wasupbefore hidden is: {_wasFaceUpBeforeHidden}");
     }
 }
 

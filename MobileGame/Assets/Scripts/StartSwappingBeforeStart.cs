@@ -93,9 +93,6 @@ public class StartSwappingBeforeStart : MonoBehaviour
         // Handcard to Playertabl
         if (PlayerTableCards.instance.cards.Contains(HandCard))
         {
-            //LOOK INTO THIS LOGIC MORE SAM DO IT NEXT TIME
-
-            
             PlayerTableCards.instance.cards.Remove(HandCard);
             // Insert at the correct index
             PlayerTableCards.instance.cards.Insert(tableCardIndex, HandCard); 

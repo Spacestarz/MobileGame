@@ -9,13 +9,7 @@ public class LastPhase : MonoBehaviour
     public bool LastPhaseAIActive = false;
 
     public bool TableCardsVisible = false;
-    //here i will put logic with the last phase
-    //when player have no cards in their hand and want to now activate tablecards cards
-
-    //when those that are visible is gone i want to make the same effect when taking a chance is on (the animation etc)
-    //with the cards that are upside down
-
-    // im making this a seperate script because i got so much going on in the other scripts
+ 
     private void Awake()
     {
 
@@ -30,7 +24,7 @@ public class LastPhase : MonoBehaviour
     }
 
     [Button]
-    public void StartEndPhase() //this should work for both opponent and player
+    public void StartEndPhase()
     {
 
         if (TrackingTurns.Instance._CurrentTurn == TrackingTurns.TurnState.OpponentTurn)

@@ -70,10 +70,8 @@ public class PlayerTableCards : CardPile
         cards = new List<Card>();
     }
 
-    //trying to make it like playerhand kinda
     public void GetCardInstance(Card card)
     {
-      //  var CardInstanceThing = MakeCards.Instance.CreateCardObject(card);
 
         UpdateTable();
     }

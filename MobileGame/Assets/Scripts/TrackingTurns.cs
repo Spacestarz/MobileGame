@@ -30,16 +30,6 @@ public class TrackingTurns : MonoBehaviour
 
     [SerializeField] private ButtonInteractable _EndButtonInteractScript;
 
-
-
-    //[SerializeField] private TextMeshProUGUI _textOnDrawButton;
-
-    //private string _DefaultTextDrawButton = "Draw";
-    //private float _DefaultFontSizeDrawButton = 24;
-
-    //public Button _EndButton;
-    //public Button _DrawButton;
-
     private bool _InteractableButton = false;
 
 
@@ -57,10 +47,6 @@ public class TrackingTurns : MonoBehaviour
     public TurnState _CurrentTurn = TurnState.Playerturn;
 
 
-    //this class will track what player/opponent can do.
-    //and it will check if you have done it and you cant do it again etc. 
-
-    //probarly best to just have an observer? like if player has drawn 1 card it cant do it again etc
 
     private void Awake()
     {
@@ -90,10 +76,6 @@ public class TrackingTurns : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
-
-    //if i want to highlight..
-    //just make a square with eh color underneath..
-    //what i want to highlight and activate/disable it
 
     private void Start()
     {
@@ -139,17 +121,6 @@ public class TrackingTurns : MonoBehaviour
     {
         HighLight.Instance.DisableHighLight();
        // Debug.Log("diables highlight end tunr");
-    }
-
-    public void PlayerCheck()
-    {
-        if (DisableInput) ;
-        //if player has successfully put a card in dropzone 
-
-        //if player has drawn  a "guess" card and fails
-
-        //here i will check if player has done all they can do
-        //so the only option left will be to click the end turn button
     }
 
 
@@ -238,7 +209,6 @@ public class TrackingTurns : MonoBehaviour
     }
 
 
-    //this  should be in opponentAI script only works for AI anyway
     public void NOCardsInDropZone() 
     {
             if (_CurrentTurn == TurnState.OpponentTurn)

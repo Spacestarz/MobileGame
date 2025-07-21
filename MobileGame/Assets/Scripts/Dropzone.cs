@@ -160,11 +160,6 @@ public class Dropzone : CardPile
     public CardResults CanIGoInDropzone(Card Newcard)
     {
 
-        //if (newcard._rank == card.rankenum.ten)
-        //{
-        //    debug.log("player put down a 10 card. taking the dropzone to discard pile");
-        //    return cardresults.ten;
-        //}
 
         if (cards.Count >= 4) //here i will check if the all have the same rank so 4 in a row
         {
@@ -292,8 +287,6 @@ public class Dropzone : CardPile
 
                 case CardResults.Illegal:
                     Debug.Log("illegal card");
-                    //play sound to indicate player cant play this card
-                    //when the sound plays i want the card to shake
                     SoundFXManager.instance.PlaySoundEffectClip(_failSound, transform, 20);
                     cardInstanceScript.Shake();
                     Debug.Log("shaking and playing fail sound");
@@ -319,15 +312,8 @@ public class Dropzone : CardPile
                 Debug.Log("removing card from ORIGIN the result is not illegal");
             }
             Debug.LogWarning("takinga chance method moving with dotween");
-            // start coroutine animation
-            //wait coroutine stuff
         }
 
-        if (_IsTakingAChance)
-        {
-            Debug.Log("taking a chance bool is on");
-            return;
-        }
        
     }
 
@@ -398,7 +384,6 @@ public class Dropzone : CardPile
 
     }
 
-    //will need the reference of the cardresults here so i can make sound depending if fail on not
     private IEnumerator animateToDropZone(Card NewCard, CardResults cardresult) 
     {
         Debug.LogWarning("animate to dropzone method");

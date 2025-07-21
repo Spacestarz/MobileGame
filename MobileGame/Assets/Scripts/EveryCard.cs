@@ -74,12 +74,7 @@ public class EveryCard : CardPile
 
     public void GetStarterCards()
     {
-        //TODO
-        //3 cards upside down to player
-        //3 cards above those
-        //3 cards to player hand
-
-        //same to the opponent
+        
 
         //players first 3 card 
         for (int i = 0; i < 3; i++)// (upside down)
@@ -154,9 +149,6 @@ public class EveryCard : CardPile
         if (Dropzone.Instance._IsTakingAChance == true)
         {
             Debug.Log("taking a chance is true");
-            //here i check if takingaturn is true
-            //will see if the card can go in the dropzone when player or
-            //opponent cant play any card they have in hand
             Dropzone.Instance.PutCardInDropzone(card);
             Debug.Log("  putcardindropzone method is DONE moving to animating to dropzone(getcard method everycard script 140");
 

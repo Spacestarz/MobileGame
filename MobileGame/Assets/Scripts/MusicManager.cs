@@ -65,7 +65,6 @@ public class MusicManager : MonoBehaviour
         }
 
     }
-
   
 
     private void PlayScheduledClip()
@@ -91,13 +90,5 @@ public class MusicManager : MonoBehaviour
 
         currentClipIndex = (currentClipIndex + 1) % _backgroundMusics.Length;
     }
-
-    //If you ever want to change the music that gets loaded to come after
-    //simply change the current clip 
-    private void ChangeCurrentClip(AudioClip clip)
-    {
-        currentClip = clip;
-    }
-
 
 }
